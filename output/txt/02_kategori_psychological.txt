@@ -1,0 +1,33 @@
+KATEGORI: Psikolojik (6 film)
+================================================================================
+
+#001 | OWL:9.2 | Perfect Blue (1997)
+  Yonetmen: Satoshi Kon | Kaynak: Novel
+  Neden: Psikolojik gerilim ve zihin oyunlari; Karanlik atmosfer ve gerilim; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#002 | OWL:9.2 | The Tatami Galaxy (2010)
+  Yonetmen: Masaaki Yuasa | Kaynak: Novel
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Psikolojik gerilim ve zihin oyunlari; Zekice komedi ve satirik anlatim
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#003 | OWL:8.8 | Paprika (2006)
+  Yonetmen: Satoshi Kon | Kaynak: Novel
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Bilim kurgu vizyonu; Psikolojik gerilim ve zihin oyunlari
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#004 | OWL:8.7 | Mind Game (2004)
+  Yonetmen: Masaaki Yuasa | Kaynak: Manga
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Zekice komedi ve satirik anlatim; Psikolojik gerilim ve zihin oyunlari
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#005 | OWL:8.4 | Revolutionary Girl Utena: Adolescence of Utena (1999)
+  Yonetmen: Kunihiko Ikuhara | Kaynak: Manga/Light Novel/Original
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Psikolojik gerilim ve zihin oyunlari
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#006 | OWL:8.2 | Psycho-Pass: The Movie (2015)
+  Yonetmen: Naoyoshi Shiotani | Kaynak: TV Series
+  Neden: Bilim kurgu vizyonu; Psikolojik gerilim ve zihin oyunlari; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------

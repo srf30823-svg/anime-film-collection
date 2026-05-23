@@ -1,0 +1,22 @@
+================================================================================
+OWL - KAPSAMLI ANIME FILM ANALIZI - OZET RAPOR
+Olusturulma: 2026-05-24 01:38
+================================================================================
+
+Toplam analiz: 215 film
+Web Novel kaynakli: 3
+Yil araligi: 1963-2025
+
+ONERILER:
+1. Felsefi/Surreal kategorisindeki yuksek puanli filmlerle baslayin
+2. Web Novel kaynakli filmleri okuyarak derinlesin
+3. Yonetmen kariyerlerini takip edin
+4. Kategori cesitliligini koruyun
+
+DOSYALAR:
+- 01_ana_liste_owl.txt: Tum filmler OWL puanina gore
+- 02_kategori_*.txt: Kategori bazli listeler
+- 03_yil_*.txt: Yil bazli listeler
+- 04_web_novel.txt: Web Novel kaynakli filmler
+- 05_kaynak.txt: Kaynak malzeme bazli
+- istatistik.txt: Detayli istatistikler

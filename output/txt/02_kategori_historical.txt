@@ -1,0 +1,133 @@
+KATEGORI: Tarihi (26 film)
+================================================================================
+
+#001 | OWL:9.3 | Princess Mononoke (1997)
+  Yonetmen: Hayao Miyazaki | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#002 | OWL:9.3 | Rurouni Kenshin: Trust and Betrayal (1999)
+  Yonetmen: Kazuhiro Furuhashi | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#003 | OWL:9.2 | Grave of the Fireflies (1988)
+  Yonetmen: Isao Takahata | Kaynak: Novel
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Klasik, tarihi oneme sahip eser
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#004 | OWL:8.8 | The Tale of The Princess Kaguya (2013)
+  Yonetmen: Isao Takahata | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#005 | OWL:8.8 | Rurouni Kenshin: The Beginning (2021)
+  Yonetmen: Keishi Otomo | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#006 | OWL:8.7 | Sword of the Stranger (2007)
+  Yonetmen: Masahiro Ando | Kaynak: Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#007 | OWL:8.6 | In This Corner of the World (2016)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#008 | OWL:8.5 | The Wind Rises (2013)
+  Yonetmen: Hayao Miyazaki | Kaynak: Manga/Light Novel/Original
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#009 | OWL:8.4 | Mononoke the Movie: Phantom in the Rain (2024)
+  Yonetmen: Kenji Nakamura | Kaynak: TV Series
+  Neden: Karanlik atmosfer ve gerilim; Felsefi derinlik ve surreal anlatim (Lain tarzi); Tarihi derinlik ve otantik atmosfer
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#010 | OWL:8.3 | Jin-Roh: The Wolf Brigade (1999)
+  Yonetmen: Hiroyuki Okiura | Kaynak: Original
+  Neden: Epik aksiyon ve muthis sahneler; Felsefi derinlik ve surreal anlatim (Lain tarzi); Tarihi derinlik ve otantik atmosfer
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#011 | OWL:8.2 | Belladonna of Sadness (1973)
+  Yonetmen: Eiichi Yamamoto | Kaynak: Manga/Light Novel/Original
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Tarihi derinlik ve otantik atmosfer; Karanlik atmosfer ve gerilim
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#012 | OWL:8.2 | Ninja Scroll (1993)
+  Yonetmen: Yoshiaki Kawajiri | Kaynak: Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Karanlik atmosfer ve gerilim
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#013 | OWL:8.2 | Inu-Oh (2021)
+  Yonetmen: Masaaki Yuasa | Kaynak: Novel
+  Neden: Muzik/sanat temali yaratici konsept; Tarihi derinlik ve otantik atmosfer; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#014 | OWL:8.1 | From Up on Poppy Hill (2011)
+  Yonetmen: Goro Miyazaki | Kaynak: Manga
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#015 | OWL:8.1 | Miss Hokusai (2015)
+  Yonetmen: Keiichi Hara | Kaynak: Manga
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#016 | OWL:7.9 | Mai Mai Miracle (2009)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Yaratici fantastik dunya
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#017 | OWL:7.8 | Legend of the Galactic Heroes: My Conquest is the Sea of Stars (1988)
+  Yonetmen: Noboru Ishiguro | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Tarihi derinlik ve otantik atmosfer; Epik aksiyon ve muthis sahneler
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#018 | OWL:7.8 | Rurouni Kenshin: The Motion Picture (1997)
+  Yonetmen: Kazuhiro Furuhashi | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#019 | OWL:7.7 | Steamboy (2004)
+  Yonetmen: Katsuhiro Otomo | Kaynak: Original
+  Neden: Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#020 | OWL:7.7 | Totto-chan: The Little Girl at the Window (2023)
+  Yonetmen: Shinnosuke Yakuwa | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#021 | OWL:7.7 | In This Corner of the World: Sincerely Yours (2019)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#022 | OWL:7.4 | Samurai Champloo: The Movie (2007)
+  Yonetmen: Shinichiro Watanabe | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#023 | OWL:7.3 | Doomed Megalopolis (1991)
+  Yonetmen: Rintaro | Kaynak: Manga/Light Novel/Original
+  Neden: Karanlik atmosfer ve gerilim; Bilim kurgu vizyonu; Tarihi derinlik ve otantik atmosfer
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#024 | OWL:7.1 | Spring and Chaos (1996)
+  Yonetmen: Shoji Kawamori | Kaynak: Manga/Light Novel/Original
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#025 | OWL:7.1 | Afro Samurai: Resurrection (2009)
+  Yonetmen: Fuminori Kizaki | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#026 | OWL:6.8 | Cleopatra (1970)
+  Yonetmen: Eiichi Yamamoto | Kaynak: Manga/Light Novel/Original
+  Neden: Tarihi derinlik ve otantik atmosfer; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser
+  Kritik: Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.
+------------------------------------------------------------

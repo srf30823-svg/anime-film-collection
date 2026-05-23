@@ -1,0 +1,5762 @@
+[
+  {
+    "title": "Chainsaw Man: Reze Arc",
+    "year": 2025,
+    "director": "Tatsuya Yoshihara",
+    "categories": [
+      "action_epic",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 9.13,
+    "imdb_score": 8.5,
+    "owl_score": 9.6,
+    "taste_score": 7.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Karanlik atmosfer ve gerilim; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Spirited Away",
+    "year": 2001,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.77,
+    "imdb_score": 8.6,
+    "owl_score": 9.5,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Princess Mononoke",
+    "year": 1997,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "action_epic",
+      "historical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Aksiyon&Muthis",
+      "Tarihi"
+    ],
+    "mal_score": 8.66,
+    "imdb_score": 8.3,
+    "owl_score": 9.3,
+    "taste_score": 7.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Rurouni Kenshin: Trust and Betrayal",
+    "year": 1999,
+    "director": "Kazuhiro Furuhashi",
+    "categories": [
+      "action_epic",
+      "historical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.7,
+    "imdb_score": 8.3,
+    "owl_score": 9.3,
+    "taste_score": 7.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "A Silent Voice",
+    "year": 2016,
+    "director": "Naoko Yamada",
+    "categories": [
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.9,
+    "imdb_score": 8.2,
+    "owl_score": 9.3,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Grave of the Fireflies",
+    "year": 1988,
+    "director": "Isao Takahata",
+    "categories": [
+      "emotional_slice",
+      "historical"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Tarihi"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 8.5,
+    "owl_score": 9.2,
+    "taste_score": 7.0,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Perfect Blue",
+    "year": 1997,
+    "director": "Satoshi Kon",
+    "categories": [
+      "psychological",
+      "horror_thriller",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Psikolojik",
+      "Korku&Gerilim",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 8.54,
+    "imdb_score": 8.0,
+    "owl_score": 9.2,
+    "taste_score": 8.3,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Psikolojik gerilim ve zihin oyunlari; Karanlik atmosfer ve gerilim; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "The Tatami Galaxy",
+    "year": 2010,
+    "director": "Masaaki Yuasa",
+    "categories": [
+      "philosophical_surreal",
+      "psychological",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Psikolojik",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 8.45,
+    "imdb_score": 8.1,
+    "owl_score": 9.2,
+    "taste_score": 9.0,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Psikolojik gerilim ve zihin oyunlari; Zekice komedi ve satirik anlatim",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Attack on Titan: Chronicle",
+    "year": 2020,
+    "director": "Tetsuro Araki",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 8.0,
+    "owl_score": 9.2,
+    "taste_score": 9.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Madoka Magica: The Movie – Walpurgisnacht: Rising",
+    "year": 2025,
+    "director": "Akiyuki Shinbo",
+    "categories": [
+      "philosophical_surreal",
+      "fantasy_adventure",
+      "action_epic"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Fantastik&Macera",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 8.0,
+    "owl_score": 9.2,
+    "taste_score": 9.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Howls Moving Castle",
+    "year": 2004,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.58,
+    "imdb_score": 8.2,
+    "owl_score": 9.1,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Wolf Children",
+    "year": 2012,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.55,
+    "imdb_score": 8.2,
+    "owl_score": 9.1,
+    "taste_score": 7.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The First Slam Dunk",
+    "year": 2022,
+    "director": "Takehiko Inoue",
+    "categories": [
+      "sports",
+      "emotional_slice",
+      "action_epic"
+    ],
+    "category_names": [
+      "Spor",
+      "Duygusal&Incelikli",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 8.0,
+    "owl_score": 9.1,
+    "taste_score": 8.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Spor temali motivasyon ve heyecan; Duygusal derinlik ve insani hikaye; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Jujutsu Kaisen 0",
+    "year": 2021,
+    "director": "Seong-Hu Park",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 7.8,
+    "owl_score": 9.1,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Look Back",
+    "year": 2024,
+    "director": "Kiyotaka Oshiyama",
+    "categories": [
+      "emotional_slice",
+      "short_film"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "KisaFilm"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 8.0,
+    "owl_score": 9.1,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Kisa ve etkili anlatim; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Nausicaa of the Valley of the Wind",
+    "year": 1984,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "sci_fi",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "BilimKurgu",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.33,
+    "imdb_score": 8.0,
+    "owl_score": 9.0,
+    "taste_score": 7.7,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Castle in the Sky",
+    "year": 1986,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "action_epic"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 8.18,
+    "imdb_score": 8.0,
+    "owl_score": 9.0,
+    "taste_score": 8.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "My Neighbor Totoro",
+    "year": 1988,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "emotional_slice",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 8.25,
+    "imdb_score": 8.1,
+    "owl_score": 9.0,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Akira",
+    "year": 1988,
+    "director": "Katsuhiro Otomo",
+    "categories": [
+      "cyberpunk",
+      "sci_fi",
+      "action_epic",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Cyberpunk",
+      "BilimKurgu",
+      "Aksiyon&Muthis",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 8.15,
+    "imdb_score": 8.0,
+    "owl_score": 9.0,
+    "taste_score": 8.8,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Cyberpunk estetigi ve teknoloji felsefesi; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Ghost in the Shell",
+    "year": 1995,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "cyberpunk",
+      "sci_fi",
+      "philosophical_surreal",
+      "action_epic"
+    ],
+    "category_names": [
+      "Cyberpunk",
+      "BilimKurgu",
+      "Felsefi&Surreal",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 8.27,
+    "imdb_score": 7.9,
+    "owl_score": 9.0,
+    "taste_score": 8.8,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Cyberpunk estetigi ve teknoloji felsefesi; Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Violet Evergarden: The Movie",
+    "year": 2020,
+    "director": "Taichi Ishidate",
+    "categories": [
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.5,
+    "imdb_score": 8.1,
+    "owl_score": 9.0,
+    "taste_score": 6.5,
+    "source_material": "Light Novel",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Cok Populer (Top 100)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Suzume",
+    "year": 2022,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice",
+      "action_epic"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 8.35,
+    "imdb_score": 7.6,
+    "owl_score": 8.9,
+    "taste_score": 8.3,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Kikis Delivery Service",
+    "year": 1989,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.18,
+    "imdb_score": 7.8,
+    "owl_score": 8.8,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Millennium Actress",
+    "year": 2001,
+    "director": "Satoshi Kon",
+    "categories": [
+      "philosophical_surreal",
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.17,
+    "imdb_score": 7.8,
+    "owl_score": 8.8,
+    "taste_score": 7.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Tokyo Godfathers",
+    "year": 2003,
+    "director": "Satoshi Kon",
+    "categories": [
+      "comedy_satirical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.1,
+    "imdb_score": 7.8,
+    "owl_score": 8.8,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Paprika",
+    "year": 2006,
+    "director": "Satoshi Kon",
+    "categories": [
+      "philosophical_surreal",
+      "sci_fi",
+      "psychological"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "BilimKurgu",
+      "Psikolojik"
+    ],
+    "mal_score": 8.04,
+    "imdb_score": 7.7,
+    "owl_score": 8.8,
+    "taste_score": 8.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Bilim kurgu vizyonu; Psikolojik gerilim ve zihin oyunlari",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Redline",
+    "year": 2009,
+    "director": "Takeshi Koike",
+    "categories": [
+      "action_epic",
+      "sci_fi",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 8.2,
+    "imdb_score": 7.7,
+    "owl_score": 8.8,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Tale of The Princess Kaguya",
+    "year": 2013,
+    "director": "Isao Takahata",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice",
+      "historical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli",
+      "Tarihi"
+    ],
+    "mal_score": 8.1,
+    "imdb_score": 8.0,
+    "owl_score": 8.8,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Fate/stay night: Heaven's Feel III. spring song",
+    "year": 2020,
+    "director": "Tomonori Sudo",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.3,
+    "imdb_score": 7.8,
+    "owl_score": 8.8,
+    "taste_score": 7.3,
+    "source_material": "Visual Novel",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Rurouni Kenshin: The Beginning",
+    "year": 2021,
+    "director": "Keishi Otomo",
+    "categories": [
+      "action_epic",
+      "historical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.2,
+    "imdb_score": 7.8,
+    "owl_score": 8.8,
+    "taste_score": 7.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Whisper of the Heart",
+    "year": 1995,
+    "director": "Yoshifumi Kondo",
+    "categories": [
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.22,
+    "imdb_score": 7.8,
+    "owl_score": 8.7,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Mind Game",
+    "year": 2004,
+    "director": "Masaaki Yuasa",
+    "categories": [
+      "philosophical_surreal",
+      "comedy_satirical",
+      "psychological"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Komedi&Satirik",
+      "Psikolojik"
+    ],
+    "mal_score": 7.85,
+    "imdb_score": 7.6,
+    "owl_score": 8.7,
+    "taste_score": 9.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Zekice komedi ve satirik anlatim; Psikolojik gerilim ve zihin oyunlari",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Cowboy Bebop: The Movie",
+    "year": 2001,
+    "director": "Shinichiro Watanabe",
+    "categories": [
+      "action_epic",
+      "sci_fi",
+      "cyberpunk"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu",
+      "Cyberpunk"
+    ],
+    "mal_score": 8.0,
+    "imdb_score": 7.6,
+    "owl_score": 8.7,
+    "taste_score": 8.3,
+    "source_material": "TV Series",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Sword of the Stranger",
+    "year": 2007,
+    "director": "Masahiro Ando",
+    "categories": [
+      "action_epic",
+      "historical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi"
+    ],
+    "mal_score": 8.1,
+    "imdb_score": 7.7,
+    "owl_score": 8.7,
+    "taste_score": 7.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Weathering with You",
+    "year": 2019,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "romance_drama",
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.26,
+    "imdb_score": 7.5,
+    "owl_score": 8.7,
+    "taste_score": 7.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Fate/stay night: Heaven's Feel II. lost butterfly",
+    "year": 2019,
+    "director": "Tomonori Sudo",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.2,
+    "imdb_score": 7.7,
+    "owl_score": 8.7,
+    "taste_score": 7.3,
+    "source_material": "Visual Novel",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Lupin III: The Castle of Cagliostro",
+    "year": 1979,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.6,
+    "owl_score": 8.6,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Ponyo",
+    "year": 2008,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.89,
+    "imdb_score": 7.6,
+    "owl_score": 8.6,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Girl Who Leapt Through Time",
+    "year": 2006,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "sci_fi",
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 8.1,
+    "imdb_score": 7.7,
+    "owl_score": 8.6,
+    "taste_score": 6.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Maquia: When the Promised Flower Blooms",
+    "year": 2018,
+    "director": "Mari Okada",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.05,
+    "imdb_score": 7.6,
+    "owl_score": 8.6,
+    "taste_score": 7.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "In This Corner of the World",
+    "year": 2016,
+    "director": "Sunao Katabuchi",
+    "categories": [
+      "historical",
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Tarihi",
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.15,
+    "imdb_score": 7.8,
+    "owl_score": 8.6,
+    "taste_score": 6.3,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Night Is Short, Walk on Girl",
+    "year": 2017,
+    "director": "Masaaki Yuasa",
+    "categories": [
+      "comedy_satirical",
+      "romance_drama",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Romantik&Drama",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 8.05,
+    "imdb_score": 7.6,
+    "owl_score": 8.6,
+    "taste_score": 7.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Liz and the Blue Bird",
+    "year": 2018,
+    "director": "Naoko Yamada",
+    "categories": [
+      "emotional_slice",
+      "music_art",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Muzik&Sanat",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.1,
+    "imdb_score": 7.6,
+    "owl_score": 8.6,
+    "taste_score": 6.7,
+    "source_material": "Light Novel",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "My Hero Academia: Heroes Rising",
+    "year": 2019,
+    "director": "Kenji Nagasaki",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.9,
+    "imdb_score": 7.5,
+    "owl_score": 8.6,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Only Yesterday",
+    "year": 1991,
+    "director": "Isao Takahata",
+    "categories": [
+      "emotional_slice",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.94,
+    "imdb_score": 7.6,
+    "owl_score": 8.5,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Cardcaptor Sakura Movie 2: The Sealed Card",
+    "year": 2000,
+    "director": "Morio Asaka",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.0,
+    "imdb_score": 7.6,
+    "owl_score": 8.5,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Summer Wars",
+    "year": 2009,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "sci_fi",
+      "comedy_satirical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Komedi&Satirik",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.9,
+    "imdb_score": 7.5,
+    "owl_score": 8.5,
+    "taste_score": 7.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Tekkonkinkreet",
+    "year": 2006,
+    "director": "Michael Arias",
+    "categories": [
+      "action_epic",
+      "philosophical_surreal",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Felsefi&Surreal",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.5,
+    "taste_score": 9.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "The Wind Rises",
+    "year": 2013,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "historical",
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Tarihi",
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.96,
+    "imdb_score": 7.8,
+    "owl_score": 8.5,
+    "taste_score": 6.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "K-On! The Movie",
+    "year": 2011,
+    "director": "Naoko Yamada",
+    "categories": [
+      "music_art",
+      "comedy_satirical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Muzik&Sanat",
+      "Komedi&Satirik",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.9,
+    "imdb_score": 7.5,
+    "owl_score": 8.5,
+    "taste_score": 7.7,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Muzik/sanat temali yaratici konsept; Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Digimon Adventure: Last Evolution Kizuna",
+    "year": 2020,
+    "director": "Tomohisa Taguchi",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.5,
+    "taste_score": 8.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Fate/stay night: Heaven's Feel I. presage flower",
+    "year": 2017,
+    "director": "Tomonori Sudo",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 8.0,
+    "imdb_score": 7.5,
+    "owl_score": 8.5,
+    "taste_score": 7.3,
+    "source_material": "Visual Novel",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Populer (Top 500)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "My Hero Academia: Two Heroes",
+    "year": 2018,
+    "director": "Kenji Nagasaki",
+    "categories": [
+      "action_epic",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.5,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Zekice komedi ve satirik anlatim",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Urusei Yatsura 2: Beautiful Dreamer",
+    "year": 1984,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "philosophical_surreal",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.55,
+    "imdb_score": 7.4,
+    "owl_score": 8.4,
+    "taste_score": 9.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Zekice komedi ve satirik anlatim; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Mobile Suit Gundam: Char's Counterattack",
+    "year": 1988,
+    "director": "Yoshiyuki Tomino",
+    "categories": [
+      "mecha",
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "Mekka",
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.5,
+    "owl_score": 8.4,
+    "taste_score": 7.3,
+    "source_material": "TV Series",
+    "has_web_novel": false,
+    "why_selected": "Mekka tasarimi ve aksiyon; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Ghost in the Shell 2: Innocence",
+    "year": 2004,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "cyberpunk",
+      "philosophical_surreal",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Cyberpunk",
+      "Felsefi&Surreal",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.63,
+    "imdb_score": 7.4,
+    "owl_score": 8.4,
+    "taste_score": 8.7,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Cyberpunk estetigi ve teknoloji felsefesi; Felsefi derinlik ve surreal anlatim (Lain tarzi); Bilim kurgu vizyonu",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Revolutionary Girl Utena: Adolescence of Utena",
+    "year": 1999,
+    "director": "Kunihiko Ikuhara",
+    "categories": [
+      "philosophical_surreal",
+      "psychological",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Psikolojik",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.4,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Psikolojik gerilim ve zihin oyunlari",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Colourful",
+    "year": 2010,
+    "director": "Keiichi Hara",
+    "categories": [
+      "emotional_slice",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.6,
+    "imdb_score": 7.3,
+    "owl_score": 8.4,
+    "taste_score": 9.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Colorful",
+    "year": 2010,
+    "director": "Keiichi Hara",
+    "categories": [
+      "emotional_slice",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.6,
+    "imdb_score": 7.3,
+    "owl_score": 8.4,
+    "taste_score": 9.0,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "The Boy and the Beast",
+    "year": 2015,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "fantasy_adventure",
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.7,
+    "imdb_score": 7.3,
+    "owl_score": 8.4,
+    "taste_score": 8.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Boy and the Heron",
+    "year": 2023,
+    "director": "Hayao Miyazaki",
+    "categories": [
+      "fantasy_adventure",
+      "philosophical_surreal",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Felsefi&Surreal",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.66,
+    "imdb_score": 7.4,
+    "owl_score": 8.4,
+    "taste_score": 8.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Mononoke the Movie: Phantom in the Rain",
+    "year": 2024,
+    "director": "Kenji Nakamura",
+    "categories": [
+      "horror_thriller",
+      "philosophical_surreal",
+      "historical"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "Felsefi&Surreal",
+      "Tarihi"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.5,
+    "owl_score": 8.4,
+    "taste_score": 7.3,
+    "source_material": "TV Series",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Felsefi derinlik ve surreal anlatim (Lain tarzi); Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Nimona",
+    "year": 2023,
+    "director": "Nick Bruno",
+    "categories": [
+      "action_epic",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.3,
+    "owl_score": 8.4,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "One Piece: Stampede",
+    "year": 2019,
+    "director": "Takashi Otsuka",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.3,
+    "owl_score": 8.4,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Angel's Egg",
+    "year": 1985,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "philosophical_surreal",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.45,
+    "imdb_score": 7.3,
+    "owl_score": 8.3,
+    "taste_score": 9.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Patlabor 2: The Movie",
+    "year": 1993,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "mecha",
+      "sci_fi",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Mekka",
+      "BilimKurgu",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.72,
+    "imdb_score": 7.3,
+    "owl_score": 8.3,
+    "taste_score": 7.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Mekka tasarimi ve aksiyon; Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Jin-Roh: The Wolf Brigade",
+    "year": 1999,
+    "director": "Hiroyuki Okiura",
+    "categories": [
+      "action_epic",
+      "philosophical_surreal",
+      "historical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Felsefi&Surreal",
+      "Tarihi"
+    ],
+    "mal_score": 7.6,
+    "imdb_score": 7.3,
+    "owl_score": 8.3,
+    "taste_score": 8.3,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Felsefi derinlik ve surreal anlatim (Lain tarzi); Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Vampire Hunter D: Bloodlust",
+    "year": 2000,
+    "director": "Yoshiaki Kawajiri",
+    "categories": [
+      "horror_thriller",
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.6,
+    "imdb_score": 7.4,
+    "owl_score": 8.3,
+    "taste_score": 7.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Cardcaptor Sakura: The Movie",
+    "year": 1999,
+    "director": "Morio Asaka",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.3,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Anthem of the Heart",
+    "year": 2015,
+    "director": "Mari Okada",
+    "categories": [
+      "emotional_slice",
+      "romance_drama",
+      "music_art"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Romantik&Drama",
+      "Muzik&Sanat"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.3,
+    "taste_score": 6.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Anthem of the Heart",
+    "year": 2015,
+    "director": "Mari Okada",
+    "categories": [
+      "emotional_slice",
+      "romance_drama",
+      "music_art"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Romantik&Drama",
+      "Muzik&Sanat"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.4,
+    "owl_score": 8.3,
+    "taste_score": 6.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Promare",
+    "year": 2019,
+    "director": "Hiroyuki Imaishi",
+    "categories": [
+      "action_epic",
+      "sci_fi",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.1,
+    "owl_score": 8.3,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Colors Within",
+    "year": 2024,
+    "director": "Naoko Yamada",
+    "categories": [
+      "emotional_slice",
+      "music_art"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Muzik&Sanat"
+    ],
+    "mal_score": 7.7,
+    "imdb_score": 7.3,
+    "owl_score": 8.3,
+    "taste_score": 7.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Shin Godzilla",
+    "year": 2016,
+    "director": "Hideaki Anno",
+    "categories": [
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.8,
+    "imdb_score": 7.1,
+    "owl_score": 8.3,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Hols: Prince of the Sun",
+    "year": 1968,
+    "director": "Isao Takahata",
+    "categories": [
+      "fantasy_adventure",
+      "action_epic"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Belladonna of Sadness",
+    "year": 1973,
+    "director": "Eiichi Yamamoto",
+    "categories": [
+      "philosophical_surreal",
+      "historical",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Tarihi",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.3,
+    "owl_score": 8.2,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Tarihi derinlik ve otantik atmosfer; Karanlik atmosfer ve gerilim",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Space Battleship Yamato",
+    "year": 1977,
+    "director": "Toshio Masuda",
+    "categories": [
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Cat Returns",
+    "year": 2002,
+    "director": "Hiroyuki Morita",
+    "categories": [
+      "fantasy_adventure",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.53,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Zekice komedi ve satirik anlatim",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Ninja Scroll",
+    "year": 1993,
+    "director": "Yoshiaki Kawajiri",
+    "categories": [
+      "action_epic",
+      "historical",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.4,
+    "owl_score": 8.2,
+    "taste_score": 7.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Karanlik atmosfer ve gerilim",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "5 Centimeters Per Second",
+    "year": 2007,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.56,
+    "imdb_score": 7.5,
+    "owl_score": 8.2,
+    "taste_score": 6.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Fullmetal Alchemist: The Sacred Star of Milos",
+    "year": 2011,
+    "director": "Kazuya Murata",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.2,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Psycho-Pass: The Movie",
+    "year": 2015,
+    "director": "Naoyoshi Shiotani",
+    "categories": [
+      "sci_fi",
+      "psychological",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Psikolojik",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.2,
+    "taste_score": 8.7,
+    "source_material": "TV Series",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Psikolojik gerilim ve zihin oyunlari; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Wreck-It Ralph",
+    "year": 2012,
+    "director": "Rich Moore",
+    "categories": [
+      "comedy_satirical",
+      "action_epic"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.2,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Belle",
+    "year": 2021,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "fantasy_adventure",
+      "music_art",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Muzik&Sanat",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.65,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 7.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Muzik/sanat temali yaratici konsept; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Inu-Oh",
+    "year": 2021,
+    "director": "Masaaki Yuasa",
+    "categories": [
+      "music_art",
+      "historical",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Muzik&Sanat",
+      "Tarihi",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.6,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 7.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Muzik/sanat temali yaratici konsept; Tarihi derinlik ve otantik atmosfer; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Spy x Family Code: White",
+    "year": 2023,
+    "director": "Takashi Katagiri",
+    "categories": [
+      "action_epic",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.0,
+    "owl_score": 8.2,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Red Turtle",
+    "year": 2016,
+    "director": "Michael Dudok de Wit",
+    "categories": [
+      "emotional_slice",
+      "fantasy_adventure",
+      "short_film"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Fantastik&Macera",
+      "KisaFilm"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 7.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya; Kisa ve etkili anlatim",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Garden of Sinners: Paradox Spiral",
+    "year": 2008,
+    "director": "Shinsuke Takizawa",
+    "categories": [
+      "mystery",
+      "horror_thriller",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Gizem",
+      "Korku&Gerilim",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.6,
+    "imdb_score": 7.2,
+    "owl_score": 8.2,
+    "taste_score": 7.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Gizem ve gerilim kurgusu; Karanlik atmosfer ve gerilim; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "One Piece Film: Strong World",
+    "year": 2009,
+    "director": "Munehisa Sakai",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.2,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "My Hero Academia: World Heroes Mission",
+    "year": 2021,
+    "director": "Kenji Nagasaki",
+    "categories": [
+      "action_epic"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.2,
+    "taste_score": 9.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Time of Eve: The Movie",
+    "year": 2010,
+    "director": "Yasuhiro Yoshiura",
+    "categories": [
+      "sci_fi",
+      "philosophical_surreal",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Felsefi&Surreal",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.2,
+    "taste_score": 8.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Galaxy Express 999",
+    "year": 1979,
+    "director": "Rintaro",
+    "categories": [
+      "sci_fi",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.1,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Patlabor: The Movie",
+    "year": 1989,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "mecha",
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "Mekka",
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.58,
+    "imdb_score": 7.1,
+    "owl_score": 8.1,
+    "taste_score": 7.3,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Mekka tasarimi ve aksiyon; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Summer Days with Coo",
+    "year": 2007,
+    "director": "Keiichi Hara",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.4,
+    "imdb_score": 7.1,
+    "owl_score": 8.1,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Zekice komedi ve satirik anlatim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "From Up on Poppy Hill",
+    "year": 2011,
+    "director": "Goro Miyazaki",
+    "categories": [
+      "romance_drama",
+      "emotional_slice",
+      "historical"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli",
+      "Tarihi"
+    ],
+    "mal_score": 7.44,
+    "imdb_score": 7.4,
+    "owl_score": 8.1,
+    "taste_score": 6.3,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Garden of Words",
+    "year": 2013,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.48,
+    "imdb_score": 7.4,
+    "owl_score": 8.1,
+    "taste_score": 6.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Her Blue Sky",
+    "year": 2019,
+    "director": "Mari Okada",
+    "categories": [
+      "romance_drama",
+      "emotional_slice",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.1,
+    "taste_score": 7.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Miss Hokusai",
+    "year": 2015,
+    "director": "Keiichi Hara",
+    "categories": [
+      "historical",
+      "emotional_slice",
+      "music_art"
+    ],
+    "category_names": [
+      "Tarihi",
+      "Duygusal&Incelikli",
+      "Muzik&Sanat"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.1,
+    "taste_score": 7.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "One Piece Film: Red",
+    "year": 2022,
+    "director": "Goro Taniguchi",
+    "categories": [
+      "action_epic",
+      "music_art",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Muzik&Sanat",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.0,
+    "owl_score": 8.1,
+    "taste_score": 8.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Muzik/sanat temali yaratici konsept; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Imaginary",
+    "year": 2023,
+    "director": "Yoshiyuki Momose",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.1,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Inuyasha: Swords of an Honorable Ruler",
+    "year": 2003,
+    "director": "Toshiya Shinohara",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.4,
+    "imdb_score": 7.1,
+    "owl_score": 8.1,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Kingdom of Dreams and Madness",
+    "year": 2013,
+    "director": "Mami Sunada",
+    "categories": [
+      "music_art",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Muzik&Sanat",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.2,
+    "owl_score": 8.1,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Muzik/sanat temali yaratici konsept; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Garden of Sinners: Overlooking View",
+    "year": 2007,
+    "director": "Eiichi Takahashi",
+    "categories": [
+      "mystery",
+      "horror_thriller",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Gizem",
+      "Korku&Gerilim",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.1,
+    "taste_score": 7.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Gizem ve gerilim kurgusu; Karanlik atmosfer ve gerilim; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "One Piece Film: Gold",
+    "year": 2016,
+    "director": "Hiroaki Miyamoto",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.4,
+    "imdb_score": 7.0,
+    "owl_score": 8.1,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Adventure: Our War Game!",
+    "year": 2000,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.1,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Arcadia of My Youth",
+    "year": 1982,
+    "director": "Tomoharu Katsumata",
+    "categories": [
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Pom Poko",
+    "year": 1994,
+    "director": "Isao Takahata",
+    "categories": [
+      "fantasy_adventure",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.1,
+    "imdb_score": 7.3,
+    "owl_score": 8.0,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Zekice komedi ve satirik anlatim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "My Neighbors the Yamadas",
+    "year": 1999,
+    "director": "Isao Takahata",
+    "categories": [
+      "comedy_satirical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.33,
+    "imdb_score": 7.1,
+    "owl_score": 8.0,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Metropolis",
+    "year": 2001,
+    "director": "Rintaro",
+    "categories": [
+      "sci_fi",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 8.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Children Who Chase Lost Voices",
+    "year": 2011,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.33,
+    "imdb_score": 7.1,
+    "owl_score": 8.0,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Mirai",
+    "year": 2018,
+    "director": "Mamoru Hosoda",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Ride Your Wave",
+    "year": 2019,
+    "director": "Masaaki Yuasa",
+    "categories": [
+      "romance_drama",
+      "emotional_slice",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.45,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 7.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Sailor Moon Cosmos Part 1",
+    "year": 2024,
+    "director": "Kazuko Tadano",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Sailor Moon Cosmos Part 2",
+    "year": 2024,
+    "director": "Kazuko Tadano",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Inuyasha: The Castle Beyond the Looking Glass",
+    "year": 2002,
+    "director": "Toshiya Shinohara",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Shin Ultraman",
+    "year": 2022,
+    "director": "Hideaki Anno",
+    "categories": [
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 6.8,
+    "owl_score": 8.0,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Garden of Sinners: The Hollow Shrine",
+    "year": 2008,
+    "director": "Takahiro Miura",
+    "categories": [
+      "mystery",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Gizem",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 6.9,
+    "owl_score": 8.0,
+    "taste_score": 8.5,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Gizem ve gerilim kurgusu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Sword Art Online: Progressive - Aria of a Starless Night",
+    "year": 2021,
+    "director": "Ayako Kouno",
+    "categories": [
+      "action_epic",
+      "romance_drama",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Romantik&Drama",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.0,
+    "taste_score": 7.0,
+    "source_material": "Light Novel",
+    "has_web_novel": true,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Horimiya: The Missing Pieces",
+    "year": 2023,
+    "director": "Masashi Ishihama",
+    "categories": [
+      "romance_drama",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.0,
+    "owl_score": 8.0,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Patema Inverted",
+    "year": 2013,
+    "director": "Yasuhiro Yoshiura",
+    "categories": [
+      "sci_fi",
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.0,
+    "taste_score": 6.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Yaratici fantastik dunya",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Josee, the Tiger and the Fish",
+    "year": 2020,
+    "director": "Kotaro Tamura",
+    "categories": [
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.5,
+    "imdb_score": 7.1,
+    "owl_score": 8.0,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Iyi Bilinen (Top 1000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Voices of a Distant Star",
+    "year": 2002,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "sci_fi",
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.18,
+    "imdb_score": 7.2,
+    "owl_score": 7.9,
+    "taste_score": 6.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Sky Crawlers",
+    "year": 2008,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "sci_fi",
+      "philosophical_surreal",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Felsefi&Surreal",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.15,
+    "imdb_score": 6.8,
+    "owl_score": 7.9,
+    "taste_score": 8.7,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi); Epik aksiyon ve muthis sahneler",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Mai Mai Miracle",
+    "year": 2009,
+    "director": "Sunao Katabuchi",
+    "categories": [
+      "emotional_slice",
+      "historical",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Tarihi",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 7.0,
+    "owl_score": 7.9,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Children of the Sea",
+    "year": 2019,
+    "director": "Ayumu Watanabe",
+    "categories": [
+      "philosophical_surreal",
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.1,
+    "imdb_score": 6.8,
+    "owl_score": 7.9,
+    "taste_score": 8.7,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Final Fantasy VII: Advent Children",
+    "year": 2005,
+    "director": "Tetsuya Nomura",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.9,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Garden of Sinners: Remaining Sense of Pain",
+    "year": 2008,
+    "director": "Takahiro Miura",
+    "categories": [
+      "mystery",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Gizem",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 7.4,
+    "imdb_score": 7.0,
+    "owl_score": 7.9,
+    "taste_score": 6.5,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Gizem ve gerilim kurgusu; Karanlik atmosfer ve gerilim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Genel anime severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Yuksek (Gizem, ipuclari, cozum)"
+  },
+  {
+    "title": "Garden of Sinners: The Hollow Garden",
+    "year": 2008,
+    "director": "Takahiro Miura",
+    "categories": [
+      "mystery",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Gizem",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.9,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Gizem ve gerilim kurgusu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Harmony",
+    "year": 2015,
+    "director": "Michael Arias",
+    "categories": [
+      "sci_fi",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.9,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Adieu Galaxy Express 999",
+    "year": 1981,
+    "director": "Rintaro",
+    "categories": [
+      "sci_fi",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Vampire Hunter D",
+    "year": 1985,
+    "director": "Toyoo Ashida",
+    "categories": [
+      "horror_thriller",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "The Vision of Escaflowne",
+    "year": 2000,
+    "director": "Kazuki Akane",
+    "categories": [
+      "fantasy_adventure",
+      "mecha",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Mekka",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 7.0,
+    "owl_score": 7.8,
+    "taste_score": 6.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Mekka tasarimi ve aksiyon",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Legend of the Galactic Heroes: My Conquest is the Sea of Stars",
+    "year": 1988,
+    "director": "Noboru Ishiguro",
+    "categories": [
+      "sci_fi",
+      "historical",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Tarihi",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Tarihi derinlik ve otantik atmosfer; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "X/1999",
+    "year": 1996,
+    "director": "Rintaro",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 7.7,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya; Karanlik atmosfer ve gerilim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Dead Leaves",
+    "year": 2004,
+    "director": "Hiroyuki Imaishi",
+    "categories": [
+      "comedy_satirical",
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.1,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Mary and the Witchs Flower",
+    "year": 2017,
+    "director": "Hiromasa Yonebayashi",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.1,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Lu Over the Wall",
+    "year": 2017,
+    "director": "Masaaki Yuasa",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.1,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Ranking of Kings: The Treasure Chest of Courage",
+    "year": 2023,
+    "director": "Shingo Kaneko",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 8.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Oban Star-Racers",
+    "year": 2006,
+    "director": "Savin Yeatman-Eiffel",
+    "categories": [
+      "sci_fi",
+      "action_epic",
+      "sports"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis",
+      "Spor"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Spor temali motivasyon ve heyecan",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Gantz:O",
+    "year": 2016,
+    "director": "Yasushi Kawamura",
+    "categories": [
+      "action_epic",
+      "sci_fi",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Karanlik atmosfer ve gerilim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Inuyasha: Affections Touching Across Time",
+    "year": 2001,
+    "director": "Toshiya Shinohara",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "StrayDog: Kerberos Panzer Cops",
+    "year": 1991,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.1,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Sailor Moon Eternal Part 1",
+    "year": 2021,
+    "director": "Chiaki Kon",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Sailor Moon Eternal Part 2",
+    "year": 2021,
+    "director": "Chiaki Kon",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 6.5,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Sword Art Online: Ordinal Scale",
+    "year": 2017,
+    "director": "Tomohiko Ito",
+    "categories": [
+      "action_epic",
+      "sci_fi",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 8.0,
+    "source_material": "Light Novel",
+    "has_web_novel": true,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Sword Art Online: Progressive - Scherzo of Deep Night",
+    "year": 2022,
+    "director": "Ayako Kouno",
+    "categories": [
+      "action_epic",
+      "romance_drama",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Romantik&Drama",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.3,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": true,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Rurouni Kenshin: The Motion Picture",
+    "year": 1997,
+    "director": "Kazuhiro Furuhashi",
+    "categories": [
+      "action_epic",
+      "historical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.8,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "She and Her Cat",
+    "year": 1999,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "emotional_slice",
+      "short_film"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "KisaFilm"
+    ],
+    "mal_score": 7.15,
+    "imdb_score": 7.0,
+    "owl_score": 7.8,
+    "taste_score": 7.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Kisa ve etkili anlatim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Penguin Highway",
+    "year": 2018,
+    "director": "Hiroyasu Ishida",
+    "categories": [
+      "sci_fi",
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.9,
+    "owl_score": 7.8,
+    "taste_score": 7.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Wicked City",
+    "year": 1987,
+    "director": "Yoshiaki Kawajiri",
+    "categories": [
+      "horror_thriller",
+      "action_epic",
+      "cyberpunk"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "Aksiyon&Muthis",
+      "Cyberpunk"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.7,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler; Cyberpunk estetigi ve teknoloji felsefesi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Record of Lodoss War: Chronicles of the Heroic Knight",
+    "year": 1998,
+    "director": "Kunihiko Yuyama",
+    "categories": [
+      "fantasy_adventure",
+      "action_epic"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.7,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Steamboy",
+    "year": 2004,
+    "director": "Katsuhiro Otomo",
+    "categories": [
+      "sci_fi",
+      "action_epic",
+      "historical"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis",
+      "Tarihi"
+    ],
+    "mal_score": 7.02,
+    "imdb_score": 6.8,
+    "owl_score": 7.7,
+    "taste_score": 7.3,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Totto-chan: The Little Girl at the Window",
+    "year": 2023,
+    "director": "Shinnosuke Yakuwa",
+    "categories": [
+      "emotional_slice",
+      "historical"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Tarihi"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.7,
+    "taste_score": 7.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Kingsglaive: Final Fantasy XV",
+    "year": 2016,
+    "director": "Takeshi Nozue",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.7,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Inuyasha: Fire on the Mystic Island",
+    "year": 2004,
+    "director": "Toshiya Shinohara",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.7,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "In This Corner of the World: Sincerely Yours",
+    "year": 2019,
+    "director": "Sunao Katabuchi",
+    "categories": [
+      "historical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Tarihi",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.7,
+    "taste_score": 7.0,
+    "source_material": "Manga",
+    "has_web_novel": false,
+    "why_selected": "Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Shin Kamen Rider",
+    "year": 2023,
+    "director": "Hideaki Anno",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.5,
+    "owl_score": 7.7,
+    "taste_score": 8.0,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Sailor Moon R: The Movie",
+    "year": 1993,
+    "director": "Kunihiko Ikuhara",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.2,
+    "imdb_score": 6.8,
+    "owl_score": 7.7,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Digimon Adventure tri. Chapter 1: Reunion",
+    "year": 2015,
+    "director": "Keitaro Motonaga",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.5,
+    "owl_score": 7.7,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Adventure tri. Chapter 6: Future",
+    "year": 2018,
+    "director": "Keitaro Motonaga",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.5,
+    "owl_score": 7.7,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Cyber City Oedo 808",
+    "year": 1990,
+    "director": "Yoshiaki Kawajiri",
+    "categories": [
+      "cyberpunk",
+      "action_epic",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Cyberpunk",
+      "Aksiyon&Muthis",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.7,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Cyberpunk estetigi ve teknoloji felsefesi; Epik aksiyon ve muthis sahneler; Karanlik atmosfer ve gerilim",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Princess Arete",
+    "year": 2001,
+    "director": "Sunao Katabuchi",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.7,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Place Promised in Our Early Days",
+    "year": 2004,
+    "director": "Makoto Shinkai",
+    "categories": [
+      "sci_fi",
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 7.02,
+    "imdb_score": 6.9,
+    "owl_score": 7.6,
+    "taste_score": 6.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Red Spectacles",
+    "year": 1987,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "philosophical_surreal",
+      "action_epic"
+    ],
+    "category_names": [
+      "Felsefi&Surreal",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.6,
+    "taste_score": 9.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Felsefi derinlik ve surreal anlatim (Lain tarzi); Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Avalon",
+    "year": 2001,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "sci_fi",
+      "cyberpunk",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Cyberpunk",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 6.95,
+    "imdb_score": 6.5,
+    "owl_score": 7.6,
+    "taste_score": 8.7,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Bofuri: I Don't Want to Get Hurt, so I'll Max Out My Defense.",
+    "year": 2021,
+    "director": "Yoshitsugu Kimura",
+    "categories": [
+      "comedy_satirical",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.5,
+    "owl_score": 7.6,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "The Wonderful World of Puss 'n Boots",
+    "year": 1969,
+    "director": "Kimio Yabuki",
+    "categories": [
+      "fantasy_adventure",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Zekice komedi ve satirik anlatim; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Demon City Shinjuku",
+    "year": 1988,
+    "director": "Yoshiaki Kawajiri",
+    "categories": [
+      "horror_thriller",
+      "action_epic",
+      "cyberpunk"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "Aksiyon&Muthis",
+      "Cyberpunk"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler; Cyberpunk estetigi ve teknoloji felsefesi",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Ocean Waves",
+    "year": 1993,
+    "director": "Tomomi Mochizuki",
+    "categories": [
+      "romance_drama",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Romantik&Drama",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.89,
+    "imdb_score": 6.8,
+    "owl_score": 7.5,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Spriggan",
+    "year": 1998,
+    "director": "Masahiko Murata",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Birthday Wonderland",
+    "year": 2019,
+    "director": "Keiichi Hara",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Appleseed",
+    "year": 2004,
+    "director": "Shinji Aramaki",
+    "categories": [
+      "sci_fi",
+      "cyberpunk",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Cyberpunk",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Blade Runner: Black Out 2022",
+    "year": 2017,
+    "director": "Shinichiro Watanabe",
+    "categories": [
+      "sci_fi",
+      "cyberpunk"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Cyberpunk"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Talking Head",
+    "year": 1992,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "mystery",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Gizem",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Gizem ve gerilim kurgusu; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Sailor Moon S: The Movie",
+    "year": 1994,
+    "director": "Hiroki Shibata",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 7.0,
+    "imdb_score": 6.7,
+    "owl_score": 7.5,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Iyi yapim. Zevk profiline uygun, keyifli izleme.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Nispeten Bilinen (Top 5000)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Digimon Adventure 02: Revenge of Diaboromon",
+    "year": 2001,
+    "director": "Jeff Nimoy",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Highlander: The Search for Vengeance",
+    "year": 2007,
+    "director": "Yoshiaki Kawajiri",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Tibetan Dog",
+    "year": 2011,
+    "director": "Masayuki Kojima",
+    "categories": [
+      "emotional_slice",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Genocidal Organ",
+    "year": 2017,
+    "director": "Shukou Murase",
+    "categories": [
+      "sci_fi",
+      "philosophical_surreal",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Felsefi&Surreal",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.7,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi); Epik aksiyon ve muthis sahneler",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Fortune Favors Lady Nikuko",
+    "year": 2021,
+    "director": "Ayumu Watanabe",
+    "categories": [
+      "emotional_slice",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Doraemon: Nobita's Little Star Wars",
+    "year": 1985,
+    "director": "Tsutomu Shibayama",
+    "categories": [
+      "sci_fi",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.4,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Blood: The Last Vampire",
+    "year": 2000,
+    "director": "Hiroyuki Kitakubo",
+    "categories": [
+      "horror_thriller",
+      "action_epic"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.4,
+    "taste_score": 7.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Samurai Champloo: The Movie",
+    "year": 2007,
+    "director": "Shinichiro Watanabe",
+    "categories": [
+      "action_epic",
+      "historical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.4,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Modest Heroes",
+    "year": 2018,
+    "director": "Studio Ponoc",
+    "categories": [
+      "emotional_slice",
+      "short_film"
+    ],
+    "category_names": [
+      "Duygusal&Incelikli",
+      "KisaFilm"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.4,
+    "taste_score": 7.5,
+    "source_material": "Original",
+    "has_web_novel": false,
+    "why_selected": "Duygusal derinlik ve insani hikaye; Kisa ve etkili anlatim",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Digimon Tamers: Battle of Adventurers",
+    "year": 2001,
+    "director": "Tetsuo Imazawa",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 6.7,
+    "imdb_score": 6.4,
+    "owl_score": 7.4,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Adventure tri. Chapter 2: Determination",
+    "year": 2016,
+    "director": "Keitaro Motonaga",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.3,
+    "owl_score": 7.4,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Adventure tri. Chapter 4: Loss",
+    "year": 2017,
+    "director": "Keitaro Motonaga",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.3,
+    "owl_score": 7.4,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Tokyo Ghoul: Jack",
+    "year": 2015,
+    "director": "Shuhei Morita",
+    "categories": [
+      "action_epic",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.4,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Karanlik atmosfer ve gerilim",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Napping Princess",
+    "year": 2017,
+    "director": "Kenji Kamiyama",
+    "categories": [
+      "sci_fi",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.4,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Yaratici fantastik dunya",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Phoenix 2772",
+    "year": 1980,
+    "director": "Sugii Gisaburo",
+    "categories": [
+      "sci_fi",
+      "romance_drama"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Romantik&Drama"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.3,
+    "taste_score": 6.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Love Hina Again",
+    "year": 2002,
+    "director": "Yoshiaki Iwasaki",
+    "categories": [
+      "comedy_satirical",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Romantik&Drama"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.3,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Tales from Earthsea",
+    "year": 2006,
+    "director": "Goro Miyazaki",
+    "categories": [
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.53,
+    "imdb_score": 6.4,
+    "owl_score": 7.3,
+    "taste_score": 8.0,
+    "source_material": "Novel",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Tachigui: The Amazing Lives of the Fast Food Grifters",
+    "year": 2006,
+    "director": "Mamoru Oshii",
+    "categories": [
+      "comedy_satirical",
+      "philosophical_surreal"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Felsefi&Surreal"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.3,
+    "taste_score": 9.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
+    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+  },
+  {
+    "title": "Sailor Moon SuperS: The Movie",
+    "year": 1995,
+    "director": "Hiroki Shibata",
+    "categories": [
+      "fantasy_adventure",
+      "romance_drama"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Romantik&Drama"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.3,
+    "taste_score": 6.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Digimon Adventure tri. Chapter 3: Confession",
+    "year": 2016,
+    "director": "Keitaro Motonaga",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.7,
+    "imdb_score": 6.2,
+    "owl_score": 7.3,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Adventure tri. Chapter 5: Coexistence",
+    "year": 2017,
+    "director": "Keitaro Motonaga",
+    "categories": [
+      "action_epic",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.7,
+    "imdb_score": 6.2,
+    "owl_score": 7.3,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Doomed Megalopolis",
+    "year": 1991,
+    "director": "Rintaro",
+    "categories": [
+      "horror_thriller",
+      "sci_fi",
+      "historical"
+    ],
+    "category_names": [
+      "Korku&Gerilim",
+      "BilimKurgu",
+      "Tarihi"
+    ],
+    "mal_score": 6.8,
+    "imdb_score": 6.5,
+    "owl_score": 7.3,
+    "taste_score": 6.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Karanlik atmosfer ve gerilim; Bilim kurgu vizyonu; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "The Little Prince and the Eight-Headed Dragon",
+    "year": 1963,
+    "director": "Yugo Serikawa",
+    "categories": [
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Appleseed: Ex Machina",
+    "year": 2007,
+    "director": "Shinji Aramaki",
+    "categories": [
+      "sci_fi",
+      "cyberpunk"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Cyberpunk"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Burn the Witch",
+    "year": 2020,
+    "director": "Tatsuro Koishi",
+    "categories": [
+      "action_epic",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Space Pirate Captain Harlock",
+    "year": 2013,
+    "director": "Shinji Aramaki",
+    "categories": [
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Tamers: Runaway Locomon",
+    "year": 2002,
+    "director": "Tetsuo Imazawa",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Digimon Frontier: Island of Lost Digimon",
+    "year": 2002,
+    "director": "Takahiro Imamura",
+    "categories": [
+      "action_epic",
+      "sci_fi"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "BilimKurgu"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Life of Budori Gusuko",
+    "year": 2012,
+    "director": "Gisaburo Sugii",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The House of the Lost on the Cape",
+    "year": 2021,
+    "director": "Shinichiro Watanabe",
+    "categories": [
+      "fantasy_adventure",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.2,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Cok Yuksek (Modern dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "The Five Star Stories",
+    "year": 1989,
+    "director": "Kazuo Yamazaki",
+    "categories": [
+      "sci_fi",
+      "action_epic",
+      "mecha"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis",
+      "Mekka"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.1,
+    "taste_score": 7.3,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Mekka tasarimi ve aksiyon",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Spirit of Wonder",
+    "year": 1992,
+    "director": "Takashi Anno",
+    "categories": [
+      "sci_fi",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.1,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Yaratici fantastik dunya",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Spring and Chaos",
+    "year": 1996,
+    "director": "Shoji Kawamori",
+    "categories": [
+      "historical",
+      "emotional_slice"
+    ],
+    "category_names": [
+      "Tarihi",
+      "Duygusal&Incelikli"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.1,
+    "taste_score": 7.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
+    "character_depth": "Derin (Duygusal gelisim, iliskiler)",
+    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+  },
+  {
+    "title": "Afro Samurai: Resurrection",
+    "year": 2009,
+    "director": "Fuminori Kizaki",
+    "categories": [
+      "action_epic",
+      "historical"
+    ],
+    "category_names": [
+      "Aksiyon&Muthis",
+      "Tarihi"
+    ],
+    "mal_score": 6.5,
+    "imdb_score": 6.2,
+    "owl_score": 7.1,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer",
+    "critic_review": "Ortalamanin uzerinde. Bazi guclu yonleri var.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "Appleseed Alpha",
+    "year": 2014,
+    "director": "Shinji Aramaki",
+    "categories": [
+      "sci_fi",
+      "cyberpunk"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Cyberpunk"
+    ],
+    "mal_score": 6.2,
+    "imdb_score": 5.9,
+    "owl_score": 6.9,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi",
+    "critic_review": "Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.",
+    "animation_quality": "Yuksek (Dijital)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Catnapped!",
+    "year": 1995,
+    "director": "Takashi Anno",
+    "categories": [
+      "fantasy_adventure",
+      "comedy_satirical"
+    ],
+    "category_names": [
+      "Fantastik&Macera",
+      "Komedi&Satirik"
+    ],
+    "mal_score": 6.2,
+    "imdb_score": 5.9,
+    "owl_score": 6.9,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Yaratici fantastik dunya; Zekice komedi ve satirik anlatim",
+    "critic_review": "Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.",
+    "animation_quality": "Iyi (Geleneksel)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Cleopatra",
+    "year": 1970,
+    "director": "Eiichi Yamamoto",
+    "categories": [
+      "historical",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "Tarihi",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 6.2,
+    "imdb_score": 5.9,
+    "owl_score": 6.8,
+    "taste_score": 7.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Tarihi derinlik ve otantik atmosfer; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Studio Ghibli, Dororo severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Rosario + Vampire CAPU2",
+    "year": 2008,
+    "director": "Takayuki Inagaki",
+    "categories": [
+      "comedy_satirical",
+      "horror_thriller"
+    ],
+    "category_names": [
+      "Komedi&Satirik",
+      "Korku&Gerilim"
+    ],
+    "mal_score": 6.2,
+    "imdb_score": 5.9,
+    "owl_score": 6.8,
+    "taste_score": 7.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Zekice komedi ve satirik anlatim; Karanlik atmosfer ve gerilim",
+    "critic_review": "Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Gintama, Konosuba severler icin",
+    "character_depth": "Iyi (Karakter tabanli mizah)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  },
+  {
+    "title": "Tailender",
+    "year": 1988,
+    "director": "Tetsuro Imazawa",
+    "categories": [
+      "sci_fi",
+      "action_epic"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Aksiyon&Muthis"
+    ],
+    "mal_score": 5.8,
+    "imdb_score": 5.5,
+    "owl_score": 6.5,
+    "taste_score": 8.0,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser",
+    "critic_review": "Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.",
+    "animation_quality": "Tarihi deger (Erken donem)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
+    "character_depth": "Iyi (Guc gelisim, motivasyon)",
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+  },
+  {
+    "title": "The Laws of the Sun",
+    "year": 2000,
+    "director": "Takaaki Ishiyama",
+    "categories": [
+      "sci_fi",
+      "fantasy_adventure"
+    ],
+    "category_names": [
+      "BilimKurgu",
+      "Fantastik&Macera"
+    ],
+    "mal_score": 5.5,
+    "imdb_score": 5.2,
+    "owl_score": 6.1,
+    "taste_score": 7.5,
+    "source_material": "Manga/Light Novel/Original",
+    "has_web_novel": false,
+    "why_selected": "Bilim kurgu vizyonu; Yaratici fantastik dunya",
+    "critic_review": "Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.",
+    "animation_quality": "Iyi (Gecis donemi)",
+    "popularity": "Az Bilinen (Gizemli Mucevher)",
+    "taste_index": "Akira, Ghost in the Shell severler icin",
+    "character_depth": "Orta (Tur geregi yeterli)",
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+  }
+]

@@ -1,0 +1,31 @@
+1988 YILI ANIME FILMLERI (7 film)
+================================================================================
+
+OWL:9.2 | Grave of the Fireflies
+  Yonetmen: Isao Takahata | Tur: Duygusal&Incelikli, Tarihi
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Klasik, tarihi oneme sahip eser
+
+OWL:9.0 | My Neighbor Totoro
+  Yonetmen: Hayao Miyazaki | Tur: Duygusal&Incelikli, Fantastik&Macera
+  Neden: Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser
+
+OWL:9.0 | Akira
+  Yonetmen: Katsuhiro Otomo | Tur: Cyberpunk, BilimKurgu, Aksiyon&Muthis, Felsefi&Surreal
+  Neden: Cyberpunk estetigi ve teknoloji felsefesi; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler
+
+OWL:8.4 | Mobile Suit Gundam: Char's Counterattack
+  Yonetmen: Yoshiyuki Tomino | Tur: Mekka, BilimKurgu, Aksiyon&Muthis
+  Neden: Mekka tasarimi ve aksiyon; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler
+
+OWL:7.8 | Legend of the Galactic Heroes: My Conquest is the Sea of Stars
+  Yonetmen: Noboru Ishiguro | Tur: BilimKurgu, Tarihi, Aksiyon&Muthis
+  Neden: Bilim kurgu vizyonu; Tarihi derinlik ve otantik atmosfer; Epik aksiyon ve muthis sahneler
+
+OWL:7.5 | Demon City Shinjuku
+  Yonetmen: Yoshiaki Kawajiri | Tur: Korku&Gerilim, Aksiyon&Muthis, Cyberpunk
+  Neden: Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler; Cyberpunk estetigi ve teknoloji felsefesi
+
+OWL:6.5 | Tailender
+  Yonetmen: Tetsuro Imazawa | Tur: BilimKurgu, Aksiyon&Muthis
+  Neden: Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler; Klasik, tarihi oneme sahip eser
+

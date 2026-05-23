@@ -1,0 +1,408 @@
+KATEGORI: Duygusal&Incelikli (81 film)
+================================================================================
+
+#001 | OWL:9.5 | Spirited Away (2001)
+  Yonetmen: Hayao Miyazaki | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#002 | OWL:9.3 | Rurouni Kenshin: Trust and Betrayal (1999)
+  Yonetmen: Kazuhiro Furuhashi | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#003 | OWL:9.3 | A Silent Voice (2016)
+  Yonetmen: Naoko Yamada | Kaynak: Manga
+  Neden: Duygusal derinlik ve insani hikaye
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#004 | OWL:9.2 | Grave of the Fireflies (1988)
+  Yonetmen: Isao Takahata | Kaynak: Novel
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Klasik, tarihi oneme sahip eser
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#005 | OWL:9.1 | Wolf Children (2012)
+  Yonetmen: Mamoru Hosoda | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#006 | OWL:9.1 | The First Slam Dunk (2022)
+  Yonetmen: Takehiko Inoue | Kaynak: Manga
+  Neden: Spor temali motivasyon ve heyecan; Duygusal derinlik ve insani hikaye; Epik aksiyon ve muthis sahneler
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#007 | OWL:9.1 | Look Back (2024)
+  Yonetmen: Kiyotaka Oshiyama | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Kisa ve etkili anlatim; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#008 | OWL:9.0 | Nausicaa of the Valley of the Wind (1984)
+  Yonetmen: Hayao Miyazaki | Kaynak: Manga
+  Neden: Yaratici fantastik dunya; Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#009 | OWL:9.0 | My Neighbor Totoro (1988)
+  Yonetmen: Hayao Miyazaki | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya; Klasik, tarihi oneme sahip eser
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#010 | OWL:9.0 | Violet Evergarden: The Movie (2020)
+  Yonetmen: Taichi Ishidate | Kaynak: Light Novel
+  Neden: Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Basyapit kabul edilir. Animasyon, kurgu ve karakter derinligi mukemmel.
+------------------------------------------------------------
+#011 | OWL:8.9 | Suzume (2022)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Epik aksiyon ve muthis sahneler
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#012 | OWL:8.8 | Kikis Delivery Service (1989)
+  Yonetmen: Hayao Miyazaki | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Klasik, tarihi oneme sahip eser
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#013 | OWL:8.8 | Millennium Actress (2001)
+  Yonetmen: Satoshi Kon | Kaynak: Original
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#014 | OWL:8.8 | Tokyo Godfathers (2003)
+  Yonetmen: Satoshi Kon | Kaynak: Original
+  Neden: Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#015 | OWL:8.8 | The Tale of The Princess Kaguya (2013)
+  Yonetmen: Isao Takahata | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#016 | OWL:8.8 | Rurouni Kenshin: The Beginning (2021)
+  Yonetmen: Keishi Otomo | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#017 | OWL:8.7 | Whisper of the Heart (1995)
+  Yonetmen: Yoshifumi Kondo | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#018 | OWL:8.7 | Weathering with You (2019)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#019 | OWL:8.6 | Ponyo (2008)
+  Yonetmen: Hayao Miyazaki | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#020 | OWL:8.6 | The Girl Who Leapt Through Time (2006)
+  Yonetmen: Mamoru Hosoda | Kaynak: Novel
+  Neden: Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#021 | OWL:8.6 | Maquia: When the Promised Flower Blooms (2018)
+  Yonetmen: Mari Okada | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#022 | OWL:8.6 | In This Corner of the World (2016)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#023 | OWL:8.6 | Liz and the Blue Bird (2018)
+  Yonetmen: Naoko Yamada | Kaynak: Light Novel
+  Neden: Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#024 | OWL:8.6 | My Hero Academia: Heroes Rising (2019)
+  Yonetmen: Kenji Nagasaki | Kaynak: Manga
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#025 | OWL:8.5 | Only Yesterday (1991)
+  Yonetmen: Isao Takahata | Kaynak: Manga
+  Neden: Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#026 | OWL:8.5 | Summer Wars (2009)
+  Yonetmen: Mamoru Hosoda | Kaynak: Original
+  Neden: Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#027 | OWL:8.5 | Tekkonkinkreet (2006)
+  Yonetmen: Michael Arias | Kaynak: Manga
+  Neden: Epik aksiyon ve muthis sahneler; Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#028 | OWL:8.5 | The Wind Rises (2013)
+  Yonetmen: Hayao Miyazaki | Kaynak: Manga/Light Novel/Original
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#029 | OWL:8.5 | K-On! The Movie (2011)
+  Yonetmen: Naoko Yamada | Kaynak: Manga
+  Neden: Muzik/sanat temali yaratici konsept; Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#030 | OWL:8.5 | Digimon Adventure: Last Evolution Kizuna (2020)
+  Yonetmen: Tomohisa Taguchi | Kaynak: Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#031 | OWL:8.4 | Colourful (2010)
+  Yonetmen: Keiichi Hara | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#032 | OWL:8.4 | Colorful (2010)
+  Yonetmen: Keiichi Hara | Kaynak: Novel
+  Neden: Duygusal derinlik ve insani hikaye; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#033 | OWL:8.4 | The Boy and the Beast (2015)
+  Yonetmen: Mamoru Hosoda | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#034 | OWL:8.4 | The Boy and the Heron (2023)
+  Yonetmen: Hayao Miyazaki | Kaynak: Novel
+  Neden: Yaratici fantastik dunya; Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#035 | OWL:8.3 | Angel's Egg (1985)
+  Yonetmen: Mamoru Oshii | Kaynak: Original
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye; Klasik, tarihi oneme sahip eser
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#036 | OWL:8.3 | Anthem of the Heart (2015)
+  Yonetmen: Mari Okada | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#037 | OWL:8.3 | The Anthem of the Heart (2015)
+  Yonetmen: Mari Okada | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#038 | OWL:8.3 | The Colors Within (2024)
+  Yonetmen: Naoko Yamada | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#039 | OWL:8.2 | 5 Centimeters Per Second (2007)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#040 | OWL:8.2 | Belle (2021)
+  Yonetmen: Mamoru Hosoda | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Muzik/sanat temali yaratici konsept; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#041 | OWL:8.2 | The Red Turtle (2016)
+  Yonetmen: Michael Dudok de Wit | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya; Kisa ve etkili anlatim
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#042 | OWL:8.2 | Time of Eve: The Movie (2010)
+  Yonetmen: Yasuhiro Yoshiura | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi); Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#043 | OWL:8.1 | Summer Days with Coo (2007)
+  Yonetmen: Keiichi Hara | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Zekice komedi ve satirik anlatim
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#044 | OWL:8.1 | From Up on Poppy Hill (2011)
+  Yonetmen: Goro Miyazaki | Kaynak: Manga
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#045 | OWL:8.1 | The Garden of Words (2013)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#046 | OWL:8.1 | Her Blue Sky (2019)
+  Yonetmen: Mari Okada | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#047 | OWL:8.1 | Miss Hokusai (2015)
+  Yonetmen: Keiichi Hara | Kaynak: Manga
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye; Muzik/sanat temali yaratici konsept
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#048 | OWL:8.1 | The Imaginary (2023)
+  Yonetmen: Yoshiyuki Momose | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#049 | OWL:8.1 | The Kingdom of Dreams and Madness (2013)
+  Yonetmen: Mami Sunada | Kaynak: Manga/Light Novel/Original
+  Neden: Muzik/sanat temali yaratici konsept; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#050 | OWL:8.0 | My Neighbors the Yamadas (1999)
+  Yonetmen: Isao Takahata | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#051 | OWL:8.0 | Children Who Chase Lost Voices (2011)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#052 | OWL:8.0 | Mirai (2018)
+  Yonetmen: Mamoru Hosoda | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#053 | OWL:8.0 | Ride Your Wave (2019)
+  Yonetmen: Masaaki Yuasa | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#054 | OWL:8.0 | Josee, the Tiger and the Fish (2020)
+  Yonetmen: Kotaro Tamura | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#055 | OWL:7.9 | Voices of a Distant Star (2002)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#056 | OWL:7.9 | Mai Mai Miracle (2009)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Yaratici fantastik dunya
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#057 | OWL:7.9 | Children of the Sea (2019)
+  Yonetmen: Ayumu Watanabe | Kaynak: Manga
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#058 | OWL:7.8 | Adieu Galaxy Express 999 (1981)
+  Yonetmen: Rintaro | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye; Klasik, tarihi oneme sahip eser
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#059 | OWL:7.8 | Mary and the Witchs Flower (2017)
+  Yonetmen: Hiromasa Yonebayashi | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#060 | OWL:7.8 | Lu Over the Wall (2017)
+  Yonetmen: Masaaki Yuasa | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#061 | OWL:7.8 | Ranking of Kings: The Treasure Chest of Courage (2023)
+  Yonetmen: Shingo Kaneko | Kaynak: Manga
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#062 | OWL:7.8 | She and Her Cat (1999)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Kisa ve etkili anlatim
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#063 | OWL:7.8 | Penguin Highway (2018)
+  Yonetmen: Hiroyasu Ishida | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#064 | OWL:7.7 | Totto-chan: The Little Girl at the Window (2023)
+  Yonetmen: Shinnosuke Yakuwa | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Tarihi derinlik ve otantik atmosfer; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#065 | OWL:7.7 | In This Corner of the World: Sincerely Yours (2019)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#066 | OWL:7.7 | Digimon Adventure tri. Chapter 1: Reunion (2015)
+  Yonetmen: Keitaro Motonaga | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#067 | OWL:7.7 | Digimon Adventure tri. Chapter 6: Future (2018)
+  Yonetmen: Keitaro Motonaga | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#068 | OWL:7.7 | Princess Arete (2001)
+  Yonetmen: Sunao Katabuchi | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#069 | OWL:7.6 | The Place Promised in Our Early Days (2004)
+  Yonetmen: Makoto Shinkai | Kaynak: Original
+  Neden: Bilim kurgu vizyonu; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#070 | OWL:7.5 | Ocean Waves (1993)
+  Yonetmen: Tomomi Mochizuki | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#071 | OWL:7.5 | Birthday Wonderland (2019)
+  Yonetmen: Keiichi Hara | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#072 | OWL:7.5 | The Tibetan Dog (2011)
+  Yonetmen: Masayuki Kojima | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Yaratici fantastik dunya
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#073 | OWL:7.5 | Fortune Favors Lady Nikuko (2021)
+  Yonetmen: Ayumu Watanabe | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#074 | OWL:7.4 | Modest Heroes (2018)
+  Yonetmen: Studio Ponoc | Kaynak: Original
+  Neden: Duygusal derinlik ve insani hikaye; Kisa ve etkili anlatim
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#075 | OWL:7.4 | Digimon Adventure tri. Chapter 2: Determination (2016)
+  Yonetmen: Keitaro Motonaga | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#076 | OWL:7.4 | Digimon Adventure tri. Chapter 4: Loss (2017)
+  Yonetmen: Keitaro Motonaga | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#077 | OWL:7.3 | Digimon Adventure tri. Chapter 3: Confession (2016)
+  Yonetmen: Keitaro Motonaga | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#078 | OWL:7.3 | Digimon Adventure tri. Chapter 5: Coexistence (2017)
+  Yonetmen: Keitaro Motonaga | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#079 | OWL:7.2 | The Life of Budori Gusuko (2012)
+  Yonetmen: Gisaburo Sugii | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#080 | OWL:7.2 | The House of the Lost on the Cape (2021)
+  Yonetmen: Shinichiro Watanabe | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#081 | OWL:7.1 | Spring and Chaos (1996)
+  Yonetmen: Shoji Kawamori | Kaynak: Manga/Light Novel/Original
+  Neden: Tarihi derinlik ve otantik atmosfer; Duygusal derinlik ve insani hikaye
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------

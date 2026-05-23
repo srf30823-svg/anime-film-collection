@@ -1,0 +1,63 @@
+OWL - ISTATISTIKLER
+================================================================================
+
+TOPLAM FILM: 215
+
+--- TUR DAGILIMI ---
+  Felsefi&Surreal: 38 (17.7%)
+  Aksiyon&Muthis: 91 (42.3%)
+  Psikolojik: 6 (2.8%)
+  Komedi&Satirik: 27 (12.6%)
+  Duygusal&Incelikli: 81 (37.7%)
+  Fantastik&Macera: 82 (38.1%)
+  BilimKurgu: 60 (27.9%)
+  Cyberpunk: 12 (5.6%)
+  Gizem: 6 (2.8%)
+  Korku&Gerilim: 19 (8.8%)
+  Romantik&Drama: 46 (21.4%)
+  Spor: 2 (0.9%)
+  Tarihi: 26 (12.1%)
+  Muzik&Sanat: 10 (4.7%)
+  Mekka: 5 (2.3%)
+  KisaFilm: 4 (1.9%)
+
+--- YIL DAGILIMI ---
+  1960ler: 3
+  1970ler: 5
+  1980ler: 21
+  1990ler: 29
+  2000ler: 57
+  2010ler: 63
+  2020ler: 37
+
+--- PUAN DAGILIMI ---
+  9.0-10.0: 21
+  8.5-9.0: 32
+  8.0-8.5: 68
+  7.5-8.0: 59
+  7.0-7.5: 29
+  0.0-7.0: 6
+
+--- WEB NOVEL: 3 film ---
+
+--- EN IYI 20 ---
+   1. Chainsaw Man: Reze Arc (2025) OWL:9.6
+   2. Spirited Away (2001) OWL:9.5
+   3. Princess Mononoke (1997) OWL:9.3
+   4. Rurouni Kenshin: Trust and Betrayal (1999) OWL:9.3
+   5. A Silent Voice (2016) OWL:9.3
+   6. Grave of the Fireflies (1988) OWL:9.2
+   7. Perfect Blue (1997) OWL:9.2
+   8. The Tatami Galaxy (2010) OWL:9.2
+   9. Attack on Titan: Chronicle (2020) OWL:9.2
+  10. Madoka Magica: The Movie – Walpurgisnacht: Rising (2025) OWL:9.2
+  11. Howls Moving Castle (2004) OWL:9.1
+  12. Wolf Children (2012) OWL:9.1
+  13. The First Slam Dunk (2022) OWL:9.1
+  14. Jujutsu Kaisen 0 (2021) OWL:9.1
+  15. Look Back (2024) OWL:9.1
+  16. Nausicaa of the Valley of the Wind (1984) OWL:9.0
+  17. Castle in the Sky (1986) OWL:9.0
+  18. My Neighbor Totoro (1988) OWL:9.0
+  19. Akira (1988) OWL:9.0
+  20. Ghost in the Shell (1995) OWL:9.0

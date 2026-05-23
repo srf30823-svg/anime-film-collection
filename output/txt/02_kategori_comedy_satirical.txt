@@ -1,0 +1,138 @@
+KATEGORI: Komedi&Satirik (27 film)
+================================================================================
+
+#001 | OWL:9.2 | The Tatami Galaxy (2010)
+  Yonetmen: Masaaki Yuasa | Kaynak: Novel
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Psikolojik gerilim ve zihin oyunlari; Zekice komedi ve satirik anlatim
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#002 | OWL:8.8 | Tokyo Godfathers (2003)
+  Yonetmen: Satoshi Kon | Kaynak: Original
+  Neden: Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#003 | OWL:8.8 | Redline (2009)
+  Yonetmen: Takeshi Koike | Kaynak: Original
+  Neden: Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#004 | OWL:8.7 | Mind Game (2004)
+  Yonetmen: Masaaki Yuasa | Kaynak: Manga
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Zekice komedi ve satirik anlatim; Psikolojik gerilim ve zihin oyunlari
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#005 | OWL:8.6 | The Night Is Short, Walk on Girl (2017)
+  Yonetmen: Masaaki Yuasa | Kaynak: Novel
+  Neden: Zekice komedi ve satirik anlatim; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#006 | OWL:8.5 | Summer Wars (2009)
+  Yonetmen: Mamoru Hosoda | Kaynak: Original
+  Neden: Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#007 | OWL:8.5 | K-On! The Movie (2011)
+  Yonetmen: Naoko Yamada | Kaynak: Manga
+  Neden: Muzik/sanat temali yaratici konsept; Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#008 | OWL:8.5 | My Hero Academia: Two Heroes (2018)
+  Yonetmen: Kenji Nagasaki | Kaynak: Manga
+  Neden: Epik aksiyon ve muthis sahneler; Zekice komedi ve satirik anlatim
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#009 | OWL:8.4 | Urusei Yatsura 2: Beautiful Dreamer (1984)
+  Yonetmen: Mamoru Oshii | Kaynak: Manga
+  Neden: Felsefi derinlik ve surreal anlatim (Lain tarzi); Zekice komedi ve satirik anlatim; Klasik, tarihi oneme sahip eser
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#010 | OWL:8.4 | Nimona (2023)
+  Yonetmen: Nick Bruno | Kaynak: Manga/Light Novel/Original
+  Neden: Epik aksiyon ve muthis sahneler; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#011 | OWL:8.3 | Promare (2019)
+  Yonetmen: Hiroyuki Imaishi | Kaynak: Original
+  Neden: Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#012 | OWL:8.2 | The Cat Returns (2002)
+  Yonetmen: Hiroyuki Morita | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Zekice komedi ve satirik anlatim
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#013 | OWL:8.2 | Wreck-It Ralph (2012)
+  Yonetmen: Rich Moore | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Epik aksiyon ve muthis sahneler
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#014 | OWL:8.2 | Spy x Family Code: White (2023)
+  Yonetmen: Takashi Katagiri | Kaynak: Manga
+  Neden: Epik aksiyon ve muthis sahneler; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#015 | OWL:8.1 | Summer Days with Coo (2007)
+  Yonetmen: Keiichi Hara | Kaynak: Original
+  Neden: Yaratici fantastik dunya; Duygusal derinlik ve insani hikaye; Zekice komedi ve satirik anlatim
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#016 | OWL:8.0 | Pom Poko (1994)
+  Yonetmen: Isao Takahata | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Zekice komedi ve satirik anlatim
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#017 | OWL:8.0 | My Neighbors the Yamadas (1999)
+  Yonetmen: Isao Takahata | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Duygusal derinlik ve insani hikaye
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#018 | OWL:8.0 | Horimiya: The Missing Pieces (2023)
+  Yonetmen: Masashi Ishihama | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#019 | OWL:7.8 | Dead Leaves (2004)
+  Yonetmen: Hiroyuki Imaishi | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#020 | OWL:7.6 | Bofuri: I Don't Want to Get Hurt, so I'll Max Out My Defense. (2021)
+  Yonetmen: Yoshitsugu Kimura | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Yaratici fantastik dunya; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#021 | OWL:7.5 | The Wonderful World of Puss 'n Boots (1969)
+  Yonetmen: Kimio Yabuki | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Zekice komedi ve satirik anlatim; Klasik, tarihi oneme sahip eser
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#022 | OWL:7.5 | Fortune Favors Lady Nikuko (2021)
+  Yonetmen: Ayumu Watanabe | Kaynak: Manga/Light Novel/Original
+  Neden: Duygusal derinlik ve insani hikaye; Zekice komedi ve satirik anlatim; Yeni cikan, guncel animasyon teknolojisi
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#023 | OWL:7.4 | Doraemon: Nobita's Little Star Wars (1985)
+  Yonetmen: Tsutomu Shibayama | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Zekice komedi ve satirik anlatim; Klasik, tarihi oneme sahip eser
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#024 | OWL:7.3 | Love Hina Again (2002)
+  Yonetmen: Yoshiaki Iwasaki | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#025 | OWL:7.3 | Tachigui: The Amazing Lives of the Fast Food Grifters (2006)
+  Yonetmen: Mamoru Oshii | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#026 | OWL:6.9 | Catnapped! (1995)
+  Yonetmen: Takashi Anno | Kaynak: Manga/Light Novel/Original
+  Neden: Yaratici fantastik dunya; Zekice komedi ve satirik anlatim
+  Kritik: Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.
+------------------------------------------------------------
+#027 | OWL:6.8 | Rosario + Vampire CAPU2 (2008)
+  Yonetmen: Takayuki Inagaki | Kaynak: Manga/Light Novel/Original
+  Neden: Zekice komedi ve satirik anlatim; Karanlik atmosfer ve gerilim
+  Kritik: Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.
+------------------------------------------------------------

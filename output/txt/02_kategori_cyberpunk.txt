@@ -1,0 +1,63 @@
+KATEGORI: Cyberpunk (12 film)
+================================================================================
+
+#001 | OWL:9.0 | Akira (1988)
+  Yonetmen: Katsuhiro Otomo | Kaynak: Manga
+  Neden: Cyberpunk estetigi ve teknoloji felsefesi; Bilim kurgu vizyonu; Epik aksiyon ve muthis sahneler
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#002 | OWL:9.0 | Ghost in the Shell (1995)
+  Yonetmen: Mamoru Oshii | Kaynak: Manga
+  Neden: Cyberpunk estetigi ve teknoloji felsefesi; Bilim kurgu vizyonu; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#003 | OWL:8.7 | Cowboy Bebop: The Movie (2001)
+  Yonetmen: Shinichiro Watanabe | Kaynak: TV Series
+  Neden: Epik aksiyon ve muthis sahneler; Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi
+  Kritik: Cok yuksek kaliteli. Hem gorsel hem anlatimsal acidan ust duzey.
+------------------------------------------------------------
+#004 | OWL:8.4 | Ghost in the Shell 2: Innocence (2004)
+  Yonetmen: Mamoru Oshii | Kaynak: Manga
+  Neden: Cyberpunk estetigi ve teknoloji felsefesi; Felsefi derinlik ve surreal anlatim (Lain tarzi); Bilim kurgu vizyonu
+  Kritik: Yuksek kalite. Turunun en iyi orneklerinden.
+------------------------------------------------------------
+#005 | OWL:7.7 | Wicked City (1987)
+  Yonetmen: Yoshiaki Kawajiri | Kaynak: Manga/Light Novel/Original
+  Neden: Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler; Cyberpunk estetigi ve teknoloji felsefesi
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#006 | OWL:7.7 | Cyber City Oedo 808 (1990)
+  Yonetmen: Yoshiaki Kawajiri | Kaynak: Manga/Light Novel/Original
+  Neden: Cyberpunk estetigi ve teknoloji felsefesi; Epik aksiyon ve muthis sahneler; Karanlik atmosfer ve gerilim
+  Kritik: Iyi yapim. Zevk profiline uygun, keyifli izleme.
+------------------------------------------------------------
+#007 | OWL:7.6 | Avalon (2001)
+  Yonetmen: Mamoru Oshii | Kaynak: Original
+  Neden: Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi; Felsefi derinlik ve surreal anlatim (Lain tarzi)
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#008 | OWL:7.5 | Demon City Shinjuku (1988)
+  Yonetmen: Yoshiaki Kawajiri | Kaynak: Manga/Light Novel/Original
+  Neden: Karanlik atmosfer ve gerilim; Epik aksiyon ve muthis sahneler; Cyberpunk estetigi ve teknoloji felsefesi
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#009 | OWL:7.5 | Appleseed (2004)
+  Yonetmen: Shinji Aramaki | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi; Epik aksiyon ve muthis sahneler
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#010 | OWL:7.5 | Blade Runner: Black Out 2022 (2017)
+  Yonetmen: Shinichiro Watanabe | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#011 | OWL:7.2 | Appleseed: Ex Machina (2007)
+  Yonetmen: Shinji Aramaki | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi
+  Kritik: Ortalamanin uzerinde. Bazi guclu yonleri var.
+------------------------------------------------------------
+#012 | OWL:6.9 | Appleseed Alpha (2014)
+  Yonetmen: Shinji Aramaki | Kaynak: Manga/Light Novel/Original
+  Neden: Bilim kurgu vizyonu; Cyberpunk estetigi ve teknoloji felsefesi
+  Kritik: Degerlendirme karmasik. Belirli bir izleyici kitlesine hitap edebilir.
+------------------------------------------------------------
