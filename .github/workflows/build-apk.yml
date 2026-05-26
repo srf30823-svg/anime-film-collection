@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
 
@@ -22,7 +22,6 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y \
-            python3-pip python3-setuptools python3-wheel \
             build-essential ccache git zlib1g-dev \
             openjdk-17-jdk autoconf automake libtool \
             pkg-config libncurses5-dev libtinfo5
@@ -32,39 +31,19 @@ jobs:
           pip install --upgrade pip
           pip install buildozer==1.6.0 cython==0.29.37
 
-      - name: Prepare APK project
+      - name: Create icons
         run: |
-          mkdir -p apk_project
-          cp oneri.py apk_project/main.py
-          cp -r data apk_project/
-          cp -r output apk_project/ 2>/dev/null || true
-
-      - name: Create buildozer.spec
-        run: |
-          cat > apk_project/buildozer.spec << 'SPECEOF'
-          [app]
-          title = Echo
-          package.name = echo.anime
-          package.domain = com.echo.anime
-          source.dir = .
-          source.include_exts = py,png,jpg,kv,atlas,db,json,txt,html,css,js
-          version = 5.2.0
-          requirements = python3,kivy==2.3.0,pillow,android,pyjnius,urllib3
-          orientation = portrait
-          fullscreen = 0
-          android.permissions = INTERNET,ACCESS_NETWORK_STATE
-          android.api = 33
-          android.minapi = 21
-          android.archs = arm64-v8a
-          android.accept_sdk_license = True
-          presplash.filename = data/presplash.png
-          icon.filename = data/icon.png
-          log_level = 2
-          warn_on_root = 1
-          [buildozer]
-          log_level = 2
-          warn_on_root = 1
-          SPECEOF
+          mkdir -p apk_project/data
+          # Create simple 512x512 icon
+          python3 -c "
+          from PIL import Image, ImageDraw
+          img = Image.new('RGB', (512, 512), color=(18,18,18))
+          d = ImageDraw.Draw(img)
+          d.text((180, 220), 'ECHO', fill=(127,216,216))
+          img.save('apk_project/data/icon.png')
+          img.save('apk_project/data/presplash.png')
+          print('Icons created')
+          "
 
       - name: Create main.py for APK
         run: |
@@ -87,7 +66,6 @@ jobs:
           from kivy.properties import StringProperty, BooleanProperty
           from kivy.uix.boxlayout import BoxLayout
           from kivy.uix.label import Label
-          from kivy.uix.button import Button
           from kivy.uix.progressbar import ProgressBar
 
           Config.set('graphics', 'width', '360')
@@ -99,8 +77,6 @@ jobs:
               'ice': (0.5, 0.85, 0.85, 1),
               'neon': (0.3, 0.93, 0.92, 1),
               'muted': (0.53, 0.53, 0.53, 1),
-              'surface': (0.12, 0.12, 0.12, 1),
-              'border': (0.16, 0.16, 0.16, 1),
           }
 
           class EchoApp(App):
@@ -112,17 +88,12 @@ jobs:
                   Window.clearcolor = COLORS['bg']
                   root = BoxLayout(orientation='vertical')
                   root.add_widget(self._build_nav())
-                  
                   self.loading = BoxLayout(orientation='vertical', padding=40, spacing=20)
-                  self.status_label = Label(
-                      text="The Wired is everywhere...",
-                      font_size=18, color=COLORS['ice'], halign='center'
-                  )
+                  self.status_label = Label(text="The Wired is everywhere...", font_size=18, color=COLORS['ice'], halign='center')
                   self.loading.add_widget(self.status_label)
                   self.pb = ProgressBar(max=100, value=0, size_hint_y=None, height=6)
                   self.loading.add_widget(self.pb)
                   root.add_widget(self.loading)
-                  
                   Clock.schedule_once(self._start_server, 0)
                   Clock.schedule_interval(self._check_server, 1)
                   return root
@@ -136,7 +107,6 @@ jobs:
 
               def _start_server(self, dt):
                   try:
-                      import sys
                       sys.path.insert(0, APP_DIR)
                       from oneri import start_web_server
                       t = threading.Thread(target=start_web_server, args=(WEB_PORT,), daemon=True)
@@ -174,14 +144,63 @@ jobs:
               EchoApp().run()
           PYEOF
 
-      - name: Build APK with buildozer
+      - name: Create buildozer.spec
+        run: |
+          cat > apk_project/buildozer.spec << 'SPECEOF'
+          [app]
+          title = Echo
+          package.name = echo.anime
+          package.domain = com.echo.anime
+          source.dir = .
+          source.include_exts = py,png,jpg,kv,atlas,db,json,txt,html,css,js
+          version = 5.2.0
+          requirements = python3,kivy==2.3.0,pillow,android,pyjnius,urllib3
+          orientation = portrait
+          fullscreen = 0
+          android.permissions = INTERNET,ACCESS_NETWORK_STATE
+          android.api = 33
+          android.minapi = 21
+          android.archs = arm64-v8a
+          android.accept_sdk_license = True
+          presplash.filename = data/presplash.png
+          icon.filename = data/icon.png
+          log_level = 2
+          warn_on_root = 1
+          [buildozer]
+          log_level = 2
+          warn_on_root = 1
+          SPECEOF
+
+      - name: Copy project files
+        run: |
+          cp oneri.py apk_project/oneri.py
+          cp -r data apk_project/
+          cp -r output apk_project/ 2>/dev/null || true
+          ls -la apk_project/
+
+      - name: Build APK
         working-directory: ./apk_project
         run: |
-          buildozer android debug 2>&1 | tail -50
+          buildozer android debug 2>&1 | tee build.log
+          echo "=== BUILD FINISHED ==="
+          echo "=== Looking for APK ==="
+          find . -name "*.apk" -type f 2>/dev/null
+          echo "=== bin/ contents ==="
+          ls -la bin/ 2>/dev/null || echo "bin/ not found"
+          echo "=== .buildozer contents ==="
+          find .buildozer -name "*.apk" -type f 2>/dev/null || echo "No APK in .buildozer"
+
+      - name: Find and copy APK
+        run: |
+          mkdir -p apk_output
+          # Search for APK in all possible locations
+          find apk_project -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
+          echo "=== APK files found ==="
+          ls -la apk_output/ 2>/dev/null || echo "No APK files found"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: echo-apk
-          path: apk_project/bin/*.apk
+          path: apk_output/*.apk
           retention-days: 30
