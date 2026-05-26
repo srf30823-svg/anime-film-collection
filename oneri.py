@@ -432,7 +432,7 @@ def get_taste_profile(db):
 def get_taste_weights(db):
     counts, avg_scores = get_taste_profile(db)
     if not counts:
-        return TASTE_W
+        return dict(TASTE_W)
     weights = dict(TASTE_W)
     total = sum(counts.values())
     for genre, count in counts.items():
@@ -480,6 +480,12 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
         if studio:
             conditions.append("studio LIKE ?")
             params.append(f"%{studio}%")
+        if genre:
+            conditions.append("genres LIKE ?")
+            params.append(f"%{genre}%")
+        if category and not genre:
+            conditions.append("genres LIKE ?")
+            params.append(f"%{category}%")
 
         where = " AND ".join(conditions)
         q = f"SELECT * FROM films WHERE {where} ORDER BY owl_score DESC LIMIT ?"
@@ -490,16 +496,6 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
             return []
 
         taste_weights = get_taste_weights(db) if smart else TASTE_W
-
-        # Genre filtresi (post-query)
-        if genre:
-            genre_lower = genre.lower()
-            rows = [r for r in rows if r["genres"] and genre_lower in r["genres"].lower()]
-
-        # Category = source eslesmesi (geriye uyumluluk)
-        if category and not genre:
-            cat_lower = category.lower()
-            rows = [r for r in rows if r["genres"] and cat_lower in r["genres"].lower()]
 
         # Puanla
         scored = []

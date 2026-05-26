@@ -388,35 +388,164 @@ def story_q(cats):
     else: return "Iyi (Tur standartlarini karsiliyor)"
 
 # === ANA İŞLEM ===
-print("="*60)
-print("OWL - KAPSAMLI ANIME FILM ANALIZ SISTEMI v1.0")
-print("="*60)
+if __name__ == "__main__":
+    print("="*60)
+    print("OWL - KAPSAMLI ANIME FILM ANALIZ SISTEMI v1.0")
+    print("="*60)
 
-# Duplicate temizleme
-seen = set()
-unique = []
-for f in FILMS:
-    key = f"{f['t'].lower()}_{f['y']}"
-    if key not in seen:
-        seen.add(key)
-        unique.append(f)
+    # Duplicate temizleme
+    seen = set()
+    unique = []
+    for f in FILMS:
+        key = f"{f['t'].lower()}_{f['y']}"
+        if key not in seen:
+            seen.add(key)
+            unique.append(f)
 
-# İzlenenleri çıkar
-filtered = [f for f in unique if not is_watched(f["t"])]
-print(f"Toplam film: {len(unique)}")
-print(f"Izlenen cikarildi: {len(unique)-len(filtered)}")
-print(f"Kalani: {len(filtered)}")
+    # İzlenenleri çıkar
+    filtered = [f for f in unique if not is_watched(f["t"])]
+    print(f"Toplam film: {len(unique)}")
+    print(f"Izlenen cikarildi: {len(unique)-len(filtered)}")
+    print(f"Kalani: {len(filtered)}")
 
-# Analiz üret
-analyzed = []
-for f in filtered:
-    mal = f.get("mal", 7.0)
-    imdb = f.get("imdb", 0)
-    cats = f.get("cat", [])
-    year = f.get("y", 2000)
-    title = f.get("t", f.get("title", ""))
-    
-    analyzed.append({
+    # Analiz üret
+    analyzed = []
+    for f in filtered:
+        mal = f.get("mal", 7.0)
+        imdb = f.get("imdb", 0)
+        cats = f.get("cat", [])
+        year = f.get("y", 2000)
+        title = f.get("t", f.get("title", ""))
+
+        analyzed.append({
+            "title": title,
+            "year": year,
+            "director": f.get("d", ""),
+            "categories": cats,
+            "category_names": [CATS.get(c,c) for c in cats],
+            "mal_score": mal,
+            "imdb_score": imdb,
+            "owl_score": owl_score(mal, imdb, cats),
+            "taste_score": taste_score(cats),
+            "source_material": get_source(title),
+            "has_web_novel": has_wn(title),
+            "why_selected": why_selected(cats, year),
+            "critic_review": critic_review(mal),
+            "animation_quality": anim_q(year),
+            "popularity": pop(mal),
+            "taste_index": taste_idx(cats),
+            "character_depth": char_depth(cats),
+            "story_quality": story_q(cats),
+        })
+
+    analyzed.sort(key=lambda x: x["owl_score"], reverse=True)
+    print(f"Analiz tamamamlandi: {len(analyzed)} film")
+
+    # === TXT RAPORLARI ===
+    print("\nTXT raporlari olusturuluyor...")
+
+    # 1. Ana liste
+    with open(f"{BASE}/output/txt/01_ana_liste_owl.txt","w",encoding="utf-8") as f:
+        f.write("="*80+"\nOWL - KAPSAMLI ANIME FILM LISTESI (OWL Puana Gore)\n")
+        f.write(f"Olusturulma: {datetime.now().strftime('%Y-%m-%d %H:%M')} | Toplam: {len(analyzed)}\n"+"="*80+"\n\n")
+        for i,film in enumerate(analyzed,1):
+            f.write(f"#{i:04d} | OWL:{film['owl_score']:.1f} | MAL:{film['mal_score']:.1f}\n")
+            f.write(f"Film: {film['title']} ({film['year']})\n")
+            f.write(f"Yonetmen: {film['director']}\n")
+            f.write(f"Tur: {', '.join(film['category_names'])}\n")
+            f.write(f"Kaynak: {film['source_material']} | WN: {'Evet' if film['has_web_novel'] else 'Hayir'}\n")
+            f.write(f"Populerlik: {film['popularity']}\n")
+            f.write(f"Neden: {film['why_selected']}\n")
+            f.write(f"Kritik: {film['critic_review']}\n")
+            f.write(f"Animasyon: {film['animation_quality']}\n")
+            f.write(f"Karakter: {film['character_depth']} | Kurgu: {film['story_quality']}\n")
+            f.write(f"Benzer Zevk: {film['taste_index']}\n")
+            f.write("-"*80+"\n\n")
+    print("  01_ana_liste_owl.txt")
+
+    # 2. Kategori bazlı
+    for ck, cn in CATS.items():
+        cf = sorted([f for f in analyzed if ck in f["categories"]], key=lambda x: x["owl_score"], reverse=True)
+        if cf:
+            with open(f"{BASE}/output/txt/02_kategori_{ck}.txt","w",encoding="utf-8") as f:
+                f.write(f"KATEGORI: {cn} ({len(cf)} film)\n"+"="*80+"\n\n")
+                for i,film in enumerate(cf,1):
+                    f.write(f"#{i:03d} | OWL:{film['owl_score']:.1f} | {film['title']} ({film['year']})\n")
+                    f.write(f"  Yonetmen: {film['director']} | Kaynak: {film['source_material']}\n")
+                    f.write(f"  Neden: {film['why_selected']}\n")
+                    f.write(f"  Kritik: {film['critic_review']}\n"+"-"*60+"\n")
+    print("  02_kategori_*.txt")
+
+    # 3. Yıl bazlı
+    for year in sorted(set(f["year"] for f in analyzed)):
+        yf = sorted([f for f in analyzed if f["year"]==year], key=lambda x: x["owl_score"], reverse=True)
+        if yf:
+            with open(f"{BASE}/output/txt/03_yil_{year}.txt","w",encoding="utf-8") as f:
+                f.write(f"{year} YILI ANIME FILMLERI ({len(yf)} film)\n"+"="*80+"\n\n")
+                for film in yf:
+                    f.write(f"OWL:{film['owl_score']:.1f} | {film['title']}\n")
+                    f.write(f"  Yonetmen: {film['director']} | Tur: {', '.join(film['category_names'])}\n")
+                    f.write(f"  Neden: {film['why_selected']}\n\n")
+    print("  03_yil_*.txt")
+
+    # 4. Web Novel
+    wn = sorted([f for f in analyzed if f["has_web_novel"]], key=lambda x: x["owl_score"], reverse=True)
+    with open(f"{BASE}/output/txt/04_web_novel.txt","w",encoding="utf-8") as f:
+        f.write(f"WEB NOVEL KAYNAKLI FILMLER ({len(wn)} film)\n"+"="*80+"\n\n")
+        for film in wn:
+            f.write(f"OWL:{film['owl_score']:.1f} | {film['title']} ({film['year']})\n")
+            f.write(f"  Kaynak: {film['source_material']}\n")
+            f.write(f"  Neden: {film['why_selected']}\n\n")
+    print("  04_web_novel.txt")
+
+    # 5. Kaynak malzeme
+    srcs = {}
+    for f in analyzed:
+        s = f["source_material"]
+        srcs.setdefault(s, []).append(f)
+    with open(f"{BASE}/output/txt/05_kaynak.txt","w",encoding="utf-8") as f:
+        f.write("KAYNAK MALZEME BAZLI\n"+"="*80+"\n\n")
+        for s in sorted(srcs.keys()):
+            films = sorted(srcs[s], key=lambda x: x["owl_score"], reverse=True)
+            f.write(f"\n--- {s} ({len(films)} film) ---\n")
+            for film in films[:20]:
+                f.write(f"  OWL:{film['owl_score']:.1f} | {film['title']} ({film['year']})\n")
+    print("  05_kaynak.txt")
+
+    # 6. İstatistik
+    with open(f"{BASE}/output/stats/istatistik.txt","w",encoding="utf-8") as f:
+        f.write("OWL - ISTATISTIKLER\n"+"="*80+"\n\n")
+        f.write(f"TOPLAM FILM: {len(analyzed)}\n\n")
+        f.write("--- TUR DAGILIMI ---\n")
+        for ck, cn in CATS.items():
+            c = len([f for f in analyzed if ck in f["categories"]])
+            if c: f.write(f"  {cn}: {c} ({c/len(analyzed)*100:.1f}%)\n")
+        f.write("\n--- YIL DAGILIMI ---\n")
+        dc = {}
+        for film in analyzed:
+            d = (film["year"]//10)*10
+            dc[d] = dc.get(d,0)+1
+        for d in sorted(dc): f.write(f"  {d}ler: {dc[d]}\n")
+        f.write("\n--- PUAN DAGILIMI ---\n")
+        for lo,hi in [(9,10),(8.5,9),(8,8.5),(7.5,8),(7,7.5),(0,7)]:
+            c = len([f for f in analyzed if lo<=f["owl_score"]<hi])
+            if c: f.write(f"  {lo:.1f}-{hi:.1f}: {c}\n")
+        f.write(f"\n--- WEB NOVEL: {len(wn)} film ---\n")
+        f.write("\n--- EN IYI 20 ---\n")
+        for i, film in enumerate(analyzed[:20], 1):
+            f.write(f"  {i:2d}. {film['title']} ({film['year']}) OWL:{film['owl_score']:.1f}\n")
+    print("  istatistik.txt")
+
+    # 7. Özet
+    print(f"\n{'='*60}")
+    print(f"TOPLAM: {len(analyzed)} film analiz edildi")
+    print(f"TXT: {BASE}/output/txt/")
+    print(f"JSON: {BASE}/data/analyzed_films.json")
+    print(f"{'='*60}")
+
+# End if __name__
+
+        analyzed.append({
         "title": title,
         "year": year,
         "director": f.get("d", ""),
@@ -531,8 +660,8 @@ with open(f"{BASE}/output/stats/istatistik.txt","w",encoding="utf-8") as f:
         if c: f.write(f"  {lo:.1f}-{hi:.1f}: {c}\n")
     f.write(f"\n--- WEB NOVEL: {len(wn)} film ---\n")
     f.write("\n--- EN IYI 20 ---\n")
-    for i,f in enumerate(analyzed[:20],1):
-        f.write(f"  {i:2d}. {f['title']} ({f['year']}) OWL:{f['owl_score']:.1f}\n")
+    for i, film in enumerate(analyzed[:20], 1):
+        f.write(f"  {i:2d}. {film['t']} ({film['y']}) OWL:{film['owl_score']:.1f}\n")
 print("  istatistik.txt")
 
 # 7. Özet
@@ -565,3 +694,4 @@ txt_count = len([f for f in os.listdir(f"{BASE}/output/txt") if f.endswith(".txt
 print(f"Toplam {txt_count} TXT dosyasi")
 print(f"Toplam {len(analyzed)} film analiz edildi")
 print("\n=== ISLEM TAMAMLANDI ===")
+    # End if __name__
