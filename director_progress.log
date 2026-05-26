@@ -1,0 +1,6 @@
+Bos director: 462 film
+Traceback (most recent call last):
+  File "/data/data/com.termux/files/home/anime-project/fetch_directors.py", line 69, in <module>
+    db.execute("UPDATE films SET director = ? WHERE id = ?", (directors, film_id))
+    ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+sqlite3.OperationalError: database is locked

@@ -228,7 +228,15 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_fs ON films(user_rating DESC);
         CREATE INDEX IF NOT EXISTS idx_ff ON films(format);
         CREATE TABLE IF NOT EXISTS watched(title_lower TEXT UNIQUE, title TEXT, watched_at TEXT, rating REAL DEFAULT 0);
-        CREATE TABLE IF NOT EXISTS taste_log(id INTEGER KEY, action TEXT, film_title TEXT, timestamp TEXT);
+        CREATE TABLE IF NOT EXISTS watchlist(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            film_id INTEGER UNIQUE,
+            added_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            priority INTEGER DEFAULT 0,
+            note TEXT DEFAULT '',
+            FOREIGN KEY(film_id) REFERENCES films(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_wl ON watchlist(priority DESC, added_at);
     """)
     db.commit()
     return db
@@ -364,7 +372,47 @@ def note_film(film_id, note):
     print(f"✅ '{t}' not eklendi: {note}")
     return True
 
-# === ZEVK PROFILI ===
+# === WATCHLIST ===
+def add_to_watchlist(film_id, priority=0, note=""):
+    db = get_db()
+    row = db.execute("SELECT title FROM films WHERE id=?", (film_id,)).fetchone()
+    if not row:
+        print(f"❌ Film bulunamadi: id={film_id}")
+        return False
+    t = row["title"]
+    db.execute("INSERT OR REPLACE INTO watchlist(film_id,priority,note,added_at) VALUES(?,?,?,?)",
+               (film_id, priority, note, datetime.now().isoformat()))
+    db.commit()
+    print(f"✅ '{t}' watchlist'e eklemdi (oncelik: {priority})")
+    return True
+
+def remove_from_watchlist(film_id):
+    db = get_db()
+    row = db.execute("SELECT f.title FROM films f JOIN watchlist w ON w.film_id=f.id WHERE w.film_id=?", (film_id,)).fetchone()
+    db.execute("DELETE FROM watchlist WHERE film_id=?", (film_id,))
+    db.commit()
+    if row:
+        print(f"✅ '{row['title']}' watchlist'ten cikarildi")
+    else:
+        print(f"✅ Film #{film_id} watchlist'ten cikarildi")
+    return True
+
+def list_watchlist(db=None, limit=50):
+    close_db = False
+    if db is None:
+        db = get_db()
+        close_db = True
+    try:
+        rows = db.execute("""
+            SELECT f.id, f.title, f.year, f.owl_score, f.genres, f.studio, f.cover_url,
+                   w.priority, w.note, w.added_at
+            FROM watchlist w JOIN films f ON f.id = w.film_id
+            ORDER BY w.priority DESC, w.added_at DESC LIMIT ?
+        """, (limit,)).fetchall()
+        return rows
+    finally:
+        if close_db:
+            db.close()
 def get_taste_profile(db):
     watched = db.execute("SELECT f.genres, f.owl_score FROM films f WHERE f.is_watched=1").fetchall()
     genre_counts = Counter()
@@ -647,6 +695,8 @@ def start_web_server(port=8080):
                 self._api_stats()
             elif path == "/api/dump":
                 self._api_dump_all()
+            elif path == "/api/watchlist":
+                self._api_watchlist(params)
             else:
                 self.send_response(404)
                 self.end_headers()
@@ -837,6 +887,47 @@ def start_web_server(port=8080):
             db.close()
             self._send_json(result)
 
+        def _api_watchlist(self, params):
+            db = self.get_db()
+            action = params.get("action", ["list"])[0]
+            if action == "list":
+                rows = list_watchlist(db)
+                result = []
+                for r in rows:
+                    result.append({
+                        "id": r["id"], "title": r["title"], "year": r["year"],
+                        "score": r["owl_score"], "genres": json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [],
+                        "studio": r["studio"], "cover_url": r["cover_url"],
+                        "priority": r["priority"], "note": r["note"], "added_at": r["added_at"],
+                    })
+                db.close()
+                self._send_json(result)
+            elif action == "add":
+                film_id = int(params.get("id", [0])[0])
+                priority = int(params.get("priority", [0])[0])
+                note = params.get("note", [""])[0]
+                row = db.execute("SELECT title FROM films WHERE id=?", (film_id,)).fetchone()
+                if row:
+                    db.execute("INSERT OR REPLACE INTO watchlist(film_id,priority,note,added_at) VALUES(?,?,?,?)",
+                               (film_id, priority, note, datetime.now().isoformat()))
+                    db.commit()
+                    t = row["title"]
+                    db.close()
+                    self._send_json({"ok": True, "message": f"'{t}' watchlist'e eklendi"})
+                else:
+                    db.close()
+                    self._send_json({"ok": False, "error": "Film bulunamadi"})
+            elif action == "remove":
+                film_id = int(params.get("id", [0])[0])
+                db.execute("DELETE FROM watchlist WHERE film_id=?", (film_id,))
+                db.commit()
+                db.close()
+                self._send_json({"ok": True, "message": f"Film #{film_id} cikarildi"})
+            else:
+                db.close()
+                self.send_response(400)
+                self.end_headers()
+
         def _send_html(self, title, content, page="index"):
             head = ""
             if page != "detail":
@@ -1015,7 +1106,7 @@ def interactive(db):
     print(f"  {db.execute('SELECT COUNT(*) FROM films').fetchone()[0]} film yuklu")
     print("="*50)
     while True:
-        print("\n[K]Oneri [T]Tur [G]Genre [Y]Yil [P]Puan [W]Izledi [R]Rapor [S]Ara [I]Stats [D]Detay [U]Web [Q]Cikis")
+        print("\n[K]Oneri [T]Tur [G]Genre [Y]Yil [P]Puan [W]Izledi [R]Rapor [S]Ara [I]Stats [D]Detay [L]Watchlist [A]Add-WL [U]Web [Q]Cikis")
         c = input("Secim: ").strip().lower()
         if c == "q":
             break
@@ -1076,6 +1167,24 @@ def interactive(db):
         elif c == "u":
             port = input("Port (8080): ").strip()
             start_web_server(int(port) if port else 8080)
+        elif c == "l":
+            rows = list_watchlist(db)
+            if not rows:
+                print("  Watchlist bos.")
+            else:
+                for i, r in enumerate(rows, 1):
+                    pri = "!!!" if r["priority"] >= 3 else ("!" if r["priority"] >= 1 else "")
+                    print(f"  {i:2d}. [{r['owl_score']:.1f}] {r['title']} ({r['year']}) {pri}")
+                    if r["note"]:
+                        print(f"      📝 {r['note']}")
+        elif c == "a":
+            try:
+                fid = int(input("Film ID: "))
+                pri = int(input("Oncelik (0-3): ") or "0")
+                note = input("Not: ").strip()
+                add_to_watchlist(fid, pri, note)
+            except:
+                print("  Gecersiz giris.")
         elif c == "y":
             try:
                 yf = int(input("Baslangic:"))
@@ -1121,6 +1230,11 @@ def main():
     p.add_argument("--web", type=int, default=0)
     p.add_argument("--init", action="store_true")
     p.add_argument("--dedup", action="store_true", help="Duplicate film temizligi")
+    p.add_argument("--add-watchlist", type=int, help="Watchlist'e film ekle (ID)")
+    p.add_argument("--remove-watchlist", type=int, help="Watchlist'ten cikar (ID)")
+    p.add_argument("--list-watchlist", action="store_true", help="Watchlist'i goster")
+    p.add_argument("--watch-priority", type=int, default=0, help="Watchlist onceligi")
+    p.add_argument("--watch-note", type=str, default="", help="Watchlist notu")
     args = p.parse_args()
 
     if args.init:
@@ -1133,7 +1247,29 @@ def main():
         print(f"Duplicate temizligi: DB={results['db_fixed']}, JSON={results['json_fixed']}")
         return
 
+    if args.add_watchlist:
+        add_to_watchlist(args.add_watchlist, args.watch_priority, args.watch_note)
+        return
+
+    if args.remove_watchlist:
+        remove_from_watchlist(args.remove_watchlist)
+        return
+
     db = init_db()
+
+    if args.list_watchlist:
+        rows = list_watchlist(db)
+        if not rows:
+            print("Watchlist bos.")
+        else:
+            print(f"\n📋 WATCHLIST ({len(rows)} film)\n")
+            for i, r in enumerate(rows, 1):
+                genres = json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else []
+                pri = "🔴" if r["priority"] >= 3 else ("🟡" if r["priority"] >= 1 else "⚪")
+                print(f"  {i:2d}. {pri} [{r['owl_score']:.1f}] {r['title']} ({r['year']}) - {r['studio']}")
+                if r["note"]:
+                    print(f"      📝 {r['note']}")
+        return
 
     if args.import_anilist > 0:
         import_anilist_data(args.import_anilist)
