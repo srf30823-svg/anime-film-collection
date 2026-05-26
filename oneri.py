@@ -43,7 +43,147 @@ import json, os, sys, sqlite3, argparse, urllib.request, re, csv, io
 from datetime import datetime
 from collections import Counter
 
-# === YOL Yonetimi (Bug 4 duzeltmesi: sabit yol kaldirildi) ===
+# === ECHO HTML TEMPLATE ===
+_ECHO_HTML_TEMPLATE = """<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a0a0f">
+<title>{page_title}</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap');
+:root{{
+  --bg:#0a0a0f;--surface:#111114;--border:#1a1a1e;--border2:#222228;
+  --text:#c8c8c8;--muted:#555566;
+  --accent:#6b5b95;--accent2:#4a4a6a;
+  --glow:rgba(107,91,149,0.15);
+  --radius:6px;--gap:10px;
+}}
+*{{box-sizing:border-box;margin:0;padding:0}}
+html,body{{height:100%}}
+body{{font-family:'Space Grotesk',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;font-weight:300}}
+body::before{{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background:repeating-linear-gradient(0deg,rgba(0,0,0,0.02) 0px,rgba(0,0,0,0.02) 1px,transparent 1px,transparent 3px);pointer-events:none;z-index:9999;opacity:0.3}}
+@keyframes fadeInUp{{from{{opacity:0;transform:translateY(12px)}}to{{opacity:1;transform:translateY(0)}}}}
+@keyframes pulseGlow{{0%,100%{{opacity:0.4}}50%{{opacity:1}}}}
+@keyframes glitch{{0%,100%{{transform:translate(0)}}20%{{transform:translate(-1px,1px)}}40%{{transform:translate(1px,-1px)}}60%{{transform:translate(-1px,-1px)}}80%{{transform:translate(1px,1px)}}}}
+.topbar{{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px}}
+.topbar .logo{{font-size:0.95em;font-weight:600;letter-spacing:0.2em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;opacity:0.85}}
+.topbar .logo:hover{{opacity:1;animation:glitch 0.2s}}
+.logo-symbol{{width:20px;height:20px;position:relative;display:inline-block}}
+.logo-symbol svg{{width:100%;height:100%}}
+.logo-dot{{width:3px;height:3px;background:var(--accent);border-radius:50%;position:absolute;top:1px;right:1px;animation:pulseGlow 3s ease-in-out infinite}}
+.topbar .badge{{background:var(--accent);color:#fff;font-size:0.5em;padding:2px 6px;border-radius:3px;font-weight:600;letter-spacing:0.1em;opacity:0.7}}
+.bottom-nav{{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;padding-bottom:max(6px,env(safe-area-inset-bottom))}}
+.bn-item{{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--muted);font-size:0.55em;padding:4px 10px;border-radius:4px;transition:all 0.15s;letter-spacing:0.05em}}
+.bn-item:hover,.bn-item.active{{color:var(--accent)}}
+.bn-item .bn-icon{{font-size:1.2em}}
+.main{{padding:14px;padding-bottom:70px;animation:fadeInUp 0.25s ease}}
+.stats-bar{{display:flex;flex-wrap:wrap;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:8px 12px;margin-bottom:var(--gap);font-size:0.7em;color:var(--muted)}}
+.type-toggle{{display:flex;gap:4px;margin-bottom:var(--gap);flex-wrap:wrap}}
+.type-toggle .btn{{flex:1;text-align:center;min-width:60px;font-size:0.68em;padding:5px 8px;background:var(--surface);color:var(--muted);border:1px solid var(--border)}}
+.type-toggle .btn:hover{{background:var(--accent);color:#fff;border-color:var(--accent)}}
+.filters{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin-bottom:var(--gap)}}
+.filter-row{{display:flex;flex-wrap:wrap;gap:6px;align-items:center}}
+.filter-row input,.filter-row select{{background:var(--bg);border:1px solid var(--border);color:var(--text);border-radius:4px;padding:6px 10px;font-size:0.8em;font-weight:300}}
+.search-input{{flex:1;min-width:120px}}.year-input{{width:70px}}.score-input{{width:55px}}select{{min-width:90px}}
+.btn{{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:0.75em;cursor:pointer;text-decoration:none;display:inline-block;font-weight:400;transition:all 0.15s}}
+.btn:hover{{background:var(--accent);color:#fff;border-color:var(--accent)}}.btn-sm{{padding:4px 8px;font-size:0.65em}}
+.film-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--gap)}}
+.film-card{{display:flex;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-decoration:none;color:inherit;transition:all 0.15s}}
+.film-card:hover{{border-color:var(--accent2);background:var(--glow)}}.film-card.watched{{opacity:0.35}}
+.cover{{width:60px;height:85px;object-fit:cover;border-radius:4px;flex-shrink:0}}
+.cover.placeholder{{width:60px;height:85px;background:var(--bg);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.2em;flex-shrink:0;border:1px solid var(--border);color:var(--muted);opacity:0.5}}
+.film-info{{flex:1;min-width:0}}.film-title{{font-weight:400;font-size:0.82em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--text);opacity:0.9}}
+.film-meta{{color:var(--muted);font-size:0.62em;margin-top:2px;letter-spacing:0.03em}}
+.film-score{{display:inline-block;background:var(--accent);color:#fff;font-weight:600;font-size:0.68em;padding:1px 6px;border-radius:3px;margin-top:3px;opacity:0.8}}
+.film-badges{{margin-top:3px}}
+.badge{{display:inline-block;background:transparent;color:var(--muted);padding:1px 5px;border-radius:3px;font-size:0.55em;margin:1px 1px 0 0;border:1px solid var(--border);letter-spacing:0.03em}}
+.badge.mt{{color:var(--accent);border-color:var(--accent2)}}
+.progress-bar{{height:2px;background:var(--border);border-radius:1px;margin-top:4px;overflow:hidden}}
+.progress-fill{{height:100%;background:var(--accent);border-radius:1px;transition:width 0.3s}}
+.progress-text{{font-size:0.55em;color:var(--muted);margin-top:1px;display:block}}
+.detail{{max-width:700px;margin:0 auto}}.back-link{{display:inline-block;color:var(--muted);text-decoration:none;font-size:0.72em;margin-bottom:10px;letter-spacing:0.05em}}
+.back-link:hover{{color:var(--accent)}}
+.detail-header{{display:flex;gap:14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap)}}
+.detail-cover{{width:120px;height:170px;object-fit:cover;border-radius:6px;flex-shrink:0}}
+.detail-cover-placeholder{{width:120px;height:170px;background:var(--bg);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.8em;flex-shrink:0;border:1px solid var(--border);color:var(--muted);opacity:0.4}}
+.detail-info h2{{font-size:1em;margin-bottom:3px;color:var(--text);font-weight:400;letter-spacing:0.03em}}
+.detail-meta{{color:var(--muted);font-size:0.7em;margin:5px 0;letter-spacing:0.03em}}
+.detail-scores{{display:flex;gap:5px;margin:8px 0;flex-wrap:wrap}}
+.score-box{{padding:3px 8px;border-radius:3px;font-size:0.68em;font-weight:600;opacity:0.8}}
+.score-box.owl{{background:var(--accent);color:#fff}}
+.score-box.mal{{background:transparent;color:var(--muted);border:1px solid var(--border)}}
+.detail-badges{{margin:6px 0}}.detail-actions{{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}}
+.detail-synopsis{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap)}}
+.detail-synopsis h3{{font-size:0.72em;color:var(--muted);margin-bottom:6px;letter-spacing:0.08em;text-transform:uppercase}}
+.detail-synopsis p{{color:var(--muted);line-height:1.7;font-size:0.78em;font-weight:300}}
+.note{{background:var(--glow);border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin-top:8px;color:var(--text);font-size:0.75em;font-weight:300}}
+.wl-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--gap)}}
+.wl-card{{display:flex;align-items:flex-start;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px;position:relative}}
+.wl-main{{display:flex;gap:8px;flex:1;text-decoration:none;color:inherit}}
+.wl-info{{flex:1;min-width:0}}.wl-title{{font-weight:400;font-size:0.82em;color:var(--text)}}
+.wl-meta{{color:var(--muted);font-size:0.62em;margin-top:2px}}
+.wl-remove{{color:var(--muted);text-decoration:none;font-size:0.8em;padding:3px 6px;border-radius:3px}}
+.wl-remove:hover{{color:var(--red);background:rgba(239,68,68,0.06)}}
+.profile-stats{{display:flex;flex-wrap:wrap;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;margin-bottom:var(--gap)}}
+.profile-stat{{display:flex;flex-direction:column;align-items:center;min-width:50px}}
+.ps-num{{font-size:1em;font-weight:600;color:var(--text);opacity:0.8}}
+.ps-lbl{{font-size:0.5em;color:var(--muted);margin-top:2px;letter-spacing:0.05em}}
+.profile-sections{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:var(--gap);margin-bottom:var(--gap)}}
+.prof-section{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px}}
+.prof-section h3{{font-size:0.72em;margin-bottom:6px;color:var(--text);letter-spacing:0.06em;text-transform:uppercase;font-weight:400}}
+.prof-list{{list-style:none;padding:0}}.prof-list li{{display:flex;justify-content:space-between;padding:3px 0;font-size:0.68em;border-bottom:1px solid var(--border);color:var(--muted)}}
+.bar-chart{{display:flex;flex-direction:column;gap:5px}}.bar-row{{display:flex;align-items:center;gap:6px}}
+.bar-label{{width:75px;font-size:0.6em;color:var(--muted);text-align:right;flex-shrink:0}}
+.bar-track{{flex:1;height:8px;background:var(--border);border-radius:2px;overflow:hidden}}
+.bar-fill{{height:100%;background:var(--accent);border-radius:2px;transition:width 0.4s ease;opacity:0.6}}
+.bar-val{{width:15px;font-size:0.6em;color:var(--muted);text-align:right}}
+.history-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}}
+.history-card{{display:flex;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:6px;text-decoration:none;color:inherit}}
+.history-card:hover{{border-color:var(--accent2)}}
+.cover-sm{{width:28px;height:40px;object-fit:cover;border-radius:2px;flex-shrink:0}}
+.cover-sm.placeholder{{width:28px;height:40px;background:var(--bg);border-radius:2px;display:flex;align-items:center;justify-content:center;font-size:0.7em;flex-shrink:0;border:1px solid var(--border);color:var(--muted);opacity:0.4}}
+.history-title{{font-size:0.65em;font-weight:400;color:var(--text)}}
+.history-meta{{font-size:0.55em;color:var(--muted)}}.history-date{{font-size:0.5em;color:var(--muted);margin-top:1px}}
+.empty-state{{text-align:center;padding:30px;color:var(--muted);font-size:0.75em;font-weight:300}}
+.muted{{color:var(--muted)}}h2{{font-size:1em;margin-bottom:6px;color:var(--text);font-weight:400;letter-spacing:0.03em}}
+h3{{font-size:0.72em;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;font-weight:400}}
+@media(max-width:600px){{
+  .film-grid{{grid-template-columns:1fr}}.wl-grid{{grid-template-columns:1fr}}
+  .detail-header{{flex-direction:column;align-items:center}}
+  .detail-cover,.detail-cover-placeholder{{width:100px;height:140px}}
+  .filter-row{{flex-direction:column}}.filter-row input,.filter-row select{{width:100%}}
+  .profile-sections{{grid-template-columns:1fr}}.history-grid{{grid-template-columns:1fr}}
+  .topbar{{padding:8px 12px}}.main{{padding:10px;padding-bottom:70px}}
+}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/" class="logo">
+    <span class="logo-symbol">
+      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="16" cy="16" r="14" stroke="var(--accent)" stroke-width="1" opacity="0.2" stroke-dasharray="2 2"/>
+        <circle cx="16" cy="16" r="11" stroke="var(--text)" stroke-width="1.2" opacity="0.4" stroke-dasharray="3 2"/>
+        <path d="M16 16 L26 6" stroke="var(--text)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
+        <circle cx="16" cy="16" r="3.5" fill="var(--accent)" opacity="0.5"/>
+        <circle cx="26" cy="6" r="2" fill="var(--text)" opacity="0.7"/>
+      </svg>
+      <span class="logo-dot"></span>
+    </span>
+    <span class="logo-text">ECHO</span>
+  </a>
+  <span class="badge">v5.2</span>
+</div>
+<div class="main">
+{content}
+</div>
+<nav class="bottom-nav">
+{nav_html}
+</nav>
+</body>
+</html>"""
 BASE = os.environ.get("ANIME_BASE", os.path.dirname(os.path.abspath(__file__)))
 DB_PATH = os.path.join(BASE, "data", "recommender.db")
 TXT_DIR = os.path.join(BASE, "output", "txt")
@@ -1453,291 +1593,8 @@ def start_web_server(port=8080):
             for p, icon, label in [("index","🏠","Ana Sayfa"),("watchlist","📋","Watchlist"),("profile","👤","Profil")]:
                 cls = " active" if page == p else ""
                 nav_html += f'<a href="/{p}" class="bn-item{cls}"><span class="bn-icon">{icon}</span><span>{label}</span></a>'
-            full = f"""<!DOCTYPE html>
-<html lang="tr">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
-<meta name="theme-color" content="#0a0a0f">
-<title>{htmlmod.escape(title)}</title>
-<style>
-/* === ECHO THEME v5.2 === */
-:root{{
-  --bg:#121212;--bg2:#1a1a1a;--surface:#1e1e1e;--border:#2a2a2a;--border2:#333333;
-  --text:#e0e0e0;--muted:#888888;
-  --ice:#7FD8D8;--neon:#4DEEEA;--purple:#A78BFA;--phosphor:#33FF33;
-  --red:#ef4444;--yellow:#eab308;--green:#22c55e;
-  --radius:8px;--gap:12px;
-}}
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap');
-*{{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}}
-html,body{{height:100%}}
-body{{
-  font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;
-  background:var(--bg);color:var(--ice);
-  line-height:1.6;overflow-x:hidden;
-  letter-spacing:0.02em;
-}}
-/* CRT scanline overlay */
-body::before{{
-  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
-  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.03) 0px,rgba(0,0,0,0.03) 1px,transparent 1px,transparent 2px);
-  pointer-events:none;z-index:9999;opacity:0.4;
-}}
-/* Noise texture on bg */
-body::after{{
-  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-  pointer-events:none;z-index:9998;opacity:0.5;
-}}
-/* === KEYFRAMES === */
-@keyframes glitch{{0%,100%{{transform:translate(0)}}20%{{transform:translate(-2px,1px)}}40%{{transform:translate(2px,-1px)}}60%{{transform:translate(-1px,-2px)}}80%{{transform:translate(1px,2px)}}}}
-@keyframes fadeInUp{{from{{opacity:0;transform:translateY(16px)}}to{{opacity:1;transform:translateY(0)}}}}
-@keyframes pulseGlow{{0%,100%{{box-shadow:0 0 4px 0 rgba(77,238,234,0.3)}}50%{{box-shadow:0 0 12px 4px rgba(77,238,234,0.5)}}}}
-@keyframes echoRipple{{0%{{transform:scale(1);opacity:0.6}}100%{{transform:scale(2.5);opacity:0}}}}
-@keyframes flicker{{0%,100%{{opacity:1}}50%{{opacity:0.8}}52%{{opacity:1}}54%{{opacity:0.6}}56%{{opacity:1}}}}
-@keyframes cursorBlink{{0%,100%{{opacity:1}}50%{{opacity:0}}}}
-/* === TOP BAR / LOGO === */
-.topbar{{
-  position:sticky;top:0;z-index:100;
-  background:rgba(18,18,18,0.95);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--border);
-  padding:12px 16px;display:flex;align-items:center;gap:10px;
-}}
-.topbar .logo{{
-  font-size:1.1em;font-weight:700;letter-spacing:0.15em;
-  color:var(--ice);text-decoration:none;
-  display:flex;align-items:center;gap:8px;
-}}
-.topbar .logo:hover{{animation:glitch 0.3s}}
-.topbar .logo-symbol{{
-  width:24px;height:24px;position:relative;
-  display:inline-block;
-}}
-.topbar .logo-symbol svg{{
-  width:100%;height:100%;
-}}
-.topbar .logo-dot{{
-  width:4px;height:4px;background:var(--neon);border-radius:50%;
-  position:absolute;top:2px;right:2px;
-  animation:pulseGlow 2s ease-in-out infinite;
-}}
-.topbar .badge{{
-  background:var(--ice);color:var(--bg);font-size:0.55em;
-  padding:2px 8px;border-radius:4px;font-weight:700;letter-spacing:0.1em;
-}}
-/* === BOTTOM NAV === */
-.bottom-nav{{
-  position:fixed;bottom:0;left:0;right:0;z-index:100;
-  background:rgba(18,18,18,0.95);backdrop-filter:blur(8px);
-  border-top:1px solid var(--border);
-  display:flex;justify-content:space-around;padding:8px 0;
-  padding-bottom:max(8px,env(safe-area-inset-bottom));
-}}
-.bn-item{{
-  display:flex;flex-direction:column;align-items:center;gap:2px;
-  text-decoration:none;color:var(--muted);font-size:0.6em;
-  padding:4px 12px;border-radius:6px;transition:all 0.2s;
-  letter-spacing:0.05em;
-}}
-.bn-item:hover,.bn-item.active{{color:var(--neon)}}
-.bn-item .bn-icon{{font-size:1.3em}}
-.bn-item.active .bn-icon{{filter:drop-shadow(0 0 4px var(--neon))}}
-/* === MAIN === */
-.main{{padding:16px;padding-bottom:80px;animation:fadeInUp 0.3s ease}}
-/* === STATS BAR === */
-.stats-bar{{
-  display:flex;flex-wrap:wrap;gap:8px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:10px 14px;margin-bottom:var(--gap);
-  font-size:0.75em;color:var(--muted);
-}}
-.stats-bar span{{display:flex;align-items:center;gap:4px}}
-/* === TYPE TOGGLE === */
-.type-toggle{{display:flex;gap:6px;margin-bottom:var(--gap);flex-wrap:wrap}}
-.type-toggle .btn{{flex:1;text-align:center;min-width:65px;font-size:0.75em;padding:6px 10px}}
-/* === FILTERS === */
-.filters{{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:12px;margin-bottom:var(--gap);
-}}
-.filter-row{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
-.filter-row input,.filter-row select{{
-  background:var(--bg);border:1px solid var(--border);color:var(--ice);
-  border-radius:6px;padding:8px 12px;font-size:0.85em;
-  font-family:'Space Grotesk',system-ui,sans-serif;
-}}
-.search-input{{flex:1;min-width:140px}}
-.year-input{{width:80px}}
-.score-input{{width:65px}}
-select{{min-width:100px}}
-.btn{{
-  background:var(--ice);color:var(--bg);border:none;border-radius:6px;
-  padding:8px 14px;font-size:0.8em;cursor:pointer;text-decoration:none;
-  display:inline-block;font-weight:600;transition:all 0.2s;
-  font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:0.03em;
-}}
-.btn:hover{{background:var(--neon);transform:translateY(-1px)}}
-.btn:active{{transform:translateY(0)}}
-.btn-clear{{background:transparent;border:1px solid var(--border);color:var(--muted)}}
-.btn-sm{{padding:5px 10px;font-size:0.7em}}
-.btn-wl{{background:var(--purple);color:#fff}}
-.btn-watched{{background:var(--phosphor);color:var(--bg)}}
-/* === FILM GRID === */
-.film-grid{{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--gap);
-}}
-.film-card{{
-  display:flex;gap:12px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:12px;
-  text-decoration:none;color:inherit;
-  transition:all 0.2s;position:relative;overflow:hidden;
-}}
-.film-card::before{{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--ice),transparent);
-  opacity:0;transition:opacity 0.3s;
-}}
-.film-card:hover{{border-color:var(--neon)}}
-.film-card:hover::before{{opacity:0.5}}
-.film-card.watched{{opacity:0.45}}
-.cover{{width:70px;height:100px;object-fit:cover;border-radius:6px;flex-shrink:0}}
-.cover.placeholder{{
-  width:70px;height:100px;background:var(--bg2);
-  border-radius:6px;display:flex;align-items:center;justify-content:center;
-  font-size:1.4em;flex-shrink:0;border:1px dashed var(--border);
-}}
-.film-info{{flex:1;min-width:0}}
-.film-title{{font-weight:600;font-size:0.88em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ice)}}
-.film-meta{{color:var(--muted);font-size:0.68em;margin-top:3px;letter-spacing:0.03em}}
-.film-score{{
-  display:inline-block;background:var(--ice);color:var(--bg);
-  font-weight:700;font-size:0.75em;padding:2px 8px;border-radius:4px;margin-top:4px;
-}}
-.film-badges{{margin-top:4px}}
-.badge{{
-  display:inline-block;background:rgba(127,216,216,0.08);
-  color:var(--ice);padding:1px 6px;border-radius:4px;
-  font-size:0.6em;margin:2px 2px 0 0;border:1px solid rgba(127,216,216,0.12);
-  letter-spacing:0.05em;
-}}
-.badge.mt{{background:rgba(167,139,250,0.1);color:var(--purple);border-color:rgba(167,139,250,0.15)}}
-/* === PROGRESS === */
-.progress-bar{{height:3px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}}
-.progress-fill{{height:100%;background:var(--neon);border-radius:2px;transition:width 0.3s}}
-.progress-text{{font-size:0.6em;color:var(--muted);margin-top:2px;display:block}}
-/* === FILM DETAIL === */
-.detail{{max-width:800px;margin:0 auto}}
-.back-link{{display:inline-block;color:var(--muted);text-decoration:none;font-size:0.78em;margin-bottom:12px;letter-spacing:0.05em}}
-.back-link:hover{{color:var(--neon)}}
-.detail-header{{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);}}
-.detail-cover{{width:140px;height:200px;object-fit:cover;border-radius:8px;flex-shrink:0}}
-.detail-cover-placeholder{{width:140px;height:200px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2em;flex-shrink:0;border:1px dashed var(--border);}}
-.detail-info h2{{font-size:1.1em;margin-bottom:4px;color:var(--ice);letter-spacing:0.05em}}
-.detail-meta{{color:var(--muted);font-size:0.75em;margin:6px 0;letter-spacing:0.03em}}
-.detail-scores{{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}}
-.score-box{{padding:4px 10px;border-radius:4px;font-size:0.75em;font-weight:600;letter-spacing:0.03em}}
-.score-box.owl{{background:var(--ice);color:var(--bg)}}
-.score-box.mal{{background:rgba(51,255,51,0.1);color:var(--phosphor);border:1px solid rgba(51,255,51,0.15)}}
-.score-box.imdb{{background:rgba(234,179,8,0.1);color:var(--yellow);border:1px solid rgba(234,179,8,0.15)}}
-.score-box.user{{background:rgba(167,139,250,0.1);color:var(--purple);border:1px solid rgba(167,139,250,0.15)}}
-.detail-badges{{margin:8px 0}}
-.detail-actions{{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}}
-.detail-synopsis{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);}}
-.detail-synopsis h3{{font-size:0.8em;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase}}
-.detail-synopsis p{{color:var(--muted);line-height:1.7;font-size:0.85em}}
-.note{{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:var(--radius);padding:12px;margin-top:10px;color:var(--text);font-size:0.82em;}}
-/* === WATCHLIST === */
-.wl-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap);}}
-.wl-card{{display:flex;align-items:flex-start;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;position:relative;}}
-.wl-main{{display:flex;gap:10px;flex:1;text-decoration:none;color:inherit}}
-.wl-info{{flex:1;min-width:0}}
-.wl-title{{font-weight:600;font-size:0.88em;color:var(--ice)}}
-.wl-meta{{color:var(--muted);font-size:0.68em;margin-top:2px}}
-.wl-badges{{margin-top:4px}}
-.wl-priority{{font-size:0.65em;margin-top:4px;color:var(--yellow)}}
-.wl-note{{font-size:0.7em;color:var(--muted);margin-top:4px;font-style:italic}}
-.wl-remove{{color:var(--muted);text-decoration:none;font-size:0.9em;padding:4px 8px;border-radius:4px;}}
-.wl-remove:hover{{color:var(--red);background:rgba(239,68,68,0.08)}}
-/* === PROFIL === */
-.profile-stats{{display:flex;flex-wrap:wrap;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap);}}
-.profile-stat{{display:flex;flex-direction:column;align-items:center;min-width:55px;}}
-.ps-num{{font-size:1.1em;font-weight:700;color:var(--ice)}}
-.ps-lbl{{font-size:0.55em;color:var(--muted);margin-top:2px;letter-spacing:0.05em}}
-.profile-sections{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--gap);margin-bottom:var(--gap);}}
-.prof-section{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}}
-.prof-section h3{{font-size:0.8em;margin-bottom:8px;color:var(--ice);letter-spacing:0.06em;text-transform:uppercase}}
-.prof-list{{list-style:none;padding:0}}
-.prof-list li{{display:flex;justify-content:space-between;padding:4px 0;font-size:0.75em;border-bottom:1px solid var(--border)}}
-.prof-list li span{{color:var(--muted)}}
-.bar-chart{{display:flex;flex-direction:column;gap:6px}}
-.bar-row{{display:flex;align-items:center;gap:8px}}
-.bar-label{{width:85px;font-size:0.65em;color:var(--muted);text-align:right;flex-shrink:0}}
-.bar-track{{flex:1;height:10px;background:var(--border);border-radius:3px;overflow:hidden}}
-.bar-fill{{height:100%;background:var(--ice);border-radius:3px;transition:width 0.5s ease}}
-.bar-val{{width:18px;font-size:0.65em;color:var(--muted);text-align:right}}
-.history-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}}
-.history-card{{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px;text-decoration:none;color:inherit}}
-.history-card:hover{{border-color:var(--neon)}}
-.cover-sm{{width:32px;height:45px;object-fit:cover;border-radius:3px;flex-shrink:0}}
-.cover-sm.placeholder{{width:32px;height:45px;background:var(--bg2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.8em;flex-shrink:0;border:1px dashed var(--border);}}
-.history-title{{font-size:0.7em;font-weight:600;color:var(--ice)}}
-.history-meta{{font-size:0.6em;color:var(--muted)}}
-.history-date{{font-size:0.55em;color:var(--muted);margin-top:2px}}
-/* === MISC === */
-.empty-state{{text-align:center;padding:40px;color:var(--muted);font-size:0.82em}}
-.muted{{color:var(--muted)}}
-.loading{{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  height:60vh;gap:16px;
-}}
-.loading-text{{color:var(--ice);font-size:0.9em;letter-spacing:0.1em;animation:flicker 3s infinite}}
-h2{{font-size:1.1em;margin-bottom:8px;color:var(--ice);letter-spacing:0.05em}}
-h3{{font-size:0.8em;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}}
-/* === RESPONSIVE === */
-@media(max-width:600px){{
-  .film-grid{{grid-template-columns:1fr}}
-  .wl-grid{{grid-template-columns:1fr}}
-  .detail-header{{flex-direction:column;align-items:center}}
-  .detail-cover,.detail-cover-placeholder{{width:110px;height:155px}}
-  .filter-row{{flex-direction:column}}
-  .filter-row input,.filter-row select{{width:100%}}
-  .profile-sections{{grid-template-columns:1fr}}
-  .history-grid{{grid-template-columns:1fr}}
-  .topbar{{padding:10px 12px}}
-  .main{{padding:12px;padding-bottom:80px}}
-}}</style>
-</head>
-<body>
-<div class="topbar">
-  <a href="/" class="logo">
-    <span class="logo-symbol">
-      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 2C6.48 2 2 6.48 2 12" stroke="var(--ice)" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
-        <path d="M12 4C7.58 4 4 7.58 4 12" stroke="var(--ice)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-        <path d="M12 6C8.69 6 6 8.69 6 12" stroke="var(--ice)" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M12 8C9.79 8 8 9.79 8 12" stroke="var(--neon)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
-      </svg>
-      <span class="logo-dot"></span>
-    </span>
-    ECHO
-  </a>
-  <span class="badge">v5.2</span>
-</div>
-<div class="main">
-{content}
-</div>
-<nav class="bottom-nav">
-{nav_html}
-</nav>
-<script>
-function markWatched(id){{
-  fetch('/api/watchlist?action=add&id='+id).then(()=>location.reload());
-}}
-</script>
-</body>
-</html>"""
+            page_title = htmlmod.escape(title)
+            full = _ECHO_HTML_TEMPLATE.format(page_title=page_title, content=content, nav_html=nav_html)
             self.send_response(200)
             self.send_header("Content-Type","text/html; charset=utf-8")
             self.end_headers()
