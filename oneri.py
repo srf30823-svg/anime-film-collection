@@ -1055,8 +1055,13 @@ def start_web_server(port=8080):
             duration = f"{film['duration']} dk" if film["duration"] > 0 else "?"
             year = film["year"] or "?"
 
+            imdb_html = f'<span class="score-box imdb">IMDB: {film["imdb_score"]:.1f}</span>' if film["imdb_score"] > 0 else ""
+            watched_btn = "✅ İzlendi" if film["is_watched"] else "📋 İzlendi İşaretle"
+            wl_btn = "📋 Watchlist'ten Çıkar" if db.execute("SELECT 1 FROM watchlist WHERE film_id=?", (film_id,)).fetchone() else "➕ Watchlist'e Ekle"
+            wl_action = "remove" if "Çıkar" in wl_btn else "add"
+
             content = f"""
-            <a href="/" class="back-link">← Listeye Don</a>
+            <a href="/" class="back-link">← Geri</a>
             <div class="detail">
                 <div class="detail-header">
                     {cover_html}
@@ -1068,14 +1073,18 @@ def start_web_server(port=8080):
                         <div class="detail-scores">
                             <span class="score-box owl">OWL: {film["owl_score"]}</span>
                             <span class="score-box mal">MAL: {film["mal_score"]:.1f}</span>
+                            {imdb_html}
                             {f'<span class="score-box user">{user_r}</span>' if film["user_rating"] > 0 else ""}
                         </div>
                         <div class="detail-badges">{badges}</div>
-                        <div class="detail-status">{watched}</div>
+                        <div class="detail-actions">
+                            <a href="/watchlist?action={wl_action}&id={film_id}" class="btn btn-sm btn-wl">{wl_btn}</a>
+                            <a href="/api/watchlist?action=add&id={film_id}" class="btn btn-sm btn-watched" onclick="markWatched({film_id})">{watched_btn}</a>
+                        </div>
                     </div>
                 </div>
                 <div class="detail-synopsis">
-                    <h3>Ozet</h3>
+                    <h3>Özet</h3>
                     <p>{synopsis}</p>
                 </div>
                 {note}
@@ -1462,286 +1471,337 @@ def start_web_server(port=8080):
             self._send_html("Karşılaştırma", content, "compare")
 
         def _send_html(self, title, content, page="index"):
-            head = ""
-            if page != "detail":
-                head = '<a href="/" class="logo-link"><h1>◇ OWL Anime & Film Oneri</h1></a>'
-            else:
-                head = '<div class="logo-sm"><a href="/">◇ OWL</a></div>'
+            nav_html = ""
+            for p, icon, label in [("index","🏠","Ana Sayfa"),("watchlist","📋","Watchlist"),("profile","👤","Profil"),("compare","⚖️","Karşılaştır")]:
+                cls = " active" if page == p else ""
+                nav_html += f'<a href="/{p}" class="bn-item{cls}"><span class="bn-icon">{icon}</span><span>{label}</span></a>'
             full = f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a0a0f">
 <title>{htmlmod.escape(title)}</title>
 <style>
-:root {{
-  --bg: #0c0c14; --surface: #14141e; --border: #1e1e2e;
-  --text: #e2e8f0; --muted: #64748b; --purple: #a855f7; --purple-dim: #6b21a8;
-  --blue: #0ea5e9; --green: #22c55e; --yellow: #eab308;
-  --radius: 10px; --gap: 12px;
+:root{{
+  --bg:#0a0a0f;--bg2:#111118;--surface:#16161f;--border:#1e1e2e;--border2:#2a2a3e;
+  --text:#e2e8f0;--muted:#64748b;--cyan:#06b6d4;--cyan-dim:#0e7490;
+  --purple:#a855f7;--pink:#ec4899;--green:#22c55e;--yellow:#eab308;--red:#ef4444;
+  --radius:12px;--gap:12px;
 }}
-* {{ box-sizing: border-box; margin: 0; padding: 0; }}
-body {{
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
-  background: var(--bg); color: var(--text);
-  padding: 16px; line-height: 1.5;
+*{{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}}
+html,body{{height:100%}}
+body{{
+  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.5;overflow-x:hidden;
 }}
-h1 {{ color: var(--purple); font-size: 1.3em; margin-bottom: 4px; }}
-h2 {{ color: var(--text); font-size: 1.4em; margin-bottom: 4px; }}
-h3 {{ color: var(--muted); font-size: 0.9em; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }}
-.logo-link {{ text-decoration: none; }}
-.logo-sm a {{ color: var(--purple); text-decoration: none; font-size: 1.1em; font-weight: 700; }}
-.stats-bar {{
-  display: flex; flex-wrap: wrap; gap: 12px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 10px 14px; margin-bottom: var(--gap);
-  font-size: 0.85em; color: var(--muted);
+/* === ANIME/LANE GLITCH KEYFRAMES === */
+@keyframes glitch{{
+  0%,100%{{transform:translate(0)}}
+  20%{{transform:translate(-1px,1px)}}
+  40%{{transform:translate(1px,-1px)}}
+  60%{{transform:translate(-1px,-1px)}}
+  80%{{transform:translate(1px,1px)}}
 }}
-.filters {{
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 12px; margin-bottom: var(--gap);
+@keyframes fadeInUp{{
+  from{{opacity:0;transform:translateY(12px)}}
+  to{{opacity:1;transform:translateY(0)}}
 }}
-.filter-row {{ display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }}
-.filter-row input, .filter-row select {{
-  background: var(--bg); border: 1px solid var(--border); color: var(--text);
-  border-radius: 6px; padding: 6px 10px; font-size: 0.85em;
+@keyframes pulse{{
+  0%,100%{{box-shadow:0 0 0 0 rgba(6,182,212,0.3)}}
+  50%{{box-shadow:0 0 0 8px rgba(6,182,212,0)}}
 }}
-.search-input {{ flex: 1; min-width: 160px; }}
-.year-input {{ width: 90px; }}
-.score-input {{ width: 70px; }}
-select {{ min-width: 120px; }}
-.btn {{
-  background: var(--purple-dim); color: var(--text); border: none;
-  border-radius: 6px; padding: 6px 14px; font-size: 0.85em;
-  cursor: pointer; text-decoration: none; display: inline-block;
+@keyframes shimmer{{
+  0%{{background-position:-200% 0}}
+  100%{{background-position:200% 0}}
 }}
-.btn:hover {{ background: var(--purple); }}
-.btn-clear {{ background: transparent; border: 1px solid var(--border); }}
-.film-grid {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: var(--gap);
+@keyframes scanline{{
+  0%{{transform:translateY(-100%)}}
+  100%{{transform:translateY(100vh)}}
 }}
-.film-card {{
-  display: flex; gap: 10px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 12px;
-  text-decoration: none; color: inherit;
-  transition: border-color 0.2s;
+/* === CRT OVERLAY === */
+body::before{{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.03) 0px,rgba(0,0,0,0.03) 1px,transparent 1px,transparent 2px);
+  pointer-events:none;z-index:9999;opacity:0.5;
 }}
-.film-card:hover {{ border-color: var(--purple); }}
-.film-card.watched {{ opacity: 0.6; }}
-.cover {{
-  width: 80px; height: 110px; object-fit: cover;
-  border-radius: 6px; flex-shrink: 0;
+/* === TOP BAR === */
+.topbar{{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(180deg,rgba(10,10,15,0.98),rgba(10,10,15,0.9));
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:12px 16px;display:flex;align-items:center;gap:10px;
 }}
-.cover.placeholder {{
-  width: 80px; height: 110px; background: var(--border);
-  border-radius: 6px; display: flex; align-items: center; justify-content: center;
-  font-size: 1.8em; flex-shrink: 0;
+.topbar .logo{{
+  font-size:1.15em;font-weight:800;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-decoration:none;
 }}
-.film-info {{ flex: 1; min-width: 0; }}
-.film-title {{ font-weight: 600; font-size: 0.95em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }}
-.film-meta {{ color: var(--muted); font-size: 0.78em; margin-top: 2px; }}
-.film-score {{
-  display: inline-block; background: var(--purple-dim);
-  color: var(--text); font-weight: 700; font-size: 0.85em;
-  padding: 2px 8px; border-radius: 4px; margin-top: 4px;
+.topbar .logo:hover{{animation:glitch 0.3s}}
+.topbar .badge{{
+  background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
+  color:#fff;font-size:0.6em;padding:2px 8px;border-radius:20px;
+  font-weight:600;letter-spacing:1px;
 }}
-.film-badges {{ margin-top: 4px; }}
-.badge {{
-  display: inline-block; background: rgba(14,165,233,0.12);
-  color: var(--blue); padding: 1px 6px; border-radius: 4px;
-  font-size: 0.7em; margin: 2px 3px 0 0;
+/* === BOTTOM NAV === */
+.bottom-nav{{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,15,0.95);backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-around;padding:8px 0;
+  padding-bottom:max(8px,env(safe-area-inset-bottom));
 }}
-.detail {{ max-width: 800px; margin: 0 auto; }}
-.back-link {{
-  display: inline-block; color: var(--muted); text-decoration: none;
-  font-size: 0.85em; margin-bottom: 16px;
+.bn-item{{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-decoration:none;color:var(--muted);font-size:0.65em;
+  padding:4px 12px;border-radius:8px;transition:all 0.2s;
 }}
-.back-link:hover {{ color: var(--purple); }}
-.detail-header {{
-  display: flex; gap: 20px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px; margin-bottom: 16px;
+.bn-item:hover,.bn-item.active{{color:var(--cyan)}}
+.bn-item .bn-icon{{font-size:1.4em}}
+.bn-item.active .bn-icon{{filter:drop-shadow(0 0 6px var(--cyan))}}
+/* === MAIN CONTENT === */
+.main{{padding:16px;padding-bottom:80px;animation:fadeInUp 0.3s ease}}
+/* === STATS BAR === */
+.stats-bar{{
+  display:flex;flex-wrap:wrap;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:10px 14px;margin-bottom:var(--gap);
+  font-size:0.8em;color:var(--muted);
 }}
-.detail-cover {{
-  width: 180px; height: 260px; object-fit: cover;
-  border-radius: 8px; flex-shrink: 0;
+.stats-bar span{{display:flex;align-items:center;gap:4px}}
+/* === FILTERS === */
+.filters{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px;margin-bottom:var(--gap);
 }}
-.detail-cover-placeholder {{
-  width: 180px; height: 260px; background: var(--border);
-  border-radius: 8px; display: flex; align-items: center; justify-content: center;
-  font-size: 3em; flex-shrink: 0;
+.filter-row{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
+.filter-row input,.filter-row select{{
+  background:var(--bg);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;padding:8px 12px;font-size:0.85em;
 }}
-.detail-info {{ flex: 1; }}
-.detail-meta {{ color: var(--muted); font-size: 0.85em; margin: 8px 0; }}
-.detail-meta span {{ margin-right: 8px; }}
-.detail-scores {{ display: flex; gap: 8px; margin: 12px 0; }}
-.score-box {{
-  padding: 4px 10px; border-radius: 6px; font-size: 0.85em; font-weight: 600;
+.search-input{{flex:1;min-width:140px}}
+.year-input{{width:80px}}
+.score-input{{width:65px}}
+select{{min-width:100px}}
+.btn{{
+  background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
+  color:#fff;border:none;border-radius:8px;padding:8px 16px;
+  font-size:0.85em;cursor:pointer;text-decoration:none;display:inline-block;
+  font-weight:600;transition:all 0.2s;
 }}
-.score-box.owl {{ background: var(--purple-dim); }}
-.score-box.mal {{ background: rgba(34,197,94,0.15); color: var(--green); }}
-.score-box.user {{ background: rgba(234,179,8,0.15); color: var(--yellow); }}
-.detail-badges {{ margin: 8px 0; }}
-.detail-status {{ color: var(--muted); font-size: 0.85em; margin-top: 8px; }}
-.detail-synopsis {{
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 20px;
+.btn:hover{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(168,85,247,0.3)}}
+.btn:active{{transform:translateY(0)}}
+.btn-clear{{background:transparent;border:1px solid var(--border);color:var(--muted)}}
+.btn-sm{{padding:6px 12px;font-size:0.75em}}
+.btn-wl{{background:linear-gradient(135deg,var(--pink),var(--purple))}}
+.btn-watched{{background:linear-gradient(135deg,var(--green),#16a34a)}}
+/* === FILM GRID === */
+.film-grid{{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:var(--gap);
 }}
-.detail-synopsis p {{ color: var(--muted); line-height: 1.7; font-size: 0.9em; margin-top: 8px; }}
-.note {{
-  background: rgba(234,179,8,0.08); border: 1px solid rgba(234,179,8,0.2);
-  border-radius: var(--radius); padding: 14px; margin-top: 12px;
-  color: var(--text); font-size: 0.9em;
+.film-card{{
+  display:flex;gap:12px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px;
+  text-decoration:none;color:inherit;
+  transition:all 0.2s;position:relative;overflow:hidden;
+}}
+.film-card::before{{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  opacity:0;transition:opacity 0.2s;
+}}
+.film-card:hover{{border-color:var(--cyan);transform:translateY(-2px)}}
+.film-card:hover::before{{opacity:1}}
+.film-card.watched{{opacity:0.55}}
+.cover{{
+  width:75px;height:105px;object-fit:cover;
+  border-radius:8px;flex-shrink:0;
+}}
+.cover.placeholder{{
+  width:75px;height:105px;background:linear-gradient(135deg,var(--border),var(--border2));
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:1.6em;flex-shrink:0;
+}}
+.film-info{{flex:1;min-width:0}}
+.film-title{{font-weight:600;font-size:0.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.film-meta{{color:var(--muted);font-size:0.72em;margin-top:3px}}
+.film-score{{
+  display:inline-block;background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
+  color:#fff;font-weight:700;font-size:0.8em;
+  padding:2px 8px;border-radius:4px;margin-top:4px;
+}}
+.film-badges{{margin-top:4px}}
+.badge{{
+  display:inline-block;background:rgba(6,182,212,0.1);
+  color:var(--cyan);padding:1px 6px;border-radius:4px;
+  font-size:0.65em;margin:2px 2px 0 0;border:1px solid rgba(6,182,212,0.15);
+}}
+/* === FILM DETAIL === */
+.detail{{max-width:800px;margin:0 auto}}
+.back-link{{
+  display:inline-block;color:var(--muted);text-decoration:none;
+  font-size:0.8em;margin-bottom:12px;
+}}
+.back-link:hover{{color:var(--cyan)}}
+.detail-header{{
+  display:flex;gap:16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);
+}}
+.detail-cover{{
+  width:150px;height:210px;object-fit:cover;
+  border-radius:10px;flex-shrink:0;
+}}
+.detail-cover-placeholder{{
+  width:150px;height:210px;background:linear-gradient(135deg,var(--border),var(--border2));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:2.5em;flex-shrink:0;
+}}
+.detail-info h2{{font-size:1.15em;margin-bottom:4px}}
+.detail-meta{{color:var(--muted);font-size:0.8em;margin:6px 0}}
+.detail-meta span{{margin-right:8px}}
+.detail-scores{{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}}
+.score-box{{padding:4px 10px;border-radius:6px;font-size:0.8em;font-weight:600}}
+.score-box.owl{{background:linear-gradient(135deg,var(--cyan-dim),var(--purple));color:#fff}}
+.score-box.mal{{background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.2)}}
+.score-box.imdb{{background:rgba(234,179,8,0.12);color:var(--yellow);border:1px solid rgba(234,179,8,0.2)}}
+.score-box.user{{background:rgba(236,72,153,0.12);color:var(--pink);border:1px solid rgba(236,72,153,0.2)}}
+.detail-badges{{margin:8px 0}}
+.detail-status{{color:var(--muted);font-size:0.8em;margin-top:6px}}
+.detail-actions{{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}}
+.detail-synopsis{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);
+}}
+.detail-synopsis h3{{font-size:0.85em;color:var(--muted);margin-bottom:8px}}
+.detail-synopsis p{{color:var(--muted);line-height:1.7;font-size:0.88em}}
+.note{{
+  background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.15);
+  border-radius:var(--radius);padding:12px;margin-top:10px;
+  color:var(--text);font-size:0.85em;
 }}
 /* === WATCHLIST === */
-.wl-grid {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-  gap: var(--gap);
+.wl-grid{{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap);
 }}
-.wl-card {{
-  display: flex; align-items: flex-start; gap: 10px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 12px;
-  position: relative;
+.wl-card{{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px;position:relative;
 }}
-.wl-main {{ display: flex; gap: 10px; flex: 1; text-decoration: none; color: inherit; }}
-.wl-info {{ flex: 1; min-width: 0; }}
-.wl-title {{ font-weight: 600; font-size: 0.95em; }}
-.wl-meta {{ color: var(--muted); font-size: 0.78em; margin-top: 2px; }}
-.wl-badges {{ margin-top: 4px; }}
-.wl-priority {{ font-size: 0.75em; margin-top: 4px; color: var(--yellow); }}
-.wl-note {{ font-size: 0.8em; color: var(--muted); margin-top: 4px; font-style: italic; }}
-.wl-remove {{
-  color: var(--muted); text-decoration: none; font-size: 1.1em;
-  padding: 4px 8px; border-radius: 4px;
+.wl-main{{display:flex;gap:10px;flex:1;text-decoration:none;color:inherit}}
+.wl-info{{flex:1;min-width:0}}
+.wl-title{{font-weight:600;font-size:0.9em}}
+.wl-meta{{color:var(--muted);font-size:0.72em;margin-top:2px}}
+.wl-badges{{margin-top:4px}}
+.wl-priority{{font-size:0.7em;margin-top:4px;color:var(--yellow)}}
+.wl-note{{font-size:0.75em;color:var(--muted);margin-top:4px;font-style:italic}}
+.wl-remove{{
+  color:var(--muted);text-decoration:none;font-size:1em;
+  padding:4px 8px;border-radius:4px;
 }}
-.wl-remove:hover {{ color: #ef4444; background: rgba(239,68,68,0.1); }}
+.wl-remove:hover{{color:var(--red);background:rgba(239,68,68,0.1)}}
 /* === PROFIL === */
-.profile-stats {{
-  display: flex; flex-wrap: wrap; gap: 12px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 14px; margin-bottom: var(--gap);
+.profile-stats{{
+  display:flex;flex-wrap:wrap;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:var(--gap);
 }}
-.profile-stat {{
-  display: flex; flex-direction: column; align-items: center;
-  min-width: 70px;
+.profile-stat{{
+  display:flex;flex-direction:column;align-items:center;min-width:60px;
 }}
-.ps-num {{ font-size: 1.3em; font-weight: 700; color: var(--purple); }}
-.ps-lbl {{ font-size: 0.7em; color: var(--muted); margin-top: 2px; }}
-.profile-sections {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: var(--gap); margin-bottom: var(--gap);
+.ps-num{{font-size:1.2em;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
+.ps-lbl{{font-size:0.6em;color:var(--muted);margin-top:2px}}
+.profile-sections{{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:var(--gap);margin-bottom:var(--gap);
 }}
-.prof-section {{
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 14px;
+.prof-section{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;
 }}
-.prof-section h3 {{ font-size: 0.9em; margin-bottom: 10px; color: var(--text); }}
-.prof-list {{ list-style: none; padding: 0; }}
-.prof-list li {{
-  display: flex; justify-content: space-between;
-  padding: 4px 0; font-size: 0.85em; border-bottom: 1px solid var(--border);
-}}
-.prof-list li span {{ color: var(--muted); }}
-.bar-chart {{ display: flex; flex-direction: column; gap: 6px; }}
-.bar-row {{ display: flex; align-items: center; gap: 8px; }}
-.bar-label {{ width: 100px; font-size: 0.75em; color: var(--muted); text-align: right; flex-shrink: 0; }}
-.bar-track {{ flex: 1; height: 14px; background: var(--border); border-radius: 4px; overflow: hidden; }}
-.bar-fill {{ height: 100%; background: linear-gradient(90deg, var(--purple-dim), var(--purple)); border-radius: 4px; }}
-.bar-val {{ width: 24px; font-size: 0.75em; color: var(--muted); text-align: right; }}
-.history-grid {{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 10px;
-}}
-.history-card {{
-  display: flex; gap: 8px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 8px;
-  text-decoration: none; color: inherit;
-}}
-.history-card:hover {{ border-color: var(--purple); }}
-.cover-sm {{
-  width: 40px; height: 56px; object-fit: cover;
-  border-radius: 4px; flex-shrink: 0;
-}}
-.cover-sm.placeholder {{
-  width: 40px; height: 56px; background: var(--border);
-  border-radius: 4px; display: flex; align-items: center; justify-content: center;
-  font-size: 1em; flex-shrink: 0;
-}}
-.history-title {{ font-size: 0.8em; font-weight: 600; }}
-.history-meta {{ font-size: 0.7em; color: var(--muted); }}
-.history-date {{ font-size: 0.65em; color: var(--muted); margin-top: 2px; }}
+.prof-section h3{{font-size:0.85em;margin-bottom:8px;color:var(--text)}}
+.prof-list{{list-style:none;padding:0}}
+.prof-list li{{display:flex;justify-content:space-between;padding:4px 0;font-size:0.8em;border-bottom:1px solid var(--border)}}
+.prof-list li span{{color:var(--muted)}}
+.bar-chart{{display:flex;flex-direction:column;gap:6px}}
+.bar-row{{display:flex;align-items:center;gap:8px}}
+.bar-label{{width:90px;font-size:0.7em;color:var(--muted);text-align:right;flex-shrink:0}}
+.bar-track{{flex:1;height:12px;background:var(--border);border-radius:4px;overflow:hidden}}
+.bar-fill{{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:4px;transition:width 0.5s ease}}
+.bar-val{{width:20px;font-size:0.7em;color:var(--muted);text-align:right}}
+.history-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}}
+.history-card{{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;text-decoration:none;color:inherit}}
+.history-card:hover{{border-color:var(--cyan)}}
+.cover-sm{{width:36px;height:50px;object-fit:cover;border-radius:4px;flex-shrink:0}}
+.cover-sm.placeholder{{width:36px;height:50px;background:var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.9em;flex-shrink:0}}
+.history-title{{font-size:0.75em;font-weight:600}}
+.history-meta{{font-size:0.65em;color:var(--muted)}}
+.history-date{{font-size:0.6em;color:var(--muted);margin-top:2px}}
 /* === KARSILASTIRMA === */
-.compare-form {{
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); padding: 14px; margin-bottom: var(--gap);
-}}
-.compare-form form {{ display: flex; gap: 8px; }}
-.compare-form .search-input {{ flex: 1; }}
-.compare-table-wrap {{ overflow-x: auto; }}
-.compare-table {{
-  width: 100%; border-collapse: collapse;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius); overflow: hidden;
-}}
-.compare-table th, .compare-table td {{
-  padding: 10px 14px; text-align: center;
-  border-bottom: 1px solid var(--border); font-size: 0.85em;
-}}
-.compare-table th {{ background: var(--bg); color: var(--muted); font-weight: 600; }}
-.compare-table td:first-child, .compare-table th:first-child {{
-  text-align: left; position: sticky; left: 0; background: var(--surface);
-}}
-.compare-cover {{
-  width: 80px; height: 110px; object-fit: cover; border-radius: 6px;
-}}
-.compare-cover-place {{
-  width: 80px; height: 110px; background: var(--border);
-  border-radius: 6px; display: flex; align-items: center; justify-content: center;
-  font-size: 1.8em; margin: 0 auto;
-}}
-.genre-row th {{ background: var(--bg); }}
-.empty-state {{
-  text-align: center; padding: 40px; color: var(--muted);
-  font-size: 0.9em;
-}}
-.muted {{ color: var(--muted); }}
-@media (max-width: 600px) {{
-  .film-grid {{ grid-template-columns: 1fr; }}
-  .wl-grid {{ grid-template-columns: 1fr; }}
-  .detail-header {{ flex-direction: column; align-items: center; }}
-  .detail-cover, .detail-cover-placeholder {{ width: 140px; height: 200px; }}
-  .filter-row {{ flex-direction: column; }}
-  .filter-row input, .filter-row select {{ width: 100%; }}
-  .profile-sections {{ grid-template-columns: 1fr; }}
-  .history-grid {{ grid-template-columns: 1fr; }}
-  .compare-form form {{ flex-direction: column; }}
+.compare-form{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap)}}
+.compare-form form{{display:flex;gap:8px}}
+.compare-form .search-input{{flex:1}}
+.compare-table-wrap{{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}}
+.compare-table{{width:100%;border-collapse:collapse;background:var(--surface)}}
+.compare-table th,.compare-table td{{padding:8px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:0.8em}}
+.compare-table th{{background:var(--bg);color:var(--muted);font-weight:600}}
+.compare-table td:first-child,.compare-table th:first-child{{text-align:left;position:sticky;left:0;background:var(--surface)}}
+.compare-cover{{width:70px;height:95px;object-fit:cover;border-radius:6px}}
+.compare-cover-place{{width:70px;height:95px;background:var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5em;margin:0 auto}}
+.genre-row th{{background:var(--bg)}}
+.empty-state{{text-align:center;padding:40px;color:var(--muted);font-size:0.85em}}
+.muted{{color:var(--muted)}}
+h2{{font-size:1.2em;margin-bottom:8px}}
+h3{{font-size:0.85em;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}}
+/* === RESPONSIVE === */
+@media(max-width:600px){{
+  .film-grid{{grid-template-columns:1fr}}
+  .wl-grid{{grid-template-columns:1fr}}
+  .detail-header{{flex-direction:column;align-items:center}}
+  .detail-cover,.detail-cover-placeholder{{width:120px;height:170px}}
+  .filter-row{{flex-direction:column}}
+  .filter-row input,.filter-row select{{width:100%}}
+  .profile-sections{{grid-template-columns:1fr}}
+  .history-grid{{grid-template-columns:1fr}}
+  .compare-form form{{flex-direction:column}}
+  .topbar{{padding:10px 12px}}
+  .main{{padding:12px;padding-bottom:80px}}
 }}
 </style>
 </head>
 <body>
-{head}
-{content}
-<div style="text-align:center;color:var(--muted);font-size:0.75em;margin-top:30px">
-  OWL Oneri Motoru v5.0 · {datetime.now().strftime("%Y-%m-%d")}
+<div class="topbar">
+  <a href="/" class="logo">◇ OWL</a>
+  <span class="badge">v5.0</span>
 </div>
+<div class="main">
+{content}
+</div>
+<nav class="bottom-nav">
+{nav_html}
+</nav>
+<script>
+function markWatched(id){{
+  fetch('/api/watchlist?action=add&id='+id).then(()=>location.reload());
+}}
+</script>
 </body>
 </html>"""
             self.send_response(200)
-            self.send_header("Content-Type", "text/html; charset=utf-8")
+            self.send_header("Content-Type","text/html; charset=utf-8")
             self.end_headers()
             self.wfile.write(full.encode())
 
         def _send_json(self, data):
             self.send_response(200)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type","application/json; charset=utf-8")
             self.end_headers()
             self.wfile.write(json.dumps(data, ensure_ascii=False).encode())
 
@@ -1750,8 +1810,9 @@ select {{ min-width: 120px; }}
 
     server = HTTPServer(("0.0.0.0", port), Handler)
     print(f"🌐 Web server baslatildi: http://localhost:{port}")
-    print(f"   API: http://localhost:{port}/api/recommend")
-    print(f"   Arama: http://localhost:{port}/api/search?q=yourname")
+    print(f"   Watchlist: http://localhost:{port}/watchlist")
+    print(f"   Profil: http://localhost:{port}/profile")
+    print(f"   Karsilastir: http://localhost:{port}/compare")
     server.serve_forever()
 
 # === CLI ===
