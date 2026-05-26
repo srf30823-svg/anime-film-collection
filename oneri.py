@@ -396,9 +396,13 @@ def import_anilist_data(pages=10, media_type="ANIME", fmt="MOVIE"):
             sd = m.get("startDate", {})
             ed = m.get("endDate", {})
             if sd and sd.get("year"):
-                start_d = f"{sd.get('year','')}-{sd.get('month',''):02d}-{sd.get('day',''):02d}"
+                try:
+                    start_d = f"{sd.get('year','')}-{int(sd.get('month',0)):02d}-{int(sd.get('day',0)):02d}"
+                except: start_d = ""
             if ed and ed.get("year"):
-                end_d = f"{ed.get('year','')}-{ed.get('month',''):02d}-{ed.get('day',''):02d}"
+                try:
+                    end_d = f"{ed.get('year','')}-{int(ed.get('month',0)):02d}-{int(ed.get('day',0)):02d}"
+                except: end_d = ""
 
             anilist_id = m.get("id", 0)
 
