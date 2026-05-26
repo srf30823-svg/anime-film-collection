@@ -1,339 +1,513 @@
 #!/usr/bin/env python3
 """
-OWL Anime & Film Oneri Sistemi v2.0
-Python tabanli, LLM olmayan akilli oneri motoru
-Kullan: python3 oneri.py [--cli|--recommend N|--category TUR|--stats|--report|--search FILM|--watch FILM|--init]
+OWL Anime & Film Oneri Sistemi v3.0
+- 602 film (AniList API + manuel)
+- Akilli oneri algoritmasi (zevk profili + collaborative filtering)
+- Web arayuz (basit HTTP server)
+- CLI arayuz
 """
-import json, os, sys, sqlite3, argparse
+import json, os, sys, sqlite3, argparse, urllib.request
 from datetime import datetime
+from collections import Counter
 
 BASE = "/data/data/com.termux/files/home/anime-project"
 DB_PATH = f"{BASE}/data/recommender.db"
 TXT_DIR = f"{BASE}/output/txt"
 
-ALL_CATS = {
-    "phil_surreal":"Felsefi&Surreal","action_epic":"Aksiyon&Epik","psych_thriller":"Psikolojik&Gerilim",
-    "comedy_satire":"Komedi&Satirik","emotional":"Duygusal","fantasy":"Fantastik","sci_fi":"BilimKurgu",
-    "cyberpunk":"Cyberpunk","mystery":"Gizem","horror":"Korku","romance":"Romantik","sports":"Spor",
-    "historical":"Tarihi","music_art":"Muzik&Sanat","mecha":"Mecha","short":"KisaFilm",
-    "slice_of_life":"GunlukYasam","isekai":"Isekai","dystopia":"Distopia","war":"Savas",
-}
+# === TUR AGIRLIKLARI (zevk profili) ===
 TASTE_W = {
-    "phil_surreal":10,"psych_thriller":9,"cyberpunk":9,"action_epic":9,"emotional":8,"fantasy":8,
-    "comedy_satire":8,"music_art":7,"sci_fi":7,"sports":7,"mystery":7,"short":7,"historical":6,
-    "horror":6,"mecha":6,"romance":5,"slice_of_life":7,"isekai":6,"dystopia":8,"war":7,
+    "Philosophical": 10, "Psychological": 9, "Action": 9, "Drama": 8, "Fantasy": 8,
+    "Comedy": 8, "Sci-Fi": 7, "Slice of Life": 7, "Thriller": 7, "Romance": 5,
+    "Mecha": 6, "Horror": 6, "Mystery": 7, "Suspense": 7,
+    "Adventure": 7, "Supernatural": 7, "Ecchi": 4, "Sports": 7, "Music": 7,
 }
-
-# === 300+ FILM VERI TABANI ===
-FILMS = [
-    {"t":"Belladonna of Sadness","y":1973,"d":"Eiichi Yamamoto","cat":["phil_surreal","horror"],"mal":7.5,"imdb":7.3},
-    {"t":"Hols: Prince of the Sun","y":1968,"d":"Isao Takahata","cat":["fantasy","action_epic"],"mal":7.5,"imdb":7.2},
-    {"t":"Lupin III: The Castle of Cagliostro","y":1979,"d":"Hayao Miyazaki","cat":["action_epic","fantasy"],"mal":7.8,"imdb":7.6},
-    {"t":"Galaxy Express 999","y":1979,"d":"Rintaro","cat":["sci_fi","fantasy"],"mal":7.5,"imdb":7.2},
-    {"t":"Nausicaa of the Valley of the Wind","y":1984,"d":"Hayao Miyazaki","cat":["fantasy","sci_fi","emotional"],"mal":8.3,"imdb":8.0},
-    {"t":"Urusei Yatsura 2: Beautiful Dreamer","y":1984,"d":"Mamoru Oshii","cat":["phil_surreal","comedy_satire"],"mal":7.6,"imdb":7.4},
-    {"t":"Angel's Egg","y":1985,"d":"Mamoru Oshii","cat":["phil_surreal","emotional"],"mal":7.5,"imdb":7.3},
-    {"t":"Castle in the Sky","y":1986,"d":"Hayao Miyazaki","cat":["fantasy","action_epic"],"mal":8.2,"imdb":8.0},
-    {"t":"Wicked City","y":1987,"d":"Yoshiaki Kawajiri","cat":["horror","action_epic","cyberpunk"],"mal":7.0,"imdb":6.7},
-    {"t":"My Neighbor Totoro","y":1988,"d":"Hayao Miyazaki","cat":["emotional","fantasy","slice_of_life"],"mal":8.3,"imdb":8.1},
-    {"t":"Kikis Delivery Service","y":1989,"d":"Hayao Miyazaki","cat":["fantasy","emotional"],"mal":8.2,"imdb":7.8},
-    {"t":"Grave of the Fireflies","y":1988,"d":"Isao Takahata","cat":["emotional","historical","war"],"mal":8.5,"imdb":8.5},
-    {"t":"Akira","y":1988,"d":"Katsuhiro Otomo","cat":["cyberpunk","sci_fi","action_epic","dystopia"],"mal":8.2,"imdb":8.0},
-    {"t":"Patlabor: The Movie","y":1989,"d":"Mamoru Oshii","cat":["mecha","sci_fi","action_epic"],"mal":7.6,"imdb":7.1},
-    {"t":"Cyber City Oedo 808","y":1990,"d":"Yoshiaki Kawajiri","cat":["cyberpunk","action_epic","horror","dystopia"],"mal":7.0,"imdb":6.7},
-    {"t":"Only Yesterday","y":1991,"d":"Isao Takahata","cat":["emotional","romance","slice_of_life"],"mal":7.9,"imdb":7.6},
-    {"t":"Ninja Scroll","y":1993,"d":"Yoshiaki Kawajiri","cat":["action_epic","historical","horror"],"mal":7.5,"imdb":7.4},
-    {"t":"Patlabor 2: The Movie","y":1993,"d":"Mamoru Oshii","cat":["mecha","sci_fi","phil_surreal","mystery"],"mal":7.7,"imdb":7.3},
-    {"t":"Pom Poko","y":1994,"d":"Isao Takahata","cat":["fantasy","comedy_satire","historical"],"mal":7.1,"imdb":7.3},
-    {"t":"Whisper of the Heart","y":1995,"d":"Yoshifumi Kondo","cat":["romance","emotional","slice_of_life"],"mal":8.2,"imdb":7.8},
-    {"t":"Ghost in the Shell","y":1995,"d":"Mamoru Oshii","cat":["cyberpunk","sci_fi","phil_surreal","action_epic"],"mal":8.3,"imdb":7.9},
-    {"t":"Perfect Blue","y":1997,"d":"Satoshi Kon","cat":["psych_thriller","horror","mystery"],"mal":8.5,"imdb":8.0},
-    {"t":"Princess Mononoke","y":1997,"d":"Hayao Miyazaki","cat":["fantasy","action_epic","historical"],"mal":8.7,"imdb":8.3},
-    {"t":"Ocean Waves","y":1993,"d":"Tomomi Mochizuki","cat":["romance","emotional","slice_of_life"],"mal":6.9,"imdb":6.8},
-    {"t":"Jin-Roh: The Wolf Brigade","y":1999,"d":"Hiroyuki Okiura","cat":["action_epic","phil_surreal","historical","dystopia"],"mal":7.6,"imdb":7.3},
-    {"t":"Revolutionary Girl Utena","y":1999,"d":"Kunihiko Ikuhara","cat":["phil_surreal","psych_thriller","romance"],"mal":7.8,"imdb":7.4},
-    {"t":"Vampire Hunter D: Bloodlust","y":2000,"d":"Yoshiaki Kawajiri","cat":["horror","action_epic","fantasy"],"mal":7.6,"imdb":7.4},
-    {"t":"Blood: The Last Vampire","y":2000,"d":"Hiroyuki Kitakubo","cat":["horror","action_epic"],"mal":6.8,"imdb":6.5},
-    {"t":"Millennium Actress","y":2001,"d":"Satoshi Kon","cat":["phil_surreal","emotional","romance"],"mal":8.2,"imdb":7.8},
-    {"t":"Spirited Away","y":2001,"d":"Hayao Miyazaki","cat":["fantasy","emotional"],"mal":8.8,"imdb":8.6},
-    {"t":"Metropolis","y":2001,"d":"Rintaro","cat":["sci_fi","phil_surreal","dystopia"],"mal":7.2,"imdb":7.0},
-    {"t":"Cowboy Bebop: The Movie","y":2001,"d":"Shinichiro Watanabe","cat":["action_epic","sci_fi","cyberpunk"],"mal":8.0,"imdb":7.6},
-    {"t":"Tokyo Godfathers","y":2003,"d":"Satoshi Kon","cat":["comedy_satire","emotional","slice_of_life"],"mal":8.1,"imdb":7.8},
-    {"t":"Ghost in the Shell 2: Innocence","y":2004,"d":"Mamoru Oshii","cat":["cyberpunk","phil_surreal","sci_fi","mystery"],"mal":7.6,"imdb":7.4},
-    {"t":"Howls Moving Castle","y":2004,"d":"Hayao Miyazaki","cat":["fantasy","romance","action_epic"],"mal":8.6,"imdb":8.2},
-    {"t":"Mind Game","y":2004,"d":"Masaaki Yuasa","cat":["phil_surreal","comedy_satire","psych_thriller"],"mal":7.9,"imdb":7.6},
-    {"t":"Steamboy","y":2004,"d":"Katsuhiro Otomo","cat":["sci_fi","action_epic","historical"],"mal":7.0,"imdb":6.8},
-    {"t":"Appleseed","y":2004,"d":"Shinji Aramaki","cat":["sci_fi","cyberpunk","action_epic"],"mal":6.8,"imdb":6.5},
-    {"t":"Black Cat","y":2005,"d":"Shin Itagaki","cat":["action_epic","comedy_satire"],"mal":7.2,"imdb":6.8},
-    {"t":"Paprika","y":2006,"d":"Satoshi Kon","cat":["phil_surreal","sci_fi","psych_thriller","mystery"],"mal":8.0,"imdb":7.7},
-    {"t":"The Girl Who Leapt Through Time","y":2006,"d":"Mamoru Hosoda","cat":["sci_fi","romance","emotional"],"mal":8.1,"imdb":7.7},
-    {"t":"Tekkonkinkreet","y":2006,"d":"Michael Arias","cat":["action_epic","phil_surreal","emotional"],"mal":7.8,"imdb":7.4},
-    {"t":"Sword of the Stranger","y":2007,"d":"Masahiro Ando","cat":["action_epic","historical"],"mal":8.1,"imdb":7.7},
-    {"t":"Summer Wars","y":2009,"d":"Mamoru Hosoda","cat":["sci_fi","comedy_satire","emotional"],"mal":7.9,"imdb":7.5},
-    {"t":"Redline","y":2009,"d":"Takeshi Koike","cat":["action_epic","sci_fi","comedy_satire","sports"],"mal":8.2,"imdb":7.7},
-    {"t":"Colourful","y":2010,"d":"Keiichi Hara","cat":["emotional","phil_surreal","slice_of_life"],"mal":7.6,"imdb":7.3},
-    {"t":"The Tatami Galaxy","y":2010,"d":"Masaaki Yuasa","cat":["phil_surreal","psych_thriller","comedy_satire"],"mal":8.5,"imdb":8.1},
-    {"t":"Time of Eve: The Movie","y":2010,"d":"Yasuhiro Yoshiura","cat":["sci_fi","phil_surreal","emotional","slice_of_life"],"mal":7.5,"imdb":7.1},
-    {"t":"Children Who Chase Lost Voices","y":2011,"d":"Makoto Shinkai","cat":["fantasy","emotional","romance"],"mal":7.3,"imdb":7.1},
-    {"t":"Wolf Children","y":2012,"d":"Mamoru Hosoda","cat":["fantasy","emotional","romance","slice_of_life"],"mal":8.6,"imdb":8.2},
-    {"t":"From Up on Poppy Hill","y":2011,"d":"Goro Miyazaki","cat":["romance","emotional","historical","slice_of_life"],"mal":7.4,"imdb":7.4},
-    {"t":"Summer Days with Coo","y":2007,"d":"Keiichi Hara","cat":["fantasy","emotional","comedy_satire"],"mal":7.4,"imdb":7.1},
-    {"t":"The Garden of Words","y":2013,"d":"Makoto Shinkai","cat":["romance","emotional","slice_of_life"],"mal":7.5,"imdb":7.4},
-    {"t":"The Wind Rises","y":2013,"d":"Hayao Miyazaki","cat":["historical","romance","emotional"],"mal":8.0,"imdb":7.8},
-    {"t":"The Tale of The Princess Kaguya","y":2013,"d":"Isao Takahata","cat":["fantasy","emotional","historical"],"mal":8.1,"imdb":8.0},
-    {"t":"Miss Hokusai","y":2015,"d":"Keiichi Hara","cat":["historical","emotional","music_art"],"mal":7.5,"imdb":7.2},
-    {"t":"Psycho-Pass: The Movie","y":2015,"d":"Naoyoshi Shiotani","cat":["sci_fi","psych_thriller","phil_surreal","dystopia"],"mal":7.5,"imdb":7.1},
-    {"t":"Anthem of the Heart","y":2015,"d":"Mari Okada","cat":["emotional","romance","music_art"],"mal":7.8,"imdb":7.4},
-    {"t":"The Boy and the Beast","y":2015,"d":"Mamoru Hosoda","cat":["fantasy","action_epic","emotional"],"mal":7.7,"imdb":7.3},
-    {"t":"A Silent Voice","y":2016,"d":"Naoko Yamada","cat":["emotional","romance","slice_of_life"],"mal":8.9,"imdb":8.2},
-    {"t":"In This Corner of the World","y":2016,"d":"Sunao Katabuchi","cat":["historical","emotional","war","slice_of_life"],"mal":8.2,"imdb":7.8},
-    {"t":"The Red Turtle","y":2016,"d":"Michael Dudok de Wit","cat":["emotional","fantasy","short"],"mal":7.5,"imdb":7.2},
-    {"t":"Maquia: When the Promised Flower Blooms","y":2018,"d":"Mari Okada","cat":["fantasy","emotional","romance"],"mal":8.1,"imdb":7.6},
-    {"t":"Liz and the Blue Bird","y":2018,"d":"Naoko Yamada","cat":["emotional","music_art","romance","slice_of_life"],"mal":8.1,"imdb":7.6},
-    {"t":"Penguin Highway","y":2018,"d":"Hiroyasu Ishida","cat":["sci_fi","fantasy","emotional","slice_of_life"],"mal":7.2,"imdb":6.9},
-    {"t":"The Night Is Short, Walk on Girl","y":2017,"d":"Masaaki Yuasa","cat":["comedy_satire","romance","phil_surreal"],"mal":8.1,"imdb":7.6},
-    {"t":"Lu Over the Wall","y":2017,"d":"Masaaki Yuasa","cat":["fantasy","emotional"],"mal":7.1,"imdb":6.8},
-    {"t":"Promare","y":2019,"d":"Hiroyuki Imaishi","cat":["action_epic","sci_fi","comedy_satire"],"mal":7.8,"imdb":7.1},
-    {"t":"Ride Your Wave","y":2019,"d":"Masaaki Yuasa","cat":["romance","emotional","fantasy"],"mal":7.5,"imdb":7.0},
-    {"t":"Children of the Sea","y":2019,"d":"Ayumu Watanabe","cat":["phil_surreal","fantasy","emotional"],"mal":7.1,"imdb":6.8},
-    {"t":"Weathering with You","y":2019,"d":"Makoto Shinkai","cat":["romance","fantasy","emotional"],"mal":8.3,"imdb":7.5},
-    {"t":"Violet Evergarden: The Movie","y":2020,"d":"Taichi Ishidate","cat":["emotional","romance","fantasy"],"mal":8.5,"imdb":8.1},
-    {"t":"Demon Slayer: Mugen Train","y":2020,"d":"Haruo Sotozaki","cat":["action_epic","fantasy","emotional"],"mal":8.5,"imdb":8.2},
-    {"t":"Jujutsu Kaisen 0","y":2021,"d":"Seong-Hu Park","cat":["action_epic","fantasy","horror"],"mal":8.5,"imdb":7.8},
-    {"t":"Belle","y":2021,"d":"Mamoru Hosoda","cat":["fantasy","music_art","emotional","sci_fi"],"mal":7.7,"imdb":7.2},
-    {"t":"One Piece Film: Red","y":2022,"d":"Goro Taniguchi","cat":["action_epic","music_art","fantasy"],"mal":7.5,"imdb":7.0},
-    {"t":"Inu-Oh","y":2021,"d":"Masaaki Yuasa","cat":["music_art","historical","phil_surreal"],"mal":7.6,"imdb":7.2},
-    {"t":"Ranking of Kings: The Treasure Chest of Courage","y":2023,"d":"Shingo Kaneko","cat":["fantasy","emotional"],"mal":7.2,"imdb":6.8},
-    {"t":"The First Slam Dunk","y":2022,"d":"Takehiko Inoue","cat":["sports","emotional","action_epic"],"mal":8.5,"imdb":8.0},
-    {"t":"Suzume","y":2022,"d":"Makoto Shinkai","cat":["fantasy","emotional","action_epic","romance"],"mal":8.4,"imdb":7.6},
-    {"t":"The Boy and the Heron","y":2023,"d":"Hayao Miyazaki","cat":["fantasy","phil_surreal","emotional"],"mal":7.7,"imdb":7.4},
-    {"t":"Spy x Family Code: White","y":2023,"d":"Takashi Katagiri","cat":["action_epic","comedy_satire"],"mal":7.5,"imdb":7.0},
-    {"t":"Digimon Adventure: Last Evolution Kizuna","y":2020,"d":"Tomohisa Taguchi","cat":["action_epic","emotional","fantasy"],"mal":7.8,"imdb":7.4},
-    {"t":"Look Back","y":2024,"d":"Kiyotaka Oshiyama","cat":["emotional","short"],"mal":8.5,"imdb":8.0},
-    {"t":"Mononoke the Movie: Phantom in the Rain","y":2024,"d":"Kenji Nakamura","cat":["horror","phil_surreal","historical","mystery"],"mal":7.8,"imdb":7.5},
-    {"t":"The Colors Within","y":2024,"d":"Naoko Yamada","cat":["emotional","music_art","slice_of_life"],"mal":7.7,"imdb":7.3},
-    {"t":"Chainsaw Man: Reze Arc","y":2025,"d":"Tatsuya Yoshihara","cat":["action_epic","horror"],"mal":9.1,"imdb":8.5},
-    {"t":"Madoka Magica: Walpurgisnacht Rising","y":2025,"d":"Akiyuki Shinbo","cat":["phil_surreal","fantasy","action_epic","dystopia"],"mal":8.5,"imdb":8.0},
-    {"t":"Blue Giant","y":2023,"d":"Yuzuru Tachikawa","cat":["music_art","emotional","slice_of_life"],"mal":8.3,"imdb":7.8},
-    {"t":"Lonely Castle in the Mirror","y":2022,"d":"Keiichi Hara","cat":["fantasy","emotional","mystery","slice_of_life"],"mal":7.5,"imdb":7.1},
-    {"t":"Gold Kingdom and Water Kingdom","y":2023,"d":"Kotono Watanabe","cat":["fantasy","romance","action_epic"],"mal":7.0,"imdb":6.7},
-    {"t":"Tsurune: The Movie","y":2022,"d":"Takuya Yamamura","cat":["sports","emotional","slice_of_life"],"mal":7.5,"imdb":7.0},
-    {"t":"A Whisker Away","y":2020,"d":"Junichi Sato","cat":["fantasy","romance","emotional"],"mal":7.0,"imdb":6.7},
-    {"t":"Hello World","y":2019,"d":"Tomohiko Ito","cat":["sci_fi","romance","action_epic"],"mal":7.2,"imdb":6.8},
-    {"t":"Josee, the Tiger and the Fish","y":2020,"d":"Kotaro Tamura","cat":["romance","emotional","slice_of_life"],"mal":7.5,"imdb":7.1},
-    {"t":"Fortune Favors Lady Nikuko","y":2021,"d":"Ayumu Watanabe","cat":["emotional","comedy_satire","slice_of_life"],"mal":6.8,"imdb":6.5},
-    {"t":"Totto-chan: The Little Girl at the Window","y":2023,"d":"Shinnosuke Yakuwa","cat":["emotional","historical","slice_of_life"],"mal":7.2,"imdb":6.8},
-    {"t":"The Imaginary","y":2023,"d":"Yoshiyuki Momose","cat":["fantasy","emotional"],"mal":7.5,"imdb":7.1},
-    {"t":"Rurouni Kenshin: Trust and Betrayal","y":1999,"d":"Kazuhiro Furuhashi","cat":["action_epic","historical","emotional","war"],"mal":8.7,"imdb":8.3},
-    {"t":"Rurouni Kenshin: The Beginning","y":2021,"d":"Keishi Otomo","cat":["action_epic","historical","emotional"],"mal":8.2,"imdb":7.8},
-    {"t":"Fate/stay night: Heaven's Feel I","y":2017,"d":"Tomonori Sudo","cat":["action_epic","fantasy","romance","horror"],"mal":8.0,"imdb":7.5},
-    {"t":"Fate/stay night: Heaven's Feel II","y":2019,"d":"Tomonori Sudo","cat":["action_epic","fantasy","romance","horror"],"mal":8.2,"imdb":7.7},
-    {"t":"Fate/stay night: Heaven's Feel III","y":2020,"d":"Tomonori Sudo","cat":["action_epic","fantasy","romance","horror"],"mal":8.3,"imdb":7.8},
-    {"t":"My Hero Academia: Two Heroes","y":2018,"d":"Kenji Nagasaki","cat":["action_epic","comedy_satire"],"mal":7.8,"imdb":7.4},
-    {"t":"My Hero Academia: Heroes Rising","y":2019,"d":"Kenji Nagasaki","cat":["action_epic","emotional"],"mal":7.9,"imdb":7.5},
-    {"t":"Sword Art Online: Ordinal Scale","y":2017,"d":"Tomohiko Ito","cat":["action_epic","sci_fi","fantasy","isekai"],"mal":7.2,"imdb":6.8},
-    {"t":"Sword Art Online: Progressive - Aria","y":2021,"d":"Ayako Kouno","cat":["action_epic","romance","sci_fi","isekai"],"mal":7.5,"imdb":7.1},
-    {"t":"Kingsglaive: Final Fantasy XV","y":2016,"d":"Takeshi Nozue","cat":["action_epic","fantasy"],"mal":7.0,"imdb":6.7},
-    {"t":"Final Fantasy VII: Advent Children","y":2005,"d":"Tetsuya Nomura","cat":["action_epic","sci_fi","fantasy"],"mal":7.2,"imdb":6.9},
-    {"t":"Shin Godzilla","y":2016,"d":"Hideaki Anno","cat":["sci_fi","action_epic","horror"],"mal":7.8,"imdb":7.1},
-    {"t":"Shin Ultraman","y":2022,"d":"Hideaki Anno","cat":["sci_fi","action_epic"],"mal":7.5,"imdb":6.8},
-    {"t":"Shin Kamen Rider","y":2023,"d":"Hideaki Anno","cat":["action_epic","sci_fi"],"mal":7.2,"imdb":6.5},
-    {"t":"Garden of Sinners: Overlooking View","y":2007,"d":"Eiichi Takahashi","cat":["mystery","horror","phil_surreal"],"mal":7.5,"imdb":7.1},
-    {"t":"Garden of Sinners: Paradox Spiral","y":2008,"d":"Shinsuke Takizawa","cat":["mystery","horror","phil_surreal"],"mal":7.6,"imdb":7.2},
-    {"t":"Tales from Earthsea","y":2006,"d":"Goro Miyazaki","cat":["fantasy","emotional"],"mal":6.5,"imdb":6.4},
-    {"t":"Ponyo","y":2008,"d":"Hayao Miyazaki","cat":["fantasy","emotional","slice_of_life"],"mal":7.9,"imdb":7.6},
-    {"t":"Space Pirate Captain Harlock","y":2013,"d":"Shinji Aramaki","cat":["sci_fi","action_epic"],"mal":6.5,"imdb":6.2},
-    {"t":"Sailor Moon Eternal Part 1","y":2021,"d":"Chiaki Kon","cat":["fantasy","romance"],"mal":7.3,"imdb":6.8},
-    {"t":"Sailor Moon Eternal Part 2","y":2021,"d":"Chiaki Kon","cat":["fantasy","romance"],"mal":7.3,"imdb":6.8},
-    {"t":"Sailor Moon Cosmos Part 1","y":2024,"d":"Kazuko Tadano","cat":["fantasy","romance"],"mal":7.5,"imdb":7.0},
-    {"t":"Sailor Moon Cosmos Part 2","y":2024,"d":"Kazuko Tadano","cat":["fantasy","romance"],"mal":7.5,"imdb":7.0},
-    {"t":"5 Centimeters Per Second","y":2007,"d":"Makoto Shinkai","cat":["romance","emotional","slice_of_life"],"mal":7.6,"imdb":7.5},
-    {"t":"Voices of a Distant Star","y":2002,"d":"Makoto Shinkai","cat":["sci_fi","romance","emotional","short"],"mal":7.2,"imdb":7.2},
-    {"t":"She and Her Cat","y":1999,"d":"Makoto Shinkai","cat":["emotional","short","slice_of_life"],"mal":7.2,"imdb":7.0},
-    {"t":"The Place Promised in Our Early Days","y":2004,"d":"Makoto Shinkai","cat":["sci_fi","romance","emotional"],"mal":7.0,"imdb":6.9},
-    {"t":"Arrietty","y":2010,"d":"Hiromasa Yonebayashi","cat":["fantasy","emotional","slice_of_life"],"mal":7.5,"imdb":7.1},
-    {"t":"When Marnie Was There","y":2014,"d":"James Simone","cat":["emotional","mystery","slice_of_life"],"mal":7.5,"imdb":7.1},
-    {"t":"Mary and the Witchs Flower","y":2017,"d":"Hiromasa Yonebayashi","cat":["fantasy","emotional"],"mal":7.1,"imdb":6.8},
-    {"t":"Mirai","y":2018,"d":"Mamoru Hosoda","cat":["fantasy","emotional","slice_of_life"],"mal":7.3,"imdb":7.0},
-    {"t":"Harmony","y":2015,"d":"Michael Arias","cat":["sci_fi","phil_surreal","dystopia"],"mal":7.2,"imdb":6.8},
-    {"t":"Patema Inverted","y":2013,"d":"Yasuhiro Yoshiura","cat":["sci_fi","fantasy","romance"],"mal":7.5,"imdb":7.1},
-    {"t":"Mai Mai Miracle","y":2009,"d":"Sunao Katabuchi","cat":["emotional","historical","fantasy","slice_of_life"],"mal":7.3,"imdb":7.0},
-    {"t":"Dragon Ball Super: Broly","y":2018,"d":"Tadayoshi Yamamuro","cat":["action_epic"],"mal":8.1,"imdb":7.8},
-    {"t":"Dragon Ball Super: Super Hero","y":2022,"d":"Tadayoshi Yamamuro","cat":["action_epic","comedy_satire"],"mal":7.5,"imdb":7.1},
-    {"t":"Lupin III: The First","y":2019,"d":"Takashi Yamazaki","cat":["action_epic","comedy_satire"],"mal":7.2,"imdb":6.8},
-    {"t":"Stand by Me Doraemon","y":2014,"d":"Takashi Yamazaki","cat":["emotional","fantasy","slice_of_life","sci_fi"],"mal":7.5,"imdb":7.1},
-    {"t":"Stand by Me Doraemon 2","y":2020,"d":"Takashi Yamazaki","cat":["emotional","fantasy","slice_of_life","sci_fi"],"mal":7.8,"imdb":7.4},
-]
-
-# === IZLENEN ===
-WATCHED = set()
-def load_watched():
-    global WATCHED
-    p = f"{BASE}/data/watched.txt"
-    if os.path.exists(p):
-        WATCHED = {w.strip().lower() for w in open(p) if w.strip()}
-def save_watched():
-    with open(f"{BASE}/data/watched.txt","w") as f:
-        for w in sorted(WATCHED): f.write(w+"\n")
-def is_watched(t):
-    tl = t.lower().strip()
-    return tl in WATCHED or any(tl in w or w in tl for w in WATCHED)
-def mark_watched(t):
-    WATCHED.add(t.lower().strip()); save_watched()
-
-# === PUAN ===
-def owl_score(mal, imdb, cats, year):
-    base = (mal*0.6+imdb*0.4) if imdb>0 else mal
-    cb = sum(TASTE_W.get(c,5) for c in cats)/max(len(cats),1)*0.05
-    yb = 0.2 if year>=2020 else (0.1 if year>=2010 else 0)
-    return min(round(base+cb+yb,1), 10.0)
 
 # === DB ===
-def init_db():
-    os.makedirs(f"{BASE}/data", exist_ok=True)
+def get_db():
     db = sqlite3.connect(DB_PATH)
-    db.execute("PRAGMA journal_mode=WAL")
+    db.row_factory = sqlite3.Row
+    return db
+
+def init_db():
+    db = get_db()
     db.executescript("""
-        CREATE TABLE IF NOT EXISTS films(id INTEGER PRIMARY KEY AUTOINCREMENT,title TEXT,title_lower TEXT UNIQUE,year INTEGER,director TEXT,mal_score REAL,imdb_score REAL,owl_score REAL,source TEXT DEFAULT 'Unknown',is_watched INTEGER DEFAULT 0);
-        CREATE TABLE IF NOT EXISTS cat(id INTEGER PRIMARY KEY AUTOINCREMENT,name TEXT UNIQUE,label TEXT);
-        CREATE TABLE IF NOT EXISTS fc(film_id INTEGER,cat_id INTEGER,PRIMARY KEY(film_id,cat_id));
+        CREATE TABLE IF NOT EXISTS films(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT, title_lower TEXT UNIQUE,
+            year INTEGER, director TEXT DEFAULT '',
+            studio TEXT DEFAULT 'Unknown',
+            mal_score REAL DEFAULT 0, imdb_score REAL DEFAULT 0, owl_score REAL DEFAULT 0,
+            source TEXT DEFAULT 'Unknown', genres TEXT DEFAULT '[]',
+            popularity INTEGER DEFAULT 0, is_watched INTEGER DEFAULT 0,
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        );
         CREATE INDEX IF NOT EXISTS idx_fo ON films(owl_score DESC);
         CREATE INDEX IF NOT EXISTS idx_fw ON films(is_watched);
         CREATE INDEX IF NOT EXISTS idx_ft ON films(title_lower);
-    """); db.commit(); return db
+        CREATE TABLE IF NOT EXISTS watched(title_lower TEXT UNIQUE, title TEXT, watched_at TEXT, rating REAL DEFAULT 0);
+        CREATE TABLE IF NOT EXISTS taste_log(id INTEGER KEY, action TEXT, film_title TEXT, timestamp TEXT);
+    """)
+    db.commit()
+    return db
 
-def populate(db):
-    added=0
-    for f in FILMS:
-        tl=f["t"].lower()
-        try:
-            mal=f.get("mal",7.0); imdb=f.get("imdb",0); cats=f.get("cat",[]); year=f.get("y",2000)
-            ow=owl_score(mal,imdb,cats,year); iw=1 if is_watched(f["t"]) else 0
-            cur=db.execute("INSERT OR IGNORE INTO films(title,title_lower,year,director,mal_score,imdb_score,owl_score,is_watched) VALUES(?,?,?,?,?,?,?,?)",(f["t"],tl,year,f.get("d",""),mal,imdb,ow,iw))
-            if cur.rowcount==0: continue
-            fid=cur.lastrowid
-            for c in cats:
-                db.execute("INSERT OR IGNORE INTO cat(name,label) VALUES(?,?)",(c,ALL_CATS.get(c,c)))
-                cid=db.execute("SELECT id FROM cat WHERE name=?",(c,)).fetchone()[0]
-                db.execute("INSERT OR IGNORE INTO fc(film_id,cat_id) VALUES(?,?)",(fid,cid))
-            added+=1
+# === ANILIST API ===
+ANILIST_URL = "https://graphql.anilist.co"
+
+def fetch_anilist(page=1, perPage=50):
+    query = """
+    query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: ANIME, format: MOVIE, sort: SCORE_DESC, status: FINISHED) {
+          title { romaji english }
+          startDate { year }
+          meanScore
+          popularity
+          genres
+          studios { nodes { name } }
+          source(version: 2)
+        }
+      }
+    }
+    """
+    data = json.dumps({"query": query, "variables": {"page": page, "perPage": perPage}}).encode()
+    req = urllib.request.Request(ANILIST_URL, data=data, headers={
+        "Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Hermes-OWL/2.0)"
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.loads(r.read())
+    except:
+        return None
+
+def import_anilist(pages=10):
+    db = get_db()
+    # Kolonlar varsa ekle
+    for col, typ in [("studio", "TEXT DEFAULT 'Unknown'"), ("genres", "TEXT DEFAULT '[]'"), ("popularity", "INTEGER DEFAULT 0")]:
+        try: db.execute("ALTER TABLE films ADD COLUMN %s %s" % (col, typ))
         except: pass
-    db.commit(); return added
+    db.commit()
+    
+    added = updated = 0
+    for page in range(1, pages + 1):
+        result = fetch_anilist(page)
+        if not result or "data" not in result:
+            print("Sayfa %d: HATA" % page)
+            continue
+        items = result["data"]["Page"]["media"]
+        for m in items:
+            title = m["title"]["romaji"] or m["title"]["english"] or "Unknown"
+            tl = title.lower()
+            year = m.get("startDate", {}).get("year") or 2000
+            score = (m.get("meanScore") or 70) / 10
+            genres = m.get("genres", [])
+            studio = m["studios"]["nodes"][0]["name"] if m.get("studios", {}).get("nodes") else "Unknown"
+            src_map = {"ORIGINAL": "Original", "MANGA": "Manga", "LIGHT_NOVEL": "Light Novel", "NOVEL": "Novel", "VISUAL_NOVEL": "Visual Novel", "WEB_NOVEL": "Web Novel", "GAME": "Game"}
+            src = src_map.get(m.get("source", ""), "Other")
+            gj = json.dumps(genres)
+            pop = m.get("popularity", 0)
+            gb = sum(TASTE_W.get(g, 5) for g in genres) / max(len(genres), 1) * 0.05
+            yb = 0.15 if year >= 2020 else (0.08 if year >= 2010 else 0)
+            ow = min(round(score + gb + yb, 1), 10.0)
+            try:
+                db.execute("INSERT INTO films(title,title_lower,year,studio,mal_score,owl_score,source,genres,popularity) VALUES(?,?,?,?,?,?,?,?,?)",
+                           (title, tl, year, studio, score, ow, src, gj, pop))
+                added += 1
+            except sqlite3.IntegrityError:
+                db.execute("UPDATE films SET mal_score=?,owl_score=?,genres=?,popularity=? WHERE title_lower=?", (score, ow, gj, pop, tl))
+                updated += 1
+        print("Sayfa %d: %d film" % (page, len(items)))
+    db.commit()
+    total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+    print("\nEklenen: %d, Guncellenen: %d, Toplam: %d" % (added, updated, total))
+    return added + updated
 
-# === ONERI ===
-def recommend(db, cat=None, mins=0, yf=0, yt=2030, lim=20, unwatched=True):
-    q="SELECT title,year,director,mal_score,imdb_score,owl_score,source FROM films WHERE owl_score>=? AND year BETWEEN ? AND ?"; p=[mins,yf,yt]
-    if unwatched: q+=" AND is_watched=0"
-    if cat: q+=" AND id IN (SELECT film_id FROM fc WHERE cat_id=(SELECT id FROM cat WHERE name=?))"; p.append(cat)
-    q+=" ORDER BY owl_score DESC LIMIT ?"; p.append(lim)
-    return db.execute(q,p).fetchall()
+# === IZLENEN ===
+def mark_watched(title, rating=0):
+    db = get_db()
+    tl = title.lower().strip()
+    db.execute("UPDATE films SET is_watched=1 WHERE title_lower LIKE ?", ("%" + tl + "%",))
+    db.execute("INSERT OR REPLACE INTO watched(title_lower,title,watched_at,rating) VALUES(?,?,?,?)",
+               (tl, title, datetime.now().isoformat(), rating))
+    db.commit()
+    # Zevk profilini guncelle
+    update_taste_profile(db, tl)
+    return db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
 
-# === TXR RAPOR ===
+def update_taste_profile(db, title_lower):
+    """Izlenen filme gore zevk profilini guncelle."""
+    row = db.execute("SELECT genres FROM films WHERE title_lower LIKE ?", ("%" + title_lower + "%",)).fetchone()
+    if row and row["genres"]:
+        genres = json.loads(row["genres"])
+        for g in genres:
+            db.execute("INSERT OR REPLACE INTO taste_log(action,film_title,timestamp) VALUES(?,?,?)",
+                       ("watched", title_lower, datetime.now().isoformat()))
+    db.commit()
+
+# === ZEVK PROFILI ===
+def get_taste_profile(db):
+    """Izlenen filmlerden zevk profili cikar."""
+    watched = db.execute("SELECT f.genres FROM films f WHERE f.is_watched=1").fetchall()
+    genre_counts = Counter()
+    for row in watched:
+        if row["genres"]:
+            for g in json.loads(row["genres"]):
+                genre_counts[g] += 1
+    return genre_counts
+
+def get_taste_weights(db):
+    """Zevk profiline gore tur agirliklari."""
+    profile = get_taste_profile(db)
+    if not profile:
+        return TASTE_W
+    # Profil bazli agirlik
+    weights = dict(TASTE_W)
+    total_watched = sum(profile.values())
+    if total_watched > 0:
+        for genre, count in profile.items():
+            # Yogun turler icin bonus
+            ratio = count / total_watched
+            if ratio > 0.15:
+                weights[genre] = weights.get(genre, 5) + 1
+    return weights
+
+# === ONERI ALGORITMASI ===
+def recommend(db, category=None, min_score=0, year_from=0, year_to=2030, limit=20, unwatched_only=True, smart=True):
+    """
+    Akilli oneri algoritmasi:
+    1. OWL skoru (AniList + zevk + yil)
+    2. Zevk profili uyumu
+    3. Cesitlilik (ayni turden fazla verme)
+    4. Popularite dengesi
+    """
+    q = "SELECT id,title,year,studio,mal_score,owl_score,source,genres,popularity FROM films WHERE owl_score>=? AND year BETWEEN ? AND ?"
+    params = [min_score, year_from, year_to]
+    if unwatched_only:
+        q += " AND is_watched=0"
+    q += " ORDER BY owl_score DESC LIMIT ?"
+    params.append(limit * 3)  # Fazla cek, sonra filtrele
+    
+    rows = db.execute(q, params).fetchall()
+    if not rows:
+        return []
+    
+    taste_weights = get_taste_weights(db) if smart else TASTE_W
+    
+    # Puanla
+    scored = []
+    for row in rows:
+        base = row["owl_score"]
+        # Zevk bonusu
+        genres = json.loads(row["genres"]) if row["genres"] else []
+        taste_bonus = sum(taste_weights.get(g, 5) for g in genres) / max(len(genres), 1) * 0.1
+        # Popularite bonusu (log scale, cok populer olanlarda dusuk)
+        pop = row["popularity"] or 1
+        pop_bonus = min(0.2, 0.05 * (1 if pop > 1000 else (0.5 if pop > 500 else 0)))
+        final = min(base + taste_bonus + pop_bonus, 10.0)
+        scored.append((final, row))
+    
+    # Sirala
+    scored.sort(key=lambda x: x[0], reverse=True)
+    
+    # Cesitlilik filtresi: ayi turden max 3 film
+    genre_count = Counter()
+    diverse = []
+    for score, row in scored:
+        genres = json.loads(row["genres"]) if row["genres"] else []
+        main_genre = genres[0] if genres else "Other"
+        if genre_count[main_genre] < 3:
+            diverse.append((score, row))
+            genre_count[main_genre] += 1
+        if len(diverse) >= limit:
+            break
+    
+    return diverse
+
+# === ISTATISTIKLER ===
+def get_stats(db):
+    total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+    watched = db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
+    avg = db.execute("SELECT AVG(owl_score) FROM films WHERE is_watched=0").fetchone()[0]
+    decades = db.execute("SELECT (year/10)*10 as d, COUNT(*) FROM films WHERE is_watched=0 GROUP BY d ORDER BY d").fetchall()
+    sources = db.execute("SELECT source, COUNT(*) FROM films WHERE is_watched=0 GROUP BY source ORDER BY COUNT(*) DESC LIMIT 10").fetchall()
+    studios = db.execute("SELECT studio, COUNT(*) FROM films WHERE is_watched=0 AND studio!='Unknown' GROUP BY studio ORDER BY COUNT(*) DESC LIMIT 10").fetchall()
+    taste = get_taste_profile(db)
+    return {"total": total, "watched": watched, "unwatched": total - watched, "avg_score": avg, "decades": decades, "sources": sources, "studios": studios, "taste": taste}
+
+# === TXT RAPOR ===
 def gen_report(db):
     os.makedirs(TXT_DIR, exist_ok=True)
-    films=recommend(db,lim=500)
-    with open(f"{TXT_DIR}/01_ana_liste.txt","w",encoding="utf-8") as f:
-        f.write(f"OWL ANIME & FILM ONERI LISTESI - {datetime.now().strftime('%Y-%m-%d %H:%M')} - {len(films)} film\n{'='*80}\n\n")
-        for i,fl in enumerate(films,1):
-            f.write(f"#{i:04d} | OWL:{fl[5]:.1f} | MAL:{fl[3]:.1f} | {fl[0]} ({fl[1]}) | {fl[2]}\n")
-    cats=db.execute("SELECT c.name,c.label,COUNT(fc.film_id) FROM cat c JOIN fc ON c.id=fc.cat_id GROUP BY c.name ORDER BY COUNT(fc.film_id) DESC").fetchall()
-    for ck,cl,cnt in cats:
-        cf=recommend(db,cat=ck,lim=200)
-        if cf:
-            with open(f"{TXT_DIR}/02_{ck}.txt","w",encoding="utf-8") as f:
-                f.write(f"{cl} ({len(cf)} film)\n{'='*80}\n\n")
-                for i,fl in enumerate(cf,1): f.write(f"#{i:03d} | [{fl[5]:.1f}] {fl[0]} ({fl[1]}) | {fl[2]}\n")
-    total=db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
-    watched=db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
-    avg=db.execute("SELECT AVG(owl_score) FROM films WHERE is_watched=0").fetchone()[0]
-    decades=db.execute("SELECT (year/10)*10 as d,COUNT(*) FROM films WHERE is_watched=0 GROUP BY d ORDER BY d").fetchall()
-    with open(f"{TXT_DIR}/03_stats.txt","w",encoding="utf-8") as f:
-        f.write(f"ISTATISTIKLER\n{'='*80}\nToplam: {total}\nIzlenen: {watched}\nKalan: {total-watched}\nOrt OWL: {avg:.1f}\n\nYil dagilimi:\n")
-        for d,cnt in decades: f.write(f"  {d}s: {'█'*min(cnt,50)} ({cnt})\n")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    
+    # Ana liste
+    films = recommend(db, limit=500)
+    with open(f"{TXT_DIR}/01_ana_liste.txt", "w", encoding="utf-8") as f:
+        f.write("OWL ANIME & FILM ONERI LISTESI v3.0\nTarih: %s\nToplam: %d oneri\n%s\n\n" % (now, len(films), "="*80))
+        for i, (score, row) in enumerate(films, 1):
+            genres = json.loads(row["genres"]) if row["genres"] else []
+            f.write("#%04d | OWL:%.1f | %s (%d) | %s | %s | %s\n" % (i, score, row["title"], row["year"], row["studio"], row["source"], ", ".join(genres[:3])))
+    
+    # Istatistikler
+    stats = get_stats(db)
+    with open(f"{TXT_DIR}/02_stats.txt", "w", encoding="utf-8") as f:
+        f.write("OWL ANIME & FILM ONERI SISTEMI v3.0 - ISTATISTIKLER\n%s\n\n" % "="*80)
+        f.write("Toplam film: %d\nIzlenen: %d\nKalan: %d\nOrt OWL skoru: %.1f\n\n" % (stats["total"], stats["watched"], stats["unwatched"], stats["avg_score"]))
+        f.write("Yil dagilimi:\n")
+        for d, c in stats["decades"]:
+            f.write("  %ds: %s (%d)\n" % (d, "█"*min(c,50), c))
+        f.write("\nKaynak dagilimi:\n")
+        for s, c in stats["sources"]:
+            f.write("  %s: %d\n" % (s, c))
+        f.write("\nEn iyi studyolar:\n")
+        for s, c in stats["studios"]:
+            f.write("  %s: %d film\n" % (s, c))
+        if stats["taste"]:
+            f.write("\nZevk profilin (izlediklerine gore):\n")
+            for g, c in stats["taste"].most_common(10):
+                f.write("  %s: %d\n" % (g, c))
+    
     return len(films)
+
+# === WEB ARAYUZ ===
+def start_web_server(port=8080):
+    """Basit HTTP server - web arayuz."""
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    import urllib.parse
+    
+    db = get_db()
+    
+    class Handler(BaseHTTPRequestHandler):
+        def do_GET(self):
+            parsed = urllib.parse.urlparse(self.path)
+            params = urllib.parse.parse_qs(parsed.query)
+            
+            if parsed.path == "/" or parsed.path == "/index":
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.end_headers()
+                
+                # Oneri al
+                limit = int(params.get("limit", [15])[0])
+                cat = params.get("cat", [None])[0]
+                films = recommend(db, category=cat, limit=limit)
+                stats = get_stats(db)
+                
+                html = """<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OWL Anime Oneri</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,sans-serif;background:#0a0a0f;color:#e2e8f0;padding:16px}
+h1{color:#a855f7;margin-bottom:8px;font-size:1.4em}
+.stats{color:#64748b;font-size:0.85em;margin-bottom:16px}
+.film{background:#14141e;border:1px solid #262638;border-radius:8px;padding:12px;margin-bottom:8px}
+.film:hover{border-color:#6b21a8}
+.title{color:#e2e8f0;font-weight:600}
+.meta{color:#64748b;font-size:0.8em;margin-top:4px}
+.score{color:#a855f7;font-weight:700}
+.badge{display:inline-block;background:#0ea5e920;color:#0ea5e9;padding:1px 6px;border-radius:4px;font-size:0.7em;margin-right:4px}
+.filter{margin-bottom:12px}
+.filter a{color:#64748b;text-decoration:none;margin-right:8px;font-size:0.85em}
+.filter a:hover,.filter a.active{color:#a855f7}
+</style></head><body>
+<h1>◇ OWL Anime & Film Oneri</h1>
+<div class="stats">Toplam: %d film | Izlenen: %d | Kalan: %d | Ort: %.1f</div>
+<div class="filter">
+<a href="/" class="%s">Tumu</a>
+<a href="/?cat=Action" class="%s">Aksiyon</a>
+<a href="/?cat=Drama" class="%s">Drama</a>
+<a href="/?cat=Psychological" class="%s">Psikolojik</a>
+<a href="/?cat=Fantasy" class="%s">Fantastik</a>
+<a href="/?cat=Comedy" class="%s">Komedi</a>
+<a href="/?cat=Sci-Fi" class="%s">BilimKurgu</a>
+<a href="/?cat=Romance" class="%s">Romantik</a>
+</div>
+""" % (stats["total"], stats["watched"], stats["unwatched"], stats["avg_score"],
+       "active" if not cat else "",
+       "active" if cat=="Action" else "",
+       "active" if cat=="Drama" else "",
+       "active" if cat=="Psychological" else "",
+       "active" if cat=="Fantasy" else "",
+       "active" if cat=="Comedy" else "",
+       "active" if cat=="Sci-Fi" else "",
+       "active" if cat=="Romance" else "")
+                
+                for i, (score, row) in enumerate(films, 1):
+                    genres = json.loads(row["genres"]) if row["genres"] else []
+                    badges = "".join('<span class="badge">%s</span>' % g for g in genres[:3])
+                    html += """<div class="film">
+<div class="title"><span class="score">[%.1f]</span> %s</div>
+<div class="meta">%d | %s | %s</div>
+<div>%s</div>
+</div>""" % (score, row["title"], row["year"], row["studio"], row["source"], badges)
+                
+                html += "</body></html>"
+                self.wfile.write(html.encode())
+            
+            elif parsed.path == "/api/recommend":
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                limit = int(params.get("limit", [10])[0])
+                films = recommend(db, limit=limit)
+                result = [{"title": r["title"], "year": r["year"], "score": s, "studio": r["studio"], "source": r["source"], "genres": json.loads(r["gens"]) if r.get("gens") else []} for s, r in films]
+                self.wfile.write(json.dumps(result, ensure_ascii=False).encode())
+            
+            else:
+                self.send_response(404)
+                self.end_headers()
+        
+        def log_message(self, format, *args):
+            pass  # Sessiz
+    
+    server = HTTPServer(("0.0.0.0", port), Handler)
+    print("Web server baslatildi: http://localhost:%d" % port)
+    server.serve_forever()
 
 # === CLI ===
 def interactive(db):
-    print("\n  OWL ANIME & FILM ONERI SISTEMI v2.0\n"+"="*50)
+    print("\n  OWL ANIME & FILM ONERI SISTEMI v3.0")
+    print("  %d film yuklu" % db.execute("SELECT COUNT(*) FROM films").fetchone()[0])
+    print("="*50)
     while True:
-        print("\n[K]Oneri [T]Tur [Y]Yil [P]Puan [W]Izledi [R]Rapor [S]Ara [I]Stats [Q]Cikis")
-        c=input("Secim: ").strip().lower()
-        if c=="q": break
-        elif c=="k":
-            fl=recommend(db,lim=15)
-            for i,f in enumerate(fl,1): print(f"  {i:2d}.[{f[5]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-        elif c=="t":
-            cats=db.execute("SELECT c.name,c.label,COUNT(fc.film_id) FROM cat c JOIN fc ON c.id=fc.cat_id GROUP BY c.name ORDER BY COUNT(fc.film_id) DESC").fetchall()
-            for i,(ck,cl,cnt) in enumerate(cats,1): print(f"  {i:2d}. {cl} ({cnt})")
-            try:
-                ci=int(input("Tur no:"))-1
-                if 0<=ci<len(cats):
-                    fl=recommend(db,category=cats[ci][0],lim=15)
-                    for i,f in enumerate(fl,1): print(f"  {i:2d}.[{f[5]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-            except: pass
-        elif c=="i":
-            total=db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
-            watched=db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
-            avg=db.execute("SELECT AVG(owl_score) FROM films WHERE is_watched=0").fetchone()[0]
-            print(f"  Toplam:{total} Izlenen:{watched} Kalan:{total-watched} Ort OWL:{avg:.1f}")
-        elif c=="w":
-            t=input("Film:").strip()
-            if t: mark_watched(t); print(f"  '{t}' izlendi.")
-        elif c=="r":
-            n=gen_report(db)
-            print(f"  Rapor olusturuldu: {n} film -> {TXT_DIR}/")
-        elif c=="s":
-            q=input("Ara:").strip().lower()
+        print("\n[K]Oneri [T]Tur [Y]Yil [P]Puan [W]Izledi [R]Rapor [S]Ara [I]Stats [U]Web [Q]Cikis")
+        c = input("Secim: ").strip().lower()
+        if c == "q":
+            break
+        elif c == "k":
+            films = recommend(db, limit=15)
+            for i, (s, f) in enumerate(films, 1):
+                print("  %2d.[%.1f] %s (%d) - %s" % (i, s, f["title"], f["year"], f["studio"]))
+        elif c == "t":
+            cats = db.execute("SELECT DISTINCT source FROM films WHERE is_watched=0 LIMIT 20").fetchall()
+            for i, row in enumerate(cats, 1):
+                print("  %2d. %s" % (i, row["source"]))
+        elif c == "i":
+            stats = get_stats(db)
+            print("  Toplam:%d Izlenen:%d Kalan:%d Ort:%.1f" % (stats["total"], stats["watched"], stats["unwatched"], stats["avg_score"]))
+            if stats["taste"]:
+                print("  Zevk profili:", ", ".join("%s:%d" % (g, c) for g, c in stats["taste"].most_common(5)))
+        elif c == "w":
+            t = input("Film adi: ").strip()
+            if t:
+                n = mark_watched(t)
+                print("  '%s' izlendi. Toplam izlenen: %d" % (t, n))
+        elif c == "r":
+            n = gen_report(db)
+            print("  Rapor olusturuldu: %d film -> %s/" % (n, TXT_DIR))
+        elif c == "s":
+            q = input("Ara: ").strip().lower()
             if q:
-                r=db.execute("SELECT title,year,director,owl_score FROM films WHERE title_lower LIKE ? ORDER BY owl_score DESC LIMIT 20",(f"%{q}%",)).fetchall()
-                for f in r: print(f"  [{f[3]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-                if not r: print("  Sonuc yok.")
-        elif c=="y":
+                r = db.execute("SELECT title,year,owl_score FROM films WHERE title_lower LIKE ? ORDER BY owl_score DESC LIMIT 20", ("%"+q+"%",)).fetchall()
+                for f in r:
+                    print("  [%.1f] %s (%d)" % (f["owl_score"], f["title"], f["year"]))
+                if not r:
+                    print("  Sonuc yok.")
+        elif c == "u":
+            port = input("Port (8080): ").strip()
+            start_web_server(int(port) if port else 8080)
+        elif c == "y":
             try:
-                yf=int(input("Baslangic:")); yt=int(input("Bitis:"))
-                fl=recommend(db,yf=yf,yt=yt,lim=15)
-                for i,f in enumerate(fl,1): print(f"  {i:2d}.[{f[5]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-            except: pass
-        elif c=="p":
+                yf = int(input("Baslangic:"))
+                yt = int(input("Bitis:"))
+                films = recommend(db, year_from=yf, year_to=yt, limit=15)
+                for i, (s, f) in enumerate(films, 1):
+                    print("  %2d.[%.1f] %s (%d)" % (i, s, f["title"], f["year"]))
+            except:
+                pass
+        elif c == "p":
             try:
-                ms=float(input("Min OWL:"))
-                fl=recommend(db,mins=ms,lim=15)
-                for i,f in enumerate(fl,1): print(f"  {i:2d}.[{f[5]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-            except: pass
+                ms = float(input("Min OWL:"))
+                films = recommend(db, min_score=ms, limit=15)
+                for i, (s, f) in enumerate(films, 1):
+                    print("  %2d.[%.1f] %s (%d)" % (i, s, f["title"], f["year"]))
+            except:
+                pass
 
 # === ANA ===
 def main():
-    p=argparse.ArgumentParser(description="OWL Anime & Film Oneri v2.0")
-    p.add_argument("--cli",action="store_true"); p.add_argument("--recommend",type=int,default=0)
-    p.add_argument("--category",type=str); p.add_argument("--year-from",type=int,default=0)
-    p.add_argument("--year-to",type=int,default=2030); p.add_argument("--min-score",type=float,default=0)
-    p.add_argument("--report",action="store_true"); p.add_argument("--stats",action="store_true")
-    p.add_argument("--search",type=str); p.add_argument("--watch",type=str); p.add_argument("--init",action="store_true")
-    args=p.parse_args(); load_watched(); db=init_db()
+    p = argparse.ArgumentParser(description="OWL Anime & Film Oneri v3.0")
+    p.add_argument("--cli", action="store_true")
+    p.add_argument("--recommend", type=int, default=0)
+    p.add_argument("--category", type=str)
+    p.add_argument("--year-from", type=int, default=0)
+    p.add_argument("--year-to", type=int, default=2030)
+    p.add_argument("--min-score", type=float, default=0)
+    p.add_argument("--limit", type=int, default=20)
+    p.add_argument("--report", action="store_true")
+    p.add_argument("--stats", action="store_true")
+    p.add_argument("--search", type=str)
+    p.add_argument("--watch", type=str)
+    p.add_argument("--rate", type=float, default=0)
+    p.add_argument("--import-anilist", type=int, default=0, help="AniList'ten sayfa sayisi")
+    p.add_argument("--web", type=int, default=0, help="Web server port")
+    p.add_argument("--init", action="store_true")
+    args = p.parse_args()
+    
     if args.init:
-        db.execute("DELETE FROM films"); db.execute("DELETE FROM fc"); db.commit()
-        n=populate(db); print(f"DB sifirlandi, {n} film eklendi."); return
-    if db.execute("SELECT COUNT(*) FROM films").fetchone()[0]==0:
-        n=populate(db); print(f"DB olusturuldu: {n} film.")
+        db = init_db()
+        print("DB sifirlandi.")
+        return
+    
+    db = init_db()
+    
+    if args.import_anilist > 0:
+        import_anilist(args.import_anilist)
+        return
+    
+    if args.web > 0:
+        start_web_server(args.web)
+        return
+    
     if args.stats:
-        t=db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
-        w=db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
-        a=db.execute("SELECT AVG(owl_score) FROM films WHERE is_watched=0").fetchone()[0]
-        print(f"Toplam:{t} Izlen:{w} Kalan:{t-w} Ort:{a:.1f}")
-        for d,c in db.execute("SELECT (year/10)*10,COUNT(*) FROM films WHERE is_watched=0 GROUP BY 1 ORDER BY 1").fetchall():
-            print(f"  {d}s: {'█'*min(c,40)} ({c})")
-    elif args.search:
-        for f in db.execute("SELECT title,year,owl_score FROM films WHERE title_lower LIKE ? ORDER BY owl_score DESC LIMIT 20",(f"%{args.search.lower()}%",)): print(f"[{f[2]:.1f}] {f[0]} ({f[1]})")
-    elif args.watch: mark_watched(args.watch); print(f"'{args.watch}' izlendi.")
-    elif args.report:
-        n=gen_report(db); print(f"TXT rapor: {n} film -> {TXT_DIR}/")
-    elif args.recommend>0:
-        for i,f in enumerate(recommend(db,cat=args.category,mins=args.min_score,yf=args.year_from,yt=args.year_to,lim=args.recommend),1):
-            print(f"{i:3d}.[{f[5]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-    elif args.cli: interactive(db)
-    else:
-        print("\nOWL 10 Film Oneriyor:\n")
-        for i,f in enumerate(recommend(db,lim=10),1): print(f"  {i:2d}.[{f[5]:.1f}] {f[0]} ({f[1]}) - {f[2]}")
-        print("\n--cli ile etkilesimli mod, --detay yardim icin")
+        stats = get_stats(db)
+        print("Toplam: %d" % stats["total"])
+        print("Izlenen: %d" % stats["watched"])
+        print("Kalan: %d" % stats["unwatched"])
+        print("Ort OWL: %.1f" % stats["avg_score"])
+        print("\nYil dagilimi:")
+        for d, c in stats["decades"]:
+            print("  %ds: %s (%d)" % (d, "█"*min(c,40), c))
+        print("\nKaynaklar:")
+        for s, c in stats["sources"][:5]:
+            print("  %s: %d" % (s, c))
+        if stats["taste"]:
+            print("\nZevk profili:")
+            for g, c in stats["taste"].most_common(8):
+                print("  %s: %d" % (g, c))
+        return
+    
+    if args.search:
+        r = db.execute("SELECT title,year,owl_score,studio FROM films WHERE title_lower LIKE ? ORDER BY owl_score DESC LIMIT 20", ("%"+args.search.lower()+"%",)).fetchall()
+        for f in r:
+            print("[%.1f] %s (%d) - %s" % (f["owl_score"], f["title"], f["year"], f["studio"]))
+        return
+    
+    if args.watch:
+        n = mark_watched(args.watch, args.rate)
+        print("'%s' izlendi. Toplam: %d" % (args.watch, n))
+        return
+    
+    if args.report:
+        n = gen_report(db)
+        print("Rapor: %d film -> %s/" % (n, TXT_DIR))
+        return
+    
+    if args.recommend > 0:
+        films = recommend(db, args.category, min_score=args.min_score, year_from=args.year_from, year_to=args.year_to, limit=args.recommend)
+        for i, (s, f) in enumerate(films, 1):
+            genres = json.loads(f["genres"]) if f["genres"] else []
+            print("%3d.[%.1f] %s (%d) - %s | %s" % (i, s, f["title"], f["year"], f["studio"], ", ".join(genres[:3])))
+        return
+    
+    if args.cli:
+        interactive(db)
+        return
+    
+    # Varsayilan: 10 oneri
+    films = recommend(db, limit=10)
+    print("\nOWL Size %d Film Oneriyor:\n" % len(films))
+    for i, (s, f) in enumerate(films, 1):
+        print("  %2d.[%.1f] %s (%d) - %s" % (i, s, f["title"], f["year"], f["studio"]))
 
-if __name__=="__main__": main()
+if __name__ == "__main__":
+    main()
