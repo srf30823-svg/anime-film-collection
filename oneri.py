@@ -5,7 +5,7 @@ OWL Anime & Film Oneri Sistemi v5.0
 - Content-based collaborative filtering
 - Tur/yil/kaynak/format/puan filtresi
 - Kullanici puani ve not sistemi
-- Modern web arayuzu (responsive, arama, detay sayfasi, watchlist, profil, karsilastirma)
+- Modern web arayuzu (responsive, arama, detay sayfasi, watchlist, profil)
 - JSON API (REST-like) + watchlist API + profil API + export API
 - CLI arayuz
 - OMDb API ile IMDB skoru cekme
@@ -552,61 +552,7 @@ def export_watchlist_csv(output_path=None):
     return output_path
 
 # === FILM KARSILASTIRMA ===
-def compare_films(film_ids):
-    """Birden fazla filmi yan yana karsilastirir."""
-    db = get_db()
-    films = []
-    for fid in film_ids:
-        row = db.execute("SELECT * FROM films WHERE id=?", (fid,)).fetchone()
-        if row:
-            films.append(dict(row))
-    db.close()
-    if not films:
-        return None
-    return films
-
-def format_comparison(films):
-    """Karsilastirma sonucunu CLI formatinda string olarak doner."""
-    if not films:
-        return "Film bulunamadi."
-    lines = ["\n" + "="*80]
-    lines.append("  FILM KARSILASTIRMA")
-    lines.append("="*80)
-    # Basliklar
-    names = [f["title"][:25] for f in films]
-    lines.append(f"  {'Kriter':<20}" + "".join(f"{n:>28}" for n in names))
-    lines.append("-" * (20 + 28 * len(films)))
-    # Satirlar
-    for label, key, fmt in [
-        ("Yil", "year", "{}"),
-        ("Studio", "studio", "{}"),
-        ("Kaynak", "source", "{}"),
-        ("Format", "format", "{}"),
-        ("OWL Skoru", "owl_score", "{:.1f}"),
-        ("MAL Skoru", "mal_score", "{:.1f}"),
-        ("IMDB Skoru", "imdb_score", "{:.1f}"),
-        ("Populerite", "popularity", "{}"),
-        ("Sure (dk)", "duration", "{}"),
-        ("Kullanici", "user_rating", "{:.1f}"),
-    ]:
-        vals = []
-        for f in films:
-            v = f.get(key, 0) or 0
-            try:
-                vals.append(fmt.format(v))
-            except:
-                vals.append(str(v))
-        lines.append(f"  {label:<20}" + "".join(f"{v:>28}" for v in vals))
-    # Turler
-    lines.append("-" * (20 + 28 * len(films)))
-    lines.append("  Turler:")
-    for f in films:
-        genres = json.loads(f["genres"]) if f.get("genres") and f["genres"] != "[]" else []
-        lines.append(f"    {f['title'][:30]}: {', '.join(genres)}")
-    lines.append("="*80)
-    return "\n".join(lines)
-
-# === PROFIL ===
+# === EXPORT ===
 def get_profile(db=None):
     """Kullanici profil verisini doner."""
     close_db = False
@@ -1035,9 +981,6 @@ def start_web_server(port=8080):
                 self._serve_watchlist(params)
             elif path == "/profile":
                 self._serve_profile()
-            elif path == "/compare":
-                ids = params.get("ids", [""])[0]
-                self._serve_compare(ids)
             elif path == "/api/recommend":
                 self._api_recommend(params)
             elif path == "/api/search":
@@ -1050,8 +993,6 @@ def start_web_server(port=8080):
                 self._api_watchlist(params)
             elif path == "/api/profile":
                 self._api_profile()
-            elif path == "/api/compare":
-                self._api_compare(params)
             elif path == "/api/export/csv":
                 self._api_export_csv()
             elif path == "/api/export/watchlist":
@@ -1341,38 +1282,6 @@ def start_web_server(port=8080):
             db.close()
             self._send_json(profile)
 
-        # === YENI API: KARSILASTIRMA ===
-        def _api_compare(self, params):
-            ids_str = params.get("ids", [""])[0]
-            try:
-                ids = [int(x.strip()) for x in ids_str.split(",") if x.strip()]
-            except ValueError:
-                self._send_json({"error": "Gecersiz ID formati. Ornek: ?ids=1,2,3"})
-                return
-            if len(ids) < 2:
-                self._send_json({"error": "En az 2 film ID gerekli."})
-                return
-            if len(ids) > 5:
-                self._send_json({"error": "Maksimum 5 film karsilastirilabilir."})
-                return
-            films = compare_films(ids)
-            if not films:
-                self._send_json({"error": "Film bulunamadi."})
-                return
-            result = []
-            for f in films:
-                result.append({
-                    "id": f["id"], "title": f["title"], "year": f["year"],
-                    "studio": f["studio"], "source": f["source"], "format": f["format"],
-                    "owl_score": f["owl_score"], "mal_score": f["mal_score"],
-                    "imdb_score": f["imdb_score"], "popularity": f["popularity"],
-                    "duration": f["duration"], "user_rating": f["user_rating"],
-                    "genres": json.loads(f["genres"]) if f.get("genres") and f["genres"] != "[]" else [],
-                    "cover_url": f.get("cover_url", ""), "synopsis": f.get("synopsis", ""),
-                })
-            self._send_json(result)
-
-        # === YENI API: EXPORT ===
         def _api_export_csv(self):
             path = export_csv()
             self.send_response(200)
@@ -1535,85 +1444,9 @@ def start_web_server(port=8080):
             self._send_html("Profil", content, "profile")
 
         # === YENI SAYFA: KARSILASTIRMA ===
-        def _serve_compare(self, ids_str):
-            try:
-                ids = [int(x.strip()) for x in ids_str.split(",") if x.strip()]
-            except ValueError:
-                ids = []
-            films = compare_films(ids) if ids else []
-            if not films:
-                content = """
-                <a href="/" class="back-link">← Ana Sayfa</a>
-                <h2>⚖️ Film Karşılaştırma</h2>
-                <div class="compare-form">
-                    <p class="muted">Film ID'lerini virgülle ayırarak girin (örnek: 1,2,3)</p>
-                    <form method="GET" action="/compare">
-                        <input type="text" name="ids" placeholder="ID1,ID2,ID3" class="search-input">
-                        <button type="submit" class="btn">Karşılaştır</button>
-                    </form>
-                </div>"""
-                self._send_html("Karşılaştırma", content, "compare")
-                return
-
-            # Karşılaştırma tablosu
-            names = "".join(f'<th>{htmlmod.escape(f["title"][:25])}</th>' for f in films)
-            rows_html = ""
-            for label, key, fmt in [
-                ("Yıl", "year", "{}"), ("Stüdyo", "studio", "{}"),
-                ("Kaynak", "source", "{}"), ("Format", "format", "{}"),
-                ("OWL", "owl_score", "{:.1f}"), ("MAL", "mal_score", "{:.1f}"),
-                ("IMDB", "imdb_score", "{:.1f}"), ("Popülerite", "popularity", "{}"),
-                ("Süre (dk)", "duration", "{}"), ("Kullanıcı", "user_rating", "{:.1f}"),
-            ]:
-                cells = ""
-                for f in films:
-                    v = f.get(key, 0) or 0
-                    try:
-                        val = fmt.format(v)
-                    except:
-                        val = str(v)
-                    cells += f"<td>{val}</td>"
-                rows_html += f"<tr><td class='row-label'>{label}</td>{cells}</tr>"
-
-            genre_rows = ""
-            max_genres = max(len(json.loads(f["genres"])) if f.get("genres") and f["genres"] != "[]" else 0 for f in films)
-            for i in range(max_genres):
-                cells = ""
-                for f in films:
-                    genres = json.loads(f["genres"]) if f.get("genres") and f["genres"] != "[]" else []
-                    g = f'<span class="badge">{genres[i]}</span>' if i < len(genres) else ""
-                    cells += f"<td>{g}</td>"
-                genre_rows += f"<tr>{cells}</tr>"
-
-            covers = "".join(
-                f'<td><img src="{f["cover_url"]}" class="compare-cover" onerror="this.parentElement.innerHTML=\'<div class=compare-cover-place>🎬</div>\'"></td>'
-                if f.get("cover_url") else '<td><div class="compare-cover-place">🎬</div></td>'
-                for f in films
-            )
-
-            content = f"""
-            <a href="/" class="back-link">← Ana Sayfa</a>
-            <h2>⚖️ Film Karşılaştırma</h2>
-            <div class="compare-form" style="margin-bottom:16px">
-                <form method="GET" action="/compare">
-                    <input type="text" name="ids" value="{ids_str}" placeholder="ID1,ID2,ID3" class="search-input">
-                    <button type="submit" class="btn">Karşılaştır</button>
-                </form>
-            </div>
-            <div class="compare-table-wrap">
-            <table class="compare-table">
-                <tr><th></th>{covers}</tr>
-                <tr><th>Film</th>{names}</tr>
-                {rows_html}
-                <tr class="genre-row"><th>Türler</th></tr>
-                {genre_rows}
-            </table>
-            </div>"""
-            self._send_html("Karşılaştırma", content, "compare")
-
         def _send_html(self, title, content, page="index"):
             nav_html = ""
-            for p, icon, label in [("index","🏠","Ana Sayfa"),("watchlist","📋","Watchlist"),("profile","👤","Profil"),("compare","⚖️","Karşılaştır")]:
+            for p, icon, label in [("index","🏠","Ana Sayfa"),("watchlist","📋","Watchlist"),("profile","👤","Profil")]:
                 cls = " active" if page == p else ""
                 nav_html += f'<a href="/{p}" class="bn-item{cls}"><span class="bn-icon">{icon}</span><span>{label}</span></a>'
             full = f"""<!DOCTYPE html>
@@ -1624,95 +1457,101 @@ def start_web_server(port=8080):
 <meta name="theme-color" content="#0a0a0f">
 <title>{htmlmod.escape(title)}</title>
 <style>
+/* === ECHO THEME v5.2 === */
 :root{{
-  --bg:#0a0a0f;--bg2:#111118;--surface:#16161f;--border:#1e1e2e;--border2:#2a2a3e;
-  --text:#e2e8f0;--muted:#64748b;--cyan:#06b6d4;--cyan-dim:#0e7490;
-  --purple:#a855f7;--pink:#ec4899;--green:#22c55e;--yellow:#eab308;--red:#ef4444;
-  --radius:12px;--gap:12px;
+  --bg:#121212;--bg2:#1a1a1a;--surface:#1e1e1e;--border:#2a2a2a;--border2:#333333;
+  --text:#e0e0e0;--muted:#888888;
+  --ice:#7FD8D8;--neon:#4DEEEA;--purple:#A78BFA;--phosphor:#33FF33;
+  --red:#ef4444;--yellow:#eab308;--green:#22c55e;
+  --radius:8px;--gap:12px;
 }}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap');
 *{{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}}
 html,body{{height:100%}}
 body{{
-  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
-  background:var(--bg);color:var(--text);
-  line-height:1.5;overflow-x:hidden;
+  font-family:'Space Grotesk',system-ui,-apple-system,sans-serif;
+  background:var(--bg);color:var(--ice);
+  line-height:1.6;overflow-x:hidden;
+  letter-spacing:0.02em;
 }}
-/* === ANIME/LANE GLITCH KEYFRAMES === */
-@keyframes glitch{{
-  0%,100%{{transform:translate(0)}}
-  20%{{transform:translate(-1px,1px)}}
-  40%{{transform:translate(1px,-1px)}}
-  60%{{transform:translate(-1px,-1px)}}
-  80%{{transform:translate(1px,1px)}}
-}}
-@keyframes fadeInUp{{
-  from{{opacity:0;transform:translateY(12px)}}
-  to{{opacity:1;transform:translateY(0)}}
-}}
-@keyframes pulse{{
-  0%,100%{{box-shadow:0 0 0 0 rgba(6,182,212,0.3)}}
-  50%{{box-shadow:0 0 0 8px rgba(6,182,212,0)}}
-}}
-@keyframes shimmer{{
-  0%{{background-position:-200% 0}}
-  100%{{background-position:200% 0}}
-}}
-@keyframes scanline{{
-  0%{{transform:translateY(-100%)}}
-  100%{{transform:translateY(100vh)}}
-}}
-/* === CRT OVERLAY === */
+/* CRT scanline overlay */
 body::before{{
   content:'';position:fixed;top:0;left:0;right:0;bottom:0;
   background:repeating-linear-gradient(0deg,rgba(0,0,0,0.03) 0px,rgba(0,0,0,0.03) 1px,transparent 1px,transparent 2px);
-  pointer-events:none;z-index:9999;opacity:0.5;
+  pointer-events:none;z-index:9999;opacity:0.4;
 }}
-/* === TOP BAR === */
+/* Noise texture on bg */
+body::after{{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:9998;opacity:0.5;
+}}
+/* === KEYFRAMES === */
+@keyframes glitch{{0%,100%{{transform:translate(0)}}20%{{transform:translate(-2px,1px)}}40%{{transform:translate(2px,-1px)}}60%{{transform:translate(-1px,-2px)}}80%{{transform:translate(1px,2px)}}}}
+@keyframes fadeInUp{{from{{opacity:0;transform:translateY(16px)}}to{{opacity:1;transform:translateY(0)}}}}
+@keyframes pulseGlow{{0%,100%{{box-shadow:0 0 4px 0 rgba(77,238,234,0.3)}}50%{{box-shadow:0 0 12px 4px rgba(77,238,234,0.5)}}}}
+@keyframes echoRipple{{0%{{transform:scale(1);opacity:0.6}}100%{{transform:scale(2.5);opacity:0}}}}
+@keyframes flicker{{0%,100%{{opacity:1}}50%{{opacity:0.8}}52%{{opacity:1}}54%{{opacity:0.6}}56%{{opacity:1}}}}
+@keyframes cursorBlink{{0%,100%{{opacity:1}}50%{{opacity:0}}}}
+/* === TOP BAR / LOGO === */
 .topbar{{
   position:sticky;top:0;z-index:100;
-  background:linear-gradient(180deg,rgba(10,10,15,0.98),rgba(10,10,15,0.9));
-  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  background:rgba(18,18,18,0.95);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--border);
   padding:12px 16px;display:flex;align-items:center;gap:10px;
 }}
 .topbar .logo{{
-  font-size:1.15em;font-weight:800;letter-spacing:2px;
-  background:linear-gradient(135deg,var(--cyan),var(--purple));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  text-decoration:none;
+  font-size:1.1em;font-weight:700;letter-spacing:0.15em;
+  color:var(--ice);text-decoration:none;
+  display:flex;align-items:center;gap:8px;
 }}
 .topbar .logo:hover{{animation:glitch 0.3s}}
+.topbar .logo-symbol{{
+  width:24px;height:24px;position:relative;
+  display:inline-block;
+}}
+.topbar .logo-symbol svg{{
+  width:100%;height:100%;
+}}
+.topbar .logo-dot{{
+  width:4px;height:4px;background:var(--neon);border-radius:50%;
+  position:absolute;top:2px;right:2px;
+  animation:pulseGlow 2s ease-in-out infinite;
+}}
 .topbar .badge{{
-  background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
-  color:#fff;font-size:0.6em;padding:2px 8px;border-radius:20px;
-  font-weight:600;letter-spacing:1px;
+  background:var(--ice);color:var(--bg);font-size:0.55em;
+  padding:2px 8px;border-radius:4px;font-weight:700;letter-spacing:0.1em;
 }}
 /* === BOTTOM NAV === */
 .bottom-nav{{
   position:fixed;bottom:0;left:0;right:0;z-index:100;
-  background:rgba(10,10,15,0.95);backdrop-filter:blur(12px);
+  background:rgba(18,18,18,0.95);backdrop-filter:blur(8px);
   border-top:1px solid var(--border);
   display:flex;justify-content:space-around;padding:8px 0;
   padding-bottom:max(8px,env(safe-area-inset-bottom));
 }}
 .bn-item{{
   display:flex;flex-direction:column;align-items:center;gap:2px;
-  text-decoration:none;color:var(--muted);font-size:0.65em;
-  padding:4px 12px;border-radius:8px;transition:all 0.2s;
+  text-decoration:none;color:var(--muted);font-size:0.6em;
+  padding:4px 12px;border-radius:6px;transition:all 0.2s;
+  letter-spacing:0.05em;
 }}
-.bn-item:hover,.bn-item.active{{color:var(--cyan)}}
-.bn-item .bn-icon{{font-size:1.4em}}
-.bn-item.active .bn-icon{{filter:drop-shadow(0 0 6px var(--cyan))}}
-/* === MAIN CONTENT === */
+.bn-item:hover,.bn-item.active{{color:var(--neon)}}
+.bn-item .bn-icon{{font-size:1.3em}}
+.bn-item.active .bn-icon{{filter:drop-shadow(0 0 4px var(--neon))}}
+/* === MAIN === */
 .main{{padding:16px;padding-bottom:80px;animation:fadeInUp 0.3s ease}}
 /* === STATS BAR === */
 .stats-bar{{
   display:flex;flex-wrap:wrap;gap:8px;
   background:var(--surface);border:1px solid var(--border);
   border-radius:var(--radius);padding:10px 14px;margin-bottom:var(--gap);
-  font-size:0.8em;color:var(--muted);
+  font-size:0.75em;color:var(--muted);
 }}
 .stats-bar span{{display:flex;align-items:center;gap:4px}}
+/* === TYPE TOGGLE === */
+.type-toggle{{display:flex;gap:6px;margin-bottom:var(--gap);flex-wrap:wrap}}
+.type-toggle .btn{{flex:1;text-align:center;min-width:65px;font-size:0.75em;padding:6px 10px}}
 /* === FILTERS === */
 .filters{{
   background:var(--surface);border:1px solid var(--border);
@@ -1720,30 +1559,29 @@ body::before{{
 }}
 .filter-row{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
 .filter-row input,.filter-row select{{
-  background:var(--bg);border:1px solid var(--border);color:var(--text);
-  border-radius:8px;padding:8px 12px;font-size:0.85em;
+  background:var(--bg);border:1px solid var(--border);color:var(--ice);
+  border-radius:6px;padding:8px 12px;font-size:0.85em;
+  font-family:'Space Grotesk',system-ui,sans-serif;
 }}
 .search-input{{flex:1;min-width:140px}}
 .year-input{{width:80px}}
 .score-input{{width:65px}}
 select{{min-width:100px}}
 .btn{{
-  background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
-  color:#fff;border:none;border-radius:8px;padding:8px 16px;
-  font-size:0.85em;cursor:pointer;text-decoration:none;display:inline-block;
-  font-weight:600;transition:all 0.2s;
+  background:var(--ice);color:var(--bg);border:none;border-radius:6px;
+  padding:8px 14px;font-size:0.8em;cursor:pointer;text-decoration:none;
+  display:inline-block;font-weight:600;transition:all 0.2s;
+  font-family:'Space Grotesk',system-ui,sans-serif;letter-spacing:0.03em;
 }}
-.btn:hover{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(168,85,247,0.3)}}
+.btn:hover{{background:var(--neon);transform:translateY(-1px)}}
 .btn:active{{transform:translateY(0)}}
 .btn-clear{{background:transparent;border:1px solid var(--border);color:var(--muted)}}
-.btn-sm{{padding:6px 12px;font-size:0.75em}}
-.btn-wl{{background:linear-gradient(135deg,var(--pink),var(--purple))}}
-.btn-watched{{background:linear-gradient(135deg,var(--green),#16a34a)}}
+.btn-sm{{padding:5px 10px;font-size:0.7em}}
+.btn-wl{{background:var(--purple);color:#fff}}
+.btn-watched{{background:var(--phosphor);color:var(--bg)}}
 /* === FILM GRID === */
 .film-grid{{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
-  gap:var(--gap);
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:var(--gap);
 }}
 .film-card{{
   display:flex;gap:12px;
@@ -1753,177 +1591,121 @@ select{{min-width:100px}}
   transition:all 0.2s;position:relative;overflow:hidden;
 }}
 .film-card::before{{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
-  opacity:0;transition:opacity 0.2s;
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--ice),transparent);
+  opacity:0;transition:opacity 0.3s;
 }}
-.film-card:hover{{border-color:var(--cyan);transform:translateY(-2px)}}
-.film-card:hover::before{{opacity:1}}
-.film-card.watched{{opacity:0.55}}
-.cover{{
-  width:75px;height:105px;object-fit:cover;
-  border-radius:8px;flex-shrink:0;
-}}
+.film-card:hover{{border-color:var(--neon)}}
+.film-card:hover::before{{opacity:0.5}}
+.film-card.watched{{opacity:0.45}}
+.cover{{width:70px;height:100px;object-fit:cover;border-radius:6px;flex-shrink:0}}
 .cover.placeholder{{
-  width:75px;height:105px;background:linear-gradient(135deg,var(--border),var(--border2));
-  border-radius:8px;display:flex;align-items:center;justify-content:center;
-  font-size:1.6em;flex-shrink:0;
+  width:70px;height:100px;background:var(--bg2);
+  border-radius:6px;display:flex;align-items:center;justify-content:center;
+  font-size:1.4em;flex-shrink:0;border:1px dashed var(--border);
 }}
 .film-info{{flex:1;min-width:0}}
-.film-title{{font-weight:600;font-size:0.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
-.film-meta{{color:var(--muted);font-size:0.72em;margin-top:3px}}
+.film-title{{font-weight:600;font-size:0.88em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ice)}}
+.film-meta{{color:var(--muted);font-size:0.68em;margin-top:3px;letter-spacing:0.03em}}
 .film-score{{
-  display:inline-block;background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
-  color:#fff;font-weight:700;font-size:0.8em;
-  padding:2px 8px;border-radius:4px;margin-top:4px;
+  display:inline-block;background:var(--ice);color:var(--bg);
+  font-weight:700;font-size:0.75em;padding:2px 8px;border-radius:4px;margin-top:4px;
 }}
 .film-badges{{margin-top:4px}}
 .badge{{
-  display:inline-block;background:rgba(6,182,212,0.1);
-  color:var(--cyan);padding:1px 6px;border-radius:4px;
-  font-size:0.65em;margin:2px 2px 0 0;border:1px solid rgba(6,182,212,0.15);
+  display:inline-block;background:rgba(127,216,216,0.08);
+  color:var(--ice);padding:1px 6px;border-radius:4px;
+  font-size:0.6em;margin:2px 2px 0 0;border:1px solid rgba(127,216,216,0.12);
+  letter-spacing:0.05em;
 }}
+.badge.mt{{background:rgba(167,139,250,0.1);color:var(--purple);border-color:rgba(167,139,250,0.15)}}
+/* === PROGRESS === */
+.progress-bar{{height:3px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}}
+.progress-fill{{height:100%;background:var(--neon);border-radius:2px;transition:width 0.3s}}
+.progress-text{{font-size:0.6em;color:var(--muted);margin-top:2px;display:block}}
 /* === FILM DETAIL === */
 .detail{{max-width:800px;margin:0 auto}}
-.back-link{{
-  display:inline-block;color:var(--muted);text-decoration:none;
-  font-size:0.8em;margin-bottom:12px;
-}}
-.back-link:hover{{color:var(--cyan)}}
-.detail-header{{
-  display:flex;gap:16px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);
-}}
-.detail-cover{{
-  width:150px;height:210px;object-fit:cover;
-  border-radius:10px;flex-shrink:0;
-}}
-.detail-cover-placeholder{{
-  width:150px;height:210px;background:linear-gradient(135deg,var(--border),var(--border2));
-  border-radius:10px;display:flex;align-items:center;justify-content:center;
-  font-size:2.5em;flex-shrink:0;
-}}
-.detail-info h2{{font-size:1.15em;margin-bottom:4px}}
-.detail-meta{{color:var(--muted);font-size:0.8em;margin:6px 0}}
-.detail-meta span{{margin-right:8px}}
+.back-link{{display:inline-block;color:var(--muted);text-decoration:none;font-size:0.78em;margin-bottom:12px;letter-spacing:0.05em}}
+.back-link:hover{{color:var(--neon)}}
+.detail-header{{display:flex;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);}}
+.detail-cover{{width:140px;height:200px;object-fit:cover;border-radius:8px;flex-shrink:0}}
+.detail-cover-placeholder{{width:140px;height:200px;background:var(--bg2);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:2em;flex-shrink:0;border:1px dashed var(--border);}}
+.detail-info h2{{font-size:1.1em;margin-bottom:4px;color:var(--ice);letter-spacing:0.05em}}
+.detail-meta{{color:var(--muted);font-size:0.75em;margin:6px 0;letter-spacing:0.03em}}
 .detail-scores{{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}}
-.score-box{{padding:4px 10px;border-radius:6px;font-size:0.8em;font-weight:600}}
-.score-box.owl{{background:linear-gradient(135deg,var(--cyan-dim),var(--purple));color:#fff}}
-.score-box.mal{{background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.2)}}
-.score-box.imdb{{background:rgba(234,179,8,0.12);color:var(--yellow);border:1px solid rgba(234,179,8,0.2)}}
-.score-box.user{{background:rgba(236,72,153,0.12);color:var(--pink);border:1px solid rgba(236,72,153,0.2)}}
+.score-box{{padding:4px 10px;border-radius:4px;font-size:0.75em;font-weight:600;letter-spacing:0.03em}}
+.score-box.owl{{background:var(--ice);color:var(--bg)}}
+.score-box.mal{{background:rgba(51,255,51,0.1);color:var(--phosphor);border:1px solid rgba(51,255,51,0.15)}}
+.score-box.imdb{{background:rgba(234,179,8,0.1);color:var(--yellow);border:1px solid rgba(234,179,8,0.15)}}
+.score-box.user{{background:rgba(167,139,250,0.1);color:var(--purple);border:1px solid rgba(167,139,250,0.15)}}
 .detail-badges{{margin:8px 0}}
-.detail-status{{color:var(--muted);font-size:0.8em;margin-top:6px}}
 .detail-actions{{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}}
-.detail-synopsis{{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);
-}}
-.detail-synopsis h3{{font-size:0.85em;color:var(--muted);margin-bottom:8px}}
-.detail-synopsis p{{color:var(--muted);line-height:1.7;font-size:0.88em}}
-.note{{
-  background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.15);
-  border-radius:var(--radius);padding:12px;margin-top:10px;
-  color:var(--text);font-size:0.85em;
-}}
+.detail-synopsis{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);}}
+.detail-synopsis h3{{font-size:0.8em;color:var(--muted);margin-bottom:8px;letter-spacing:0.08em;text-transform:uppercase}}
+.detail-synopsis p{{color:var(--muted);line-height:1.7;font-size:0.85em}}
+.note{{background:rgba(167,139,250,0.06);border:1px solid rgba(167,139,250,0.12);border-radius:var(--radius);padding:12px;margin-top:10px;color:var(--text);font-size:0.82em;}}
 /* === WATCHLIST === */
-.wl-grid{{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap);
-}}
-.wl-card{{
-  display:flex;align-items:flex-start;gap:10px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:12px;position:relative;
-}}
+.wl-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap);}}
+.wl-card{{display:flex;align-items:flex-start;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px;position:relative;}}
 .wl-main{{display:flex;gap:10px;flex:1;text-decoration:none;color:inherit}}
 .wl-info{{flex:1;min-width:0}}
-.wl-title{{font-weight:600;font-size:0.9em}}
-.wl-meta{{color:var(--muted);font-size:0.72em;margin-top:2px}}
+.wl-title{{font-weight:600;font-size:0.88em;color:var(--ice)}}
+.wl-meta{{color:var(--muted);font-size:0.68em;margin-top:2px}}
 .wl-badges{{margin-top:4px}}
-.wl-priority{{font-size:0.7em;margin-top:4px;color:var(--yellow)}}
-.wl-note{{font-size:0.75em;color:var(--muted);margin-top:4px;font-style:italic}}
-.wl-remove{{
-  color:var(--muted);text-decoration:none;font-size:1em;
-  padding:4px 8px;border-radius:4px;
-}}
-.wl-remove:hover{{color:var(--red);background:rgba(239,68,68,0.1)}}
+.wl-priority{{font-size:0.65em;margin-top:4px;color:var(--yellow)}}
+.wl-note{{font-size:0.7em;color:var(--muted);margin-top:4px;font-style:italic}}
+.wl-remove{{color:var(--muted);text-decoration:none;font-size:0.9em;padding:4px 8px;border-radius:4px;}}
+.wl-remove:hover{{color:var(--red);background:rgba(239,68,68,0.08)}}
 /* === PROFIL === */
-.profile-stats{{
-  display:flex;flex-wrap:wrap;gap:8px;
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:14px;margin-bottom:var(--gap);
-}}
-.profile-stat{{
-  display:flex;flex-direction:column;align-items:center;min-width:60px;
-}}
-.ps-num{{font-size:1.2em;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
-.ps-lbl{{font-size:0.6em;color:var(--muted);margin-top:2px}}
-.profile-sections{{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-  gap:var(--gap);margin-bottom:var(--gap);
-}}
-.prof-section{{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:14px;
-}}
-.prof-section h3{{font-size:0.85em;margin-bottom:8px;color:var(--text)}}
+.profile-stats{{display:flex;flex-wrap:wrap;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap);}}
+.profile-stat{{display:flex;flex-direction:column;align-items:center;min-width:55px;}}
+.ps-num{{font-size:1.1em;font-weight:700;color:var(--ice)}}
+.ps-lbl{{font-size:0.55em;color:var(--muted);margin-top:2px;letter-spacing:0.05em}}
+.profile-sections{{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--gap);margin-bottom:var(--gap);}}
+.prof-section{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;}}
+.prof-section h3{{font-size:0.8em;margin-bottom:8px;color:var(--ice);letter-spacing:0.06em;text-transform:uppercase}}
 .prof-list{{list-style:none;padding:0}}
-.prof-list li{{display:flex;justify-content:space-between;padding:4px 0;font-size:0.8em;border-bottom:1px solid var(--border)}}
+.prof-list li{{display:flex;justify-content:space-between;padding:4px 0;font-size:0.75em;border-bottom:1px solid var(--border)}}
 .prof-list li span{{color:var(--muted)}}
 .bar-chart{{display:flex;flex-direction:column;gap:6px}}
 .bar-row{{display:flex;align-items:center;gap:8px}}
-.bar-label{{width:90px;font-size:0.7em;color:var(--muted);text-align:right;flex-shrink:0}}
-.bar-track{{flex:1;height:12px;background:var(--border);border-radius:4px;overflow:hidden}}
-.bar-fill{{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:4px;transition:width 0.5s ease}}
-.bar-val{{width:20px;font-size:0.7em;color:var(--muted);text-align:right}}
-.history-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}}
-.history-card{{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;text-decoration:none;color:inherit}}
-.history-card:hover{{border-color:var(--cyan)}}
-.cover-sm{{width:36px;height:50px;object-fit:cover;border-radius:4px;flex-shrink:0}}
-.cover-sm.placeholder{{width:36px;height:50px;background:var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.9em;flex-shrink:0}}
-.history-title{{font-size:0.75em;font-weight:600}}
-.history-meta{{font-size:0.65em;color:var(--muted)}}
-.history-date{{font-size:0.6em;color:var(--muted);margin-top:2px}}
-/* === KARSILASTIRMA === */
-.compare-form{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap)}}
-.compare-form form{{display:flex;gap:8px}}
-.compare-form .search-input{{flex:1}}
-.compare-table-wrap{{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}}
-.compare-table{{width:100%;border-collapse:collapse;background:var(--surface)}}
-.compare-table th,.compare-table td{{padding:8px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:0.8em}}
-.compare-table th{{background:var(--bg);color:var(--muted);font-weight:600}}
-.compare-table td:first-child,.compare-table th:first-child{{text-align:left;position:sticky;left:0;background:var(--surface)}}
-.compare-cover{{width:70px;height:95px;object-fit:cover;border-radius:6px}}
-.compare-cover-place{{width:70px;height:95px;background:var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5em;margin:0 auto}}
-.genre-row th{{background:var(--bg)}}
-.empty-state{{text-align:center;padding:40px;color:var(--muted);font-size:0.85em}}
+.bar-label{{width:85px;font-size:0.65em;color:var(--muted);text-align:right;flex-shrink:0}}
+.bar-track{{flex:1;height:10px;background:var(--border);border-radius:3px;overflow:hidden}}
+.bar-fill{{height:100%;background:var(--ice);border-radius:3px;transition:width 0.5s ease}}
+.bar-val{{width:18px;font-size:0.65em;color:var(--muted);text-align:right}}
+.history-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}}
+.history-card{{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:8px;text-decoration:none;color:inherit}}
+.history-card:hover{{border-color:var(--neon)}}
+.cover-sm{{width:32px;height:45px;object-fit:cover;border-radius:3px;flex-shrink:0}}
+.cover-sm.placeholder{{width:32px;height:45px;background:var(--bg2);border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:0.8em;flex-shrink:0;border:1px dashed var(--border);}}
+.history-title{{font-size:0.7em;font-weight:600;color:var(--ice)}}
+.history-meta{{font-size:0.6em;color:var(--muted)}}
+.history-date{{font-size:0.55em;color:var(--muted);margin-top:2px}}
+/* === MISC === */
+.empty-state{{text-align:center;padding:40px;color:var(--muted);font-size:0.82em}}
 .muted{{color:var(--muted)}}
-/* === TYPE TOGGLE === */
-.type-toggle{{display:flex;gap:8px;margin-bottom:var(--gap);flex-wrap:wrap}}
-.type-toggle .btn{{flex:1;text-align:center;min-width:70px}}
-/* === PROGRESS === */
-.progress-bar{{height:4px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}}
-.progress-fill{{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:2px;transition:width 0.3s}}
-.progress-text{{font-size:0.65em;color:var(--muted);margin-top:2px;display:block}}
-h2{{font-size:1.2em;margin-bottom:8px}}
-h3{{font-size:0.85em;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}}
+.loading{{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  height:60vh;gap:16px;
+}}
+.loading-text{{color:var(--ice);font-size:0.9em;letter-spacing:0.1em;animation:flicker 3s infinite}}
+h2{{font-size:1.1em;margin-bottom:8px;color:var(--ice);letter-spacing:0.05em}}
+h3{{font-size:0.8em;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:8px}}
 /* === RESPONSIVE === */
 @media(max-width:600px){{
   .film-grid{{grid-template-columns:1fr}}
   .wl-grid{{grid-template-columns:1fr}}
   .detail-header{{flex-direction:column;align-items:center}}
-  .detail-cover,.detail-cover-placeholder{{width:120px;height:170px}}
+  .detail-cover,.detail-cover-placeholder{{width:110px;height:155px}}
   .filter-row{{flex-direction:column}}
   .filter-row input,.filter-row select{{width:100%}}
   .profile-sections{{grid-template-columns:1fr}}
   .history-grid{{grid-template-columns:1fr}}
-  .compare-form form{{flex-direction:column}}
   .topbar{{padding:10px 12px}}
   .main{{padding:12px;padding-bottom:80px}}
 }}
+  0%,100%{{transform:translate(0)}}
 </style>
-</head>
 <body>
 <div class="topbar">
   <a href="/" class="logo">◇ OWL</a>
@@ -2140,9 +1922,10 @@ def main():
     p.add_argument("--fetch-imdb", action="store_true", help="OMDb ile IMDB skorlarini cek")
     p.add_argument("--fetch-limit", type=int, default=50, help="IMDB fetch limit")
     p.add_argument("--export", type=str, choices=["csv", "watchlist"], help="CSV export")
-    p.add_argument("--compare", type=str, help="Film karsilastirma (virgulle ID: 1,2,3)")
     p.add_argument("--profile", action="store_true", help="Kullanici profili")
     p.add_argument("--imdb-info", action="store_true", help="IMDB skoru istatistikleri")
+    p.add_argument("--import-type", type=str, default="ANIME", help="AniList import tipi: ANIME/MANGA")
+    p.add_argument("--import-fmt", type=str, default="MOVIE", help="AniList format: MOVIE/TV/MANGA/LIGHT_NOVEL/NOVEL")
     args = p.parse_args()
 
     if args.init:
@@ -2231,22 +2014,8 @@ def main():
                 print(f"    {h['title']} ({h['year']}){rating}")
         return
 
-    # v5.0: Karsilastirma
-    if args.compare:
-        try:
-            ids = [int(x.strip()) for x in args.compare.split(",") if x.strip()]
-        except ValueError:
-            print("Gecersiz ID formati. Ornek: --compare 1,2,3")
-            return
-        films = compare_films(ids)
-        if films:
-            print(format_comparison(films))
-        else:
-            print("Film bulunamadi.")
-        return
-
     if args.import_anilist > 0:
-        import_anilist_data(args.import_anilist)
+        import_anilist_data(args.import_anilist, media_type=args.import_type, fmt=args.import_fmt)
         return
 
     if args.web > 0:
