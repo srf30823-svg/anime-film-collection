@@ -566,10 +566,17 @@ def get_detail(db, film_id):
 
 # === ARAMA ===
 def search_film(db, query, limit=20):
-    q = f"%{query.lower()}%"
+    q = f"%{query}%"
     return db.execute(
-        "SELECT id,title,year,owl_score,studio,genres,cover_url FROM films WHERE title_lower LIKE ? ORDER BY owl_score DESC LIMIT ?",
-        (q, limit)).fetchall()
+        """SELECT id,title,year,owl_score,studio,genres,cover_url 
+           FROM films 
+           WHERE title_lower LIKE ? 
+              OR studio LIKE ? 
+              OR director LIKE ? 
+              OR source LIKE ?
+              OR synopsis LIKE ?
+           ORDER BY owl_score DESC LIMIT ?""",
+        (q, q, q, q, q, limit)).fetchall()
 
 # === ISTATISTIKLER ===
 def get_stats(db=None):
