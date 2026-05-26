@@ -1703,13 +1703,23 @@ h3{{font-size:0.8em;color:var(--muted);text-transform:uppercase;letter-spacing:0
   .history-grid{{grid-template-columns:1fr}}
   .topbar{{padding:10px 12px}}
   .main{{padding:12px;padding-bottom:80px}}
-}}
-  0%,100%{{transform:translate(0)}}
-</style>
+}}</style>
+</head>
 <body>
 <div class="topbar">
-  <a href="/" class="logo">◇ OWL</a>
-  <span class="badge">v5.0</span>
+  <a href="/" class="logo">
+    <span class="logo-symbol">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 2C6.48 2 2 6.48 2 12" stroke="var(--ice)" stroke-width="1.5" stroke-linecap="round" opacity="0.3"/>
+        <path d="M12 4C7.58 4 4 7.58 4 12" stroke="var(--ice)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+        <path d="M12 6C8.69 6 6 8.69 6 12" stroke="var(--ice)" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M12 8C9.79 8 8 9.79 8 12" stroke="var(--neon)" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
+      </svg>
+      <span class="logo-dot"></span>
+    </span>
+    ECHO
+  </a>
+  <span class="badge">v5.2</span>
 </div>
 <div class="main">
 {content}
