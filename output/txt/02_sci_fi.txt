@@ -1,0 +1,37 @@
+BilimKurgu (34 film)
+================================================================================
+
+#001 | [8.6] Nausicaa of the Valley of the Wind (1984) | Hayao Miyazaki
+#002 | [8.6] Ghost in the Shell (1995) | Mamoru Oshii
+#003 | [8.5] Akira (1988) | Katsuhiro Otomo
+#004 | [8.4] Redline (2009) | Takeshi Koike
+#005 | [8.3] Cowboy Bebop: The Movie (2001) | Shinichiro Watanabe
+#006 | [8.3] Paprika (2006) | Satoshi Kon
+#007 | [8.3] The Girl Who Leapt Through Time (2006) | Mamoru Hosoda
+#008 | [8.2] Stand by Me Doraemon 2 (2020) | Takashi Yamazaki
+#009 | [8.1] Summer Wars (2009) | Mamoru Hosoda
+#010 | [8.1] Belle (2021) | Mamoru Hosoda
+#011 | [8.0] Promare (2019) | Hiroyuki Imaishi
+#012 | [8.0] Shin Godzilla (2016) | Hideaki Anno
+#013 | [7.9] Patlabor 2: The Movie (1993) | Mamoru Oshii
+#014 | [7.9] Ghost in the Shell 2: Innocence (2004) | Mamoru Oshii
+#015 | [7.9] Psycho-Pass: The Movie (2015) | Naoyoshi Shiotani
+#016 | [7.9] Sword Art Online: Progressive - Aria (2021) | Ayako Kouno
+#017 | [7.8] Galaxy Express 999 (1979) | Rintaro
+#018 | [7.8] Patlabor: The Movie (1989) | Mamoru Oshii
+#019 | [7.8] Time of Eve: The Movie (2010) | Yasuhiro Yoshiura
+#020 | [7.8] Shin Ultraman (2022) | Hideaki Anno
+#021 | [7.8] Patema Inverted (2013) | Yasuhiro Yoshiura
+#022 | [7.8] Stand by Me Doraemon (2014) | Takashi Yamazaki
+#023 | [7.6] Penguin Highway (2018) | Hiroyasu Ishida
+#024 | [7.6] Harmony (2015) | Michael Arias
+#025 | [7.5] Metropolis (2001) | Rintaro
+#026 | [7.5] Hello World (2019) | Tomohiko Ito
+#027 | [7.5] Sword Art Online: Ordinal Scale (2017) | Tomohiko Ito
+#028 | [7.5] Final Fantasy VII: Advent Children (2005) | Tetsuya Nomura
+#029 | [7.5] Shin Kamen Rider (2023) | Hideaki Anno
+#030 | [7.5] Voices of a Distant Star (2002) | Makoto Shinkai
+#031 | [7.3] Steamboy (2004) | Katsuhiro Otomo
+#032 | [7.3] The Place Promised in Our Early Days (2004) | Makoto Shinkai
+#033 | [7.1] Appleseed (2004) | Shinji Aramaki
+#034 | [6.9] Space Pirate Captain Harlock (2013) | Shinji Aramaki

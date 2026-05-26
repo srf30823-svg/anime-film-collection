@@ -1,0 +1,137 @@
+OWL ANIME & FILM ONERI LISTESI - 2026-05-26 07:18 - 134 film
+================================================================================
+
+#0001 | OWL:9.4 | MAL:9.1 | Chainsaw Man: Reze Arc (2025) | Tatsuya Yoshihara
+#0002 | OWL:9.1 | MAL:8.8 | Spirited Away (2001) | Hayao Miyazaki
+#0003 | OWL:9.1 | MAL:8.9 | A Silent Voice (2016) | Naoko Yamada
+#0004 | OWL:8.9 | MAL:8.7 | Princess Mononoke (1997) | Hayao Miyazaki
+#0005 | OWL:8.9 | MAL:8.5 | The Tatami Galaxy (2010) | Masaaki Yuasa
+#0006 | OWL:8.9 | MAL:8.6 | Wolf Children (2012) | Mamoru Hosoda
+#0007 | OWL:8.9 | MAL:8.5 | Violet Evergarden: The Movie (2020) | Taichi Ishidate
+#0008 | OWL:8.9 | MAL:8.5 | The First Slam Dunk (2022) | Takehiko Inoue
+#0009 | OWL:8.9 | MAL:8.5 | Look Back (2024) | Kiyotaka Oshiyama
+#0010 | OWL:8.9 | MAL:8.5 | Madoka Magica: Walpurgisnacht Rising (2025) | Akiyuki Shinbo
+#0011 | OWL:8.9 | MAL:8.7 | Rurouni Kenshin: Trust and Betrayal (1999) | Kazuhiro Furuhashi
+#0012 | OWL:8.8 | MAL:8.5 | Grave of the Fireflies (1988) | Isao Takahata
+#0013 | OWL:8.8 | MAL:8.6 | Howls Moving Castle (2004) | Hayao Miyazaki
+#0014 | OWL:8.8 | MAL:8.5 | Jujutsu Kaisen 0 (2021) | Seong-Hu Park
+#0015 | OWL:8.7 | MAL:8.5 | Perfect Blue (1997) | Satoshi Kon
+#0016 | OWL:8.7 | MAL:8.4 | Suzume (2022) | Makoto Shinkai
+#0017 | OWL:8.7 | MAL:8.3 | Blue Giant (2023) | Yuzuru Tachikawa
+#0018 | OWL:8.7 | MAL:8.3 | Fate/stay night: Heaven's Feel III (2020) | Tomonori Sudo
+#0019 | OWL:8.6 | MAL:8.3 | Nausicaa of the Valley of the Wind (1984) | Hayao Miyazaki
+#0020 | OWL:8.6 | MAL:8.3 | My Neighbor Totoro (1988) | Hayao Miyazaki
+#0021 | OWL:8.6 | MAL:8.3 | Ghost in the Shell (1995) | Mamoru Oshii
+#0022 | OWL:8.6 | MAL:8.2 | Rurouni Kenshin: The Beginning (2021) | Keishi Otomo
+#0023 | OWL:8.5 | MAL:8.2 | Castle in the Sky (1986) | Hayao Miyazaki
+#0024 | OWL:8.5 | MAL:8.2 | Akira (1988) | Katsuhiro Otomo
+#0025 | OWL:8.5 | MAL:8.1 | The Tale of The Princess Kaguya (2013) | Isao Takahata
+#0026 | OWL:8.5 | MAL:8.2 | In This Corner of the World (2016) | Sunao Katabuchi
+#0027 | OWL:8.4 | MAL:8.2 | Kikis Delivery Service (1989) | Hayao Miyazaki
+#0028 | OWL:8.4 | MAL:8.2 | Whisper of the Heart (1995) | Yoshifumi Kondo
+#0029 | OWL:8.4 | MAL:8.2 | Millennium Actress (2001) | Satoshi Kon
+#0030 | OWL:8.4 | MAL:8.1 | Tokyo Godfathers (2003) | Satoshi Kon
+#0031 | OWL:8.4 | MAL:8.2 | Redline (2009) | Takeshi Koike
+#0032 | OWL:8.4 | MAL:8.1 | The Night Is Short, Walk on Girl (2017) | Masaaki Yuasa
+#0033 | OWL:8.4 | MAL:8.3 | Weathering with You (2019) | Makoto Shinkai
+#0034 | OWL:8.4 | MAL:8.2 | Fate/stay night: Heaven's Feel II (2019) | Tomonori Sudo
+#0035 | OWL:8.3 | MAL:8.0 | Cowboy Bebop: The Movie (2001) | Shinichiro Watanabe
+#0036 | OWL:8.3 | MAL:8.0 | Paprika (2006) | Satoshi Kon
+#0037 | OWL:8.3 | MAL:8.1 | The Girl Who Leapt Through Time (2006) | Mamoru Hosoda
+#0038 | OWL:8.3 | MAL:8.1 | Sword of the Stranger (2007) | Masahiro Ando
+#0039 | OWL:8.3 | MAL:8.0 | The Wind Rises (2013) | Hayao Miyazaki
+#0040 | OWL:8.3 | MAL:8.1 | Maquia: When the Promised Flower Blooms (2018) | Mari Okada
+#0041 | OWL:8.3 | MAL:8.1 | Liz and the Blue Bird (2018) | Naoko Yamada
+#0042 | OWL:8.3 | MAL:7.8 | Digimon Adventure: Last Evolution Kizuna (2020) | Tomohisa Taguchi
+#0043 | OWL:8.3 | MAL:7.9 | My Hero Academia: Heroes Rising (2019) | Kenji Nagasaki
+#0044 | OWL:8.2 | MAL:7.9 | Mind Game (2004) | Masaaki Yuasa
+#0045 | OWL:8.2 | MAL:7.7 | The Boy and the Heron (2023) | Hayao Miyazaki
+#0046 | OWL:8.2 | MAL:7.8 | Mononoke the Movie: Phantom in the Rain (2024) | Kenji Nakamura
+#0047 | OWL:8.2 | MAL:8.0 | Fate/stay night: Heaven's Feel I (2017) | Tomonori Sudo
+#0048 | OWL:8.2 | MAL:7.8 | My Hero Academia: Two Heroes (2018) | Kenji Nagasaki
+#0049 | OWL:8.2 | MAL:7.9 | Ponyo (2008) | Hayao Miyazaki
+#0050 | OWL:8.2 | MAL:7.8 | Stand by Me Doraemon 2 (2020) | Takashi Yamazaki
+#0051 | OWL:8.1 | MAL:7.8 | Lupin III: The Castle of Cagliostro (1979) | Hayao Miyazaki
+#0052 | OWL:8.1 | MAL:7.9 | Only Yesterday (1991) | Isao Takahata
+#0053 | OWL:8.1 | MAL:7.8 | Tekkonkinkreet (2006) | Michael Arias
+#0054 | OWL:8.1 | MAL:7.9 | Summer Wars (2009) | Mamoru Hosoda
+#0055 | OWL:8.1 | MAL:7.8 | Anthem of the Heart (2015) | Mari Okada
+#0056 | OWL:8.1 | MAL:7.7 | The Boy and the Beast (2015) | Mamoru Hosoda
+#0057 | OWL:8.1 | MAL:7.7 | Belle (2021) | Mamoru Hosoda
+#0058 | OWL:8.1 | MAL:7.7 | The Colors Within (2024) | Naoko Yamada
+#0059 | OWL:8.0 | MAL:7.6 | Urusei Yatsura 2: Beautiful Dreamer (1984) | Mamoru Oshii
+#0060 | OWL:8.0 | MAL:7.8 | Revolutionary Girl Utena (1999) | Kunihiko Ikuhara
+#0061 | OWL:8.0 | MAL:7.6 | Colourful (2010) | Keiichi Hara
+#0062 | OWL:8.0 | MAL:7.8 | Promare (2019) | Hiroyuki Imaishi
+#0063 | OWL:8.0 | MAL:7.6 | Inu-Oh (2021) | Masaaki Yuasa
+#0064 | OWL:8.0 | MAL:7.8 | Shin Godzilla (2016) | Hideaki Anno
+#0065 | OWL:7.9 | MAL:7.5 | Angel's Egg (1985) | Mamoru Oshii
+#0066 | OWL:7.9 | MAL:7.7 | Patlabor 2: The Movie (1993) | Mamoru Oshii
+#0067 | OWL:7.9 | MAL:7.6 | Jin-Roh: The Wolf Brigade (1999) | Hiroyuki Okiura
+#0068 | OWL:7.9 | MAL:7.6 | Vampire Hunter D: Bloodlust (2000) | Yoshiaki Kawajiri
+#0069 | OWL:7.9 | MAL:7.6 | Ghost in the Shell 2: Innocence (2004) | Mamoru Oshii
+#0070 | OWL:7.9 | MAL:7.5 | The Garden of Words (2013) | Makoto Shinkai
+#0071 | OWL:7.9 | MAL:7.5 | Psycho-Pass: The Movie (2015) | Naoyoshi Shiotani
+#0072 | OWL:7.9 | MAL:7.5 | The Red Turtle (2016) | Michael Dudok de Wit
+#0073 | OWL:7.9 | MAL:7.5 | One Piece Film: Red (2022) | Goro Taniguchi
+#0074 | OWL:7.9 | MAL:7.5 | Spy x Family Code: White (2023) | Takashi Katagiri
+#0075 | OWL:7.9 | MAL:7.5 | Lonely Castle in the Mirror (2022) | Keiichi Hara
+#0076 | OWL:7.9 | MAL:7.5 | Tsurune: The Movie (2022) | Takuya Yamamura
+#0077 | OWL:7.9 | MAL:7.5 | Josee, the Tiger and the Fish (2020) | Kotaro Tamura
+#0078 | OWL:7.9 | MAL:7.5 | The Imaginary (2023) | Yoshiyuki Momose
+#0079 | OWL:7.9 | MAL:7.5 | Sword Art Online: Progressive - Aria (2021) | Ayako Kouno
+#0080 | OWL:7.9 | MAL:7.6 | 5 Centimeters Per Second (2007) | Makoto Shinkai
+#0081 | OWL:7.8 | MAL:7.5 | Belladonna of Sadness (1973) | Eiichi Yamamoto
+#0082 | OWL:7.8 | MAL:7.5 | Hols: Prince of the Sun (1968) | Isao Takahata
+#0083 | OWL:7.8 | MAL:7.5 | Galaxy Express 999 (1979) | Rintaro
+#0084 | OWL:7.8 | MAL:7.6 | Patlabor: The Movie (1989) | Mamoru Oshii
+#0085 | OWL:7.8 | MAL:7.5 | Ninja Scroll (1993) | Yoshiaki Kawajiri
+#0086 | OWL:7.8 | MAL:7.5 | Time of Eve: The Movie (2010) | Yasuhiro Yoshiura
+#0087 | OWL:7.8 | MAL:7.4 | From Up on Poppy Hill (2011) | Goro Miyazaki
+#0088 | OWL:7.8 | MAL:7.5 | Miss Hokusai (2015) | Keiichi Hara
+#0089 | OWL:7.8 | MAL:7.5 | Ride Your Wave (2019) | Masaaki Yuasa
+#0090 | OWL:7.8 | MAL:7.5 | Shin Ultraman (2022) | Hideaki Anno
+#0091 | OWL:7.8 | MAL:7.6 | Garden of Sinners: Paradox Spiral (2008) | Shinsuke Takizawa
+#0092 | OWL:7.8 | MAL:7.5 | Sailor Moon Cosmos Part 1 (2024) | Kazuko Tadano
+#0093 | OWL:7.8 | MAL:7.5 | Sailor Moon Cosmos Part 2 (2024) | Kazuko Tadano
+#0094 | OWL:7.8 | MAL:7.5 | Arrietty (2010) | Hiromasa Yonebayashi
+#0095 | OWL:7.8 | MAL:7.5 | When Marnie Was There (2014) | James Simone
+#0096 | OWL:7.8 | MAL:7.5 | Patema Inverted (2013) | Yasuhiro Yoshiura
+#0097 | OWL:7.8 | MAL:7.5 | Stand by Me Doraemon (2014) | Takashi Yamazaki
+#0098 | OWL:7.7 | MAL:7.3 | Children Who Chase Lost Voices (2011) | Makoto Shinkai
+#0099 | OWL:7.7 | MAL:7.4 | Summer Days with Coo (2007) | Keiichi Hara
+#0100 | OWL:7.7 | MAL:7.5 | Garden of Sinners: Overlooking View (2007) | Eiichi Takahashi
+#0101 | OWL:7.7 | MAL:7.3 | Mirai (2018) | Mamoru Hosoda
+#0102 | OWL:7.6 | MAL:7.2 | Penguin Highway (2018) | Hiroyasu Ishida
+#0103 | OWL:7.6 | MAL:7.2 | Ranking of Kings: The Treasure Chest of Courage (2023) | Shingo Kaneko
+#0104 | OWL:7.6 | MAL:7.2 | Totto-chan: The Little Girl at the Window (2023) | Shinnosuke Yakuwa
+#0105 | OWL:7.6 | MAL:7.3 | Sailor Moon Eternal Part 1 (2021) | Chiaki Kon
+#0106 | OWL:7.6 | MAL:7.3 | Sailor Moon Eternal Part 2 (2021) | Chiaki Kon
+#0107 | OWL:7.6 | MAL:7.2 | Harmony (2015) | Michael Arias
+#0108 | OWL:7.6 | MAL:7.2 | Lupin III: The First (2019) | Takashi Yamazaki
+#0109 | OWL:7.5 | MAL:7.1 | Pom Poko (1994) | Isao Takahata
+#0110 | OWL:7.5 | MAL:7.2 | Metropolis (2001) | Rintaro
+#0111 | OWL:7.5 | MAL:7.2 | Black Cat (2005) | Shin Itagaki
+#0112 | OWL:7.5 | MAL:7.1 | Lu Over the Wall (2017) | Masaaki Yuasa
+#0113 | OWL:7.5 | MAL:7.1 | Children of the Sea (2019) | Ayumu Watanabe
+#0114 | OWL:7.5 | MAL:7.2 | Hello World (2019) | Tomohiko Ito
+#0115 | OWL:7.5 | MAL:7.2 | Sword Art Online: Ordinal Scale (2017) | Tomohiko Ito
+#0116 | OWL:7.5 | MAL:7.2 | Final Fantasy VII: Advent Children (2005) | Tetsuya Nomura
+#0117 | OWL:7.5 | MAL:7.2 | Shin Kamen Rider (2023) | Hideaki Anno
+#0118 | OWL:7.5 | MAL:7.2 | Voices of a Distant Star (2002) | Makoto Shinkai
+#0119 | OWL:7.5 | MAL:7.2 | She and Her Cat (1999) | Makoto Shinkai
+#0120 | OWL:7.5 | MAL:7.1 | Mary and the Witchs Flower (2017) | Hiromasa Yonebayashi
+#0121 | OWL:7.5 | MAL:7.3 | Mai Mai Miracle (2009) | Sunao Katabuchi
+#0122 | OWL:7.4 | MAL:7.0 | Gold Kingdom and Water Kingdom (2023) | Kotono Watanabe
+#0123 | OWL:7.4 | MAL:7.0 | A Whisker Away (2020) | Junichi Sato
+#0124 | OWL:7.4 | MAL:7.0 | Kingsglaive: Final Fantasy XV (2016) | Takeshi Nozue
+#0125 | OWL:7.3 | MAL:7.0 | Wicked City (1987) | Yoshiaki Kawajiri
+#0126 | OWL:7.3 | MAL:7.0 | Cyber City Oedo 808 (1990) | Yoshiaki Kawajiri
+#0127 | OWL:7.3 | MAL:7.0 | Steamboy (2004) | Katsuhiro Otomo
+#0128 | OWL:7.3 | MAL:6.8 | Fortune Favors Lady Nikuko (2021) | Ayumu Watanabe
+#0129 | OWL:7.3 | MAL:7.0 | The Place Promised in Our Early Days (2004) | Makoto Shinkai
+#0130 | OWL:7.2 | MAL:6.9 | Ocean Waves (1993) | Tomomi Mochizuki
+#0131 | OWL:7.1 | MAL:6.8 | Blood: The Last Vampire (2000) | Hiroyuki Kitakubo
+#0132 | OWL:7.1 | MAL:6.8 | Appleseed (2004) | Shinji Aramaki
+#0133 | OWL:6.9 | MAL:6.5 | Tales from Earthsea (2006) | Goro Miyazaki
+#0134 | OWL:6.9 | MAL:6.5 | Space Pirate Captain Harlock (2013) | Shinji Aramaki
