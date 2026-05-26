@@ -1,6 +1,6 @@
-OWL ANIME & FILM ONERI LISTESI v3.0
-Tarih: 2026-05-26 08:18
-Toplam: 38 oneri
+OWL ANIME & FILM ONERI LISTESI v4.0
+Tarih: 2026-05-26 16:27
+Toplam: 39 oneri
 ================================================================================
 
 #0001 | OWL:10.0 | Gintama: THE FINAL (2021) | Bandai Namco Pictures | Manga | Action, Comedy, Drama
@@ -8,36 +8,37 @@ Toplam: 38 oneri
 #0003 | OWL:10.0 | Shin Gintama Movie: Yoshiwara Daienjou (2026) | Warner Bros. Japan | Manga | Action, Comedy, Sci-Fi
 #0004 | OWL:10.0 | Violet Evergarden Movie (2020) | Kyoto Animation | Light Novel | Drama, Fantasy, Slice of Life
 #0005 | OWL:10.0 | Uma Musume: Pretty Derby - Shin Jidai no Tobira (2024) | CygamesPictures | Other | Drama, Psychological, Slice of Life
-#0006 | OWL:9.9 | Haikyuu!!: Gomi Suteba no Kessen (2024) | Toho | Manga | Comedy, Drama, Sports
-#0007 | OWL:9.9 | Koe no Katachi (2016) | Kyoto Animation | Manga | Drama, Romance, Slice of Life
+#0006 | OWL:9.8 | Haikyuu!!: Gomi Suteba no Kessen (2024) | Toho | Manga | Comedy, Drama, Sports
+#0007 | OWL:9.8 | Koe no Katachi (2016) | Kyoto Animation | Manga | Drama, Romance, Slice of Life
 #0008 | OWL:9.8 | The First Slam Dunk (2022) | Unknown | Unknown | Sports
-#0009 | OWL:9.8 | Bocchi the Rock! Re:Re: (2024) | CloverWorks | Manga | Comedy, Music, Slice of Life
+#0009 | OWL:9.8 | Spirited Away (2001) | Studio Ghibli | Original | Adventure, Drama, Fantasy
 #0010 | OWL:9.8 | Sen to Chihiro no Kamikakushi (2001) | Studio Ghibli | Original | Adventure, Drama, Fantasy
-#0011 | OWL:9.7 | Bocchi the Rock! Re: (2024) | CloverWorks | Manga | Comedy, Music, Slice of Life
-#0012 | OWL:9.6 | Mushishi Tokubetsu-hen: Suzu no Shizuku (2015) | Artland | Manga | Adventure, Fantasy, Mystery
+#0011 | OWL:9.7 | Bocchi the Rock! Re:Re: (2024) | CloverWorks | Manga | Comedy, Music, Slice of Life
+#0012 | OWL:9.6 | Bocchi the Rock! Re: (2024) | CloverWorks | Manga | Comedy, Music, Slice of Life
 #0013 | OWL:9.6 | Mononoke: Hinezumi (2025) | Twin Engine | Original | Fantasy, Horror, Mystery
-#0014 | OWL:9.6 | Howl no Ugoku Shiro (2004) | Studio Ghibli | Novel | Adventure, Drama, Fantasy
-#0015 | OWL:9.5 | ARIA The BENEDIZIONE (2021) | J.C.STAFF | Manga | Fantasy, Sci-Fi, Slice of Life
+#0014 | OWL:9.5 | Mushishi Tokubetsu-hen: Suzu no Shizuku (2015) | Artland | Manga | Adventure, Fantasy, Mystery
+#0015 | OWL:9.4 | ARIA The BENEDIZIONE (2021) | J.C.STAFF | Manga | Fantasy, Sci-Fi, Slice of Life
 #0016 | OWL:9.4 | Mononoke: Karakasa (2024) | Twin Engine | Original | Fantasy, Horror, Mystery
-#0017 | OWL:9.4 | Chainsaw Man: Reze Arc (2025) | Unknown | Unknown | 
-#0018 | OWL:9.3 | Aikatsu! 10th STORY: Mirai e no STARWAY (2023) (2023) | Bandai Namco Pictures | Original | Music
-#0019 | OWL:9.2 | Love Live! Nijigasaki Gakuen School Idol Doukoukai: Kanketsu-hen 2 (2025) | Sunrise | Other | Music, Slice of Life
-#0020 | OWL:9.2 | BanG Dream! Episode of Roselia II: Song I am. (2021) | SANZIGEN | Other | Music
-#0021 | OWL:9.1 | Spirited Away (2001) | Unknown | Unknown | 
-#0022 | OWL:9.1 | A Silent Voice (2016) | Unknown | Unknown | 
-#0023 | OWL:9.1 | Madogiwa no Totto-chan (2023) | Shin-Ei Animation | Other | Slice of Life
+#0017 | OWL:9.3 | Aikatsu! 10th STORY: Mirai e no STARWAY (2023) (2023) | Bandai Namco Pictures | Original | Music
+#0018 | OWL:9.3 | Chainsaw Man: Reze Arc (2025) | Unknown | Unknown | 
+#0019 | OWL:9.2 | BanG Dream! Episode of Roselia II: Song I am. (2021) | SANZIGEN | Other | Music
+#0020 | OWL:9.1 | Love Live! Nijigasaki Gakuen School Idol Doukoukai: Kanketsu-hen 2 (2025) | Sunrise | Other | Music, Slice of Life
+#0021 | OWL:9.0 | A Silent Voice (2016) | Unknown | Unknown | 
+#0022 | OWL:8.9 | Madogiwa no Totto-chan (2023) | Shin-Ei Animation | Other | Slice of Life
+#0023 | OWL:8.9 | Kitarou Tanjou: Gegege no Nazo (2023) | Toei Animation | Manga | Horror, Supernatural
 #0024 | OWL:8.9 | Meitantei Conan: Tengoku e no Count Down (2001) | TMS Entertainment | Original | Mystery
-#0025 | OWL:8.9 | Meitantei Conan: Tantei-tachi no Requiem (2006) | TMS Entertainment | Original | Mystery
-#0026 | OWL:8.9 | Meitantei Conan: Sekigan no Flashback (2025) | TMS Entertainment | Original | Mystery
-#0027 | OWL:8.9 | Kitarou Tanjou: Gegege no Nazo (2023) | Toei Animation | Manga | Horror, Supernatural
-#0028 | OWL:8.9 | Eve no Jikan Movie (2010) | Studio Rikka | Original | Sci-Fi, Slice of Life
-#0029 | OWL:8.9 | Star☆Twinkle Precure: Hoshi no Uta ni Omoi wo Komete (2019) | Toei Animation | Original | Mahou Shoujo
-#0030 | OWL:8.9 | Date A Bullet: Nightmare or Queen (2020) | GEEKTOYS | Light Novel | Sci-Fi
-#0031 | OWL:8.8 | Tamako Love Story (2014) | Kyoto Animation | Original | Romance, Slice of Life
-#0032 | OWL:8.8 | Date A Bullet: Dead or Bullet (2020) | GEEKTOYS | Light Novel | Sci-Fi
-#0033 | OWL:8.7 | Free!: Timeless Medley - Yakusoku (2017) | Kyoto Animation | Original | Slice of Life, Sports
-#0034 | OWL:8.7 | Kidou Senshi Gundam: Cucuruz Doan no Shima (2022) | Sunrise | Other | Mecha, Sci-Fi
-#0035 | OWL:8.6 | Boku ga Aishita Subete no Kimi e (2022) | BAKKEN RECORD | Novel | Romance, Sci-Fi
-#0036 | OWL:8.6 | Cider no You ni Kotoba ga Wakiagaru (2021) | Signal.MD | Original | Romance, Slice of Life
-#0037 | OWL:8.5 | Kuroko no Basket: Winter Cup Soushuu-hen - Kage to Hikari (2016) | Production I.G | Manga | Sports
-#0038 | OWL:8.5 | Kuroko no Basket: Winter Cup Soushuu-hen - Namida no Saki e (2016) | Production I.G | Manga | Sports
+#0025 | OWL:8.8 | Meitantei Conan: Sekigan no Flashback (2025) | TMS Entertainment | Original | Mystery
+#0026 | OWL:8.8 | Rurouni Kenshin: Trust and Betrayal (1999) | Unknown | Unknown | 
+#0027 | OWL:8.8 | Time of Eve: The Movie (2010) | Studio Rikka | Original | Sci-Fi, Slice of Life
+#0028 | OWL:8.8 | Eve no Jikan Movie (2010) | Studio Rikka | Original | Sci-Fi, Slice of Life
+#0029 | OWL:8.8 | Date A Bullet: Nightmare or Queen (2020) | GEEKTOYS | Light Novel | Sci-Fi
+#0030 | OWL:8.8 | Star☆Twinkle Precure: Hoshi no Uta ni Omoi wo Komete (2019) | Toei Animation | Original | Mahou Shoujo
+#0031 | OWL:8.8 | Meitantei Conan: Tantei-tachi no Requiem (2006) | TMS Entertainment | Original | Mystery
+#0032 | OWL:8.7 | Tamako Love Story (2014) | Kyoto Animation | Original | Romance, Slice of Life
+#0033 | OWL:8.6 | Free!: Timeless Medley - Yakusoku (2017) | Kyoto Animation | Original | Slice of Life, Sports
+#0034 | OWL:8.5 | Kidou Senshi Gundam: Cucuruz Doan no Shima (2022) | Sunrise | Other | Mecha, Sci-Fi
+#0035 | OWL:8.5 | Boku ga Aishita Subete no Kimi e (2022) | BAKKEN RECORD | Novel | Romance, Sci-Fi
+#0036 | OWL:8.5 | Kuroko no Basket: Winter Cup Soushuu-hen - Kage to Hikari (2016) | Production I.G | Manga | Sports
+#0037 | OWL:8.5 | Kuroko no Basket: Winter Cup Soushuu-hen - Namida no Saki e (2016) | Production I.G | Manga | Sports
+#0038 | OWL:8.4 | Cider no You ni Kotoba ga Wakiagaru (2021) | Signal.MD | Original | Romance, Slice of Life
+#0039 | OWL:7.5 | Blood: The Last Vampire (2000) | Production I.G | Original | Horror, Supernatural
