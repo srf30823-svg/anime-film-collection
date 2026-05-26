@@ -215,22 +215,30 @@ jobs:
       - name: Build APK
         working-directory: ./apk_project
         run: |
-          buildozer android debug 2>&1 | tee build.log
-          echo "=== BUILD FINISHED ==="
-          echo "=== Looking for APK ==="
+          # Accept SDK licenses non-interactively
+          export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
+          export ANDROID_SDK_ROOT=$ANDROID_HOME
+          yes | buildozer android debug 2>&1 | tail -100
+          echo "=== BUILD COMPLETE ==="
+          echo "=== Searching for APK ==="
           find . -name "*.apk" -type f 2>/dev/null
-          echo "=== bin/ contents ==="
-          ls -la bin/ 2>/dev/null || echo "bin/ not found"
-          echo "=== .buildozer contents ==="
-          find .buildozer -name "*.apk" -type f 2>/dev/null || echo "No APK in .buildozer"
+          echo "=== bin/ ==="
+          ls -la bin/ 2>/dev/null || echo "No bin/ dir"
+          echo "=== .buildozer ==="
+          find .buildozer -name "*.apk" 2>/dev/null || echo "No APK in .buildozer"
 
       - name: Find and copy APK
         run: |
           mkdir -p apk_output
-          # Search for APK in all possible locations
-          find apk_project -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
-          echo "=== APK files found ==="
-          ls -la apk_output/ 2>/dev/null || echo "No APK files found"
+          # Find APK in all possible locations
+          find apk_project -name "*.apk" -type f 2>/dev/null | while read f; do
+            echo "Found: $f"
+            cp "$f" apk_output/
+          done
+          echo "=== APK files ==="
+          ls -la apk_output/ 2>/dev/null || echo "NO APK FOUND"
+          # Also check if bin exists
+          ls -la apk_project/bin/ 2>/dev/null || echo "No bin dir"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
