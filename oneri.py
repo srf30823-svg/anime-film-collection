@@ -226,7 +226,17 @@ def init_db():
             synopsis TEXT DEFAULT '', duration INTEGER DEFAULT 0, episodes INTEGER DEFAULT 1,
             cover_url TEXT DEFAULT '', user_rating REAL DEFAULT 0, user_note TEXT DEFAULT '',
             format TEXT DEFAULT 'MOVIE', created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-            watched_at TEXT DEFAULT ''
+            watched_at TEXT DEFAULT '',
+            media_type TEXT DEFAULT 'anime',
+            status TEXT DEFAULT 'plan_to_watch',
+            progress INTEGER DEFAULT 0,
+            total_items INTEGER DEFAULT 0,
+            mal_id INTEGER DEFAULT 0,
+            anilist_id INTEGER DEFAULT 0,
+            start_date TEXT DEFAULT '',
+            end_date TEXT DEFAULT '',
+            rewatch_count INTEGER DEFAULT 0,
+            tags TEXT DEFAULT '[]'
         );
         CREATE INDEX IF NOT EXISTS idx_fo ON films(owl_score DESC);
         CREATE INDEX IF NOT EXISTS idx_fw ON films(is_watched);
@@ -234,6 +244,9 @@ def init_db():
         CREATE INDEX IF NOT EXISTS idx_fy ON films(year);
         CREATE INDEX IF NOT EXISTS idx_fs ON films(user_rating DESC);
         CREATE INDEX IF NOT EXISTS idx_ff ON films(format);
+        CREATE INDEX IF NOT EXISTS idx_media_type ON films(media_type);
+        CREATE INDEX IF NOT EXISTS idx_status ON films(status);
+        CREATE INDEX IF NOT EXISTS idx_mal_id ON films(mal_id);
         CREATE TABLE IF NOT EXISTS watched(title_lower TEXT UNIQUE, title TEXT, watched_at TEXT, rating REAL DEFAULT 0);
         CREATE TABLE IF NOT EXISTS watchlist(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -251,28 +264,46 @@ def init_db():
 # === ANILIST API ===
 ANILIST_URL = "https://graphql.anilist.co"
 
-def fetch_anilist(page=1, perPage=50):
-    query = """
-    query ($page: Int, $perPage: Int) {
-      Page(page: $page, perPage: $perPage) {
-        media(type: ANIME, format: MOVIE, sort: SCORE_DESC, status: FINISHED) {
-          title { romaji english }
-          startDate { year }
-          meanScore
-          popularity
-          genres
-          studios { nodes { name } }
-          source(version: 2)
-          duration
-          description
-          coverImage { medium }
-        }
-      }
+ANILIST_QUERY = """
+query ($page: Int, $perPage: Int, $type: MediaType, $format: MediaFormat) {
+  Page(page: $page, perPage: $perPage) {
+    media(type: $type, format: $format, sort: SCORE_DESC, status: FINISHED) {
+      id
+      title { romaji english native }
+      startDate { year }
+      endDate { year }
+      meanScore
+      popularity
+      genres
+      studios { nodes { name } }
+      source(version: 2)
+      duration
+      chapters
+      volumes
+      episodes
+      description
+      coverImage { medium large }
+      format
+      type
     }
-    """
-    data = json.dumps({"query": query, "variables": {"page": page, "perPage": perPage}}).encode()
+  }
+}
+"""
+
+def fetch_anilist(page=1, perPage=50, media_type="ANIME", fmt="MOVIE"):
+    """AniList'ten veri ceker. media_type: ANIME/MANGA, fmt: MOVIE/TV/MANGA/NOVEL/LIGHT_NOVEL"""
+    type_map = {"ANIME": "ANIME", "MANGA": "MANGA"}
+    fmt_map = {
+        "MOVIE": "MOVIE", "TV": "TV", "OVA": "OVA", "SPECIAL": "SPECIAL",
+        "MANGA": "MANGA", "NOVEL": "NOVEL", "LIGHT_NOVEL": "LIGHT_NOVEL",
+        "ONE_SHOT": "ONE_SHOT",
+    }
+    t = type_map.get(media_type, "ANIME")
+    f = fmt_map.get(fmt, "MOVIE")
+    variables = {"page": page, "perPage": perPage, "type": t, "format": f}
+    data = json.dumps({"query": ANILIST_QUERY, "variables": variables}).encode()
     req = urllib.request.Request(ANILIST_URL, data=data, headers={
-        "Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Hermes-OWL/2.0)"
+        "Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Hermes-OWL/5.0)"
     })
     try:
         with urllib.request.urlopen(req, timeout=15) as r:
@@ -280,22 +311,57 @@ def fetch_anilist(page=1, perPage=50):
     except:
         return None
 
-def import_anilist_data(pages=10):
+def detect_media_type(format_str, episodes, chapters, volumes):
+    """Format str'ye gore media_type belirle."""
+    fmt = (format_str or "").upper()
+    if fmt in ("MANGA", "ONE_SHOT"):
+        return "manga"
+    if fmt in ("NOVEL", "LIGHT_NOVEL"):
+        return "light_novel"
+    if chapters and chapters > 0 and not episodes:
+        return "manga"
+    return "anime"
+
+def detect_source_for_type(source_str, media_type):
+    """Media type'a gore kaynak belirle."""
+    s = (source_str or "").upper().replace("-", "_")
+    if media_type == "manga":
+        return SOURCE_MAP.get(s, "Manga") if s in SOURCE_MAP else "Manga"
+    if media_type == "light_novel":
+        ln_map = {
+            "LIGHT_NOVEL": "Light Novel", "WEB_NOVEL": "Web Novel",
+            "NOVEL": "Novel", "VISUAL_NOVEL": "Visual Novel",
+            "ORIGINAL": "Original", "MANGA": "Manga", "GAME": "Game",
+        }
+        return ln_map.get(s, "Light Novel")
+    return SOURCE_MAP.get(s, "Other")
+
+def import_anilist_data(pages=10, media_type="ANIME", fmt="MOVIE"):
     """
-    AniList'ten film ceker ve DB'ye yazar/ayarla.
+    AniList'ten veri ceker ve DB'ye yazar/ayarla.
     Fonksiyon API: build.py veya baska modullerden cagrilabilir.
+    media_type: ANIME veya MANGA
+    fmt: MOVIE, TV, OVA, SPECIAL, MANGA, NOVEL, LIGHT_NOVEL, ONE_SHOT
     """
     db = get_db()
-    for col, typ in [("synopsis","TEXT DEFAULT ''"),("duration","INTEGER DEFAULT 0"),
-                      ("episodes","INTEGER DEFAULT 1"),("cover_url","TEXT DEFAULT ''"),
-                      ("format","TEXT DEFAULT 'MOVIE'")]:
-        try: db.execute("ALTER TABLE films ADD COLUMN %s %s" % (col, typ))
+    # Yeni kolonlar varsa ekle
+    for col, typ in [
+        ("synopsis","TEXT DEFAULT ''"),("duration","INTEGER DEFAULT 0"),
+        ("episodes","INTEGER DEFAULT 1"),("cover_url","TEXT DEFAULT ''"),
+        ("format","TEXT DEFAULT 'MOVIE'"),("media_type","TEXT DEFAULT 'anime'"),
+        ("status","TEXT DEFAULT 'plan_to_watch'"),("progress","INTEGER DEFAULT 0"),
+        ("total_items","INTEGER DEFAULT 0"),("mal_id","INTEGER DEFAULT 0"),
+        ("anilist_id","INTEGER DEFAULT 0"),("start_date","TEXT DEFAULT ''"),
+        ("end_date","TEXT DEFAULT ''"),("rewatch_count","INTEGER DEFAULT 0"),
+        ("tags","TEXT DEFAULT '[]'"),
+    ]:
+        try: db.execute(f"ALTER TABLE films ADD COLUMN {col} {typ}")
         except: pass
     db.commit()
 
     added = updated = 0
     for page in range(1, pages + 1):
-        result = fetch_anilist(page)
+        result = fetch_anilist(page, media_type=media_type, fmt=fmt)
         if not result or "data" not in result:
             print(f"Sayfa {page}: HATA")
             continue
@@ -307,13 +373,34 @@ def import_anilist_data(pages=10):
             score = (m.get("meanScore") or 70) / 10
             genres = m.get("genres", [])
             studio = m["studios"]["nodes"][0]["name"] if m.get("studios", {}).get("nodes") else "Unknown"
-            src = SOURCE_MAP.get(m.get("source",""), "Other")
+            src_raw = m.get("source", "")
             gj = json.dumps(genres)
             pop = m.get("popularity", 0)
             dur = m.get("duration", 0) or 0
             desc = (m.get("description") or "")[:600]
-            cover = (m.get("coverImage") or {}).get("medium", "")
-            fmt = m.get("format", "MOVIE")
+            cover = (m.get("coverImage") or {}).get("large") or (m.get("coverImage") or {}).get("medium", "")
+            format_str = m.get("format", fmt)
+            episodes = m.get("episodes", 0) or 0
+            chapters = m.get("chapters", 0) or 0
+            volumes = m.get("volumes", 0) or 0
+
+            # Media type ve kaynak belirle
+            mt = detect_media_type(format_str, episodes, chapters, volumes)
+            src = detect_source_for_type(src_raw, mt)
+
+            # toplam item sayisi
+            total_items = episodes if mt == "anime" else chapters
+
+            start_d = ""
+            end_d = ""
+            sd = m.get("startDate", {})
+            ed = m.get("endDate", {})
+            if sd and sd.get("year"):
+                start_d = f"{sd.get('year','')}-{sd.get('month',''):02d}-{sd.get('day',''):02d}"
+            if ed and ed.get("year"):
+                end_d = f"{ed.get('year','')}-{ed.get('month',''):02d}-{ed.get('day',''):02d}"
+
+            anilist_id = m.get("id", 0)
 
             gb = sum(TASTE_W.get(g, 5) for g in genres) / max(len(genres), 1) * 0.05
             yb = 0.15 if year >= 2020 else (0.08 if year >= 2010 else 0.03)
@@ -321,14 +408,22 @@ def import_anilist_data(pages=10):
             ow = min(round(score + gb + yb + pb, 1), 10.0)
 
             try:
-                db.execute("INSERT INTO films(title,title_lower,year,studio,mal_score,owl_score,source,genres,popularity,duration,synopsis,cover_url,format) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
-                           (title, tl, year, studio, score, ow, src, gj, pop, dur, desc, cover, fmt))
+                db.execute("""INSERT INTO films(title,title_lower,year,studio,mal_score,owl_score,
+                    source,genres,popularity,duration,synopsis,cover_url,format,media_type,
+                    total_items,anilist_id,start_date,end_date)
+                    VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)""",
+                    (title, tl, year, studio, score, ow, src, gj, pop, dur, desc, cover,
+                     format_str, mt, total_items, anilist_id, start_d, end_d))
                 added += 1
             except sqlite3.IntegrityError:
-                db.execute("UPDATE films SET mal_score=?,owl_score=?,genres=?,popularity=?,duration=?,synopsis=?,cover_url=?,studio=?,source=?,format=? WHERE title_lower=?",
-                           (score, ow, gj, pop, dur, desc, cover, studio, src, fmt, tl))
+                db.execute("""UPDATE films SET mal_score=?,owl_score=?,genres=?,popularity=?,
+                    duration=?,synopsis=?,cover_url=?,studio=?,source=?,format=?,media_type=?,
+                    total_items=?,anilist_id=?,start_date=?,end_date=?
+                    WHERE title_lower=?""",
+                    (score, ow, gj, pop, dur, desc, cover, studio, src, format_str, mt,
+                     total_items, anilist_id, start_d, end_d, tl))
                 updated += 1
-        print(f"Sayfa {page}: {len(items)} film")
+        print(f"Sayfa {page}: {len(items)} item")
     db.commit()
     total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
     print(f"\nEklenen: {added}, Guncellenen: {updated}, Toplam: {total}")
@@ -684,16 +779,18 @@ def get_taste_weights(db):
 # === ONERI ALGORITMASI v5.0 ===
 def recommend(db=None, category=None, genre=None, studio=None, source=None,
               year_from=0, year_to=2030, min_score=0, max_score=10,
-              format_type=None, unwatched_only=True, limit=20, smart=True):
+              format_type=None, media_type=None, status=None,
+              unwatched_only=True, limit=20, smart=True):
     """
-    v5.0 Oneri algoritmasi:
-    1. Filtreler (tur/yil/kaynak/format/puan)
+    v5.1 Oneri algoritmasi:
+    1. Filtreler (tur/yil/kaynak/format/media_type/status/puan)
     2. OWL skoru (AniList + zevk + yil + popularity)
     3. Content-based zevk profili bonusu
     4. Cesitlilik filtresi (her turden max 3)
     5. Dengeli popularite
 
-    Fonksiyon API: db parametresi opsiyonel. Verilmezse kendi olusturur.
+    media_type: 'anime', 'manga', 'light_novel' (None = tumu)
+    status: 'watching', 'completed', 'plan_to_watch', 'dropped', 'on_hold' (None = tumu)
     """
     close_db = False
     if db is None:
@@ -724,6 +821,12 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
         if category and not genre:
             conditions.append("genres LIKE ?")
             params.append(f"%{category}%")
+        if media_type:
+            conditions.append("media_type=?")
+            params.append(media_type)
+        if status:
+            conditions.append("status=?")
+            params.append(status)
 
         where = " AND ".join(conditions)
         q = f"SELECT * FROM films WHERE {where} ORDER BY owl_score DESC LIMIT ?"
@@ -967,6 +1070,7 @@ def start_web_server(port=8080):
             yt = int(params.get("year_to", [2030])[0])
             ms = float(params.get("min_score", [0])[0])
             search_q = params.get("q", [None])[0]
+            media_f = params.get("media_type", [None])[0]
 
             if search_q:
                 films = search_film(db, search_q, limit)
@@ -974,8 +1078,11 @@ def start_web_server(port=8080):
                 scored.sort(key=lambda x: x[0], reverse=True)
             else:
                 scored = recommend(db, genre=genre_f, source=source_f, studio=studio_f,
-                                   year_from=yf, year_to=yt, min_score=ms, limit=limit)
+                                   year_from=yf, year_to=yt, min_score=ms,
+                                   media_type=media_f, limit=limit)
             stats = get_stats(db)
+            # Type dagilimi (db.close() oncesi)
+            type_counts = db.execute("SELECT media_type, COUNT(*) FROM films GROUP BY media_type ORDER BY COUNT(*) DESC").fetchall()
             db.close()
 
             all_genres = sorted(set(g for _, r in scored for g in (json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [])))
@@ -992,6 +1099,27 @@ def start_web_server(port=8080):
                 cover_html = f'<img src="{cover}" class="cover" loading="lazy" onerror="this.style.display=\'none\'">' if cover else '<div class="cover placeholder">🎬</div>'
                 watched_class = "watched" if row["is_watched"] else ""
                 user_r = f" | ⭐ {row['user_rating']}" if row["user_rating"] > 0 else ""
+
+                # Media type badge
+                mt = row["media_type"] or "anime"
+                mt_icons = {"anime":"🎬","manga":"📖","light_novel":"📚","web_novel":"🌐"}
+                mt_labels = {"anime":"Anime","manga":"Manga","light_novel":"LN","web_novel":"WN"}
+                mt_icon = mt_icons.get(mt, "🎬")
+                mt_label = mt_labels.get(mt, mt)
+                mt_badge = f'<span class="badge" style="background:rgba(236,72,153,0.12);color:var(--pink);border-color:rgba(236,72,153,0.2)">{mt_icon} {mt_label}</span>'
+
+                # Progress bar (manga/LN icin)
+                progress_html = ""
+                total_items = row["total_items"] or 0 or 0
+                progress = row["progress"] or 0 or 0
+                if total_items > 0 and mt != "anime":
+                    pct = min(int(progress / total_items * 100), 100)
+                    item_label = "ch" if mt == "manga" else "vol"
+                    progress_html = f'<div class="progress-bar"><div class="progress-fill" style="width:{pct}%"></div></div><span class="progress-text">{progress}/{total_items} {item_label}</span>'
+                elif row["episodes"] and mt == "anime" and row["format"] == "TV":
+                    eps = row["episodes"] or 0
+                    progress_html = f'<span class="progress-text">{progress}/{eps} ep</span>'
+
                 film_html += f"""
                 <a href="/film?id={row['id']}" class="film-card {watched_class}">
                     {cover_html}
@@ -999,9 +1127,19 @@ def start_web_server(port=8080):
                         <div class="film-title">#{i} {htmlmod.escape(row["title"])}</div>
                         <div class="film-meta">{row["year"]} · {htmlmod.escape(row["studio"])} · {row["source"]}{user_r}</div>
                         <div class="film-score">{score}</div>
-                        <div class="film-badges">{badges}</div>
+                        <div class="film-badges">{mt_badge}{badges}</div>
+                        {progress_html}
                     </div>
                 </a>"""
+
+            type_stats = " · ".join(f"{t[0]}: {t[1]}" for t in type_counts)
+
+            # Type toggle butonlari
+            type_btns = ""
+            for mt_val, mt_icon, mt_name in [(None,"🌐","Tümü"),("anime","🎬","Anime"),("manga","📖","Manga"),("light_novel","📚","LN")]:
+                active = " style=\"background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff\"" if mt_val == media_f else ""
+                href = f"/?media_type={mt_val}" if mt_val else "/"
+                type_btns += f'<a href="{href}" class="btn btn-sm"{active}>{mt_icon} {mt_name}</a>'
 
             sq = htmlmod.escape(search_q or "")
             yf_val = yf if yf else ""
@@ -1010,10 +1148,13 @@ def start_web_server(port=8080):
 
             content = f"""
             <div class="stats-bar">
-                <span>📊 {stats["total"]} film</span>
+                <span>📊 {stats["total"]} item</span>
                 <span>✅ {stats["watched"]} izlenen</span>
-                <span>📋 {stats["unwatched"]} kalan</span>
                 <span>⭐ Ort: {stats["avg_score"]:.1f}</span>
+                <span>{type_stats}</span>
+            </div>
+            <div class="type-toggle">
+                {type_btns}
             </div>
             <div class="filters">
                 <form method="GET" action="/">
@@ -1758,6 +1899,13 @@ select{{min-width:100px}}
 .genre-row th{{background:var(--bg)}}
 .empty-state{{text-align:center;padding:40px;color:var(--muted);font-size:0.85em}}
 .muted{{color:var(--muted)}}
+/* === TYPE TOGGLE === */
+.type-toggle{{display:flex;gap:8px;margin-bottom:var(--gap);flex-wrap:wrap}}
+.type-toggle .btn{{flex:1;text-align:center;min-width:70px}}
+/* === PROGRESS === */
+.progress-bar{{height:4px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}}
+.progress-fill{{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:2px;transition:width 0.3s}}
+.progress-text{{font-size:0.65em;color:var(--muted);margin-top:2px;display:block}}
 h2{{font-size:1.2em;margin-bottom:8px}}
 h3{{font-size:0.85em;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}}
 /* === RESPONSIVE === */
