@@ -1,8 +1,8 @@
 import json, os, sqlite3, urllib.request
 from datetime import datetime
 
-BASE = "/data/data/com.termux/files/home/anime-project"
-DB_PATH = f"{BASE}/data/recommender.db"
+BASE = os.environ.get("ANIME_BASE", os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE, "data", "recommender.db")
 ANILIST_URL = "https://graphql.anilist.co"
 
 def fetch_page(page):

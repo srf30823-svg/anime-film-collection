@@ -3,12 +3,20 @@
 import json, os, sys
 from datetime import datetime
 
-BASE = "/data/data/com.termux/files/home/anime-project"
+BASE = os.environ.get("ANIME_BASE", os.path.dirname(os.path.abspath(__file__)))
 os.makedirs(f"{BASE}/output/txt", exist_ok=True)
 os.makedirs(f"{BASE}/output/stats", exist_ok=True)
 
 # === İZLENEN FİLMLER (çıkarılacak) ===
-WATCHED = set(w.strip().lower() for w in open(f"{BASE}/data/watched.txt").readlines()) if os.path.exists(f"{BASE}/data/watched.txt") else set()
+# Bug 5 duzeltmesi: encoding="utf-8", try/except
+WATCHED = set()
+_watched_path = f"{BASE}/data/watched.txt"
+if os.path.exists(_watched_path):
+    try:
+        with open(_watched_path, encoding="utf-8") as _wf:
+            WATCHED = set(w.strip().lower() for w in _wf if w.strip())
+    except (OSError, UnicodeDecodeError) as _e:
+        print(f"⚠️ watched.txt okuma hatasi: {_e}")
 
 # === TÜR İSİMLERİ ===
 CATS = {
@@ -165,7 +173,7 @@ FILMS = [
     {"t":"The Boy and the Heron","y":2023,"d":"Hayao Miyazaki","cat":["fantasy_adventure","philosophical_surreal","emotional_slice"],"mal":7.66,"imdb":7.4},
     {"t":"Spy x Family Code: White","y":2023,"d":"Takashi Katagiri","cat":["action_epic","comedy_satirical"],"mal":7.5,"imdb":7.0},
     {"t":"Digimon Adventure: Last Evolution Kizuna","y":2020,"d":"Tomohisa Taguchi","cat":["action_epic","emotional_slice"],"mal":7.8,"imdb":7.4},
-    {"t":"Ranking of Kings: The Treasure Chest of Courage","y":2023,"y":2023,"d":"Shingo Kaneko","cat":["fantasy_adventure","emotional_slice"],"mal":7.2,"imdb":6.8},
+    {"t":"Ranking of Kings: The Treasure Chest of Courage","y":2023,"d":"Shingo Kaneko","cat":["fantasy_adventure","emotional_slice"],"mal":7.2,"imdb":6.8},
     {"t":"Chainsaw Man: Reze Arc","y":2025,"d":"Tatsuya Yoshihara","cat":["action_epic","horror_thriller"],"mal":9.13,"imdb":8.5},
     {"t":"Mononoke the Movie: Phantom in the Rain","y":2024,"d":"Kenji Nakamura","cat":["horror_thriller","philosophical_surreal","historical"],"mal":7.8,"imdb":7.5},
     {"t":"The Colors Within","y":2024,"d":"Naoko Yamada","cat":["emotional_slice","music_art"],"mal":7.7,"imdb":7.3},

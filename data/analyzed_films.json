@@ -1,6 +1,5 @@
 [
   {
-    "title": "Chainsaw Man: Reze Arc",
     "year": 2025,
     "director": "Tatsuya Yoshihara",
     "categories": [
@@ -23,10 +22,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Chainsaw Man: Reze Arc"
   },
   {
-    "title": "Spirited Away",
     "year": 2001,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -49,10 +48,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Spirited Away"
   },
   {
-    "title": "Princess Mononoke",
     "year": 1997,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -77,10 +76,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Princess Mononoke"
   },
   {
-    "title": "Rurouni Kenshin: Trust and Betrayal",
     "year": 1999,
     "director": "Kazuhiro Furuhashi",
     "categories": [
@@ -105,10 +104,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Rurouni Kenshin: Trust and Betrayal"
   },
   {
-    "title": "A Silent Voice",
     "year": 2016,
     "director": "Naoko Yamada",
     "categories": [
@@ -131,10 +130,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "A Silent Voice"
   },
   {
-    "title": "Grave of the Fireflies",
     "year": 1988,
     "director": "Isao Takahata",
     "categories": [
@@ -157,10 +156,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Grave of the Fireflies"
   },
   {
-    "title": "Perfect Blue",
     "year": 1997,
     "director": "Satoshi Kon",
     "categories": [
@@ -185,10 +184,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Perfect Blue"
   },
   {
-    "title": "The Tatami Galaxy",
     "year": 2010,
     "director": "Masaaki Yuasa",
     "categories": [
@@ -213,10 +212,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "The Tatami Galaxy"
   },
   {
-    "title": "Attack on Titan: Chronicle",
     "year": 2020,
     "director": "Tetsuro Araki",
     "categories": [
@@ -241,10 +240,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Attack on Titan: Chronicle"
   },
   {
-    "title": "Madoka Magica: The Movie – Walpurgisnacht: Rising",
     "year": 2025,
     "director": "Akiyuki Shinbo",
     "categories": [
@@ -269,10 +268,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Madoka Magica: The Movie – Walpurgisnacht: Rising"
   },
   {
-    "title": "Howls Moving Castle",
     "year": 2004,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -295,10 +294,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Howls Moving Castle"
   },
   {
-    "title": "Wolf Children",
     "year": 2012,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -323,10 +322,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Wolf Children"
   },
   {
-    "title": "The First Slam Dunk",
     "year": 2022,
     "director": "Takehiko Inoue",
     "categories": [
@@ -351,10 +350,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "The First Slam Dunk"
   },
   {
-    "title": "Jujutsu Kaisen 0",
     "year": 2021,
     "director": "Seong-Hu Park",
     "categories": [
@@ -377,10 +376,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Jujutsu Kaisen 0"
   },
   {
-    "title": "Look Back",
     "year": 2024,
     "director": "Kiyotaka Oshiyama",
     "categories": [
@@ -403,10 +402,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Look Back"
   },
   {
-    "title": "Nausicaa of the Valley of the Wind",
     "year": 1984,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -431,10 +430,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Nausicaa of the Valley of the Wind"
   },
   {
-    "title": "Castle in the Sky",
     "year": 1986,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -457,10 +456,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Castle in the Sky"
   },
   {
-    "title": "My Neighbor Totoro",
     "year": 1988,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -483,10 +482,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "My Neighbor Totoro"
   },
   {
-    "title": "Akira",
     "year": 1988,
     "director": "Katsuhiro Otomo",
     "categories": [
@@ -513,10 +512,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Akira"
   },
   {
-    "title": "Ghost in the Shell",
     "year": 1995,
     "director": "Mamoru Oshii",
     "categories": [
@@ -543,10 +542,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Ghost in the Shell"
   },
   {
-    "title": "Violet Evergarden: The Movie",
     "year": 2020,
     "director": "Taichi Ishidate",
     "categories": [
@@ -569,10 +568,10 @@
     "popularity": "Cok Populer (Top 100)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Violet Evergarden: The Movie"
   },
   {
-    "title": "Suzume",
     "year": 2022,
     "director": "Makoto Shinkai",
     "categories": [
@@ -597,10 +596,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Suzume"
   },
   {
-    "title": "Kikis Delivery Service",
     "year": 1989,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -623,10 +622,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Kikis Delivery Service"
   },
   {
-    "title": "Millennium Actress",
     "year": 2001,
     "director": "Satoshi Kon",
     "categories": [
@@ -651,10 +650,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Millennium Actress"
   },
   {
-    "title": "Tokyo Godfathers",
     "year": 2003,
     "director": "Satoshi Kon",
     "categories": [
@@ -677,10 +676,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Tokyo Godfathers"
   },
   {
-    "title": "Paprika",
     "year": 2006,
     "director": "Satoshi Kon",
     "categories": [
@@ -705,10 +704,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Paprika"
   },
   {
-    "title": "Redline",
     "year": 2009,
     "director": "Takeshi Koike",
     "categories": [
@@ -733,10 +732,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Redline"
   },
   {
-    "title": "The Tale of The Princess Kaguya",
     "year": 2013,
     "director": "Isao Takahata",
     "categories": [
@@ -761,10 +760,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Tale of The Princess Kaguya"
   },
   {
-    "title": "Fate/stay night: Heaven's Feel III. spring song",
     "year": 2020,
     "director": "Tomonori Sudo",
     "categories": [
@@ -789,10 +788,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Fate/stay night: Heaven's Feel III. spring song"
   },
   {
-    "title": "Rurouni Kenshin: The Beginning",
     "year": 2021,
     "director": "Keishi Otomo",
     "categories": [
@@ -817,10 +816,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Rurouni Kenshin: The Beginning"
   },
   {
-    "title": "Whisper of the Heart",
     "year": 1995,
     "director": "Yoshifumi Kondo",
     "categories": [
@@ -843,10 +842,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Whisper of the Heart"
   },
   {
-    "title": "Mind Game",
     "year": 2004,
     "director": "Masaaki Yuasa",
     "categories": [
@@ -871,10 +870,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Mind Game"
   },
   {
-    "title": "Cowboy Bebop: The Movie",
     "year": 2001,
     "director": "Shinichiro Watanabe",
     "categories": [
@@ -899,10 +898,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Cowboy Bebop: The Movie"
   },
   {
-    "title": "Sword of the Stranger",
     "year": 2007,
     "director": "Masahiro Ando",
     "categories": [
@@ -925,10 +924,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Sword of the Stranger"
   },
   {
-    "title": "Weathering with You",
     "year": 2019,
     "director": "Makoto Shinkai",
     "categories": [
@@ -953,10 +952,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Weathering with You"
   },
   {
-    "title": "Fate/stay night: Heaven's Feel II. lost butterfly",
     "year": 2019,
     "director": "Tomonori Sudo",
     "categories": [
@@ -981,10 +980,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Fate/stay night: Heaven's Feel II. lost butterfly"
   },
   {
-    "title": "Lupin III: The Castle of Cagliostro",
     "year": 1979,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -1007,10 +1006,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Lupin III: The Castle of Cagliostro"
   },
   {
-    "title": "Ponyo",
     "year": 2008,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -1033,10 +1032,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Ponyo"
   },
   {
-    "title": "The Girl Who Leapt Through Time",
     "year": 2006,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -1061,10 +1060,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Girl Who Leapt Through Time"
   },
   {
-    "title": "Maquia: When the Promised Flower Blooms",
     "year": 2018,
     "director": "Mari Okada",
     "categories": [
@@ -1089,10 +1088,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Maquia: When the Promised Flower Blooms"
   },
   {
-    "title": "In This Corner of the World",
     "year": 2016,
     "director": "Sunao Katabuchi",
     "categories": [
@@ -1117,10 +1116,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "In This Corner of the World"
   },
   {
-    "title": "The Night Is Short, Walk on Girl",
     "year": 2017,
     "director": "Masaaki Yuasa",
     "categories": [
@@ -1145,10 +1144,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "The Night Is Short, Walk on Girl"
   },
   {
-    "title": "Liz and the Blue Bird",
     "year": 2018,
     "director": "Naoko Yamada",
     "categories": [
@@ -1173,10 +1172,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Liz and the Blue Bird"
   },
   {
-    "title": "My Hero Academia: Heroes Rising",
     "year": 2019,
     "director": "Kenji Nagasaki",
     "categories": [
@@ -1199,10 +1198,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "My Hero Academia: Heroes Rising"
   },
   {
-    "title": "Only Yesterday",
     "year": 1991,
     "director": "Isao Takahata",
     "categories": [
@@ -1225,10 +1224,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Only Yesterday"
   },
   {
-    "title": "Cardcaptor Sakura Movie 2: The Sealed Card",
     "year": 2000,
     "director": "Morio Asaka",
     "categories": [
@@ -1251,10 +1250,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Cardcaptor Sakura Movie 2: The Sealed Card"
   },
   {
-    "title": "Summer Wars",
     "year": 2009,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -1279,10 +1278,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Summer Wars"
   },
   {
-    "title": "Tekkonkinkreet",
     "year": 2006,
     "director": "Michael Arias",
     "categories": [
@@ -1307,10 +1306,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Tekkonkinkreet"
   },
   {
-    "title": "The Wind Rises",
     "year": 2013,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -1335,10 +1334,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Wind Rises"
   },
   {
-    "title": "K-On! The Movie",
     "year": 2011,
     "director": "Naoko Yamada",
     "categories": [
@@ -1363,10 +1362,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "K-On! The Movie"
   },
   {
-    "title": "Digimon Adventure: Last Evolution Kizuna",
     "year": 2020,
     "director": "Tomohisa Taguchi",
     "categories": [
@@ -1389,10 +1388,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure: Last Evolution Kizuna"
   },
   {
-    "title": "Fate/stay night: Heaven's Feel I. presage flower",
     "year": 2017,
     "director": "Tomonori Sudo",
     "categories": [
@@ -1417,10 +1416,10 @@
     "popularity": "Populer (Top 500)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Fate/stay night: Heaven's Feel I. presage flower"
   },
   {
-    "title": "My Hero Academia: Two Heroes",
     "year": 2018,
     "director": "Kenji Nagasaki",
     "categories": [
@@ -1443,10 +1442,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "My Hero Academia: Two Heroes"
   },
   {
-    "title": "Urusei Yatsura 2: Beautiful Dreamer",
     "year": 1984,
     "director": "Mamoru Oshii",
     "categories": [
@@ -1469,10 +1468,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Urusei Yatsura 2: Beautiful Dreamer"
   },
   {
-    "title": "Mobile Suit Gundam: Char's Counterattack",
     "year": 1988,
     "director": "Yoshiyuki Tomino",
     "categories": [
@@ -1497,10 +1496,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Mobile Suit Gundam: Char's Counterattack"
   },
   {
-    "title": "Ghost in the Shell 2: Innocence",
     "year": 2004,
     "director": "Mamoru Oshii",
     "categories": [
@@ -1525,10 +1524,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Ghost in the Shell 2: Innocence"
   },
   {
-    "title": "Revolutionary Girl Utena: Adolescence of Utena",
     "year": 1999,
     "director": "Kunihiko Ikuhara",
     "categories": [
@@ -1553,10 +1552,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Revolutionary Girl Utena: Adolescence of Utena"
   },
   {
-    "title": "Colourful",
     "year": 2010,
     "director": "Keiichi Hara",
     "categories": [
@@ -1579,36 +1578,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Colourful"
   },
   {
-    "title": "Colorful",
-    "year": 2010,
-    "director": "Keiichi Hara",
-    "categories": [
-      "emotional_slice",
-      "philosophical_surreal"
-    ],
-    "category_names": [
-      "Duygusal&Incelikli",
-      "Felsefi&Surreal"
-    ],
-    "mal_score": 7.6,
-    "imdb_score": 7.3,
-    "owl_score": 8.4,
-    "taste_score": 9.0,
-    "source_material": "Novel",
-    "has_web_novel": false,
-    "why_selected": "Duygusal derinlik ve insani hikaye; Felsefi derinlik ve surreal anlatim (Lain tarzi)",
-    "critic_review": "Yuksek kalite. Turunun en iyi orneklerinden.",
-    "animation_quality": "Yuksek (Dijital)",
-    "popularity": "Iyi Bilinen (Top 1000)",
-    "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
-    "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
-  },
-  {
-    "title": "The Boy and the Beast",
     "year": 2015,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -1633,10 +1606,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "The Boy and the Beast"
   },
   {
-    "title": "The Boy and the Heron",
     "year": 2023,
     "director": "Hayao Miyazaki",
     "categories": [
@@ -1661,10 +1634,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "The Boy and the Heron"
   },
   {
-    "title": "Mononoke the Movie: Phantom in the Rain",
     "year": 2024,
     "director": "Kenji Nakamura",
     "categories": [
@@ -1689,10 +1662,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Mononoke the Movie: Phantom in the Rain"
   },
   {
-    "title": "Nimona",
     "year": 2023,
     "director": "Nick Bruno",
     "categories": [
@@ -1715,10 +1688,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Nimona"
   },
   {
-    "title": "One Piece: Stampede",
     "year": 2019,
     "director": "Takashi Otsuka",
     "categories": [
@@ -1741,10 +1714,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "One Piece: Stampede"
   },
   {
-    "title": "Angel's Egg",
     "year": 1985,
     "director": "Mamoru Oshii",
     "categories": [
@@ -1767,10 +1740,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Angel's Egg"
   },
   {
-    "title": "Patlabor 2: The Movie",
     "year": 1993,
     "director": "Mamoru Oshii",
     "categories": [
@@ -1795,10 +1768,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Patlabor 2: The Movie"
   },
   {
-    "title": "Jin-Roh: The Wolf Brigade",
     "year": 1999,
     "director": "Hiroyuki Okiura",
     "categories": [
@@ -1823,10 +1796,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Jin-Roh: The Wolf Brigade"
   },
   {
-    "title": "Vampire Hunter D: Bloodlust",
     "year": 2000,
     "director": "Yoshiaki Kawajiri",
     "categories": [
@@ -1851,10 +1824,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Vampire Hunter D: Bloodlust"
   },
   {
-    "title": "Cardcaptor Sakura: The Movie",
     "year": 1999,
     "director": "Morio Asaka",
     "categories": [
@@ -1877,10 +1850,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Cardcaptor Sakura: The Movie"
   },
   {
-    "title": "Anthem of the Heart",
     "year": 2015,
     "director": "Mari Okada",
     "categories": [
@@ -1905,10 +1878,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Anthem of the Heart"
   },
   {
-    "title": "The Anthem of the Heart",
     "year": 2015,
     "director": "Mari Okada",
     "categories": [
@@ -1933,10 +1906,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Anthem of the Heart"
   },
   {
-    "title": "Promare",
     "year": 2019,
     "director": "Hiroyuki Imaishi",
     "categories": [
@@ -1961,10 +1934,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Promare"
   },
   {
-    "title": "The Colors Within",
     "year": 2024,
     "director": "Naoko Yamada",
     "categories": [
@@ -1987,10 +1960,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Colors Within"
   },
   {
-    "title": "Shin Godzilla",
     "year": 2016,
     "director": "Hideaki Anno",
     "categories": [
@@ -2013,10 +1986,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Shin Godzilla"
   },
   {
-    "title": "Hols: Prince of the Sun",
     "year": 1968,
     "director": "Isao Takahata",
     "categories": [
@@ -2039,10 +2012,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Hols: Prince of the Sun"
   },
   {
-    "title": "Belladonna of Sadness",
     "year": 1973,
     "director": "Eiichi Yamamoto",
     "categories": [
@@ -2067,10 +2040,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Belladonna of Sadness"
   },
   {
-    "title": "Space Battleship Yamato",
     "year": 1977,
     "director": "Toshio Masuda",
     "categories": [
@@ -2093,10 +2066,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Space Battleship Yamato"
   },
   {
-    "title": "The Cat Returns",
     "year": 2002,
     "director": "Hiroyuki Morita",
     "categories": [
@@ -2119,10 +2092,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "The Cat Returns"
   },
   {
-    "title": "Ninja Scroll",
     "year": 1993,
     "director": "Yoshiaki Kawajiri",
     "categories": [
@@ -2147,10 +2120,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Ninja Scroll"
   },
   {
-    "title": "5 Centimeters Per Second",
     "year": 2007,
     "director": "Makoto Shinkai",
     "categories": [
@@ -2173,10 +2146,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "5 Centimeters Per Second"
   },
   {
-    "title": "Fullmetal Alchemist: The Sacred Star of Milos",
     "year": 2011,
     "director": "Kazuya Murata",
     "categories": [
@@ -2199,10 +2172,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Fullmetal Alchemist: The Sacred Star of Milos"
   },
   {
-    "title": "Psycho-Pass: The Movie",
     "year": 2015,
     "director": "Naoyoshi Shiotani",
     "categories": [
@@ -2227,10 +2200,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Psycho-Pass: The Movie"
   },
   {
-    "title": "Wreck-It Ralph",
     "year": 2012,
     "director": "Rich Moore",
     "categories": [
@@ -2253,10 +2226,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Wreck-It Ralph"
   },
   {
-    "title": "Belle",
     "year": 2021,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -2281,10 +2254,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Belle"
   },
   {
-    "title": "Inu-Oh",
     "year": 2021,
     "director": "Masaaki Yuasa",
     "categories": [
@@ -2309,10 +2282,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Inu-Oh"
   },
   {
-    "title": "Spy x Family Code: White",
     "year": 2023,
     "director": "Takashi Katagiri",
     "categories": [
@@ -2335,10 +2308,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Spy x Family Code: White"
   },
   {
-    "title": "The Red Turtle",
     "year": 2016,
     "director": "Michael Dudok de Wit",
     "categories": [
@@ -2363,10 +2336,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Red Turtle"
   },
   {
-    "title": "Garden of Sinners: Paradox Spiral",
     "year": 2008,
     "director": "Shinsuke Takizawa",
     "categories": [
@@ -2391,10 +2364,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Garden of Sinners: Paradox Spiral"
   },
   {
-    "title": "One Piece Film: Strong World",
     "year": 2009,
     "director": "Munehisa Sakai",
     "categories": [
@@ -2417,10 +2390,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "One Piece Film: Strong World"
   },
   {
-    "title": "My Hero Academia: World Heroes Mission",
     "year": 2021,
     "director": "Kenji Nagasaki",
     "categories": [
@@ -2441,10 +2414,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "My Hero Academia: World Heroes Mission"
   },
   {
-    "title": "Time of Eve: The Movie",
     "year": 2010,
     "director": "Yasuhiro Yoshiura",
     "categories": [
@@ -2469,10 +2442,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Time of Eve: The Movie"
   },
   {
-    "title": "Galaxy Express 999",
     "year": 1979,
     "director": "Rintaro",
     "categories": [
@@ -2495,10 +2468,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Galaxy Express 999"
   },
   {
-    "title": "Patlabor: The Movie",
     "year": 1989,
     "director": "Mamoru Oshii",
     "categories": [
@@ -2523,10 +2496,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Patlabor: The Movie"
   },
   {
-    "title": "Summer Days with Coo",
     "year": 2007,
     "director": "Keiichi Hara",
     "categories": [
@@ -2551,10 +2524,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Summer Days with Coo"
   },
   {
-    "title": "From Up on Poppy Hill",
     "year": 2011,
     "director": "Goro Miyazaki",
     "categories": [
@@ -2579,10 +2552,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "From Up on Poppy Hill"
   },
   {
-    "title": "The Garden of Words",
     "year": 2013,
     "director": "Makoto Shinkai",
     "categories": [
@@ -2605,10 +2578,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Garden of Words"
   },
   {
-    "title": "Her Blue Sky",
     "year": 2019,
     "director": "Mari Okada",
     "categories": [
@@ -2633,10 +2606,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Her Blue Sky"
   },
   {
-    "title": "Miss Hokusai",
     "year": 2015,
     "director": "Keiichi Hara",
     "categories": [
@@ -2661,10 +2634,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Miss Hokusai"
   },
   {
-    "title": "One Piece Film: Red",
     "year": 2022,
     "director": "Goro Taniguchi",
     "categories": [
@@ -2689,10 +2662,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "One Piece Film: Red"
   },
   {
-    "title": "The Imaginary",
     "year": 2023,
     "director": "Yoshiyuki Momose",
     "categories": [
@@ -2715,10 +2688,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Imaginary"
   },
   {
-    "title": "Inuyasha: Swords of an Honorable Ruler",
     "year": 2003,
     "director": "Toshiya Shinohara",
     "categories": [
@@ -2741,10 +2714,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Inuyasha: Swords of an Honorable Ruler"
   },
   {
-    "title": "The Kingdom of Dreams and Madness",
     "year": 2013,
     "director": "Mami Sunada",
     "categories": [
@@ -2767,10 +2740,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Kingdom of Dreams and Madness"
   },
   {
-    "title": "Garden of Sinners: Overlooking View",
     "year": 2007,
     "director": "Eiichi Takahashi",
     "categories": [
@@ -2795,10 +2768,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Garden of Sinners: Overlooking View"
   },
   {
-    "title": "One Piece Film: Gold",
     "year": 2016,
     "director": "Hiroaki Miyamoto",
     "categories": [
@@ -2821,10 +2794,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "One Piece Film: Gold"
   },
   {
-    "title": "Digimon Adventure: Our War Game!",
     "year": 2000,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -2847,10 +2820,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure: Our War Game!"
   },
   {
-    "title": "Arcadia of My Youth",
     "year": 1982,
     "director": "Tomoharu Katsumata",
     "categories": [
@@ -2873,10 +2846,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Arcadia of My Youth"
   },
   {
-    "title": "Pom Poko",
     "year": 1994,
     "director": "Isao Takahata",
     "categories": [
@@ -2899,10 +2872,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Pom Poko"
   },
   {
-    "title": "My Neighbors the Yamadas",
     "year": 1999,
     "director": "Isao Takahata",
     "categories": [
@@ -2925,10 +2898,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "My Neighbors the Yamadas"
   },
   {
-    "title": "Metropolis",
     "year": 2001,
     "director": "Rintaro",
     "categories": [
@@ -2951,10 +2924,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Metropolis"
   },
   {
-    "title": "Children Who Chase Lost Voices",
     "year": 2011,
     "director": "Makoto Shinkai",
     "categories": [
@@ -2977,10 +2950,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Children Who Chase Lost Voices"
   },
   {
-    "title": "Mirai",
     "year": 2018,
     "director": "Mamoru Hosoda",
     "categories": [
@@ -3003,10 +2976,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Mirai"
   },
   {
-    "title": "Ride Your Wave",
     "year": 2019,
     "director": "Masaaki Yuasa",
     "categories": [
@@ -3031,10 +3004,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Ride Your Wave"
   },
   {
-    "title": "Sailor Moon Cosmos Part 1",
     "year": 2024,
     "director": "Kazuko Tadano",
     "categories": [
@@ -3057,10 +3030,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon Cosmos Part 1"
   },
   {
-    "title": "Sailor Moon Cosmos Part 2",
     "year": 2024,
     "director": "Kazuko Tadano",
     "categories": [
@@ -3083,10 +3056,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon Cosmos Part 2"
   },
   {
-    "title": "Inuyasha: The Castle Beyond the Looking Glass",
     "year": 2002,
     "director": "Toshiya Shinohara",
     "categories": [
@@ -3109,10 +3082,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Inuyasha: The Castle Beyond the Looking Glass"
   },
   {
-    "title": "Shin Ultraman",
     "year": 2022,
     "director": "Hideaki Anno",
     "categories": [
@@ -3135,10 +3108,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Shin Ultraman"
   },
   {
-    "title": "Garden of Sinners: The Hollow Shrine",
     "year": 2008,
     "director": "Takahiro Miura",
     "categories": [
@@ -3161,10 +3134,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Garden of Sinners: The Hollow Shrine"
   },
   {
-    "title": "Sword Art Online: Progressive - Aria of a Starless Night",
     "year": 2021,
     "director": "Ayako Kouno",
     "categories": [
@@ -3189,10 +3162,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Sword Art Online: Progressive - Aria of a Starless Night"
   },
   {
-    "title": "Horimiya: The Missing Pieces",
     "year": 2023,
     "director": "Masashi Ishihama",
     "categories": [
@@ -3215,10 +3188,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Horimiya: The Missing Pieces"
   },
   {
-    "title": "Patema Inverted",
     "year": 2013,
     "director": "Yasuhiro Yoshiura",
     "categories": [
@@ -3243,10 +3216,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Patema Inverted"
   },
   {
-    "title": "Josee, the Tiger and the Fish",
     "year": 2020,
     "director": "Kotaro Tamura",
     "categories": [
@@ -3269,10 +3242,10 @@
     "popularity": "Iyi Bilinen (Top 1000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Josee, the Tiger and the Fish"
   },
   {
-    "title": "Voices of a Distant Star",
     "year": 2002,
     "director": "Makoto Shinkai",
     "categories": [
@@ -3297,10 +3270,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Voices of a Distant Star"
   },
   {
-    "title": "The Sky Crawlers",
     "year": 2008,
     "director": "Mamoru Oshii",
     "categories": [
@@ -3325,10 +3298,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "The Sky Crawlers"
   },
   {
-    "title": "Mai Mai Miracle",
     "year": 2009,
     "director": "Sunao Katabuchi",
     "categories": [
@@ -3353,10 +3326,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Mai Mai Miracle"
   },
   {
-    "title": "Children of the Sea",
     "year": 2019,
     "director": "Ayumu Watanabe",
     "categories": [
@@ -3381,10 +3354,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Children of the Sea"
   },
   {
-    "title": "Final Fantasy VII: Advent Children",
     "year": 2005,
     "director": "Tetsuya Nomura",
     "categories": [
@@ -3407,10 +3380,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Final Fantasy VII: Advent Children"
   },
   {
-    "title": "Garden of Sinners: Remaining Sense of Pain",
     "year": 2008,
     "director": "Takahiro Miura",
     "categories": [
@@ -3433,10 +3406,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Genel anime severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Yuksek (Gizem, ipuclari, cozum)"
+    "story_quality": "Yuksek (Gizem, ipuclari, cozum)",
+    "t": "Garden of Sinners: Remaining Sense of Pain"
   },
   {
-    "title": "Garden of Sinners: The Hollow Garden",
     "year": 2008,
     "director": "Takahiro Miura",
     "categories": [
@@ -3459,10 +3432,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Garden of Sinners: The Hollow Garden"
   },
   {
-    "title": "Harmony",
     "year": 2015,
     "director": "Michael Arias",
     "categories": [
@@ -3485,10 +3458,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Harmony"
   },
   {
-    "title": "Adieu Galaxy Express 999",
     "year": 1981,
     "director": "Rintaro",
     "categories": [
@@ -3511,10 +3484,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Adieu Galaxy Express 999"
   },
   {
-    "title": "Vampire Hunter D",
     "year": 1985,
     "director": "Toyoo Ashida",
     "categories": [
@@ -3537,10 +3510,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Vampire Hunter D"
   },
   {
-    "title": "The Vision of Escaflowne",
     "year": 2000,
     "director": "Kazuki Akane",
     "categories": [
@@ -3565,10 +3538,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "The Vision of Escaflowne"
   },
   {
-    "title": "Legend of the Galactic Heroes: My Conquest is the Sea of Stars",
     "year": 1988,
     "director": "Noboru Ishiguro",
     "categories": [
@@ -3593,10 +3566,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Legend of the Galactic Heroes: My Conquest is the Sea of Stars"
   },
   {
-    "title": "X/1999",
     "year": 1996,
     "director": "Rintaro",
     "categories": [
@@ -3621,10 +3594,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "X/1999"
   },
   {
-    "title": "Dead Leaves",
     "year": 2004,
     "director": "Hiroyuki Imaishi",
     "categories": [
@@ -3649,10 +3622,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Dead Leaves"
   },
   {
-    "title": "Mary and the Witchs Flower",
     "year": 2017,
     "director": "Hiromasa Yonebayashi",
     "categories": [
@@ -3675,10 +3648,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Mary and the Witchs Flower"
   },
   {
-    "title": "Lu Over the Wall",
     "year": 2017,
     "director": "Masaaki Yuasa",
     "categories": [
@@ -3701,10 +3674,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Lu Over the Wall"
   },
   {
-    "title": "Ranking of Kings: The Treasure Chest of Courage",
     "year": 2023,
     "director": "Shingo Kaneko",
     "categories": [
@@ -3727,10 +3700,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Ranking of Kings: The Treasure Chest of Courage"
   },
   {
-    "title": "Oban Star-Racers",
     "year": 2006,
     "director": "Savin Yeatman-Eiffel",
     "categories": [
@@ -3755,10 +3728,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Oban Star-Racers"
   },
   {
-    "title": "Gantz:O",
     "year": 2016,
     "director": "Yasushi Kawamura",
     "categories": [
@@ -3783,10 +3756,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Gantz:O"
   },
   {
-    "title": "Inuyasha: Affections Touching Across Time",
     "year": 2001,
     "director": "Toshiya Shinohara",
     "categories": [
@@ -3811,10 +3784,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Inuyasha: Affections Touching Across Time"
   },
   {
-    "title": "StrayDog: Kerberos Panzer Cops",
     "year": 1991,
     "director": "Mamoru Oshii",
     "categories": [
@@ -3837,10 +3810,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "StrayDog: Kerberos Panzer Cops"
   },
   {
-    "title": "Sailor Moon Eternal Part 1",
     "year": 2021,
     "director": "Chiaki Kon",
     "categories": [
@@ -3863,10 +3836,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon Eternal Part 1"
   },
   {
-    "title": "Sailor Moon Eternal Part 2",
     "year": 2021,
     "director": "Chiaki Kon",
     "categories": [
@@ -3889,10 +3862,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon Eternal Part 2"
   },
   {
-    "title": "Sword Art Online: Ordinal Scale",
     "year": 2017,
     "director": "Tomohiko Ito",
     "categories": [
@@ -3917,10 +3890,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Sword Art Online: Ordinal Scale"
   },
   {
-    "title": "Sword Art Online: Progressive - Scherzo of Deep Night",
     "year": 2022,
     "director": "Ayako Kouno",
     "categories": [
@@ -3945,10 +3918,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Sword Art Online: Progressive - Scherzo of Deep Night"
   },
   {
-    "title": "Rurouni Kenshin: The Motion Picture",
     "year": 1997,
     "director": "Kazuhiro Furuhashi",
     "categories": [
@@ -3971,10 +3944,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Rurouni Kenshin: The Motion Picture"
   },
   {
-    "title": "She and Her Cat",
     "year": 1999,
     "director": "Makoto Shinkai",
     "categories": [
@@ -3997,10 +3970,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "She and Her Cat"
   },
   {
-    "title": "Penguin Highway",
     "year": 2018,
     "director": "Hiroyasu Ishida",
     "categories": [
@@ -4025,10 +3998,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Penguin Highway"
   },
   {
-    "title": "Wicked City",
     "year": 1987,
     "director": "Yoshiaki Kawajiri",
     "categories": [
@@ -4053,10 +4026,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Wicked City"
   },
   {
-    "title": "Record of Lodoss War: Chronicles of the Heroic Knight",
     "year": 1998,
     "director": "Kunihiko Yuyama",
     "categories": [
@@ -4079,10 +4052,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Record of Lodoss War: Chronicles of the Heroic Knight"
   },
   {
-    "title": "Steamboy",
     "year": 2004,
     "director": "Katsuhiro Otomo",
     "categories": [
@@ -4107,10 +4080,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Steamboy"
   },
   {
-    "title": "Totto-chan: The Little Girl at the Window",
     "year": 2023,
     "director": "Shinnosuke Yakuwa",
     "categories": [
@@ -4133,10 +4106,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Totto-chan: The Little Girl at the Window"
   },
   {
-    "title": "Kingsglaive: Final Fantasy XV",
     "year": 2016,
     "director": "Takeshi Nozue",
     "categories": [
@@ -4159,10 +4132,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Kingsglaive: Final Fantasy XV"
   },
   {
-    "title": "Inuyasha: Fire on the Mystic Island",
     "year": 2004,
     "director": "Toshiya Shinohara",
     "categories": [
@@ -4185,10 +4158,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Inuyasha: Fire on the Mystic Island"
   },
   {
-    "title": "In This Corner of the World: Sincerely Yours",
     "year": 2019,
     "director": "Sunao Katabuchi",
     "categories": [
@@ -4211,10 +4184,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "In This Corner of the World: Sincerely Yours"
   },
   {
-    "title": "Shin Kamen Rider",
     "year": 2023,
     "director": "Hideaki Anno",
     "categories": [
@@ -4237,10 +4210,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Shin Kamen Rider"
   },
   {
-    "title": "Sailor Moon R: The Movie",
     "year": 1993,
     "director": "Kunihiko Ikuhara",
     "categories": [
@@ -4263,10 +4236,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon R: The Movie"
   },
   {
-    "title": "Digimon Adventure tri. Chapter 1: Reunion",
     "year": 2015,
     "director": "Keitaro Motonaga",
     "categories": [
@@ -4289,10 +4262,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure tri. Chapter 1: Reunion"
   },
   {
-    "title": "Digimon Adventure tri. Chapter 6: Future",
     "year": 2018,
     "director": "Keitaro Motonaga",
     "categories": [
@@ -4315,10 +4288,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure tri. Chapter 6: Future"
   },
   {
-    "title": "Cyber City Oedo 808",
     "year": 1990,
     "director": "Yoshiaki Kawajiri",
     "categories": [
@@ -4343,10 +4316,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Cyber City Oedo 808"
   },
   {
-    "title": "Princess Arete",
     "year": 2001,
     "director": "Sunao Katabuchi",
     "categories": [
@@ -4369,10 +4342,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Princess Arete"
   },
   {
-    "title": "The Place Promised in Our Early Days",
     "year": 2004,
     "director": "Makoto Shinkai",
     "categories": [
@@ -4397,10 +4370,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Place Promised in Our Early Days"
   },
   {
-    "title": "The Red Spectacles",
     "year": 1987,
     "director": "Mamoru Oshii",
     "categories": [
@@ -4423,10 +4396,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "The Red Spectacles"
   },
   {
-    "title": "Avalon",
     "year": 2001,
     "director": "Mamoru Oshii",
     "categories": [
@@ -4451,10 +4424,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Avalon"
   },
   {
-    "title": "Bofuri: I Don't Want to Get Hurt, so I'll Max Out My Defense.",
     "year": 2021,
     "director": "Yoshitsugu Kimura",
     "categories": [
@@ -4477,10 +4450,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Bofuri: I Don't Want to Get Hurt, so I'll Max Out My Defense."
   },
   {
-    "title": "The Wonderful World of Puss 'n Boots",
     "year": 1969,
     "director": "Kimio Yabuki",
     "categories": [
@@ -4503,10 +4476,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "The Wonderful World of Puss 'n Boots"
   },
   {
-    "title": "Demon City Shinjuku",
     "year": 1988,
     "director": "Yoshiaki Kawajiri",
     "categories": [
@@ -4531,10 +4504,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Demon City Shinjuku"
   },
   {
-    "title": "Ocean Waves",
     "year": 1993,
     "director": "Tomomi Mochizuki",
     "categories": [
@@ -4557,10 +4530,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Ocean Waves"
   },
   {
-    "title": "Spriggan",
     "year": 1998,
     "director": "Masahiko Murata",
     "categories": [
@@ -4583,10 +4556,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Spriggan"
   },
   {
-    "title": "Birthday Wonderland",
     "year": 2019,
     "director": "Keiichi Hara",
     "categories": [
@@ -4609,10 +4582,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Birthday Wonderland"
   },
   {
-    "title": "Appleseed",
     "year": 2004,
     "director": "Shinji Aramaki",
     "categories": [
@@ -4637,10 +4610,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Appleseed"
   },
   {
-    "title": "Blade Runner: Black Out 2022",
     "year": 2017,
     "director": "Shinichiro Watanabe",
     "categories": [
@@ -4663,10 +4636,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Blade Runner: Black Out 2022"
   },
   {
-    "title": "Talking Head",
     "year": 1992,
     "director": "Mamoru Oshii",
     "categories": [
@@ -4689,10 +4662,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Talking Head"
   },
   {
-    "title": "Sailor Moon S: The Movie",
     "year": 1994,
     "director": "Hiroki Shibata",
     "categories": [
@@ -4715,10 +4688,10 @@
     "popularity": "Nispeten Bilinen (Top 5000)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon S: The Movie"
   },
   {
-    "title": "Digimon Adventure 02: Revenge of Diaboromon",
     "year": 2001,
     "director": "Jeff Nimoy",
     "categories": [
@@ -4741,10 +4714,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure 02: Revenge of Diaboromon"
   },
   {
-    "title": "Highlander: The Search for Vengeance",
     "year": 2007,
     "director": "Yoshiaki Kawajiri",
     "categories": [
@@ -4767,10 +4740,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Highlander: The Search for Vengeance"
   },
   {
-    "title": "The Tibetan Dog",
     "year": 2011,
     "director": "Masayuki Kojima",
     "categories": [
@@ -4793,10 +4766,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Tibetan Dog"
   },
   {
-    "title": "Genocidal Organ",
     "year": 2017,
     "director": "Shukou Murase",
     "categories": [
@@ -4821,10 +4794,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Genocidal Organ"
   },
   {
-    "title": "Fortune Favors Lady Nikuko",
     "year": 2021,
     "director": "Ayumu Watanabe",
     "categories": [
@@ -4847,10 +4820,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Fortune Favors Lady Nikuko"
   },
   {
-    "title": "Doraemon: Nobita's Little Star Wars",
     "year": 1985,
     "director": "Tsutomu Shibayama",
     "categories": [
@@ -4873,10 +4846,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Doraemon: Nobita's Little Star Wars"
   },
   {
-    "title": "Blood: The Last Vampire",
     "year": 2000,
     "director": "Hiroyuki Kitakubo",
     "categories": [
@@ -4899,10 +4872,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Blood: The Last Vampire"
   },
   {
-    "title": "Samurai Champloo: The Movie",
     "year": 2007,
     "director": "Shinichiro Watanabe",
     "categories": [
@@ -4925,10 +4898,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Samurai Champloo: The Movie"
   },
   {
-    "title": "Modest Heroes",
     "year": 2018,
     "director": "Studio Ponoc",
     "categories": [
@@ -4951,10 +4924,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Modest Heroes"
   },
   {
-    "title": "Digimon Tamers: Battle of Adventurers",
     "year": 2001,
     "director": "Tetsuo Imazawa",
     "categories": [
@@ -4977,10 +4950,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Tamers: Battle of Adventurers"
   },
   {
-    "title": "Digimon Adventure tri. Chapter 2: Determination",
     "year": 2016,
     "director": "Keitaro Motonaga",
     "categories": [
@@ -5003,10 +4976,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure tri. Chapter 2: Determination"
   },
   {
-    "title": "Digimon Adventure tri. Chapter 4: Loss",
     "year": 2017,
     "director": "Keitaro Motonaga",
     "categories": [
@@ -5029,10 +5002,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure tri. Chapter 4: Loss"
   },
   {
-    "title": "Tokyo Ghoul: Jack",
     "year": 2015,
     "director": "Shuhei Morita",
     "categories": [
@@ -5055,10 +5028,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Tokyo Ghoul: Jack"
   },
   {
-    "title": "Napping Princess",
     "year": 2017,
     "director": "Kenji Kamiyama",
     "categories": [
@@ -5081,10 +5054,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Napping Princess"
   },
   {
-    "title": "Phoenix 2772",
     "year": 1980,
     "director": "Sugii Gisaburo",
     "categories": [
@@ -5107,10 +5080,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Phoenix 2772"
   },
   {
-    "title": "Love Hina Again",
     "year": 2002,
     "director": "Yoshiaki Iwasaki",
     "categories": [
@@ -5133,10 +5106,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Love Hina Again"
   },
   {
-    "title": "Tales from Earthsea",
     "year": 2006,
     "director": "Goro Miyazaki",
     "categories": [
@@ -5157,10 +5130,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Tales from Earthsea"
   },
   {
-    "title": "Tachigui: The Amazing Lives of the Fast Food Grifters",
     "year": 2006,
     "director": "Mamoru Oshii",
     "categories": [
@@ -5183,10 +5156,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Lain, Perfect Blue, Evangelion severler icin",
     "character_depth": "Cok Derin (Psikolojik profil, ic catisma)",
-    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)"
+    "story_quality": "Cok Yuksek (Katmanli anlatim, sembolizm)",
+    "t": "Tachigui: The Amazing Lives of the Fast Food Grifters"
   },
   {
-    "title": "Sailor Moon SuperS: The Movie",
     "year": 1995,
     "director": "Hiroki Shibata",
     "categories": [
@@ -5209,10 +5182,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Sailor Moon SuperS: The Movie"
   },
   {
-    "title": "Digimon Adventure tri. Chapter 3: Confession",
     "year": 2016,
     "director": "Keitaro Motonaga",
     "categories": [
@@ -5235,10 +5208,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure tri. Chapter 3: Confession"
   },
   {
-    "title": "Digimon Adventure tri. Chapter 5: Coexistence",
     "year": 2017,
     "director": "Keitaro Motonaga",
     "categories": [
@@ -5261,10 +5234,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Adventure tri. Chapter 5: Coexistence"
   },
   {
-    "title": "Doomed Megalopolis",
     "year": 1991,
     "director": "Rintaro",
     "categories": [
@@ -5289,10 +5262,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Doomed Megalopolis"
   },
   {
-    "title": "The Little Prince and the Eight-Headed Dragon",
     "year": 1963,
     "director": "Yugo Serikawa",
     "categories": [
@@ -5313,10 +5286,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "The Little Prince and the Eight-Headed Dragon"
   },
   {
-    "title": "Appleseed: Ex Machina",
     "year": 2007,
     "director": "Shinji Aramaki",
     "categories": [
@@ -5339,10 +5312,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Appleseed: Ex Machina"
   },
   {
-    "title": "Burn the Witch",
     "year": 2020,
     "director": "Tatsuro Koishi",
     "categories": [
@@ -5365,10 +5338,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Burn the Witch"
   },
   {
-    "title": "Space Pirate Captain Harlock",
     "year": 2013,
     "director": "Shinji Aramaki",
     "categories": [
@@ -5391,10 +5364,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Space Pirate Captain Harlock"
   },
   {
-    "title": "Digimon Tamers: Runaway Locomon",
     "year": 2002,
     "director": "Tetsuo Imazawa",
     "categories": [
@@ -5417,10 +5390,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Tamers: Runaway Locomon"
   },
   {
-    "title": "Digimon Frontier: Island of Lost Digimon",
     "year": 2002,
     "director": "Takahiro Imamura",
     "categories": [
@@ -5443,10 +5416,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Digimon Frontier: Island of Lost Digimon"
   },
   {
-    "title": "The Life of Budori Gusuko",
     "year": 2012,
     "director": "Gisaburo Sugii",
     "categories": [
@@ -5469,10 +5442,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The Life of Budori Gusuko"
   },
   {
-    "title": "The House of the Lost on the Cape",
     "year": 2021,
     "director": "Shinichiro Watanabe",
     "categories": [
@@ -5495,10 +5468,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "The House of the Lost on the Cape"
   },
   {
-    "title": "The Five Star Stories",
     "year": 1989,
     "director": "Kazuo Yamazaki",
     "categories": [
@@ -5523,10 +5496,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "The Five Star Stories"
   },
   {
-    "title": "Spirit of Wonder",
     "year": 1992,
     "director": "Takashi Anno",
     "categories": [
@@ -5549,10 +5522,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Spirit of Wonder"
   },
   {
-    "title": "Spring and Chaos",
     "year": 1996,
     "director": "Shoji Kawamori",
     "categories": [
@@ -5575,10 +5548,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Mushishi, Dororo, Violet Evergarden severler icin",
     "character_depth": "Derin (Duygusal gelisim, iliskiler)",
-    "story_quality": "Yuksek (Doyurucu, dokunakli)"
+    "story_quality": "Yuksek (Doyurucu, dokunakli)",
+    "t": "Spring and Chaos"
   },
   {
-    "title": "Afro Samurai: Resurrection",
     "year": 2009,
     "director": "Fuminori Kizaki",
     "categories": [
@@ -5601,10 +5574,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Afro Samurai: Resurrection"
   },
   {
-    "title": "Appleseed Alpha",
     "year": 2014,
     "director": "Shinji Aramaki",
     "categories": [
@@ -5627,10 +5600,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Appleseed Alpha"
   },
   {
-    "title": "Catnapped!",
     "year": 1995,
     "director": "Takashi Anno",
     "categories": [
@@ -5653,10 +5626,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Catnapped!"
   },
   {
-    "title": "Cleopatra",
     "year": 1970,
     "director": "Eiichi Yamamoto",
     "categories": [
@@ -5679,10 +5652,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Studio Ghibli, Dororo severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Cleopatra"
   },
   {
-    "title": "Rosario + Vampire CAPU2",
     "year": 2008,
     "director": "Takayuki Inagaki",
     "categories": [
@@ -5705,10 +5678,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Gintama, Konosuba severler icin",
     "character_depth": "Iyi (Karakter tabanli mizah)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "Rosario + Vampire CAPU2"
   },
   {
-    "title": "Tailender",
     "year": 1988,
     "director": "Tetsuro Imazawa",
     "categories": [
@@ -5731,10 +5704,10 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Dragon Ball, Demon Slayer, Solo Leveling severler icin",
     "character_depth": "Iyi (Guc gelisim, motivasyon)",
-    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)"
+    "story_quality": "Iyi (Tempo, gerilim, doruk noktasi)",
+    "t": "Tailender"
   },
   {
-    "title": "The Laws of the Sun",
     "year": 2000,
     "director": "Takaaki Ishiyama",
     "categories": [
@@ -5757,6 +5730,7 @@
     "popularity": "Az Bilinen (Gizemli Mucevher)",
     "taste_index": "Akira, Ghost in the Shell severler icin",
     "character_depth": "Orta (Tur geregi yeterli)",
-    "story_quality": "Iyi (Tur standartlarini karsiliyor)"
+    "story_quality": "Iyi (Tur standartlarini karsiliyor)",
+    "t": "The Laws of the Sun"
   }
 ]

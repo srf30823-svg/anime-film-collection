@@ -1,4 +1,23 @@
+# Python
 __pycache__/
 *.pyc
+*.pyo
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Project
 data/*.shm
 data/*.wal
+output/
+
+# Keep data files tracked
+!data/watched.txt
+!data/recommender.db

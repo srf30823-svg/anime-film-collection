@@ -1,0 +1,7 @@
+# OWL Anime & Film Oneri Sistemi - Bagimliliklar
+# Python 3.10+ built-in moduller kullanir (sqlite3, json, http.server, vb.)
+# Harici paket gerektirmez!
+
+# Opsiyonel: Test icin
+# pytest>=7.0
+# pytest-cov>=4.0
