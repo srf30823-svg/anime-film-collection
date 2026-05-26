@@ -1,0 +1,2203 @@
+#!/usr/bin/env python3
+"""
+OWL Anime & Film Oneri Sistemi v5.0
+- 602 film (AniList API + manuel)
+- Content-based collaborative filtering
+- Tur/yil/kaynak/format/puan filtresi
+- Kullanici puani ve not sistemi
+- Modern web arayuzu (responsive, arama, detay sayfasi, watchlist, profil, karsilastirma)
+- JSON API (REST-like) + watchlist API + profil API + export API
+- CLI arayuz
+- OMDb API ile IMDB skoru cekme
+- CSV/PDF export
+- Fonksiyon API (build.py ve diger moduller icin import edilebilir)
+
+Kullanim:
+  python3 oneri.py                          # Varsayilan: 10 oneri
+  python3 oneri.py --recommend 20           # 20 oneri
+  python3 oneri.py --genre Psychological    # Tur filtresi
+  python3 oneri.py --studio "Studio Ghibli" # Studio filtresi
+  python3 oneri.py --source Manga            # Kaynak filtresi
+  python3 oneri.py --min-score 8.5           # Min OWL puani
+  python3 oneri.py --year-from 2020          # Yil filtresi
+  python3 oneri.py --search "your name"      # Arama
+  python3 oneri.py --watch 1 --rate 9.5     # Film izle + puanla
+  python3 oneri.py --watch 1 --note "mukemmel" # Film notu
+  python3 oneri.py --detail 1                # Film detayi
+  python3 oneri.py --report                  # TXT rapor
+  python3 oneri.py --stats                   # Istatistikler
+  python3 oneri.py --import-anilist 10       # AniList import
+  python3 oneri.py --web 8080                # Web arayuz
+  python3 oneri.py --cli                     # Interaktif CLI
+  python3 oneri.py --fetch-imdb              # OMDb ile IMDB skorlarini cek
+  python3 oneri.py --export csv              # CSV export
+  python3 oneri.py --compare 1,2,3          # Film karsilastirma
+  python3 oneri.py --profile                 # Kullanici profili (CLI)
+
+Modul olarak kullanim:
+  from oneri import init_db, recommend, get_stats, mark_watched, rate_film
+  from oneri import import_anilist_data, search_film, get_detail
+  from oneri import fetch_imdb_scores, export_csv, compare_films
+"""
+import json, os, sys, sqlite3, argparse, urllib.request, re, csv, io
+from datetime import datetime
+from collections import Counter
+
+# === YOL Yonetimi (Bug 4 duzeltmesi: sabit yol kaldirildi) ===
+BASE = os.environ.get("ANIME_BASE", os.path.dirname(os.path.abspath(__file__)))
+DB_PATH = os.path.join(BASE, "data", "recommender.db")
+TXT_DIR = os.path.join(BASE, "output", "txt")
+WATCHED_FILE = os.path.join(BASE, "data", "watched.txt")
+ANALYZED_FILE = os.path.join(BASE, "data", "analyzed_films.json")
+
+# === TUR PROFILI (OWL zevk agirligi) ===
+TASTE_W = {
+    "Philosophical": 10, "Psychological": 9, "Action": 9, "Drama": 8, "Fantasy": 8,
+    "Comedy": 8, "Sci-Fi": 7, "Slice of Life": 7, "Thriller": 7, "Romance": 5,
+    "Mecha": 6, "Horror": 6, "Mystery": 7, "Suspense": 7,
+    "Adventure": 7, "Supernatural": 7, "Ecchi": 4, "Sports": 7, "Music": 7,
+}
+
+# === KAYNAK ESLESTIRME ===
+SOURCE_MAP = {
+    "ORIGINAL": "Original", "MANGA": "Manga", "LIGHT_NOVEL": "Light Novel",
+    "NOVEL": "Novel", "VISUAL_NOVEL": "Visual Novel", "WEB_NOVEL": "Web Novel",
+    "GAME": "Game",
+}
+
+# =====================================================================
+# LOYALTY / SERIALIZE — JSON corruption'a dayaniklidir
+# =====================================================================
+def _safe_json_dumps(obj, path):
+    """Atomik yazma: once tmp, sonra rename. corruption korumasi."""
+    tmp = path + ".tmp"
+    try:
+        with open(tmp, "w", encoding="utf-8") as f:
+            json.dump(obj, f, ensure_ascii=False, indent=2)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp, path)
+    except Exception as e:
+        if os.path.exists(tmp):
+            os.remove(tmp)
+        raise
+
+def _safe_json_load(path, default=None):
+    """Guvenli JSON okuma. Bozuk dosya icin default doner."""
+    try:
+        with open(path, encoding="utf-8") as f:
+            return json.load(f)
+    except (json.JSONDecodeError, FileNotFoundError, OSError):
+        return default if default is not None else {}
+
+# =====================================================================
+# DUPLICATE TEMIZLEME (Bug 2-3 duzeltmesi)
+# =====================================================================
+def _normalize_title(t):
+    """Title'i normalize et: kucuk harf, trim, colour->color vb."""
+    if not t:
+        return ""
+    t = t.lower().strip()
+    # Yazim farkliliklarini düzelt
+    t = t.replace("colour", "color")
+    t = t.replace("grey", "gray")
+    t = t.replace("favourite", "favorite")
+    t = re.sub(r"\s+", " ", t)
+    return t
+
+def deduplicate_films():
+    """
+    FILMS listesindeki duplicate temizligi.
+    build.py ve analyzed_films.json icin.
+    Aynı film (normalize title ile) birden fazla kez eklenmisse ilki tutulur.
+    """
+    results = {"db_fixed": 0, "json_fixed": 0}
+
+    # 1. DB duplicate temizligi (title_lower UNIQUE zaten engelliyor, ama emin olalim)
+    db = get_db()
+    dups = db.execute(
+        "SELECT title_lower, COUNT(*) as c, GROUP_CONCAT(id, ',') as ids FROM films GROUP BY title_lower HAVING c > 1"
+    ).fetchall()
+    for row in dups:
+        ids = row["ids"].split(",")
+        # Ilki tut, geri kalanlari sil
+        for dup_id in ids[1:]:
+            db.execute("DELETE FROM films WHERE id = ?", (dup_id,))
+            results["db_fixed"] += 1
+    db.commit()
+
+    # 2. Build.py FILMS listesi (inline kontrol)
+    build_path = os.path.join(BASE, "build.py")
+    if os.path.exists(build_path):
+        try:
+            with open(build_path, encoding="utf-8") as f:
+                build_content = f.read()
+            # FILMS listesini bul ve temizle
+            films_match = re.search(r'FILMS\s*=\s*\[(.*?)\]', build_content, re.DOTALL)
+            if films_match:
+                films_text = films_match.group(1)
+                titles = re.findall(r'"t"\s*:\s*"([^"]+)"', films_text)
+                seen = set()
+                new_films = []
+                removed = 0
+                for film_block in re.findall(r'\{[^{}]+\}', films_text):
+                    t_match = re.search(r'"t"\s*:\s*"([^"]+)"', film_block)
+                    if t_match:
+                        nt = _normalize_title(t_match.group(1))
+                        if nt not in seen:
+                            seen.add(nt)
+                            new_films.append(film_block)
+                        else:
+                            removed += 1
+                if removed > 0:
+                    new_films_text = ",\n    ".join(new_films)
+                    new_content = build_content[:films_match.start(1)] + "\n    " + new_films_text + "\n" + build_content[films_match.end(1):]
+                    with open(build_path, "w", encoding="utf-8") as f:
+                        f.write(new_content)
+                    results["json_fixed"] += removed
+        except Exception as e:
+            print(f"⚠️ build.py duplicate temizligi basarisiz: {e}")
+
+    # 3. analyzed_films.json duplicate temizligi
+    if os.path.exists(ANALYZED_FILE):
+        try:
+            data = _safe_json_load(ANALYZED_FILE, [])
+            if data:
+                seen = {}
+                clean = []
+                for film in data:
+                    # title vs t tutarsizligi cozumu (Bug 3)
+                    t = film.get("t") or film.get("title", "")
+                    nt = _normalize_title(t)
+                    if nt and nt not in seen:
+                        seen[nt] = True
+                        # Standart: "t" anahtari kullan
+                        film["t"] = t
+                        if "title" in film:
+                            del film["title"]
+                        clean.append(film)
+                    else:
+                        results["json_fixed"] += 1
+                if results["json_fixed"] > 0:
+                    _safe_json_dumps(clean, ANALYZED_FILE)
+        except Exception as e:
+            print(f"⚠️ analyzed_films.json duplicate temizligi basarisiz: {e}")
+
+    db.close()
+    return results
+
+# =====================================================================
+# WATCHED MANAGEMENT
+# =====================================================================
+def load_watched_set():
+    """
+    watched.txt'den izlenen film setini yukle.
+    Bug 5 duzeltmesi: encoding="utf-8", try/except
+    """
+    watched = set()
+    try:
+        if os.path.exists(WATCHED_FILE):
+            with open(WATCHED_FILE, encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        watched.add(line.lower())
+    except (OSError, UnicodeDecodeError) as e:
+        print(f"⚠️ watched.txt okuma hatasi: {e}")
+    return watched
+
+# === DB ===
+def get_db():
+    db = sqlite3.connect(DB_PATH)
+    db.row_factory = sqlite3.Row
+    return db
+
+def init_db():
+    db = get_db()
+    db.executescript("""
+        CREATE TABLE IF NOT EXISTS films(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            title TEXT, title_lower TEXT UNIQUE,
+            year INTEGER, director TEXT DEFAULT '',
+            studio TEXT DEFAULT 'Unknown',
+            mal_score REAL DEFAULT 0, imdb_score REAL DEFAULT 0, owl_score REAL DEFAULT 0,
+            source TEXT DEFAULT 'Unknown', genres TEXT DEFAULT '[]',
+            popularity INTEGER DEFAULT 0, is_watched INTEGER DEFAULT 0,
+            synopsis TEXT DEFAULT '', duration INTEGER DEFAULT 0, episodes INTEGER DEFAULT 1,
+            cover_url TEXT DEFAULT '', user_rating REAL DEFAULT 0, user_note TEXT DEFAULT '',
+            format TEXT DEFAULT 'MOVIE', created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            watched_at TEXT DEFAULT ''
+        );
+        CREATE INDEX IF NOT EXISTS idx_fo ON films(owl_score DESC);
+        CREATE INDEX IF NOT EXISTS idx_fw ON films(is_watched);
+        CREATE INDEX IF NOT EXISTS idx_ft ON films(title_lower);
+        CREATE INDEX IF NOT EXISTS idx_fy ON films(year);
+        CREATE INDEX IF NOT EXISTS idx_fs ON films(user_rating DESC);
+        CREATE INDEX IF NOT EXISTS idx_ff ON films(format);
+        CREATE TABLE IF NOT EXISTS watched(title_lower TEXT UNIQUE, title TEXT, watched_at TEXT, rating REAL DEFAULT 0);
+        CREATE TABLE IF NOT EXISTS watchlist(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            film_id INTEGER UNIQUE,
+            added_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            priority INTEGER DEFAULT 0,
+            note TEXT DEFAULT '',
+            FOREIGN KEY(film_id) REFERENCES films(id)
+        );
+        CREATE INDEX IF NOT EXISTS idx_wl ON watchlist(priority DESC, added_at);
+    """)
+    db.commit()
+    return db
+
+# === ANILIST API ===
+ANILIST_URL = "https://graphql.anilist.co"
+
+def fetch_anilist(page=1, perPage=50):
+    query = """
+    query ($page: Int, $perPage: Int) {
+      Page(page: $page, perPage: $perPage) {
+        media(type: ANIME, format: MOVIE, sort: SCORE_DESC, status: FINISHED) {
+          title { romaji english }
+          startDate { year }
+          meanScore
+          popularity
+          genres
+          studios { nodes { name } }
+          source(version: 2)
+          duration
+          description
+          coverImage { medium }
+        }
+      }
+    }
+    """
+    data = json.dumps({"query": query, "variables": {"page": page, "perPage": perPage}}).encode()
+    req = urllib.request.Request(ANILIST_URL, data=data, headers={
+        "Content-Type": "application/json", "User-Agent": "Mozilla/5.0 (Hermes-OWL/2.0)"
+    })
+    try:
+        with urllib.request.urlopen(req, timeout=15) as r:
+            return json.loads(r.read())
+    except:
+        return None
+
+def import_anilist_data(pages=10):
+    """
+    AniList'ten film ceker ve DB'ye yazar/ayarla.
+    Fonksiyon API: build.py veya baska modullerden cagrilabilir.
+    """
+    db = get_db()
+    for col, typ in [("synopsis","TEXT DEFAULT ''"),("duration","INTEGER DEFAULT 0"),
+                      ("episodes","INTEGER DEFAULT 1"),("cover_url","TEXT DEFAULT ''"),
+                      ("format","TEXT DEFAULT 'MOVIE'")]:
+        try: db.execute("ALTER TABLE films ADD COLUMN %s %s" % (col, typ))
+        except: pass
+    db.commit()
+
+    added = updated = 0
+    for page in range(1, pages + 1):
+        result = fetch_anilist(page)
+        if not result or "data" not in result:
+            print(f"Sayfa {page}: HATA")
+            continue
+        items = result["data"]["Page"]["media"]
+        for m in items:
+            title = m["title"]["romaji"] or m["title"]["english"] or "Unknown"
+            tl = title.lower()
+            year = m.get("startDate", {}).get("year") or 2000
+            score = (m.get("meanScore") or 70) / 10
+            genres = m.get("genres", [])
+            studio = m["studios"]["nodes"][0]["name"] if m.get("studios", {}).get("nodes") else "Unknown"
+            src = SOURCE_MAP.get(m.get("source",""), "Other")
+            gj = json.dumps(genres)
+            pop = m.get("popularity", 0)
+            dur = m.get("duration", 0) or 0
+            desc = (m.get("description") or "")[:600]
+            cover = (m.get("coverImage") or {}).get("medium", "")
+            fmt = m.get("format", "MOVIE")
+
+            gb = sum(TASTE_W.get(g, 5) for g in genres) / max(len(genres), 1) * 0.05
+            yb = 0.15 if year >= 2020 else (0.08 if year >= 2010 else 0.03)
+            pb = 0.1 if pop > 1000 else (0.05 if pop > 500 else 0)
+            ow = min(round(score + gb + yb + pb, 1), 10.0)
+
+            try:
+                db.execute("INSERT INTO films(title,title_lower,year,studio,mal_score,owl_score,source,genres,popularity,duration,synopsis,cover_url,format) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)",
+                           (title, tl, year, studio, score, ow, src, gj, pop, dur, desc, cover, fmt))
+                added += 1
+            except sqlite3.IntegrityError:
+                db.execute("UPDATE films SET mal_score=?,owl_score=?,genres=?,popularity=?,duration=?,synopsis=?,cover_url=?,studio=?,source=?,format=? WHERE title_lower=?",
+                           (score, ow, gj, pop, dur, desc, cover, studio, src, fmt, tl))
+                updated += 1
+        print(f"Sayfa {page}: {len(items)} film")
+    db.commit()
+    total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+    print(f"\nEklenen: {added}, Guncellenen: {updated}, Toplam: {total}")
+    return added + updated
+
+# === OMDB API - IMDB SKOR CEKME ===
+OMDB_API_KEY = os.environ.get("OMDB_API_KEY", "")
+
+def fetch_omdb_rating(title, year=None):
+    """OMDb API'den IMDB skoru ceker. API key gerekli."""
+    if not OMDB_API_KEY:
+        return None
+    try:
+        q = urllib.parse.quote(title)
+        url = f"http://www.omdbapi.com/?t={q}&apikey={OMDB_API_KEY}"
+        if year:
+            url += f"&y={year}"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=10) as r:
+            data = json.loads(r.read())
+        if data.get("Response") == "True":
+            imdb = data.get("imdbRating", "N/A")
+            if imdb and imdb != "N/A":
+                return float(imdb)
+    except Exception:
+        pass
+    return None
+
+def fetch_imdb_scores(limit=50, force=False):
+    """
+    IMDB skoru olmayan filmler icin OMDb API'den skor ceker.
+    limit: kac film guncellenecek (rate limit korumasi)
+    force: True ise mevcut skorlari da guncelle
+    """
+    if not OMDB_API_KEY:
+        print("⚠️ OMDB_API_KEY ortam degiskeni ayarli degil.")
+        print("   https://www.omdbapi.com/apikey.aspx adresinden ucretsiz key alin.")
+        print("   export OMDB_API_KEY=your_key")
+        return 0
+    db = get_db()
+    if force:
+        missing = db.execute(
+            "SELECT id, title, year FROM films WHERE imdb_score = 0 OR imdb_score IS NULL LIMIT ?",
+            (limit,)
+        ).fetchall()
+    else:
+        missing = db.execute(
+            "SELECT id, title, year FROM films WHERE imdb_score = 0 OR imdb_score IS NULL LIMIT ?",
+            (limit,)
+        ).fetchall()
+    updated = 0
+    errors = 0
+    for row in missing:
+        try:
+            score = fetch_omdb_rating(row["title"], row["year"])
+            if score:
+                db.execute("UPDATE films SET imdb_score=? WHERE id=?", (score, row["id"]))
+                updated += 1
+                print(f"  ✅ {row['title']} ({row['year']}) -> IMDB: {score}")
+            else:
+                errors += 1
+                print(f"  ⚠️ {row['title']} ({row['year']}) -> bulunamadi")
+            db.commit()
+            import time
+            time.sleep(0.5)  # Rate limit: ~2 req/sec for free tier
+        except Exception as e:
+            errors += 1
+            print(f"  ❌ {row['title']}: {e}")
+    total = db.execute("SELECT COUNT(*) FROM films WHERE imdb_score > 0").fetchone()[0]
+    all_total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+    pct = total / all_total * 100 if all_total else 0
+    print(f"\nIMDB skoru: {total}/{all_total} (%{pct:.1f})")
+    print(f"Guncellenen: {updated}, Hata: {errors}")
+    db.close()
+    return updated
+
+# === EXPORT ===
+def export_csv(output_path=None):
+    """Tum filmlerin CSV ciktisini uretir."""
+    db = get_db()
+    rows = db.execute("""
+        SELECT id, title, year, director, studio, mal_score, imdb_score, owl_score,
+               source, genres, popularity, duration, format, is_watched, user_rating,
+               user_note, synopsis, cover_url
+        FROM films ORDER BY owl_score DESC
+    """).fetchall()
+    db.close()
+    if not output_path:
+        os.makedirs(os.path.join(BASE, "output"), exist_ok=True)
+        output_path = os.path.join(BASE, "output", "films_export.csv")
+    fieldnames = ["id","title","year","director","studio","mal_score","imdb_score",
+                  "owl_score","source","genres","popularity","duration","format",
+                  "is_watched","user_rating","user_note","synopsis","cover_url"]
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction="ignore")
+        writer.writeheader()
+        for row in rows:
+            d = dict(row)
+            d["genres"] = ", ".join(json.loads(d["genres"])) if d.get("genres") and d["genres"] != "[]" else ""
+            d["is_watched"] = "Evet" if d.get("is_watched") else "Hayir"
+            writer.writerow(d)
+    print(f"CSV export: {output_path} ({len(rows)} film)")
+    return output_path
+
+def export_watchlist_csv(output_path=None):
+    """Watchlist'in CSV ciktisini uretir."""
+    db = get_db()
+    rows = db.execute("""
+        SELECT f.id, f.title, f.year, f.owl_score, f.mal_score, f.imdb_score,
+               f.studio, f.source, f.genres, w.priority, w.note, w.added_at
+        FROM watchlist w JOIN films f ON f.id = w.film_id
+        ORDER BY w.priority DESC, w.added_at DESC
+    """).fetchall()
+    db.close()
+    if not output_path:
+        os.makedirs(os.path.join(BASE, "output"), exist_ok=True)
+        output_path = os.path.join(BASE, "output", "watchlist_export.csv")
+    with open(output_path, "w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f)
+        writer.writerow(["ID","Title","Year","OWL","MAL","IMDB","Studio","Source","Genres","Priority","Note","Added"])
+        for r in rows:
+            genres = ", ".join(json.loads(r["genres"])) if r["genres"] and r["genres"] != "[]" else ""
+            writer.writerow([r["id"], r["title"], r["year"], r["owl_score"], r["mal_score"],
+                           r["imdb_score"], r["studio"], r["source"], genres, r["priority"], r["note"], r["added_at"]])
+    print(f"Watchlist CSV: {output_path} ({len(rows)} film)")
+    return output_path
+
+# === FILM KARSILASTIRMA ===
+def compare_films(film_ids):
+    """Birden fazla filmi yan yana karsilastirir."""
+    db = get_db()
+    films = []
+    for fid in film_ids:
+        row = db.execute("SELECT * FROM films WHERE id=?", (fid,)).fetchone()
+        if row:
+            films.append(dict(row))
+    db.close()
+    if not films:
+        return None
+    return films
+
+def format_comparison(films):
+    """Karsilastirma sonucunu CLI formatinda string olarak doner."""
+    if not films:
+        return "Film bulunamadi."
+    lines = ["\n" + "="*80]
+    lines.append("  FILM KARSILASTIRMA")
+    lines.append("="*80)
+    # Basliklar
+    names = [f["title"][:25] for f in films]
+    lines.append(f"  {'Kriter':<20}" + "".join(f"{n:>28}" for n in names))
+    lines.append("-" * (20 + 28 * len(films)))
+    # Satirlar
+    for label, key, fmt in [
+        ("Yil", "year", "{}"),
+        ("Studio", "studio", "{}"),
+        ("Kaynak", "source", "{}"),
+        ("Format", "format", "{}"),
+        ("OWL Skoru", "owl_score", "{:.1f}"),
+        ("MAL Skoru", "mal_score", "{:.1f}"),
+        ("IMDB Skoru", "imdb_score", "{:.1f}"),
+        ("Populerite", "popularity", "{}"),
+        ("Sure (dk)", "duration", "{}"),
+        ("Kullanici", "user_rating", "{:.1f}"),
+    ]:
+        vals = []
+        for f in films:
+            v = f.get(key, 0) or 0
+            try:
+                vals.append(fmt.format(v))
+            except:
+                vals.append(str(v))
+        lines.append(f"  {label:<20}" + "".join(f"{v:>28}" for v in vals))
+    # Turler
+    lines.append("-" * (20 + 28 * len(films)))
+    lines.append("  Turler:")
+    for f in films:
+        genres = json.loads(f["genres"]) if f.get("genres") and f["genres"] != "[]" else []
+        lines.append(f"    {f['title'][:30]}: {', '.join(genres)}")
+    lines.append("="*80)
+    return "\n".join(lines)
+
+# === PROFIL ===
+def get_profile(db=None):
+    """Kullanici profil verisini doner."""
+    close_db = False
+    if db is None:
+        db = get_db()
+        close_db = True
+    try:
+        total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+        watched_count = db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
+        watchlist_count = db.execute("SELECT COUNT(*) FROM watchlist").fetchone()[0]
+        rated_count = db.execute("SELECT COUNT(*) FROM films WHERE user_rating > 0").fetchone()[0]
+        avg_user_rating = db.execute("SELECT AVG(user_rating) FROM films WHERE user_rating > 0").fetchone()[0]
+        avg_owl_watched = db.execute("SELECT AVG(owl_score) FROM films WHERE is_watched=1").fetchone()[0]
+        # Izleme gecmişi (son 20)
+        history = db.execute("""
+            SELECT f.id, f.title, f.year, f.owl_score, f.user_rating, f.watched_at, f.genres, f.cover_url
+            FROM films f WHERE f.is_watched=1 ORDER BY f.watched_at DESC LIMIT 20
+        """).fetchall()
+        # Zevk profili
+        taste_counts, taste_avg = get_taste_profile(db)
+        # En cok izlenen turler
+        genre_list = taste_counts.most_common(10)
+        # En cok izlenen studyolar
+        studio_counts = Counter()
+        for row in db.execute("SELECT studio FROM films WHERE is_watched=1 AND studio NOT IN ('Unknown','')").fetchall():
+            studio_counts[row["studio"]] += 1
+        # En cok izlenen yillar
+        year_counts = Counter()
+        for row in db.execute("SELECT year FROM films WHERE is_watched=1 AND year > 0").fetchall():
+            year_counts[(row["year"] // 10) * 10] += 1
+        # Kaynak dagilimi
+        source_counts = Counter()
+        for row in db.execute("SELECT source FROM films WHERE is_watched=1").fetchall():
+            source_counts[row["source"]] += 1
+        return {
+            "total": total,
+            "watched_count": watched_count,
+            "watchlist_count": watchlist_count,
+            "rated_count": rated_count,
+            "avg_user_rating": round(avg_user_rating or 0, 1),
+            "avg_owl_watched": round(avg_owl_watched or 0, 1),
+            "history": [dict(r) for r in history],
+            "taste_profile": dict(genre_list),
+            "taste_avg": taste_avg,
+            "top_studios": dict(studio_counts.most_common(5)),
+            "top_years": dict(sorted(year_counts.items())),
+            "top_sources": dict(source_counts.most_common(5)),
+            "completion_pct": round(watched_count / total * 100, 1) if total else 0,
+        }
+    finally:
+        if close_db:
+            db.close()
+
+# === IZLENEN ISLEMLERI ===
+def mark_watched(film_id, rating=0):
+    db = get_db()
+    row = db.execute("SELECT title, title_lower, genres FROM films WHERE id=?", (film_id,)).fetchone()
+    if not row:
+        print(f"❌ Film bulunamadi: id={film_id}")
+        return False
+    tl = row["title_lower"]
+    now = datetime.now().isoformat()
+    db.execute("UPDATE films SET is_watched=1, watched_at=? WHERE id=?", (now, film_id))
+    db.execute("INSERT OR REPLACE INTO watched(title_lower,title,watched_at,rating) VALUES(?,?,?,?)",
+               (tl, row["title"], now, rating))
+    for g in (json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []):
+        db.execute("INSERT INTO taste_log(action,film_title,timestamp) VALUES(?,?,?)",
+                   ("watched", tl, now))
+    db.commit()
+    n = db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
+    t = row["title"]
+    print(f"✅ '{t}' izlendi (puan: {rating}). Toplam izlenen: {n}")
+    return True
+
+def rate_film(film_id, rating):
+    db = get_db()
+    row = db.execute("SELECT title FROM films WHERE id=?", (film_id,)).fetchone()
+    if not row:
+        print(f"❌ Film bulunamadi: id={film_id}")
+        return False
+    db.execute("UPDATE films SET user_rating=? WHERE id=?", (rating, film_id))
+    db.commit()
+    t = row["title"]
+    print(f"✅ '{t}' puanlandi: {rating}/10")
+    return True
+
+def note_film(film_id, note):
+    db = get_db()
+    row = db.execute("SELECT title FROM films WHERE id=?", (film_id,)).fetchone()
+    if not row:
+        print(f"❌ Film bulunamadi: id={film_id}")
+        return False
+    db.execute("UPDATE films SET user_note=? WHERE id=?", (note, film_id))
+    db.commit()
+    t = row["title"]
+    print(f"✅ '{t}' not eklendi: {note}")
+    return True
+
+# === WATCHLIST ===
+def add_to_watchlist(film_id, priority=0, note=""):
+    db = get_db()
+    row = db.execute("SELECT title FROM films WHERE id=?", (film_id,)).fetchone()
+    if not row:
+        print(f"❌ Film bulunamadi: id={film_id}")
+        return False
+    t = row["title"]
+    db.execute("INSERT OR REPLACE INTO watchlist(film_id,priority,note,added_at) VALUES(?,?,?,?)",
+               (film_id, priority, note, datetime.now().isoformat()))
+    db.commit()
+    print(f"✅ '{t}' watchlist'e eklemdi (oncelik: {priority})")
+    return True
+
+def remove_from_watchlist(film_id):
+    db = get_db()
+    row = db.execute("SELECT f.title FROM films f JOIN watchlist w ON w.film_id=f.id WHERE w.film_id=?", (film_id,)).fetchone()
+    db.execute("DELETE FROM watchlist WHERE film_id=?", (film_id,))
+    db.commit()
+    if row:
+        print(f"✅ '{row['title']}' watchlist'ten cikarildi")
+    else:
+        print(f"✅ Film #{film_id} watchlist'ten cikarildi")
+    return True
+
+def list_watchlist(db=None, limit=50):
+    close_db = False
+    if db is None:
+        db = get_db()
+        close_db = True
+    try:
+        rows = db.execute("""
+            SELECT f.id, f.title, f.year, f.owl_score, f.genres, f.studio, f.cover_url,
+                   w.priority, w.note, w.added_at
+            FROM watchlist w JOIN films f ON f.id = w.film_id
+            ORDER BY w.priority DESC, w.added_at DESC LIMIT ?
+        """, (limit,)).fetchall()
+        return rows
+    finally:
+        if close_db:
+            db.close()
+def get_taste_profile(db):
+    watched = db.execute("SELECT f.genres, f.owl_score FROM films f WHERE f.is_watched=1").fetchall()
+    genre_counts = Counter()
+    genre_scores = Counter()
+    for row in watched:
+        genres_str = row["genres"]
+        owl = row["owl_score"] or 7
+        if genres_str and genres_str != "[]":
+            for g in json.loads(genres_str):
+                genre_counts[g] += 1
+                genre_scores[g] += owl
+    avg_scores = {}
+    for g in genre_counts:
+        avg_scores[g] = genre_scores[g] / genre_counts[g]
+    return genre_counts, avg_scores
+
+def get_taste_weights(db):
+    counts, avg_scores = get_taste_profile(db)
+    if not counts:
+        return dict(TASTE_W)
+    weights = dict(TASTE_W)
+    total = sum(counts.values())
+    for genre, count in counts.items():
+        ratio = count / total
+        if ratio > 0.1:
+            weights[genre] = weights.get(genre, 5) + 2
+        elif ratio > 0.05:
+            weights[genre] = weights.get(genre, 5) + 1
+    return weights
+
+# === ONERI ALGORITMASI v5.0 ===
+def recommend(db=None, category=None, genre=None, studio=None, source=None,
+              year_from=0, year_to=2030, min_score=0, max_score=10,
+              format_type=None, unwatched_only=True, limit=20, smart=True):
+    """
+    v5.0 Oneri algoritmasi:
+    1. Filtreler (tur/yil/kaynak/format/puan)
+    2. OWL skoru (AniList + zevk + yil + popularity)
+    3. Content-based zevk profili bonusu
+    4. Cesitlilik filtresi (her turden max 3)
+    5. Dengeli popularite
+
+    Fonksiyon API: db parametresi opsiyonel. Verilmezse kendi olusturur.
+    """
+    close_db = False
+    if db is None:
+        db = get_db()
+        close_db = True
+
+    try:
+        conditions = ["owl_score>=? AND year BETWEEN ? AND ?"]
+        params = [min_score, year_from, year_to]
+
+        if max_score < 10:
+            conditions.append("owl_score<=?")
+            params.append(max_score)
+        if unwatched_only:
+            conditions.append("is_watched=0")
+        if source:
+            conditions.append("source=?")
+            params.append(source)
+        if format_type:
+            conditions.append("format=?")
+            params.append(format_type)
+        if studio:
+            conditions.append("studio LIKE ?")
+            params.append(f"%{studio}%")
+        if genre:
+            conditions.append("genres LIKE ?")
+            params.append(f"%{genre}%")
+        if category and not genre:
+            conditions.append("genres LIKE ?")
+            params.append(f"%{category}%")
+
+        where = " AND ".join(conditions)
+        q = f"SELECT * FROM films WHERE {where} ORDER BY owl_score DESC LIMIT ?"
+        params.append(limit * 4)
+
+        rows = db.execute(q, params).fetchall()
+        if not rows:
+            return []
+
+        taste_weights = get_taste_weights(db) if smart else TASTE_W
+
+        # Puanla
+        scored = []
+        for row in rows:
+            base = row["owl_score"]
+
+            genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
+            if genres:
+                taste_bonus = sum(taste_weights.get(g, 5) for g in genres) / len(genres) * 0.12
+            else:
+                taste_bonus = 0
+
+            if row["user_rating"] > 0:
+                user_bonus = (row["user_rating"] - 5) * 0.05
+            else:
+                user_bonus = 0
+
+            year = row["year"] or 2010
+            if year >= 2023:
+                recency = 0.1
+            elif year >= 2018:
+                recency = 0.05
+            else:
+                recency = 0
+
+            pop = row["popularity"] or 1
+            if pop > 5000:
+                pop_b = 0.08
+            elif pop > 1000:
+                pop_b = 0.12
+            elif pop > 200:
+                pop_b = 0.05
+            else:
+                pop_b = 0.03
+
+            final = base + (taste_bonus + user_bonus + recency + pop_b) * 0.5
+            scored.append((round(min(final, 10.0), 2), row))
+
+        scored.sort(key=lambda x: x[0], reverse=True)
+
+        # Cesitlilik filtresi
+        genre_count = Counter()
+        diverse = []
+        for score, row in scored:
+            genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
+            main = genres[0] if genres else "Other"
+            if genre_count[main] < 3:
+                diverse.append((score, row))
+                genre_count[main] += 1
+            if len(diverse) >= limit:
+                break
+
+        return diverse
+    finally:
+        if close_db:
+            db.close()
+
+# === FILM DETAY ===
+def get_detail(db, film_id):
+    row = db.execute("SELECT * FROM films WHERE id=?", (film_id,)).fetchone()
+    if not row:
+        return None
+    return dict(row)
+
+# === ARAMA ===
+def search_film(db, query, limit=20):
+    q = f"%{query}%"
+    return db.execute(
+        """SELECT id,title,year,owl_score,studio,genres,cover_url 
+           FROM films 
+           WHERE title_lower LIKE ? 
+              OR studio LIKE ? 
+              OR director LIKE ? 
+              OR source LIKE ?
+              OR synopsis LIKE ?
+           ORDER BY owl_score DESC LIMIT ?""",
+        (q, q, q, q, q, limit)).fetchall()
+
+# === ISTATISTIKLER ===
+def get_stats(db=None):
+    close_db = False
+    if db is None:
+        db = get_db()
+        close_db = True
+    try:
+        total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+        watched = db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
+        avg = db.execute("SELECT AVG(owl_score) FROM films WHERE is_watched=0").fetchone()[0]
+        decades = db.execute("SELECT (year/10)*10 as d, COUNT(*) FROM films WHERE is_watched=0 GROUP BY d ORDER BY d").fetchall()
+        sources = db.execute("SELECT source, COUNT(*) FROM films WHERE is_watched=0 GROUP BY source ORDER BY COUNT(*) DESC LIMIT 10").fetchall()
+        studios = db.execute("SELECT studio, COUNT(*) FROM films WHERE is_watched=0 AND studio NOT IN ('Unknown','') GROUP BY studio ORDER BY COUNT(*) DESC LIMIT 10").fetchall()
+        formats = db.execute("SELECT format, COUNT(*) FROM films GROUP BY format").fetchall()
+        genres_all = db.execute("SELECT genres FROM films WHERE is_watched=0").fetchall()
+        genre_counter = Counter()
+        for row in genres_all:
+            if row["genres"] and row["genres"] != "[]":
+                for g in json.loads(row["genres"]):
+                    genre_counter[g] += 1
+        taste_counts, taste_avg = get_taste_profile(db)
+        return {
+            "total": total, "watched": watched, "unwatched": total - watched,
+            "avg_score": avg, "decades": decades, "sources": sources,
+            "studios": studios, "formats": formats,
+            "genre_ranking": genre_counter.most_common(15),
+            "taste_profile": dict(taste_counts.most_common(10)),
+            "taste_avg_scores": taste_avg,
+        }
+    finally:
+        if close_db:
+            db.close()
+
+# === TXT RAPOR (Bug 1 duzeltmesi: f degiskeni degistirildi) ===
+def gen_report(db=None):
+    close_db = False
+    if db is None:
+        db = get_db()
+        close_db = True
+    try:
+        os.makedirs(TXT_DIR, exist_ok=True)
+        now = datetime.now().strftime("%Y-%m-%d %H:%M")
+
+        films = recommend(db, limit=500)
+        with open(f"{TXT_DIR}/01_ana_liste.txt", "w", encoding="utf-8") as f:
+            f.write(f"OWL ANIME & FILM ONERI LISTESI v5.0\nTarih: {now}\nToplam: {len(films)} oneri\n{'='*80}\n\n")
+            for i, (score, row) in enumerate(films, 1):
+                genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
+                f.write(f"#{i:04d} | OWL:{score:.1f} | {row['title']} ({row['year']}) | {row['studio']} | {row['source']} | {', '.join(genres[:3])}\n")
+
+        stats = get_stats(db)
+        with open(f"{TXT_DIR}/02_stats.txt", "w", encoding="utf-8") as f:
+            f.write(f"OWL ANIME & FILM ONERI SISTEMI v5.0 - ISTATISTIKLER\n{'='*80}\n\n")
+            f.write(f"Toplam film: {stats['total']}\nIzlenen: {stats['watched']}\nKalan: {stats['unwatched']}\nOrt OWL skoru: {stats['avg_score']:.1f}\n\n")
+            f.write("Yil dagilimi:\n")
+            for d, c in stats["decades"]:
+                f.write(f"  {d}s: {'█'*min(c,50)} ({c})\n")
+            f.write("\nKaynak dagilimi:\n")
+            for s, c in stats["sources"]:
+                f.write(f"  {s}: {c}\n")
+            f.write("\nEn iyi studyolar:\n")
+            for s, c in stats["studios"]:
+                f.write(f"  {s}: {c} film\n")
+            f.write("\nTur dagilimi:\n")
+            for g, c in stats["genre_ranking"][:15]:
+                f.write(f"  {g}: {c}\n")
+            if stats["taste_profile"]:
+                f.write("\nZevk profilin (izlediklerine gore):\n")
+                for g, c in stats["taste_profile"].items():
+                    avg = stats["taste_avg_scores"].get(g, 0)
+                    f.write(f"  {g}: {c} film (ort puan: {avg:.1f})\n")
+
+        # Bug 1 duzeltmesi: istatistik.txt icin ayri dosya, f caprazi yok
+        with open(f"{TXT_DIR}/03_analiz.txt", "w", encoding="utf-8") as f:
+            f.write(f"OWL ANIME & FILM ANALIZ RAPORU v5.0\nTarih: {now}\n{'='*80}\n\n")
+            f.write(f"En yuksek puanli 20 film:\n")
+            top = db.execute("SELECT title, year, owl_score, studio FROM films ORDER BY owl_score DESC LIMIT 20").fetchall()
+            # Bug 1: 'film' degiskeni kullanildi, 'f' dosya handle ile caprazmiyor
+            for i, film in enumerate(top, 1):
+                f.write(f"  {i:2d}. {film['title']} ({film['year']}) OWL:{film['owl_score']:.1f} - {film['studio']}\n")
+
+            f.write(f"\nEn iyi 10 studio:\n")
+            for i, (s, c) in enumerate(stats["studios"][:10], 1):
+                f.write(f"  {i:2d}. {s}: {c} film\n")
+
+            f.write(f"\nTur dagilimi:\n")
+            for g, c in stats["genre_ranking"][:15]:
+                bar = "█" * min(c // 5, 40)
+                f.write(f"  {g:20s}: {bar} ({c})\n")
+
+        return len(films)
+    finally:
+        if close_db:
+            db.close()
+
+# === WEB ARAYUZ v5.0 ===
+def start_web_server(port=8080):
+    from http.server import HTTPServer, BaseHTTPRequestHandler
+    import urllib.parse, html as htmlmod
+
+    class Handler(BaseHTTPRequestHandler):
+        def get_db(self):
+            db = sqlite3.connect(DB_PATH)
+            db.row_factory = sqlite3.Row
+            return db
+
+        def do_GET(self):
+            parsed = urllib.parse.urlparse(self.path)
+            params = urllib.parse.parse_qs(parsed.query)
+            path = parsed.path
+
+            if path == "/" or path == "/index":
+                self._serve_index(params)
+            elif path == "/film":
+                film_id = int(params.get("id", [0])[0])
+                self._serve_detail(film_id)
+            elif path == "/watchlist":
+                self._serve_watchlist(params)
+            elif path == "/profile":
+                self._serve_profile()
+            elif path == "/compare":
+                ids = params.get("ids", [""])[0]
+                self._serve_compare(ids)
+            elif path == "/api/recommend":
+                self._api_recommend(params)
+            elif path == "/api/search":
+                self._api_search(params)
+            elif path == "/api/stats":
+                self._api_stats()
+            elif path == "/api/dump":
+                self._api_dump_all()
+            elif path == "/api/watchlist":
+                self._api_watchlist(params)
+            elif path == "/api/profile":
+                self._api_profile()
+            elif path == "/api/compare":
+                self._api_compare(params)
+            elif path == "/api/export/csv":
+                self._api_export_csv()
+            elif path == "/api/export/watchlist":
+                self._api_export_watchlist()
+            else:
+                self.send_response(404)
+                self.end_headers()
+
+        def _serve_index(self, params):
+            db = self.get_db()
+            limit = min(int(params.get("limit", [20])[0]), 100)
+            genre_f = params.get("genre", [None])[0]
+            source_f = params.get("source", [None])[0]
+            studio_f = params.get("studio", [None])[0]
+            yf = int(params.get("year_from", [0])[0])
+            yt = int(params.get("year_to", [2030])[0])
+            ms = float(params.get("min_score", [0])[0])
+            search_q = params.get("q", [None])[0]
+
+            if search_q:
+                films = search_film(db, search_q, limit)
+                scored = [(r["owl_score"], r) for r in films]
+                scored.sort(key=lambda x: x[0], reverse=True)
+            else:
+                scored = recommend(db, genre=genre_f, source=source_f, studio=studio_f,
+                                   year_from=yf, year_to=yt, min_score=ms, limit=limit)
+            stats = get_stats(db)
+            db.close()
+
+            all_genres = sorted(set(g for _, r in scored for g in (json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [])))
+            all_sources = sorted(set(r["source"] for _, r in scored if r["source"] != "Unknown"))
+
+            genre_opts = "".join(f'<option value="{g}" {"selected" if g==genre_f else ""}>{g}</option>' for g in all_genres[:20])
+            source_opts = "".join(f'<option value="{s}" {"selected" if s==source_f else ""}>{s}</option>' for s in all_sources)
+
+            film_html = ""
+            for i, (score, row) in enumerate(scored, 1):
+                genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
+                badges = "".join(f'<span class="badge">{g}</span>' for g in genres[:4])
+                cover = row["cover_url"] or ""
+                cover_html = f'<img src="{cover}" class="cover" loading="lazy" onerror="this.style.display=\'none\'">' if cover else '<div class="cover placeholder">🎬</div>'
+                watched_class = "watched" if row["is_watched"] else ""
+                user_r = f" | ⭐ {row['user_rating']}" if row["user_rating"] > 0 else ""
+                film_html += f"""
+                <a href="/film?id={row['id']}" class="film-card {watched_class}">
+                    {cover_html}
+                    <div class="film-info">
+                        <div class="film-title">#{i} {htmlmod.escape(row["title"])}</div>
+                        <div class="film-meta">{row["year"]} · {htmlmod.escape(row["studio"])} · {row["source"]}{user_r}</div>
+                        <div class="film-score">{score}</div>
+                        <div class="film-badges">{badges}</div>
+                    </div>
+                </a>"""
+
+            sq = htmlmod.escape(search_q or "")
+            yf_val = yf if yf else ""
+            yt_val = yt if yt != 2030 else ""
+            ms_val = ms if ms else ""
+
+            content = f"""
+            <div class="stats-bar">
+                <span>📊 {stats["total"]} film</span>
+                <span>✅ {stats["watched"]} izlenen</span>
+                <span>📋 {stats["unwatched"]} kalan</span>
+                <span>⭐ Ort: {stats["avg_score"]:.1f}</span>
+            </div>
+            <div class="filters">
+                <form method="GET" action="/">
+                    <div class="filter-row">
+                        <input type="text" name="q" placeholder="🔍 Ara..." value="{sq}" class="search-input">
+                        <select name="genre"><option value="">Tum Turler</option>{genre_opts}</select>
+                        <select name="source"><option value="">Tum Kaynaklar</option>{source_opts}</select>
+                        <input type="number" name="year_from" placeholder="Yil baslangic" value="{yf_val}" class="year-input">
+                        <input type="number" name="year_to" placeholder="Yil bitis" value="{yt_val}" class="year-input">
+                        <input type="number" name="min_score" placeholder="Min OWL" value="{ms_val}" step="0.5" class="score-input">
+                        <button type="submit" class="btn">Filtrele</button>
+                        <a href="/" class="btn btn-clear">Temizle</a>
+                    </div>
+                </form>
+            </div>
+            <div class="film-grid">{film_html}</div>
+            """
+
+            self._send_html("OWL Anime & Film Oneri", content, "index")
+
+        def _serve_detail(self, film_id):
+            db = self.get_db()
+            film = get_detail(db, film_id)
+            if not film:
+                self.send_response(404)
+                self.end_headers()
+                self.wfile.write(b"Not found")
+                db.close()
+                return
+
+            genres = json.loads(film["genres"]) if film["genres"] and film["genres"] != "[]" else []
+            badges = "".join(f'<span class="badge">{g}</span>' for g in genres)
+            cover = film["cover_url"] or ""
+            cover_html = f'<img src="{cover}" class="detail-cover" onerror="this.parentElement.innerHTML=\'<div class=detail-cover-placeholder>🎬</div>\'">' if cover else '<div class="detail-cover-placeholder">🎬</div>'
+            synopsis = htmlmod.escape(film["synopsis"] or "Ozet yok.")
+            watched = "✅ Izlenmis" if film["is_watched"] else "📋 Bekliyor"
+            user_r = f"⭐ Kullanıcı: {film['user_rating']}/10" if film["user_rating"] > 0 else "Kullanıcı puani yok"
+            note = f'<div class="note">📝 {htmlmod.escape(film["user_note"])}</div>' if film["user_note"] else ""
+            duration = f"{film['duration']} dk" if film["duration"] > 0 else "?"
+            year = film["year"] or "?"
+
+            imdb_html = f'<span class="score-box imdb">IMDB: {film["imdb_score"]:.1f}</span>' if film["imdb_score"] > 0 else ""
+            watched_btn = "✅ İzlendi" if film["is_watched"] else "📋 İzlendi İşaretle"
+            wl_btn = "📋 Watchlist'ten Çıkar" if db.execute("SELECT 1 FROM watchlist WHERE film_id=?", (film_id,)).fetchone() else "➕ Watchlist'e Ekle"
+            wl_action = "remove" if "Çıkar" in wl_btn else "add"
+
+            content = f"""
+            <a href="/" class="back-link">← Geri</a>
+            <div class="detail">
+                <div class="detail-header">
+                    {cover_html}
+                    <div class="detail-info">
+                        <h2>{htmlmod.escape(film["title"])}</h2>
+                        <div class="detail-meta">
+                            <span>{year}</span> · <span>{htmlmod.escape(film["studio"])}</span> · <span>{film["source"]}</span> · <span>{duration}</span>
+                        </div>
+                        <div class="detail-scores">
+                            <span class="score-box owl">OWL: {film["owl_score"]}</span>
+                            <span class="score-box mal">MAL: {film["mal_score"]:.1f}</span>
+                            {imdb_html}
+                            {f'<span class="score-box user">{user_r}</span>' if film["user_rating"] > 0 else ""}
+                        </div>
+                        <div class="detail-badges">{badges}</div>
+                        <div class="detail-actions">
+                            <a href="/watchlist?action={wl_action}&id={film_id}" class="btn btn-sm btn-wl">{wl_btn}</a>
+                            <a href="/api/watchlist?action=add&id={film_id}" class="btn btn-sm btn-watched" onclick="markWatched({film_id})">{watched_btn}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="detail-synopsis">
+                    <h3>Özet</h3>
+                    <p>{synopsis}</p>
+                </div>
+                {note}
+            </div>
+            """
+            self._send_html(film["title"], content, "detail")
+            db.close()
+
+        def _api_recommend(self, params):
+            db = self.get_db()
+            limit = min(int(params.get("limit", [20])[0]), 100)
+            genre_f = params.get("genre", [None])[0]
+            source_f = params.get("source", [None])[0]
+            ms = float(params.get("min_score", [0])[0])
+            yf = int(params.get("year_from", [0])[0])
+            yt = int(params.get("year_to", [2030])[0])
+            films = recommend(db, genre=genre_f, source=source_f, min_score=ms, year_from=yf, year_to=yt, limit=limit)
+            result = []
+            for score, r in films:
+                result.append({
+                    "id": r["id"], "title": r["title"], "year": r["year"],
+                    "score": score, "owl_score": r["owl_score"], "studio": r["studio"],
+                    "source": r["source"], "genres": json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [],
+                    "cover_url": r["cover_url"], "synopsis": r["synopsis"],
+                    "is_watched": bool(r["is_watched"]), "user_rating": r["user_rating"],
+                })
+            db.close()
+            self._send_json(result)
+
+        def _api_search(self, params):
+            db = self.get_db()
+            q = params.get("q", [""])[0]
+            limit = min(int(params.get("limit", [20])[0]), 100)
+            if not q:
+                self._send_json([])
+                db.close()
+                return
+            rows = search_film(db, q, limit)
+            result = [{"id": r["id"], "title": r["title"], "year": r["year"], "score": r["owl_score"], "studio": r["studio"], "genres": json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [], "cover_url": r["cover_url"]} for r in rows]
+            db.close()
+            self._send_json(result)
+
+        def _api_stats(self):
+            db = self.get_db()
+            s = get_stats(db)
+            db.close()
+            r = {
+                "total": s["total"], "watched": s["watched"], "unwatched": s["unwatched"],
+                "avg_score": round(s["avg_score"] or 0, 1),
+                "formats": {},
+                "top_genres": {g: c for g, c in s["genre_ranking"][:10]},
+                "top_studios": {},
+                "taste_profile": s["taste_profile"],
+            }
+            for row in s["formats"]:
+                r["formats"][row[0]] = row[1]
+            for row in s["studios"][:10]:
+                r["top_studios"][row[0]] = row[1]
+            self._send_json(r)
+
+        def _api_dump_all(self):
+            db = self.get_db()
+            rows = db.execute("SELECT id, title, year, owl_score, studio, source, genres, cover_url, is_watched FROM films ORDER BY owl_score DESC").fetchall()
+            result = [{"id": r["id"], "title": r["title"], "year": r["year"], "score": r["owl_score"], "studio": r["studio"], "source": r["source"], "genres": json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [], "cover_url": r["cover_url"], "is_watched": bool(r["is_watched"])} for r in rows]
+            db.close()
+            self._send_json(result)
+
+        def _api_watchlist(self, params):
+            db = self.get_db()
+            action = params.get("action", ["list"])[0]
+            if action == "list":
+                rows = list_watchlist(db)
+                result = []
+                for r in rows:
+                    result.append({
+                        "id": r["id"], "title": r["title"], "year": r["year"],
+                        "score": r["owl_score"], "genres": json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [],
+                        "studio": r["studio"], "cover_url": r["cover_url"],
+                        "priority": r["priority"], "note": r["note"], "added_at": r["added_at"],
+                    })
+                db.close()
+                self._send_json(result)
+            elif action == "add":
+                film_id = int(params.get("id", [0])[0])
+                priority = int(params.get("priority", [0])[0])
+                note = params.get("note", [""])[0]
+                row = db.execute("SELECT title FROM films WHERE id=?", (film_id,)).fetchone()
+                if row:
+                    db.execute("INSERT OR REPLACE INTO watchlist(film_id,priority,note,added_at) VALUES(?,?,?,?)",
+                               (film_id, priority, note, datetime.now().isoformat()))
+                    db.commit()
+                    t = row["title"]
+                    db.close()
+                    self._send_json({"ok": True, "message": f"'{t}' watchlist'e eklendi"})
+                else:
+                    db.close()
+                    self._send_json({"ok": False, "error": "Film bulunamadi"})
+            elif action == "remove":
+                film_id = int(params.get("id", [0])[0])
+                db.execute("DELETE FROM watchlist WHERE film_id=?", (film_id,))
+                db.commit()
+                db.close()
+                self._send_json({"ok": True, "message": f"Film #{film_id} cikarildi"})
+            else:
+                db.close()
+                self.send_response(400)
+                self.end_headers()
+
+        # === YENI API: PROFIL ===
+        def _api_profile(self):
+            db = self.get_db()
+            profile = get_profile(db)
+            db.close()
+            self._send_json(profile)
+
+        # === YENI API: KARSILASTIRMA ===
+        def _api_compare(self, params):
+            ids_str = params.get("ids", [""])[0]
+            try:
+                ids = [int(x.strip()) for x in ids_str.split(",") if x.strip()]
+            except ValueError:
+                self._send_json({"error": "Gecersiz ID formati. Ornek: ?ids=1,2,3"})
+                return
+            if len(ids) < 2:
+                self._send_json({"error": "En az 2 film ID gerekli."})
+                return
+            if len(ids) > 5:
+                self._send_json({"error": "Maksimum 5 film karsilastirilabilir."})
+                return
+            films = compare_films(ids)
+            if not films:
+                self._send_json({"error": "Film bulunamadi."})
+                return
+            result = []
+            for f in films:
+                result.append({
+                    "id": f["id"], "title": f["title"], "year": f["year"],
+                    "studio": f["studio"], "source": f["source"], "format": f["format"],
+                    "owl_score": f["owl_score"], "mal_score": f["mal_score"],
+                    "imdb_score": f["imdb_score"], "popularity": f["popularity"],
+                    "duration": f["duration"], "user_rating": f["user_rating"],
+                    "genres": json.loads(f["genres"]) if f.get("genres") and f["genres"] != "[]" else [],
+                    "cover_url": f.get("cover_url", ""), "synopsis": f.get("synopsis", ""),
+                })
+            self._send_json(result)
+
+        # === YENI API: EXPORT ===
+        def _api_export_csv(self):
+            path = export_csv()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/csv; charset=utf-8")
+            self.send_header("Content-Disposition", "attachment; filename=films_export.csv")
+            self.end_headers()
+            with open(path, "rb") as f:
+                self.wfile.write(f.read())
+
+        def _api_export_watchlist(self):
+            path = export_watchlist_csv()
+            self.send_response(200)
+            self.send_header("Content-Type", "text/csv; charset=utf-8")
+            self.send_header("Content-Disposition", "attachment; filename=watchlist_export.csv")
+            self.end_headers()
+            with open(path, "rb") as f:
+                self.wfile.write(f.read())
+
+        # === YENI SAYFA: WATCHLIST ===
+        def _serve_watchlist(self, params):
+            db = self.get_db()
+            action = params.get("action", [None])[0]
+            if action == "add":
+                fid = int(params.get("id", [0])[0])
+                pri = int(params.get("priority", [0])[0])
+                note = params.get("note", [""])[0]
+                row = db.execute("SELECT title FROM films WHERE id=?", (fid,)).fetchone()
+                if row:
+                    db.execute("INSERT OR REPLACE INTO watchlist(film_id,priority,note,added_at) VALUES(?,?,?,?)",
+                              (fid, pri, note, datetime.now().isoformat()))
+                    db.commit()
+            elif action == "remove":
+                fid = int(params.get("id", [0])[0])
+                db.execute("DELETE FROM watchlist WHERE film_id=?", (fid,))
+                db.commit()
+
+            rows = list_watchlist(db)
+            stats = get_stats(db)
+            profile = get_profile(db)
+            db.close()
+
+            watchlist_html = ""
+            priority_labels = {0: "⚪ Normal", 1: "🟡 Düşük", 2: "🟠 Yüksek", 3: "🔴 Acil"}
+            for i, r in enumerate(rows, 1):
+                genres = json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else []
+                badges = "".join(f'<span class="badge">{g}</span>' for g in genres[:4])
+                cover = r["cover_url"] or ""
+                cover_html = f'<img src="{cover}" class="cover" loading="lazy" onerror="this.style.display=\'none\'">' if cover else '<div class="cover placeholder">🎬</div>'
+                pri_label = priority_labels.get(r["priority"], "⚪")
+                note_html = f'<div class="wl-note">📝 {htmlmod.escape(r["note"])}</div>' if r["note"] else ""
+                watchlist_html += f"""
+                <div class="wl-card">
+                    <a href="/film?id={r['id']}" class="wl-main">
+                        {cover_html}
+                        <div class="wl-info">
+                            <div class="wl-title">#{i} {htmlmod.escape(r["title"])}</div>
+                            <div class="wl-meta">{r["year"]} · {htmlmod.escape(r["studio"])} · OWL: {r["owl_score"]}</div>
+                            <div class="wl-badges">{badges}</div>
+                            <div class="wl-priority">{pri_label}</div>
+                            {note_html}
+                        </div>
+                    </a>
+                    <a href="/watchlist?action=remove&id={r['id']}" class="wl-remove" title="Çıkart">✕</a>
+                </div>"""
+
+            if not rows:
+                watchlist_html = '<div class="empty-state">📋 Watchlist boş. Filmlere giderek "Watchlist\'e Ekle" butonunu kullanabilirsin.</div>'
+
+            content = f"""
+            <a href="/" class="back-link">← Ana Sayfa</a>
+            <h2>📋 Watchlist</h2>
+            <div class="profile-stats">
+                <span>📋 {profile['watchlist_count']} film</span>
+                <span>✅ {profile['watched_count']} izlenen</span>
+                <span>🎯 %{profile['completion_pct']} tamamlandı</span>
+            </div>
+            <div class="wl-grid">{watchlist_html}</div>
+            """
+            self._send_html("Watchlist", content, "watchlist")
+
+        # === YENI SAYFA: PROFIL ===
+        def _serve_profile(self):
+            db = self.get_db()
+            profile = get_profile(db)
+            db.close()
+
+            # Zevk profili grafiği (basit bar chart)
+            taste_bars = ""
+            max_taste = max(profile["taste_profile"].values()) if profile["taste_profile"] else 1
+            for genre, count in sorted(profile["taste_profile"].items(), key=lambda x: x[1], reverse=True)[:10]:
+                pct = count / max_taste * 100
+                taste_bars += f"""
+                <div class="bar-row">
+                    <span class="bar-label">{genre}</span>
+                    <div class="bar-track"><div class="bar-fill" style="width:{pct}%"></div></div>
+                    <span class="bar-val">{count}</span>
+                </div>"""
+
+            # İzleme geçmişi
+            history_html = ""
+            for h in profile["history"]:
+                genres = json.loads(h["genres"]) if h.get("genres") and h["genres"] != "[]" else []
+                cover = h.get("cover_url", "") or ""
+                cover_html = f'<img src="{cover}" class="cover-sm" loading="lazy">' if cover else '<div class="cover-sm placeholder">🎬</div>'
+                rating = f'⭐ {h["user_rating"]}' if h.get("user_rating") and h["user_rating"] > 0 else ""
+                watched_at = h.get("watched_at", "")[:10] if h.get("watched_at") else ""
+                history_html += f"""
+                <a href="/film?id={h['id']}" class="history-card">
+                    {cover_html}
+                    <div>
+                        <div class="history-title">{htmlmod.escape(h["title"])}</div>
+                        <div class="history-meta">{h["year"]} · OWL: {h["owl_score"]} {rating}</div>
+                        <div class="history-date">{watched_at}</div>
+                    </div>
+                </a>"""
+            if not profile["history"]:
+                history_html = '<div class="empty-state">Henüz film izlemedin. Filmleri görüntüleyip "İzlendi" diyebilirsin.</div>'
+
+            # Studio/Year/Source dagilimi
+            studio_html = "".join(f"<li>{s} <span>{c} film</span></li>" for s, c in profile.get("top_studios", {}).items())
+            source_html = "".join(f"<li>{s} <span>{c}</span></li>" for s, c in profile.get("top_sources", {}).items())
+            year_html = "".join(f"<li>{y}'lar <span>{c}</span></li>" for y, c in sorted(profile.get("top_years", {}).items()))
+
+            content = f"""
+            <a href="/" class="back-link">← Ana Sayfa</a>
+            <h2>👤 Profil</h2>
+            <div class="profile-stats">
+                <div class="profile-stat"><span class="ps-num">{profile['watched_count']}</span><span class="ps-lbl">İzlenen</span></div>
+                <div class="profile-stat"><span class="ps-num">{profile['watchlist_count']}</span><span class="ps-lbl">Watchlist</span></div>
+                <div class="profile-stat"><span class="ps-num">{profile['rated_count']}</span><span class="ps-lbl">Puanlanan</span></div>
+                <div class="profile-stat"><span class="ps-num">{profile['avg_user_rating']}</span><span class="ps-lbl">Ort. Puan</span></div>
+                <div class="profile-stat"><span class="ps-num">%{profile['completion_pct']}</span><span class="ps-lbl">Tamamlanan</span></div>
+            </div>
+
+            <div class="profile-sections">
+                <div class="prof-section">
+                    <h3>🎯 Zevk Profili</h3>
+                    <div class="bar-chart">{taste_bars if taste_bars else '<p class="muted">Yeterli veri yok.</p>'}</div>
+                </div>
+
+                <div class="prof-section">
+                    <h3>🏢 En Çok İzlenen Stüdyolar</h3>
+                    <ul class="prof-list">{studio_html if studio_html else '<li class="muted">Veri yok</li>'}</ul>
+                </div>
+
+                <div class="prof-section">
+                    <h3>📚 Kaynak Dağılımı</h3>
+                    <ul class="prof-list">{source_html if source_html else '<li class="muted">Veri yok</li>'}</ul>
+                </div>
+
+                <div class="prof-section">
+                    <h3>📅 Yıl Dağılımı</h3>
+                    <ul class="prof-list">{year_html if year_html else '<li class="muted">Veri yok</li>'}</ul>
+                </div>
+            </div>
+
+            <h3>📜 İzleme Geçmişi (Son {len(profile['history'])})</h3>
+            <div class="history-grid">{history_html}</div>
+            """
+            self._send_html("Profil", content, "profile")
+
+        # === YENI SAYFA: KARSILASTIRMA ===
+        def _serve_compare(self, ids_str):
+            try:
+                ids = [int(x.strip()) for x in ids_str.split(",") if x.strip()]
+            except ValueError:
+                ids = []
+            films = compare_films(ids) if ids else []
+            if not films:
+                content = """
+                <a href="/" class="back-link">← Ana Sayfa</a>
+                <h2>⚖️ Film Karşılaştırma</h2>
+                <div class="compare-form">
+                    <p class="muted">Film ID'lerini virgülle ayırarak girin (örnek: 1,2,3)</p>
+                    <form method="GET" action="/compare">
+                        <input type="text" name="ids" placeholder="ID1,ID2,ID3" class="search-input">
+                        <button type="submit" class="btn">Karşılaştır</button>
+                    </form>
+                </div>"""
+                self._send_html("Karşılaştırma", content, "compare")
+                return
+
+            # Karşılaştırma tablosu
+            names = "".join(f'<th>{htmlmod.escape(f["title"][:25])}</th>' for f in films)
+            rows_html = ""
+            for label, key, fmt in [
+                ("Yıl", "year", "{}"), ("Stüdyo", "studio", "{}"),
+                ("Kaynak", "source", "{}"), ("Format", "format", "{}"),
+                ("OWL", "owl_score", "{:.1f}"), ("MAL", "mal_score", "{:.1f}"),
+                ("IMDB", "imdb_score", "{:.1f}"), ("Popülerite", "popularity", "{}"),
+                ("Süre (dk)", "duration", "{}"), ("Kullanıcı", "user_rating", "{:.1f}"),
+            ]:
+                cells = ""
+                for f in films:
+                    v = f.get(key, 0) or 0
+                    try:
+                        val = fmt.format(v)
+                    except:
+                        val = str(v)
+                    cells += f"<td>{val}</td>"
+                rows_html += f"<tr><td class='row-label'>{label}</td>{cells}</tr>"
+
+            genre_rows = ""
+            max_genres = max(len(json.loads(f["genres"])) if f.get("genres") and f["genres"] != "[]" else 0 for f in films)
+            for i in range(max_genres):
+                cells = ""
+                for f in films:
+                    genres = json.loads(f["genres"]) if f.get("genres") and f["genres"] != "[]" else []
+                    g = f'<span class="badge">{genres[i]}</span>' if i < len(genres) else ""
+                    cells += f"<td>{g}</td>"
+                genre_rows += f"<tr>{cells}</tr>"
+
+            covers = "".join(
+                f'<td><img src="{f["cover_url"]}" class="compare-cover" onerror="this.parentElement.innerHTML=\'<div class=compare-cover-place>🎬</div>\'"></td>'
+                if f.get("cover_url") else '<td><div class="compare-cover-place">🎬</div></td>'
+                for f in films
+            )
+
+            content = f"""
+            <a href="/" class="back-link">← Ana Sayfa</a>
+            <h2>⚖️ Film Karşılaştırma</h2>
+            <div class="compare-form" style="margin-bottom:16px">
+                <form method="GET" action="/compare">
+                    <input type="text" name="ids" value="{ids_str}" placeholder="ID1,ID2,ID3" class="search-input">
+                    <button type="submit" class="btn">Karşılaştır</button>
+                </form>
+            </div>
+            <div class="compare-table-wrap">
+            <table class="compare-table">
+                <tr><th></th>{covers}</tr>
+                <tr><th>Film</th>{names}</tr>
+                {rows_html}
+                <tr class="genre-row"><th>Türler</th></tr>
+                {genre_rows}
+            </table>
+            </div>"""
+            self._send_html("Karşılaştırma", content, "compare")
+
+        def _send_html(self, title, content, page="index"):
+            nav_html = ""
+            for p, icon, label in [("index","🏠","Ana Sayfa"),("watchlist","📋","Watchlist"),("profile","👤","Profil"),("compare","⚖️","Karşılaştır")]:
+                cls = " active" if page == p else ""
+                nav_html += f'<a href="/{p}" class="bn-item{cls}"><span class="bn-icon">{icon}</span><span>{label}</span></a>'
+            full = f"""<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+<meta name="theme-color" content="#0a0a0f">
+<title>{htmlmod.escape(title)}</title>
+<style>
+:root{{
+  --bg:#0a0a0f;--bg2:#111118;--surface:#16161f;--border:#1e1e2e;--border2:#2a2a3e;
+  --text:#e2e8f0;--muted:#64748b;--cyan:#06b6d4;--cyan-dim:#0e7490;
+  --purple:#a855f7;--pink:#ec4899;--green:#22c55e;--yellow:#eab308;--red:#ef4444;
+  --radius:12px;--gap:12px;
+}}
+*{{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}}
+html,body{{height:100%}}
+body{{
+  font-family:system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--bg);color:var(--text);
+  line-height:1.5;overflow-x:hidden;
+}}
+/* === ANIME/LANE GLITCH KEYFRAMES === */
+@keyframes glitch{{
+  0%,100%{{transform:translate(0)}}
+  20%{{transform:translate(-1px,1px)}}
+  40%{{transform:translate(1px,-1px)}}
+  60%{{transform:translate(-1px,-1px)}}
+  80%{{transform:translate(1px,1px)}}
+}}
+@keyframes fadeInUp{{
+  from{{opacity:0;transform:translateY(12px)}}
+  to{{opacity:1;transform:translateY(0)}}
+}}
+@keyframes pulse{{
+  0%,100%{{box-shadow:0 0 0 0 rgba(6,182,212,0.3)}}
+  50%{{box-shadow:0 0 0 8px rgba(6,182,212,0)}}
+}}
+@keyframes shimmer{{
+  0%{{background-position:-200% 0}}
+  100%{{background-position:200% 0}}
+}}
+@keyframes scanline{{
+  0%{{transform:translateY(-100%)}}
+  100%{{transform:translateY(100vh)}}
+}}
+/* === CRT OVERLAY === */
+body::before{{
+  content:'';position:fixed;top:0;left:0;right:0;bottom:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.03) 0px,rgba(0,0,0,0.03) 1px,transparent 1px,transparent 2px);
+  pointer-events:none;z-index:9999;opacity:0.5;
+}}
+/* === TOP BAR === */
+.topbar{{
+  position:sticky;top:0;z-index:100;
+  background:linear-gradient(180deg,rgba(10,10,15,0.98),rgba(10,10,15,0.9));
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:12px 16px;display:flex;align-items:center;gap:10px;
+}}
+.topbar .logo{{
+  font-size:1.15em;font-weight:800;letter-spacing:2px;
+  background:linear-gradient(135deg,var(--cyan),var(--purple));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  text-decoration:none;
+}}
+.topbar .logo:hover{{animation:glitch 0.3s}}
+.topbar .badge{{
+  background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
+  color:#fff;font-size:0.6em;padding:2px 8px;border-radius:20px;
+  font-weight:600;letter-spacing:1px;
+}}
+/* === BOTTOM NAV === */
+.bottom-nav{{
+  position:fixed;bottom:0;left:0;right:0;z-index:100;
+  background:rgba(10,10,15,0.95);backdrop-filter:blur(12px);
+  border-top:1px solid var(--border);
+  display:flex;justify-content:space-around;padding:8px 0;
+  padding-bottom:max(8px,env(safe-area-inset-bottom));
+}}
+.bn-item{{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  text-decoration:none;color:var(--muted);font-size:0.65em;
+  padding:4px 12px;border-radius:8px;transition:all 0.2s;
+}}
+.bn-item:hover,.bn-item.active{{color:var(--cyan)}}
+.bn-item .bn-icon{{font-size:1.4em}}
+.bn-item.active .bn-icon{{filter:drop-shadow(0 0 6px var(--cyan))}}
+/* === MAIN CONTENT === */
+.main{{padding:16px;padding-bottom:80px;animation:fadeInUp 0.3s ease}}
+/* === STATS BAR === */
+.stats-bar{{
+  display:flex;flex-wrap:wrap;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:10px 14px;margin-bottom:var(--gap);
+  font-size:0.8em;color:var(--muted);
+}}
+.stats-bar span{{display:flex;align-items:center;gap:4px}}
+/* === FILTERS === */
+.filters{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px;margin-bottom:var(--gap);
+}}
+.filter-row{{display:flex;flex-wrap:wrap;gap:8px;align-items:center}}
+.filter-row input,.filter-row select{{
+  background:var(--bg);border:1px solid var(--border);color:var(--text);
+  border-radius:8px;padding:8px 12px;font-size:0.85em;
+}}
+.search-input{{flex:1;min-width:140px}}
+.year-input{{width:80px}}
+.score-input{{width:65px}}
+select{{min-width:100px}}
+.btn{{
+  background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
+  color:#fff;border:none;border-radius:8px;padding:8px 16px;
+  font-size:0.85em;cursor:pointer;text-decoration:none;display:inline-block;
+  font-weight:600;transition:all 0.2s;
+}}
+.btn:hover{{transform:translateY(-1px);box-shadow:0 4px 12px rgba(168,85,247,0.3)}}
+.btn:active{{transform:translateY(0)}}
+.btn-clear{{background:transparent;border:1px solid var(--border);color:var(--muted)}}
+.btn-sm{{padding:6px 12px;font-size:0.75em}}
+.btn-wl{{background:linear-gradient(135deg,var(--pink),var(--purple))}}
+.btn-watched{{background:linear-gradient(135deg,var(--green),#16a34a)}}
+/* === FILM GRID === */
+.film-grid{{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:var(--gap);
+}}
+.film-card{{
+  display:flex;gap:12px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px;
+  text-decoration:none;color:inherit;
+  transition:all 0.2s;position:relative;overflow:hidden;
+}}
+.film-card::before{{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--cyan),var(--purple),var(--pink));
+  opacity:0;transition:opacity 0.2s;
+}}
+.film-card:hover{{border-color:var(--cyan);transform:translateY(-2px)}}
+.film-card:hover::before{{opacity:1}}
+.film-card.watched{{opacity:0.55}}
+.cover{{
+  width:75px;height:105px;object-fit:cover;
+  border-radius:8px;flex-shrink:0;
+}}
+.cover.placeholder{{
+  width:75px;height:105px;background:linear-gradient(135deg,var(--border),var(--border2));
+  border-radius:8px;display:flex;align-items:center;justify-content:center;
+  font-size:1.6em;flex-shrink:0;
+}}
+.film-info{{flex:1;min-width:0}}
+.film-title{{font-weight:600;font-size:0.9em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}}
+.film-meta{{color:var(--muted);font-size:0.72em;margin-top:3px}}
+.film-score{{
+  display:inline-block;background:linear-gradient(135deg,var(--cyan-dim),var(--purple));
+  color:#fff;font-weight:700;font-size:0.8em;
+  padding:2px 8px;border-radius:4px;margin-top:4px;
+}}
+.film-badges{{margin-top:4px}}
+.badge{{
+  display:inline-block;background:rgba(6,182,212,0.1);
+  color:var(--cyan);padding:1px 6px;border-radius:4px;
+  font-size:0.65em;margin:2px 2px 0 0;border:1px solid rgba(6,182,212,0.15);
+}}
+/* === FILM DETAIL === */
+.detail{{max-width:800px;margin:0 auto}}
+.back-link{{
+  display:inline-block;color:var(--muted);text-decoration:none;
+  font-size:0.8em;margin-bottom:12px;
+}}
+.back-link:hover{{color:var(--cyan)}}
+.detail-header{{
+  display:flex;gap:16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);
+}}
+.detail-cover{{
+  width:150px;height:210px;object-fit:cover;
+  border-radius:10px;flex-shrink:0;
+}}
+.detail-cover-placeholder{{
+  width:150px;height:210px;background:linear-gradient(135deg,var(--border),var(--border2));
+  border-radius:10px;display:flex;align-items:center;justify-content:center;
+  font-size:2.5em;flex-shrink:0;
+}}
+.detail-info h2{{font-size:1.15em;margin-bottom:4px}}
+.detail-meta{{color:var(--muted);font-size:0.8em;margin:6px 0}}
+.detail-meta span{{margin-right:8px}}
+.detail-scores{{display:flex;gap:6px;margin:10px 0;flex-wrap:wrap}}
+.score-box{{padding:4px 10px;border-radius:6px;font-size:0.8em;font-weight:600}}
+.score-box.owl{{background:linear-gradient(135deg,var(--cyan-dim),var(--purple));color:#fff}}
+.score-box.mal{{background:rgba(34,197,94,0.12);color:var(--green);border:1px solid rgba(34,197,94,0.2)}}
+.score-box.imdb{{background:rgba(234,179,8,0.12);color:var(--yellow);border:1px solid rgba(234,179,8,0.2)}}
+.score-box.user{{background:rgba(236,72,153,0.12);color:var(--pink);border:1px solid rgba(236,72,153,0.2)}}
+.detail-badges{{margin:8px 0}}
+.detail-status{{color:var(--muted);font-size:0.8em;margin-top:6px}}
+.detail-actions{{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}}
+.detail-synopsis{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;margin-bottom:var(--gap);
+}}
+.detail-synopsis h3{{font-size:0.85em;color:var(--muted);margin-bottom:8px}}
+.detail-synopsis p{{color:var(--muted);line-height:1.7;font-size:0.88em}}
+.note{{
+  background:rgba(234,179,8,0.06);border:1px solid rgba(234,179,8,0.15);
+  border-radius:var(--radius);padding:12px;margin-top:10px;
+  color:var(--text);font-size:0.85em;
+}}
+/* === WATCHLIST === */
+.wl-grid{{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:var(--gap);
+}}
+.wl-card{{
+  display:flex;align-items:flex-start;gap:10px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:12px;position:relative;
+}}
+.wl-main{{display:flex;gap:10px;flex:1;text-decoration:none;color:inherit}}
+.wl-info{{flex:1;min-width:0}}
+.wl-title{{font-weight:600;font-size:0.9em}}
+.wl-meta{{color:var(--muted);font-size:0.72em;margin-top:2px}}
+.wl-badges{{margin-top:4px}}
+.wl-priority{{font-size:0.7em;margin-top:4px;color:var(--yellow)}}
+.wl-note{{font-size:0.75em;color:var(--muted);margin-top:4px;font-style:italic}}
+.wl-remove{{
+  color:var(--muted);text-decoration:none;font-size:1em;
+  padding:4px 8px;border-radius:4px;
+}}
+.wl-remove:hover{{color:var(--red);background:rgba(239,68,68,0.1)}}
+/* === PROFIL === */
+.profile-stats{{
+  display:flex;flex-wrap:wrap;gap:8px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;margin-bottom:var(--gap);
+}}
+.profile-stat{{
+  display:flex;flex-direction:column;align-items:center;min-width:60px;
+}}
+.ps-num{{font-size:1.2em;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}}
+.ps-lbl{{font-size:0.6em;color:var(--muted);margin-top:2px}}
+.profile-sections{{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:var(--gap);margin-bottom:var(--gap);
+}}
+.prof-section{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:14px;
+}}
+.prof-section h3{{font-size:0.85em;margin-bottom:8px;color:var(--text)}}
+.prof-list{{list-style:none;padding:0}}
+.prof-list li{{display:flex;justify-content:space-between;padding:4px 0;font-size:0.8em;border-bottom:1px solid var(--border)}}
+.prof-list li span{{color:var(--muted)}}
+.bar-chart{{display:flex;flex-direction:column;gap:6px}}
+.bar-row{{display:flex;align-items:center;gap:8px}}
+.bar-label{{width:90px;font-size:0.7em;color:var(--muted);text-align:right;flex-shrink:0}}
+.bar-track{{flex:1;height:12px;background:var(--border);border-radius:4px;overflow:hidden}}
+.bar-fill{{height:100%;background:linear-gradient(90deg,var(--cyan),var(--purple));border-radius:4px;transition:width 0.5s ease}}
+.bar-val{{width:20px;font-size:0.7em;color:var(--muted);text-align:right}}
+.history-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}}
+.history-card{{display:flex;gap:8px;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px;text-decoration:none;color:inherit}}
+.history-card:hover{{border-color:var(--cyan)}}
+.cover-sm{{width:36px;height:50px;object-fit:cover;border-radius:4px;flex-shrink:0}}
+.cover-sm.placeholder{{width:36px;height:50px;background:var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:0.9em;flex-shrink:0}}
+.history-title{{font-size:0.75em;font-weight:600}}
+.history-meta{{font-size:0.65em;color:var(--muted)}}
+.history-date{{font-size:0.6em;color:var(--muted);margin-top:2px}}
+/* === KARSILASTIRMA === */
+.compare-form{{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px;margin-bottom:var(--gap)}}
+.compare-form form{{display:flex;gap:8px}}
+.compare-form .search-input{{flex:1}}
+.compare-table-wrap{{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}}
+.compare-table{{width:100%;border-collapse:collapse;background:var(--surface)}}
+.compare-table th,.compare-table td{{padding:8px 12px;text-align:center;border-bottom:1px solid var(--border);font-size:0.8em}}
+.compare-table th{{background:var(--bg);color:var(--muted);font-weight:600}}
+.compare-table td:first-child,.compare-table th:first-child{{text-align:left;position:sticky;left:0;background:var(--surface)}}
+.compare-cover{{width:70px;height:95px;object-fit:cover;border-radius:6px}}
+.compare-cover-place{{width:70px;height:95px;background:var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:1.5em;margin:0 auto}}
+.genre-row th{{background:var(--bg)}}
+.empty-state{{text-align:center;padding:40px;color:var(--muted);font-size:0.85em}}
+.muted{{color:var(--muted)}}
+h2{{font-size:1.2em;margin-bottom:8px}}
+h3{{font-size:0.85em;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}}
+/* === RESPONSIVE === */
+@media(max-width:600px){{
+  .film-grid{{grid-template-columns:1fr}}
+  .wl-grid{{grid-template-columns:1fr}}
+  .detail-header{{flex-direction:column;align-items:center}}
+  .detail-cover,.detail-cover-placeholder{{width:120px;height:170px}}
+  .filter-row{{flex-direction:column}}
+  .filter-row input,.filter-row select{{width:100%}}
+  .profile-sections{{grid-template-columns:1fr}}
+  .history-grid{{grid-template-columns:1fr}}
+  .compare-form form{{flex-direction:column}}
+  .topbar{{padding:10px 12px}}
+  .main{{padding:12px;padding-bottom:80px}}
+}}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="/" class="logo">◇ OWL</a>
+  <span class="badge">v5.0</span>
+</div>
+<div class="main">
+{content}
+</div>
+<nav class="bottom-nav">
+{nav_html}
+</nav>
+<script>
+function markWatched(id){{
+  fetch('/api/watchlist?action=add&id='+id).then(()=>location.reload());
+}}
+</script>
+</body>
+</html>"""
+            self.send_response(200)
+            self.send_header("Content-Type","text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(full.encode())
+
+        def _send_json(self, data):
+            self.send_response(200)
+            self.send_header("Content-Type","application/json; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(json.dumps(data, ensure_ascii=False).encode())
+
+        def log_message(self, format, *args):
+            pass
+
+    server = HTTPServer(("0.0.0.0", port), Handler)
+    print(f"🌐 Web server baslatildi: http://localhost:{port}")
+    print(f"   Watchlist: http://localhost:{port}/watchlist")
+    print(f"   Profil: http://localhost:{port}/profile")
+    print(f"   Karsilastir: http://localhost:{port}/compare")
+    server.serve_forever()
+
+# === CLI ===
+def interactive(db):
+    print("\n  OWL ANIME & FILM ONERI SISTEMI v5.0")
+    print(f"  {db.execute('SELECT COUNT(*) FROM films').fetchone()[0]} film yuklu")
+    print("="*50)
+    while True:
+        print("\n[K]Oneri [T]Tur [G]Genre [Y]Yil [P]Puan [W]Izledi [R]Rapor [S]Ara [I]Stats [D]Detay [L]Watchlist [A]Add-WL [U]Web [V]Profil [Z]Karsilastir [E]Export [Q]Cikis")
+        c = input("Secim: ").strip().lower()
+        if c == "q":
+            break
+        elif c == "k":
+            films = recommend(db, limit=15)
+            for i, (s, f) in enumerate(films, 1):
+                genres = json.loads(f["genres"]) if f["genres"] and f["genres"] != "[]" else []
+                imdb_s = f" IMDB:{f['imdb_score']:.1f}" if f['imdb_score'] > 0 else ""
+                print(f"  {i:2d}.[{s:.1f}] {f['title']} ({f['year']}) - {f['studio']} | {','.join(genres[:2])}{imdb_s}")
+        elif c == "t":
+            stats = get_stats(db)
+            print("  Turler:")
+            for g, cnt in stats["genre_ranking"][:15]:
+                print(f"    {g}: {cnt}")
+        elif c == "g":
+            g = input("Tur ara: ").strip()
+            if g:
+                films = recommend(db, genre=g, limit=15)
+                for i, (s, f) in enumerate(films, 1):
+                    print(f"  {i:2d}.[{s:.1f}] {f['title']} ({f['year']}) - {f['studio']}")
+        elif c == "i":
+            stats = get_stats(db)
+            imdb_c = db.execute("SELECT COUNT(*) FROM films WHERE imdb_score > 0").fetchone()[0]
+            print(f"  Toplam:{stats['total']} Izlenen:{stats['watched']} Kalan:{stats['unwatched']} Ort:{stats['avg_score']:.1f}")
+            print(f"  IMDB skoru:{imdb_c}/{stats['total']} (%{imdb_c/stats['total']*100:.1f})")
+            if stats["taste_profile"]:
+                print("  Zevk:", ", ".join(f"{g}:{c}" for g, c in list(stats["taste_profile"].items())[:5]))
+        elif c == "w":
+            try:
+                fid = int(input("Film ID: "))
+                rating = float(input("Puan (0=yok): ") or "0")
+                mark_watched(fid, rating)
+            except:
+                print("  Gecersiz giris.")
+        elif c == "d":
+            try:
+                fid = int(input("Film ID: "))
+                film = get_detail(db, fid)
+                if film:
+                    genres = json.loads(film["genres"]) if film["genres"] and film["genres"] != "[]" else []
+                    print(f"\n  {film['title']} ({film['year']})")
+                    print(f"  Studio: {film['studio']} | Kaynak: {film['source']}")
+                    print(f"  OWL: {film['owl_score']} | MAL: {film['mal_score']:.1f} | IMDB: {film['imdb_score']:.1f}")
+                    print(f"  Tur: {', '.join(genres)}")
+                    print(f"  Ozet: {(film['synopsis'] or 'Yok')[:200]}")
+                else:
+                    print("  Film bulunamadi.")
+            except:
+                print("  Gecersiz giris.")
+        elif c == "r":
+            n = gen_report(db)
+            print(f"  Rapor olusturuldu: {n} film -> {TXT_DIR}/")
+        elif c == "s":
+            q = input("Ara: ").strip()
+            if q:
+                r = search_film(db, q)
+                for f in r:
+                    print(f"  [{f['owl_score']}] {f['title']} ({f['year']}) - {f['studio']}")
+                if not r:
+                    print("  Sonuc yok.")
+        elif c == "u":
+            port = input("Port (8080): ").strip()
+            start_web_server(int(port) if port else 8080)
+        elif c == "l":
+            rows = list_watchlist(db)
+            if not rows:
+                print("  Watchlist bos.")
+            else:
+                for i, r in enumerate(rows, 1):
+                    pri = "!!!" if r["priority"] >= 3 else ("!" if r["priority"] >= 1 else "")
+                    print(f"  {i:2d}. [{r['owl_score']:.1f}] {r['title']} ({r['year']}) {pri}")
+                    if r["note"]:
+                        print(f"      📝 {r['note']}")
+        elif c == "a":
+            try:
+                fid = int(input("Film ID: "))
+                pri = int(input("Oncelik (0-3): ") or "0")
+                note = input("Not: ").strip()
+                add_to_watchlist(fid, pri, note)
+            except:
+                print("  Gecersiz giris.")
+        elif c == "y":
+            try:
+                yf = int(input("Baslangic:"))
+                yt = int(input("Bitis:"))
+                films = recommend(db, year_from=yf, year_to=yt, limit=15)
+                for i, (s, f) in enumerate(films, 1):
+                    print(f"  {i:2d}.[{s:.1f}] {f['title']} ({f['year']})")
+            except:
+                pass
+        elif c == "p":
+            try:
+                ms = float(input("Min OWL:"))
+                films = recommend(db, min_score=ms, limit=15)
+                for i, (s, f) in enumerate(films, 1):
+                    print(f"  {i:2d}.[{s:.1f}] {f['title']} ({f['year']})")
+            except:
+                pass
+        elif c == "v":
+            profile = get_profile(db)
+            print(f"\n  PROFIL")
+            print(f"  Izlenen: {profile['watched_count']}/{profile['total']} (%{profile['completion_pct']})")
+            print(f"  Watchlist: {profile['watchlist_count']}")
+            print(f"  Puanlanan: {profile['rated_count']}")
+            print(f"  Ort. puan: {profile['avg_user_rating']}")
+            if profile['taste_profile']:
+                print("  Zevk:", ", ".join(f"{g}:{c}" for g, c in list(profile['taste_profile'].items())[:5]))
+            if profile['history']:
+                print("  Son izlenen:")
+                for h in profile['history'][:5]:
+                    r = f" ⭐{h['user_rating']}" if h.get('user_rating') and h['user_rating'] > 0 else ""
+                    print(f"    {h['title']} ({h['year']}){r}")
+        elif c == "z":
+            ids_str = input("Film IDleri (virgulle): ").strip()
+            try:
+                ids = [int(x.strip()) for x in ids_str.split(",") if x.strip()]
+                films = compare_films(ids)
+                if films:
+                    print(format_comparison(films))
+                else:
+                    print("  Film bulunamadi.")
+            except:
+                print("  Gecersiz giris.")
+        elif c == "e":
+            fmt = input("Format (csv/watchlist): ").strip().lower()
+            if fmt == "csv":
+                p = export_csv()
+                print(f"  CSV: {p}")
+            elif fmt == "watchlist":
+                p = export_watchlist_csv()
+                print(f"  Watchlist CSV: {p}")
+            else:
+                print("  Gecersiz format.")
+
+# === ANA ===
+def main():
+    p = argparse.ArgumentParser(description="OWL Anime & Film Oneri v5.0")
+    p.add_argument("--cli", action="store_true")
+    p.add_argument("--recommend", type=int, default=0)
+    p.add_argument("--category", type=str)
+    p.add_argument("--genre", type=str)
+    p.add_argument("--studio", type=str)
+    p.add_argument("--source", type=str)
+    p.add_argument("--year-from", type=int, default=0)
+    p.add_argument("--year-to", type=int, default=2030)
+    p.add_argument("--min-score", type=float, default=0)
+    p.add_argument("--max-score", type=float, default=10)
+    p.add_argument("--format", type=str)
+    p.add_argument("--limit", type=int, default=20)
+    p.add_argument("--watched", action="store_true")
+    p.add_argument("--report", action="store_true")
+    p.add_argument("--stats", action="store_true")
+    p.add_argument("--search", type=str)
+    p.add_argument("--watch", type=int)
+    p.add_argument("--rate", type=float, default=0)
+    p.add_argument("--note", type=str)
+    p.add_argument("--detail", type=int)
+    p.add_argument("--import-anilist", type=int, default=0)
+    p.add_argument("--web", type=int, default=0)
+    p.add_argument("--init", action="store_true")
+    p.add_argument("--dedup", action="store_true", help="Duplicate film temizligi")
+    p.add_argument("--add-watchlist", type=int, help="Watchlist'e film ekle (ID)")
+    p.add_argument("--remove-watchlist", type=int, help="Watchlist'ten cikar (ID)")
+    p.add_argument("--list-watchlist", action="store_true", help="Watchlist'i goster")
+    p.add_argument("--watch-priority", type=int, default=0, help="Watchlist onceligi")
+    p.add_argument("--watch-note", type=str, default="", help="Watchlist notu")
+    # v5.0 yeni argumanlar
+    p.add_argument("--fetch-imdb", action="store_true", help="OMDb ile IMDB skorlarini cek")
+    p.add_argument("--fetch-limit", type=int, default=50, help="IMDB fetch limit")
+    p.add_argument("--export", type=str, choices=["csv", "watchlist"], help="CSV export")
+    p.add_argument("--compare", type=str, help="Film karsilastirma (virgulle ID: 1,2,3)")
+    p.add_argument("--profile", action="store_true", help="Kullanici profili")
+    p.add_argument("--imdb-info", action="store_true", help="IMDB skoru istatistikleri")
+    args = p.parse_args()
+
+    if args.init:
+        db = init_db()
+        print("DB sifirlandi.")
+        return
+
+    if args.dedup:
+        results = deduplicate_films()
+        print(f"Duplicate temizligi: DB={results['db_fixed']}, JSON={results['json_fixed']}")
+        return
+
+    if args.add_watchlist:
+        add_to_watchlist(args.add_watchlist, args.watch_priority, args.watch_note)
+        return
+
+    if args.remove_watchlist:
+        remove_from_watchlist(args.remove_watchlist)
+        return
+
+    # v5.0: IMDB fetch
+    if args.fetch_imdb:
+        n = fetch_imdb_scores(limit=args.fetch_limit)
+        return
+
+    # v5.0: Export
+    if args.export == "csv":
+        path = export_csv()
+        return
+    if args.export == "watchlist":
+        path = export_watchlist_csv()
+        return
+
+    # v5.0: IMDB info
+    if args.imdb_info:
+        db = get_db()
+        total = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+        imdb_count = db.execute("SELECT COUNT(*) FROM films WHERE imdb_score > 0").fetchone()[0]
+        imdb_pct = imdb_count / total * 100 if total else 0
+        print(f"IMDB skoru olan: {imdb_count}/{total} (%{imdb_pct:.1f})")
+        print(f"OMDB_API_KEY: {'Ayarli' if OMDB_API_KEY else 'Ayarli degil'}")
+        if not OMDB_API_KEY:
+            print("Key almak icin: https://www.omdbapi.com/apikey.aspx")
+            print("Kullanim: export OMDB_API_KEY=your_key")
+        db.close()
+        return
+
+    db = init_db()
+
+    if args.list_watchlist:
+        rows = list_watchlist(db)
+        if not rows:
+            print("Watchlist bos.")
+        else:
+            print(f"\n📋 WATCHLIST ({len(rows)} film)\n")
+            for i, r in enumerate(rows, 1):
+                genres = json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else []
+                pri = "🔴" if r["priority"] >= 3 else ("🟡" if r["priority"] >= 1 else "⚪")
+                print(f"  {i:2d}. {pri} [{r['owl_score']:.1f}] {r['title']} ({r['year']}) - {r['studio']}")
+                if r["note"]:
+                    print(f"      📝 {r['note']}")
+        return
+
+    # v5.0: Profil
+    if args.profile:
+        profile = get_profile(db)
+        print(f"\n👤 KULLANICI PROFILI\n")
+        print(f"  Izlenen: {profile['watched_count']} / {profile['total']} (%{profile['completion_pct']})")
+        print(f"  Watchlist: {profile['watchlist_count']}")
+        print(f"  Puanlanan: {profile['rated_count']}")
+        print(f"  Ort. kullanici puani: {profile['avg_user_rating']}")
+        print(f"  Ort. OWL (izlenen): {profile['avg_owl_watched']}")
+        if profile['taste_profile']:
+            print(f"\n  Zevk profili:")
+            for g, c in sorted(profile['taste_profile'].items(), key=lambda x: x[1], reverse=True)[:10]:
+                avg = profile['taste_avg'].get(g, 0)
+                print(f"    {g}: {c} film (ort: {avg:.1f})")
+        if profile['top_studios']:
+            print(f"\n  En cok izlenen studyolar:")
+            for s, c in profile['top_studios'].items():
+                print(f"    {s}: {c}")
+        if profile['history']:
+            print(f"\n  Son izlenen:")
+            for h in profile['history'][:5]:
+                rating = f" ⭐{h['user_rating']}" if h.get('user_rating') and h['user_rating'] > 0 else ""
+                print(f"    {h['title']} ({h['year']}){rating}")
+        return
+
+    # v5.0: Karsilastirma
+    if args.compare:
+        try:
+            ids = [int(x.strip()) for x in args.compare.split(",") if x.strip()]
+        except ValueError:
+            print("Gecersiz ID formati. Ornek: --compare 1,2,3")
+            return
+        films = compare_films(ids)
+        if films:
+            print(format_comparison(films))
+        else:
+            print("Film bulunamadi.")
+        return
+
+    if args.import_anilist > 0:
+        import_anilist_data(args.import_anilist)
+        return
+
+    if args.web > 0:
+        start_web_server(args.web)
+        return
+
+    if args.stats:
+        stats = get_stats(db)
+        print(f"Toplam: {stats['total']}")
+        print(f"Izlenen: {stats['watched']}")
+        print(f"Kalan: {stats['unwatched']}")
+        print(f"Ort OWL: {stats['avg_score']:.1f}")
+        imdb_c = db.execute("SELECT COUNT(*) FROM films WHERE imdb_score > 0").fetchone()[0]
+        print(f"IMDB skoru: {imdb_c}/{stats['total']} (%{imdb_c/stats['total']*100:.1f})")
+        print(f"\nYil dagilimi:")
+        for d, c in stats["decades"]:
+            print(f"  {d}s: {'█'*min(c,40)} ({c})")
+        print(f"\nKaynaklar:")
+        for s, c in stats["sources"][:5]:
+            print(f"  {s}: {c}")
+        print(f"\nTurler:")
+        for g, c in stats["genre_ranking"][:10]:
+            print(f"  {g}: {c}")
+        print(f"\nStudyolar:")
+        for s, c in stats["studios"][:5]:
+            print(f"  {s}: {c}")
+        if stats["taste_profile"]:
+            print(f"\nZevk profili:")
+            for g, c in stats["taste_profile"].items():
+                avg = stats["taste_avg_scores"].get(g, 0)
+                print(f"  {g}: {c} film (ort: {avg:.1f})")
+        return
+
+    if args.search:
+        r = search_film(db, args.search)
+        for f in r:
+            genres = json.loads(f["genres"]) if f["genres"] and f["genres"] != "[]" else []
+            print(f"[{f['owl_score']}] {f['title']} ({f['year']}) - {f['studio']} | {','.join(genres[:3])}")
+        return
+
+    if args.watch:
+        rating = args.rate if args.rate else 0
+        mark_watched(args.watch, rating)
+        if args.note:
+            note_film(args.watch, args.note)
+        return
+
+    if args.rate and not args.watch:
+        print("Kullanim: --watch ID --rate PUAN")
+        return
+
+    if args.note and not args.watch:
+        print("Kullanim: --watch ID --note NOT")
+        return
+
+    if args.detail:
+        film = get_detail(db, args.detail)
+        if film:
+            genres = json.loads(film["genres"]) if film["genres"] and film["genres"] != "[]" else []
+            print(f"\n{film['title']} ({film['year']})")
+            print(f"  Studio: {film['studio']}")
+            print(f"  Kaynak: {film['source']}")
+            print(f"  Format: {film['format']}")
+            print(f"  OWL: {film['owl_score']} | MAL: {film['mal_score']:.1f} | IMDB: {film['imdb_score']:.1f}")
+            print(f"  Tur: {', '.join(genres)}")
+            print(f"  Populerite: {film['popularity']}")
+            print(f"  Sure: {film['duration']} dk")
+            print(f"  Izlenmis: {'Evet' if film['is_watched'] else 'Hayir'}")
+            print(f"  Kullanici puani: {film['user_rating'] or 'Yok'}")
+            print(f"\n  Ozet:\n  {(film['synopsis'] or 'Yok')[:400]}")
+        else:
+            print("Film bulunamadi.")
+        return
+
+    if args.report:
+        n = gen_report(db)
+        print(f"Rapor: {n} film -> {TXT_DIR}/")
+        return
+
+    if args.recommend > 0 or (not args.cli and not args.detail and not args.watch):
+        cat = args.category or args.genre
+        films = recommend(db, category=cat, genre=args.genre, studio=args.studio,
+                          source=args.source, year_from=args.year_from, year_to=args.year_to,
+                          min_score=args.min_score, max_score=args.max_score,
+                          format_type=args.format, unwatched_only=not args.watched,
+                          limit=args.recommend if args.recommend > 0 else 10)
+        if not films:
+            print("Kriterlere uygun film bulunamadi.")
+            return
+        print(f"\nOWL Size {len(films)} Film Oneriyor:\n")
+        for i, (s, f) in enumerate(films, 1):
+            genres = json.loads(f["genres"]) if f["genres"] and f["genres"] != "[]" else []
+            imdb_str = f" | IMDB:{f['imdb_score']:.1f}" if f['imdb_score'] > 0 else ""
+            print(f"  {i:2d}.[{s:.1f}] {f['title']} ({f['year']}) - {f['studio']} | {','.join(genres[:3])}{imdb_str}")
+        return
+
+    if args.cli:
+        interactive(db)
+        return
+
+if __name__ == "__main__":
+    main()

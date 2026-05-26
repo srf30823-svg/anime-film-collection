@@ -21,3 +21,4 @@ output/
 # Keep data files tracked
 !data/watched.txt
 !data/recommender.db
+hermes-apk/.git
