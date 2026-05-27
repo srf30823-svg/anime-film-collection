@@ -16,16 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
-
-      - name: Cache buildozer
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.buildozer
-          key: buildozer-${{ runner.os }}-${{ hashFiles('apk_project/buildozer.spec') }}
-          restore-keys: |
-            buildozer-${{ runner.os }}-
+          python-version: '3.11'
 
       - name: Install system deps
         run: |
@@ -36,10 +27,12 @@ jobs:
             pkg-config libncurses5-dev libtinfo5 \
             zip unzip
 
-      - name: Install buildozer
+      - name: Install buildozer + latest kivy
         run: |
-          pip install --upgrade pip
-          pip install buildozer==1.6.0 cython==0.29.37
+          pip install --upgrade pip setuptools wheel
+          pip install cython>=3.0
+          pip install kivy==2.3.1
+          pip install buildozer==1.6.0
 
       - name: Prepare APK project
         run: |
@@ -79,11 +72,11 @@ jobs:
           source.dir = .
           source.include_exts = py,png,jpg,db,json,txt
           version = 5.2.0
-          requirements = python3,kivy==2.3.0,android,pyjnius
+          requirements = python3,kivy==2.3.1,android,pyjnius
           orientation = portrait
           fullscreen = 0
           android.permissions = INTERNET,ACCESS_NETWORK_STATE
-          android.api = 33
+          android.api = 34
           android.minapi = 21
           android.archs = arm64-v8a
           android.accept_sdk_license = True
@@ -159,39 +152,38 @@ jobs:
           PYEOF
 
       - name: Build APK
-        id: build
         working-directory: ./apk_project
         run: |
           export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
           export ANDROID_SDK_ROOT=$ANDROID_HOME
+          echo "=== Python version ==="
+          python3 --version
+          echo "=== Kivy version ==="
+          python3 -c "import kivy; print(kivy.__version__)"
           echo "=== Buildozer version ==="
           buildozer version
           echo "=== Starting build ==="
           yes | buildozer -v android debug 2>&1 | tee /tmp/build.log
-          echo "=== BUILD DONE ==="
+          echo "=== BUILD EXIT CODE: $? ==="
+
+      - name: Find and collect APK
+        if: always()
+        run: |
+          mkdir -p apk_output
           echo "=== Searching ALL .apk files ==="
           find /home -name "*.apk" -type f 2>/dev/null
           find /tmp -name "*.apk" -type f 2>/dev/null
           find /root -name "*.apk" -type f 2>/dev/null
-          echo "=== apk_project/bin ==="
-          ls -la bin/ 2>/dev/null || echo "No bin/"
-          echo "=== .buildozer ==="
-          ls -la .buildozer/android/platform/build/dists/ 2>/dev/null || echo "No dists/"
-          find .buildozer -name "*.apk" 2>/dev/null || echo "No APK in .buildozer"
-          echo "=== Last 100 lines of build log ==="
-          tail -100 /tmp/build.log
-
-      - name: Collect APK
-        if: always()
-        run: |
-          mkdir -p apk_output
-          # Search everywhere
+          find . -name "*.apk" -type f 2>/dev/null
+          echo "=== Copying APKs ==="
           find /home -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
           find /tmp -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
           find /root -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
           find . -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
-          echo "=== Collected APKs ==="
-          ls -la apk_output/ 2>/dev/null || echo "NO APK COLLECTED"
+          echo "=== apk_output ==="
+          ls -la apk_output/ 2>/dev/null || echo "NO APK FOUND"
+          echo "=== Build log tail ==="
+          tail -50 /tmp/build.log 2>/dev/null
 
       - name: Upload APK
         if: always()
