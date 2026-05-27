@@ -967,13 +967,13 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
 
         scored.sort(key=lambda x: x[0], reverse=True)
 
-        # Cesitlilik filtresi
+        # Cesitlilik filtresi - her turden max 10
         genre_count = Counter()
         diverse = []
         for score, row in scored:
             genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
             main = genres[0] if genres else "Other"
-            if genre_count[main] < 3:
+            if genre_count[main] < 10:
                 diverse.append((score, row))
                 genre_count[main] += 1
             if len(diverse) >= limit:
@@ -1147,7 +1147,7 @@ def start_web_server(port=8080):
 
         def _serve_index(self, params):
             db = self.get_db()
-            limit = min(int(params.get("limit", [20])[0]), 100)
+            limit = min(int(params.get("limit", [50])[0]), 100)
             genre_f = params.get("genre", [None])[0]
             source_f = params.get("source", [None])[0]
             studio_f = params.get("studio", [None])[0]
@@ -1321,7 +1321,7 @@ def start_web_server(port=8080):
 
         def _api_recommend(self, params):
             db = self.get_db()
-            limit = min(int(params.get("limit", [20])[0]), 100)
+            limit = min(int(params.get("limit", [50])[0]), 100)
             genre_f = params.get("genre", [None])[0]
             source_f = params.get("source", [None])[0]
             ms = float(params.get("min_score", [0])[0])
@@ -1343,7 +1343,7 @@ def start_web_server(port=8080):
         def _api_search(self, params):
             db = self.get_db()
             q = params.get("q", [""])[0]
-            limit = min(int(params.get("limit", [20])[0]), 100)
+            limit = min(int(params.get("limit", [50])[0]), 100)
             if not q:
                 self._send_json([])
                 db.close()
