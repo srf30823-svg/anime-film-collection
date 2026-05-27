@@ -195,7 +195,7 @@ h3{{font-size:0.72em;color:var(--muted);text-transform:uppercase;letter-spacing:
     </span>
     <span class="logo-text">ECHO</span>
   </a>
-  <span class="badge">v5.2</span>
+  <span class="badge">v5.3</span>
 </div>
 <div class="main">
 {content}
@@ -216,6 +216,62 @@ function toggleWatched(id, current) {{
     }})
     .catch(function() {{ btn.disabled = false; btn.textContent = 'Hata'; }});
 }}
+</script>
+<script>
+// === ECHO UX ENHANCEMENTS ===
+(function() {
+  // 1. Anlık arama (debounce)
+  var searchInput = document.querySelector('input[name="q"]');
+  var searchTimeout = null;
+  if (searchInput) {
+    searchInput.addEventListener('input', function() {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(function() {
+        if (searchInput.value.length >= 2 || searchInput.value.length === 0) {
+          searchInput.closest('form').submit();
+        }
+      }, 600);
+    });
+  }
+  // 2. Lazy loading cover images
+  if ('IntersectionObserver' in window) {
+    var lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    var imgObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var img = entry.target;
+          if (img.dataset.src) {
+            img.src = img.dataset.src;
+            img.removeAttribute('data-src');
+          }
+          imgObserver.unobserve(img);
+        }
+      });
+    });
+    lazyImages.forEach(function(img) { imgObserver.observe(img); });
+  }
+  // 3. Tema değiştirici (localStorage)
+  var theme = localStorage.getItem('echo-theme') || 'dark';
+  if (theme === 'light') { document.documentElement.classList.add('light-theme'); }
+  // 4.Scroll to top
+  var scrollBtn = null;
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 500) {
+      if (!scrollBtn) {
+        scrollBtn = document.createElement('button');
+        scrollBtn.innerHTML = '↑';
+        scrollBtn.style.cssText = 'position:fixed;bottom:70px;right:16px;width:36px;height:36px;border-radius:50%;background:var(--accent);color:#fff;border:none;cursor:pointer;font-size:1em;opacity:0.7;z-index:99;';
+        scrollBtn.onclick = function() { window.scrollTo({top:0,behavior:'smooth'}); };
+        scrollBtn.onmouseenter = function() { scrollBtn.style.opacity = '1'; };
+        scrollBtn.onmouseleave = function() { scrollBtn.style.opacity = '0.7'; };
+        document.body.appendChild(scrollBtn);
+      }
+      scrollBtn.style.display = 'block';
+    } else if (scrollBtn) {
+      scrollBtn.style.display = 'none';
+    }
+  });
+})();
 </script>
 </body>
 </html>"""
