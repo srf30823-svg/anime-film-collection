@@ -967,19 +967,8 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
 
         scored.sort(key=lambda x: x[0], reverse=True)
 
-        # Cesitlilik filtresi - her turden max 10
-        genre_count = Counter()
-        diverse = []
-        for score, row in scored:
-            genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
-            main = genres[0] if genres else "Other"
-            if genre_count[main] < 10:
-                diverse.append((score, row))
-                genre_count[main] += 1
-            if len(diverse) >= limit:
-                break
-
-        return diverse
+        # Tum sirali sonuclari dondur (filtresiz)
+        return scored[:limit]
     finally:
         if close_db:
             db.close()
@@ -1258,7 +1247,7 @@ def start_web_server(port=8080):
             <div class="film-grid">{film_html}</div>
             """
 
-            self._send_html("OWL Anime & Film Oneri", content, "index")
+            self._send_html("Echo", content, "index")
 
         def _serve_detail(self, film_id):
             db = self.get_db()
@@ -1274,8 +1263,17 @@ def start_web_server(port=8080):
             badges = "".join(f'<span class="badge">{g}</span>' for g in genres)
             cover = film["cover_url"] or ""
             cover_html = f'<img src="{cover}" class="detail-cover" onerror="this.parentElement.innerHTML=\'<div class=detail-cover-placeholder>🎬</div>\'">' if cover else '<div class="detail-cover-placeholder">🎬</div>'
-            synopsis = htmlmod.escape(film["synopsis"] or "Ozet yok.")
-            watched = "✅ Izlenmis" if film["is_watched"] else "📋 Bekliyor"
+            # Synopsis temizle (HTML tag'leri cikar)
+            import re as _re
+            raw_synopsis = film["synopsis"] or ""
+            clean_synopsis = _re.sub(r'<[^>]+>', '', raw_synopsis).strip()
+            if not clean_synopsis:
+                clean_synopsis = "Özet eklenmedi."
+            synopsis = htmlmod.escape(clean_synopsis)
+            # Cok uzunsa kisalt
+            if len(synopsis) > 500:
+                synopsis = synopsis[:500] + "..."
+            watched_btn = "✅ İzlendi" if film["is_watched"] else "📋 İzlendi İşaretle"
             user_r = f"⭐ Kullanıcı: {film['user_rating']}/10" if film["user_rating"] > 0 else "Kullanıcı puani yok"
             note = f'<div class="note">📝 {htmlmod.escape(film["user_note"])}</div>' if film["user_note"] else ""
             duration = f"{film['duration']} dk" if film["duration"] > 0 else "?"
