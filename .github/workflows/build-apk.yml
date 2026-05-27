@@ -13,12 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Set up Python 3.11
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install system deps
+      - name: Install system deps + Java 17
         run: |
           sudo apt-get update
           sudo apt-get install -y \
@@ -26,21 +26,25 @@ jobs:
             openjdk-17-jdk autoconf automake libtool \
             pkg-config libncurses5-dev libtinfo5 \
             zip unzip
+          # Force Java 17 as default
+          sudo update-alternatives --set java /usr/lib/jvm/java-17-openjdk-amd64/bin/java
+          sudo update-alternatives --set javac /usr/lib/jvm/java-17-openjdk-amd64/bin/javac
+          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
+          java -version
 
-      - name: Install buildozer + latest kivy
+      - name: Install python-for-android
         run: |
           pip install --upgrade pip setuptools wheel
           pip install cython>=3.0
           pip install kivy==2.3.1
-          pip install buildozer==1.6.0
+          pip install python-for-android
 
-      - name: Prepare APK project
+      - name: Prepare project
         run: |
-          mkdir -p apk_project/data apk_project/assets
-          cp oneri.py apk_project/oneri.py
-          cp data/recommender.db apk_project/data/recommender.db
-          ls -la apk_project/
-          ls -la apk_project/data/
+          mkdir -p echo_app/data echo_app/assets
+          cp oneri.py echo_app/main.py
+          cp data/recommender.db echo_app/data/recommender.db
+          ls -la echo_app/
 
       - name: Create icon
         run: |
@@ -57,41 +61,14 @@ jobs:
           idat = chunk(b'IDAT', zlib.compress(raw))
           iend = chunk(b'IEND', b'')
           d = sig + ihdr + idat + iend
-          with open('apk_project/assets/icon.png', 'wb') as f: f.write(d)
-          with open('apk_project/assets/presplash.png', 'wb') as f: f.write(d)
+          with open('echo_app/assets/icon.png', 'wb') as f: f.write(d)
+          with open('echo_app/assets/presplash.png', 'wb') as f: f.write(d)
           print('Icons OK')
           "
 
-      - name: Create buildozer.spec
+      - name: Create main.py (WebView wrapper)
         run: |
-          cat > apk_project/buildozer.spec << 'EOF'
-          [app]
-          title = Echo
-          package.name = echo.anime
-          package.domain = com.echo.anime
-          source.dir = .
-          source.include_exts = py,png,jpg,db,json,txt
-          version = 5.2.0
-          requirements = python3,kivy==2.3.1,android,pyjnius
-          orientation = portrait
-          fullscreen = 0
-          android.permissions = INTERNET,ACCESS_NETWORK_STATE
-          android.api = 34
-          android.minapi = 21
-          android.archs = arm64-v8a
-          android.accept_sdk_license = True
-          presplash.filename = assets/presplash.png
-          icon.filename = assets/icon.png
-          log_level = 2
-          warn_on_root = 1
-          [buildozer]
-          log_level = 2
-          warn_on_root = 1
-          EOF
-
-      - name: Create main.py
-        run: |
-          cat > apk_project/main.py << 'PYEOF'
+          cat > echo_app/main.py << 'PYEOF'
           import os, sys, time, threading
           APP_DIR = os.path.dirname(os.path.abspath(__file__))
           WEB_PORT = 8765
@@ -140,7 +117,7 @@ jobs:
                               wv.loadUrl(f"http://127.0.0.1:{WEB_PORT}/")
                               activity.setContentView(wv)
                           except:
-                              root.add_widget(Label(text=f"Server: http://127.0.0.1:{WEB_PORT}/", font_size=14, color=(0.5, 0.85, 0.85, 1)))
+                              root.add_widget(Label(text=f"Server running at http://127.0.0.1:{WEB_PORT}/", font_size=14, color=(0.5, 0.85, 0.85, 1)))
                           return False
                   Clock.schedule_once(start_server, 0)
                   Clock.schedule_interval(check_server, 1)
@@ -151,41 +128,56 @@ jobs:
               EchoApp().run()
           PYEOF
 
-      - name: Build APK
-        working-directory: ./apk_project
+      - name: Build APK with p4a
+        env:
+          JAVA_HOME: /usr/lib/jvm/java-17-openjdk-amd64
+          ANDROID_HOME: ${{ github.workspace }}/android-sdk
+          ANDROID_SDK_ROOT: ${{ github.workspace }}/android-sdk
         run: |
-          export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
-          export ANDROID_SDK_ROOT=$ANDROID_HOME
-          echo "=== Python version ==="
+          echo "=== Java ==="
+          java -version
+          echo "=== Python ==="
           python3 --version
-          echo "=== Kivy version ==="
-          python3 -c "import kivy; print(kivy.__version__)"
-          echo "=== Buildozer version ==="
-          buildozer version
-          echo "=== Starting build ==="
-          yes | buildozer -v android debug 2>&1 | tee /tmp/build.log
-          echo "=== BUILD EXIT CODE: $? ==="
+          echo "=== p4a version ==="
+          p4a --version 2>&1 | head -5
+          
+          echo "=== Starting p4a build ==="
+          cd echo_app
+          
+          p4a apk \
+            --private=. \
+            --package=com.echo.anime \
+            --name=Echo \
+            --version=5.2.0 \
+            --bootstrap=sdl2 \
+            --requirements=python3,kivy==2.3.1,pyjnius \
+            --permission=INTERNET \
+            --permission=ACCESS_NETWORK_STATE \
+            --android-api=34 \
+            --minsdk=21 \
+            --arch=arm64-v8a \
+            --presplash=assets/presplash.png \
+            --icon=assets/icon.png \
+            --orientation=portrait \
+            2>&1 | tee /tmp/p4a.log
+          
+          BUILD_EXIT=$?
+          echo "=== BUILD EXIT: $BUILD_EXIT ==="
+          
+          echo "=== Searching for APK ==="
+          find / -name "*.apk" -type f 2>/dev/null | head -20
+          
+          exit $BUILD_EXIT
 
-      - name: Find and collect APK
+      - name: Collect and upload APK
         if: always()
         run: |
           mkdir -p apk_output
-          echo "=== Searching ALL .apk files ==="
-          find /home -name "*.apk" -type f 2>/dev/null
-          find /tmp -name "*.apk" -type f 2>/dev/null
-          find /root -name "*.apk" -type f 2>/dev/null
-          find . -name "*.apk" -type f 2>/dev/null
-          echo "=== Copying APKs ==="
-          find /home -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
-          find /tmp -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
-          find /root -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
-          find . -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
-          echo "=== apk_output ==="
-          ls -la apk_output/ 2>/dev/null || echo "NO APK FOUND"
-          echo "=== Build log tail ==="
-          tail -50 /tmp/build.log 2>/dev/null
+          find / -name "*.apk" -type f -exec cp {} apk_output/ \; 2>/dev/null
+          echo "=== APKs found ==="
+          ls -la apk_output/ 2>/dev/null || echo "NO APK"
 
-      - name: Upload APK
+      - name: Upload artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
