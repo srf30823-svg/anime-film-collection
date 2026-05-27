@@ -34,8 +34,8 @@ jobs:
       - name: Prepare APK project
         run: |
           mkdir -p apk_project/data apk_project/assets
-          cp anime-project/oneri.py apk_project/oneri.py
-          cp -r anime-project/data/* apk_project/data/
+          cp oneri.py apk_project/oneri.py
+          cp -r data/* apk_project/data/
           ls -la apk_project/data/
 
       - name: Create icon
