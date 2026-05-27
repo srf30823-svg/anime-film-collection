@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
 
@@ -43,9 +43,15 @@ jobs:
 
       - name: Prepare APK project
         run: |
-          mkdir -p apk_project/data apk_project/assets
+          mkdir -p apk_project/data apk_project/assets apk_project/fonts
+          # Ana modül
           cp oneri.py apk_project/oneri.py
+          # Veritabanı
           cp data/recommender.db apk_project/data/recommender.db
+          # main.py (güncel)
+          cp hermes-apk/main.py apk_project/main.py
+          # buildozer.spec (güncel)
+          cp hermes-apk/buildozer.spec apk_project/buildozer.spec
 
       - name: Create icon
         run: |
@@ -55,106 +61,23 @@ jobs:
               c = t + d
               return struct.pack('>I', len(d)) + c + struct.pack('>I', zlib.crc32(c) & 0xffffffff)
           sig = b'\x89PNG\r\n\x1a\n'
-          ihdr = chunk(b'IHDR', struct.pack('>IIBBBBB', 512, 512, 8, 2, 0, 0, 0))
+          # 512x512 mor gradient icon
           raw = b''
           for y in range(512):
-              raw += b'\x00' + bytes([10, 10, 15]) * 512
-          idat = chunk(b'IDAT', zlib.compress(raw))
+              raw += b'\x00'
+              for x in range(512):
+                  r = int(10 + (y/512) * 30)
+                  g = int(10 + (x/512) * 20)
+                  b = int(15 + ((x+y)/1024) * 60)
+                  raw += bytes([r, g, b])
+          ihdr = chunk(b'IHDR', struct.pack('>IIBBBBB', 512, 512, 8, 2, 0, 0, 0))
+          idat = chunk(b'IDAT', zlib.compress(raw, 9))
           iend = chunk(b'IEND', b'')
           d = sig + ihdr + idat + iend
           with open('apk_project/assets/icon.png', 'wb') as f: f.write(d)
           with open('apk_project/assets/presplash.png', 'wb') as f: f.write(d)
           print('Icons OK')
           "
-
-      - name: Create buildozer.spec
-        run: |
-          cat > apk_project/buildozer.spec << 'EOF'
-          [app]
-          title = Echo
-          package.name = echo.anime
-          package.domain = com.echo.anime
-          source.dir = .
-          source.include_exts = py,png,jpg,db,json,txt
-          version = 5.2.0
-          requirements = python3,kivy==2.3.1,android,pyjnius
-          orientation = portrait
-          fullscreen = 0
-          android.permissions = INTERNET,ACCESS_NETWORK_STATE
-          android.api = 34
-          android.minapi = 21
-          android.archs = arm64-v8a
-          android.accept_sdk_license = True
-          presplash.filename = assets/presplash.png
-          icon.filename = assets/icon.png
-          log_level = 2
-          warn_on_root = 1
-          [buildozer]
-          log_level = 2
-          warn_on_root = 1
-          EOF
-
-      - name: Create main.py
-        run: |
-          cat > apk_project/main.py << 'PYEOF'
-          import os, sys, time, threading
-          APP_DIR = os.path.dirname(os.path.abspath(__file__))
-          WEB_PORT = 8765
-          os.environ['KIVY_LOG_LEVEL'] = 'warning'
-          from kivy.app import App
-          from kivy.config import Config
-          from kivy.core.window import Window
-          from kivy.clock import Clock
-          from kivy.uix.boxlayout import BoxLayout
-          from kivy.uix.label import Label
-          from kivy.uix.progressbar import ProgressBar
-          Config.set('graphics', 'width', '360')
-          Config.set('graphics', 'height', '640')
-          Config.set('graphics', 'resizable', False)
-          class EchoApp(App):
-              def build(self):
-                  self.title = "Echo"
-                  Window.clearcolor = (0.07, 0.07, 0.07, 1)
-                  root = BoxLayout(orientation='vertical')
-                  nav = BoxLayout(size_hint_y=None, height=56, padding=8)
-                  nav.add_widget(Label(text="ECHO", font_size=20, color=(0.5, 0.85, 0.85, 1), bold=True, size_hint_x=0.7))
-                  root.add_widget(nav)
-                  loading = BoxLayout(orientation='vertical', padding=40, spacing=20)
-                  status = Label(text="The Wired is everywhere...", font_size=18, color=(0.5, 0.85, 0.85, 1), halign='center')
-                  loading.add_widget(status)
-                  pb = ProgressBar(max=100, value=0, size_hint_y=None, height=6)
-                  loading.add_widget(pb)
-                  root.add_widget(loading)
-                  def start_server(dt):
-                      try:
-                          sys.path.insert(0, APP_DIR)
-                          from oneri import start_web_server
-                          t = threading.Thread(target=start_web_server, args=(WEB_PORT,), daemon=True)
-                          t.start()
-                      except: pass
-                  def check_server(dt):
-                      pb.value += 25
-                      if pb.value >= 100:
-                          try:
-                              root.remove_widget(loading)
-                              from jnius import autoclass
-                              WebView = autoclass('android.webkit.WebView')
-                              activity = autoclass('org.kivy.android.PythonActivity').mActivity
-                              wv = WebView(activity)
-                              wv.getSettings().setJavaScriptEnabled(True)
-                              wv.loadUrl(f"http://127.0.0.1:{WEB_PORT}/")
-                              activity.setContentView(wv)
-                          except:
-                              root.add_widget(Label(text=f"Server: http://127.0.0.1:{WEB_PORT}/", font_size=14, color=(0.5, 0.85, 0.85, 1)))
-                          return False
-                  Clock.schedule_once(start_server, 0)
-                  Clock.schedule_interval(check_server, 1)
-                  return root
-              def on_pause(self):
-                  return True
-          if __name__ == "__main__":
-              EchoApp().run()
-          PYEOF
 
       - name: Build APK
         working-directory: ./apk_project
@@ -177,20 +100,20 @@ jobs:
         if: always()
         run: |
           mkdir -p apk_output
-          find / -name "*.apk" -type f 2>/dev/null | while read f; do
+          find /home/runner -name "*.apk" -type f 2>/dev/null | while read f; do
             echo "FOUND: $f"
             cp "$f" apk_output/
           done
           echo "=== APKs ==="
           ls -la apk_output/ 2>/dev/null || echo "NO APK"
           echo "=== Build log tail ==="
-          tail -80 /tmp/build.log 2>/dev/null
+          tail -100 /tmp/build.log 2>/dev/null
 
       - name: Upload APK
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: echo-apk
+          name: echo-apk-v5.3
           path: apk_output/*.apk
           retention-days: 30
           if-no-files-found: warn
