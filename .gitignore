@@ -1,23 +1,13 @@
-# Python
-__pycache__/
 *.pyc
-*.pyo
-
-# IDE
-.vscode/
-.idea/
-*.swp
-*~
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Project
-data/*.shm
-data/*.wal
+__pycache__/
+*.db-shm
+*.db-wal
+backups/
 output/
-
-# Keep data files tracked
-!data/watched.txt
-!data/recommender.db
+.venv/
+venv/
+archive/
+buildozer.spec.bak
+^hermes-apk/bin/
+^hermes-apk/.buildozer/
+*.apk

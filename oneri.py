@@ -273,6 +273,138 @@ function toggleWatched(id, current) {{
   });
 })();
 </script>
+<script>
+// === LAIN 8-BIT AUDIO SYSTEM ===
+(function() {
+  // Kullanıcı etkileşimi ile başlat (browser policy)
+  var audioCtx = null;
+  var isPlaying = false;
+  var currentTimeout = null;
+
+  // Lain teması müziği - düşük tempolu, minimalist, 8-bit
+  var melody = [
+    // Nota, süre(s), frekans(Hz) - Lain "Wired" temasına benzer minimalist
+    [0, 0.5],      // rest
+    [523.25, 0.8], // C5
+    [0, 0.2],      // rest
+    [587.33, 0.6], // D5
+    [659.25, 0.8], // E5
+    [0, 0.4],      // rest
+    [587.33, 0.6], // D5
+    [523.25, 1.0], // C5
+    [0, 0.6],      // rest
+    [392.00, 0.8], // G4
+    [0, 0.2],      // rest
+    [440.00, 0.6], // A4
+    [523.25, 0.8], // C5
+    [0, 0.4],      // rest
+    [440.00, 0.6], // A4
+    [392.00, 1.0], // G4
+    [0, 0.8],      // rest
+    [329.63, 0.8], // E4
+    [0, 0.2],      // rest
+    [349.23, 0.6], // F4
+    [440.00, 0.8], // A4
+    [523.25, 0.6], // C5
+    [0, 0.4],      // rest
+    [440.00, 0.8], // A4
+    [349.23, 0.6], // F4
+    [329.63, 1.2], // E4
+    [0, 1.0],      // rest - uzun bekleme
+  ];
+
+  function createOscillator(ctx, freq, startTime, duration) {
+    var osc = ctx.createOscillator();
+    var gain = ctx.createGain();
+
+    // 8-bit için square wave
+    osc.type = 'square';
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    // Volume envelope - 8-bit tarzı keskin
+    var vol = 0.08; // düşük ses
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(vol, startTime + 0.02);
+    gain.gain.setValueAtTime(vol, startTime + duration * 0.7);
+    gain.gain.linearRampToValueAtTime(0, startTime + duration);
+
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    return osc;
+  }
+
+  function playMelody() {
+    if (!audioCtx) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+    var now = audioCtx.currentTime;
+    var time = now;
+
+    for (var i = 0; i < melody.length; i++) {
+      var note = melody[i];
+      var freq = note[0];
+      var dur = note[1];
+      if (freq > 0) {
+        var osc = createOscillator(audioCtx, freq, time, dur * 0.8);
+        osc.start(time);
+        osc.stop(time + dur * 0.8);
+      }
+      time += dur;
+    }
+
+    // Döngü için tekrar et
+    var totalLen = (time - now) * 1000;
+    currentTimeout = setTimeout(function() {
+      if (isPlaying) playMelody();
+    }, totalLen);
+  }
+
+  // UI - sol alt köşede gizli kontrol
+  var musicBtn = document.createElement('button');
+  musicBtn.id = 'lain-music-btn';
+  musicBtn.innerHTML = '♪';
+  musicBtn.title = 'Lain Wired Müziği';
+  musicBtn.style.cssText = 'position:fixed;bottom:64px;left:8px;width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--accent);color:var(--accent);font-size:0.9em;cursor:pointer;z-index:99;opacity:0;display:flex;align-items:center;justify-content:center;transition:opacity 0.3s';
+  document.body.appendChild(musicBtn);
+
+  // 3 saniye sonra göster
+  setTimeout(function() {
+    musicBtn.style.opacity = '0.5';
+  }, 3000);
+
+  musicBtn.onmouseenter = function() { musicBtn.style.opacity = '1'; };
+  musicBtn.onmouseleave = function() { if (!isPlaying) musicBtn.style.opacity = '0.5'; };
+
+  musicBtn.onclick = function() {
+    if (isPlaying) {
+      isPlaying = false;
+      if (currentTimeout) clearTimeout(currentTimeout);
+      musicBtn.innerHTML = '♪';
+      musicBtn.style.borderColor = 'var(--accent)';
+      musicBtn.style.color = 'var(--accent)';
+      if (audioCtx) audioCtx.close();
+      audioCtx = null;
+    } else {
+      isPlaying = true;
+      playMelody();
+      musicBtn.innerHTML = '♫';
+      musicBtn.style.borderColor = '#2dd4bf';
+      musicBtn.style.color = '#2dd4bf';
+      musicBtn.style.opacity = '1';
+    }
+  };
+
+  // Mouse hareketi ile de tetiklenebilir (Lain temasına uygun)
+  var lastMove = 0;
+  document.addEventListener('mousemove', function() {
+    var now = Date.now();
+    if (now - lastMove > 30000) { // 30sn hareketsizlik sonrası
+      lastMove = now;
+      // Otomatik çalma - kullanıcı açmadıysa
+    }
+  });
+})();
+</script>
 </body>
 </html>"""
 BASE = os.environ.get("ANIME_BASE", os.path.dirname(os.path.abspath(__file__)))
