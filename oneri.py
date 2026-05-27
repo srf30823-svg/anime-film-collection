@@ -1136,7 +1136,9 @@ def start_web_server(port=8080):
 
         def _serve_index(self, params):
             db = self.get_db()
-            limit = min(int(params.get("limit", [50])[0]), 100)
+            page = max(int(params.get("page", [1])[0]), 1)
+            per_page = min(int(params.get("per_page", [50])[0]), 200)
+            limit = per_page * page  # fetch enough for pagination
             genre_f = params.get("genre", [None])[0]
             source_f = params.get("source", [None])[0]
             studio_f = params.get("studio", [None])[0]
@@ -1154,6 +1156,12 @@ def start_web_server(port=8080):
                 scored = recommend(db, genre=genre_f, source=source_f, studio=studio_f,
                                    year_from=yf, year_to=yt, min_score=ms,
                                    media_type=media_f, limit=limit)
+
+            # Pagination slice
+            start = (page - 1) * per_page
+            end = start + per_page
+            total_count = len(scored)
+            scored = scored[start:end]
             stats = get_stats(db)
             # Type dagilimi (db.close() oncesi)
             type_counts = db.execute("SELECT media_type, COUNT(*) FROM films GROUP BY media_type ORDER BY COUNT(*) DESC").fetchall()
@@ -1194,12 +1202,22 @@ def start_web_server(port=8080):
                     eps = row["episodes"] or 0
                     progress_html = f'<span class="progress-text">{progress}/{eps} ep</span>'
 
+                # Kisa ozet (film card icin)
+                raw_s = row["synopsis"] or ""
+                import re as _re2
+                clean_s = _re2.sub(r'<[^>]+>', '', raw_s).strip()
+                synopsis_snippet = ""
+                if clean_s:
+                    syn_html = htmlmod.escape(clean_s[:120])
+                    synopsis_snippet = f'<div style="font-size:0.58em;color:var(--muted);margin-top:2px;line-height:1.5;-webkit-line-clamp:2;display:-webkit-box;-webkit-box-orient:vertical;overflow:hidden">{syn_html}{"..." if len(clean_s)>120 else ""}</div>'
+
                 film_html += f"""
                 <a href="/film?id={row['id']}" class="film-card {watched_class}">
                     {cover_html}
                     <div class="film-info">
                         <div class="film-title">#{i} {htmlmod.escape(row["title"])}</div>
                         <div class="film-meta">{row["year"]} · {htmlmod.escape(row["studio"])} · {row["source"]}{user_r}</div>
+                        {synopsis_snippet}
                         <div class="film-score">{score}</div>
                         <div class="film-badges">{mt_badge}{badges}</div>
                         {progress_html}
@@ -1245,9 +1263,43 @@ def start_web_server(port=8080):
                 </form>
             </div>
             <div class="film-grid">{film_html}</div>
+            {self._pagination_html(page, per_page, total_count, params)}
             """
 
             self._send_html("Echo", content, "index")
+
+        def _pagination_html(self, page, per_page, total_count, params):
+            """Sayfalama HTML'i uretir."""
+            if total_count < per_page and page == 1:
+                return ""
+            total_pages = max((total_count + per_page - 1) // per_page, 1)
+            # Build base URL params
+            import urllib.parse as _up
+            base_params = {}
+            for k in ("genre", "source", "studio", "year_from", "year_to", "min_score", "media_type", "q", "per_page"):
+                v = params.get(k, [None])[0]
+                if v and v not in ("0", "2030", ""):
+                    base_params[k] = v
+            base_qs = _up.urlencode(base_params)
+
+            btns = ""
+            # First + prev
+            if page > 1:
+                btns += f'<a href="/?{base_qs}&page=1" class="btn btn-sm">«</a>'
+                btns += f'<a href="/?{base_qs}&page={page-1}" class="btn btn-sm">‹</a>'
+            # Page range (max 7)
+            start_page = max(1, page - 3)
+            end_page = min(total_pages, page + 3)
+            for p in range(start_page, end_page + 1):
+                active = ' style="background:var(--accent);color:#fff"' if p == page else ""
+                btns += f'<a href="/?{base_qs}&page={p}" class="btn btn-sm"{active}>{p}</a>'
+            # Next + last
+            if page < total_pages:
+                btns += f'<a href="/?{base_qs}&page={page+1}" class="btn btn-sm">›</a>'
+                btns += f'<a href="/?{base_qs}&page={total_pages}" class="btn btn-sm">»</a>'
+
+            info = f'<span class="muted" style="font-size:0.65em">Sayfa {page}/{total_pages} ({total_count} sonuç)</span>'
+            return f'<div style="display:flex;gap:4px;align-items:center;margin-top:12px;flex-wrap:wrap;justify-content:center">{btns}{info}</div>'
 
         def _serve_detail(self, film_id):
             db = self.get_db()
@@ -1268,11 +1320,14 @@ def start_web_server(port=8080):
             raw_synopsis = film["synopsis"] or ""
             clean_synopsis = _re.sub(r'<[^>]+>', '', raw_synopsis).strip()
             if not clean_synopsis:
-                clean_synopsis = "Özet eklenmedi."
+                clean_synopsis = "Bu eser icin henuz ozet eklenmemistir. Detaylar icin AniList veya MAL sayfasini ziyaret edebilirsiniz."
             synopsis = htmlmod.escape(clean_synopsis)
-            # Cok uzunsa kisalt
-            if len(synopsis) > 500:
-                synopsis = synopsis[:500] + "..."
+            # Cok uzunsa kisalt (ok butonu ile tamamini goster)
+            if len(synopsis) > 400:
+                short_synopsis = synopsis[:400] + "..."
+                synopsis_html = f'<span id="syn-short">{short_synopsis}</span><span id="syn-full" style="display:none">{synopsis}</span><button onclick="var s=document.getElementById(\'syn-short\'),f=document.getElementById(\'syn-full\');var h=s.style.display==\'none\';s.style.display=h?\'inline\':\'none\';f.style.display=h?\'none\':\'inline\';this.textContent=h?\'Daralt\' :\'Devamini Oku\'" class="btn btn-sm" style="margin-left:4px;font-size:0.7em">Devamini Oku</button>'
+            else:
+                synopsis_html = synopsis
             watched_btn = "✅ İzlendi" if film["is_watched"] else "📋 İzlendi İşaretle"
             user_r = f"⭐ Kullanıcı: {film['user_rating']}/10" if film["user_rating"] > 0 else "Kullanıcı puani yok"
             note = f'<div class="note">📝 {htmlmod.escape(film["user_note"])}</div>' if film["user_note"] else ""
@@ -1309,7 +1364,7 @@ def start_web_server(port=8080):
                 </div>
                 <div class="detail-synopsis">
                     <h3>Özet</h3>
-                    <p>{synopsis}</p>
+                    <p>{synopsis_html}</p>
                 </div>
                 {note}
             </div>

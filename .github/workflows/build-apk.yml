@@ -31,53 +31,71 @@ jobs:
           pip install --upgrade pip
           pip install buildozer==1.6.0 cython==0.29.37
 
-      - name: Create icons
+      - name: Prepare APK project
         run: |
-          mkdir -p apk_project/data
-          # Create simple PNG icon using Python stdlib (no Pillow needed)
+          mkdir -p apk_project/data apk_project/assets
+          cp anime-project/oneri.py apk_project/oneri.py
+          cp -r anime-project/data/* apk_project/data/
+          ls -la apk_project/data/
+
+      - name: Create icon
+        run: |
           python3 << 'ICONEOF'
           import struct, zlib
-          def create_png(width, height, color, text):
-              # Create a simple PNG with solid color
+          def create_png(width, height, color):
               def chunk(chunk_type, data):
                   c = chunk_type + data
                   crc = struct.pack('>I', zlib.crc32(c) & 0xffffffff)
                   return struct.pack('>I', len(data)) + c + crc
-              
-              # PNG signature
               sig = b'\x89PNG\r\n\x1a\n'
-              
-              # IHDR
               ihdr_data = struct.pack('>IIBBBBB', width, height, 8, 2, 0, 0, 0)
               ihdr = chunk(b'IHDR', ihdr_data)
-              
-              # IDAT - raw pixel data
               raw = b''
               for y in range(height):
-                  raw += b'\x00'  # filter byte
+                  raw += b'\x00'
                   for x in range(width):
-                      # Simple text area detection (rough center)
                       if height//3 < y < 2*height//3 and width//4 < x < 3*width//4:
-                          raw += bytes([color[0]//2, color[1]//2, color[2]//2])  # darker center
+                          raw += bytes([color[0]//2, color[1]//2, color[2]//2])
                       else:
                           raw += bytes(color)
-              
               compressed = zlib.compress(raw)
               idat = chunk(b'IDAT', compressed)
-              
-              # IEND
               iend = chunk(b'IEND', b'')
-              
               return sig + ihdr + idat + iend
-          
-          # Create icon (512x512, dark bg with ice color center)
-          icon_data = create_png(512, 512, (18, 18, 18), "ECHO")
-          with open('apk_project/data/icon.png', 'wb') as f:
+          icon_data = create_png(512, 512, (10, 10, 15))
+          with open('apk_project/assets/icon.png', 'wb') as f:
               f.write(icon_data)
-          with open('apk_project/data/presplash.png', 'wb') as f:
+          with open('apk_project/assets/presplash.png', 'wb') as f:
               f.write(icon_data)
           print('Icons created')
           ICONEOF
+
+      - name: Create buildozer.spec
+        run: |
+          cat > apk_project/buildozer.spec << 'SPECEOF'
+          [app]
+          title = Echo
+          package.name = echo.anime
+          package.domain = com.echo.anime
+          source.dir = .
+          source.include_exts = py,png,jpg,db,json,txt
+          version = 5.2.0
+          requirements = python3,kivy==2.3.0,android,pyjnius
+          orientation = portrait
+          fullscreen = 0
+          android.permissions = INTERNET,ACCESS_NETWORK_STATE
+          android.api = 33
+          android.minapi = 21
+          android.archs = arm64-v8a
+          android.accept_sdk_license = True
+          presplash.filename = assets/presplash.png
+          icon.filename = assets/icon.png
+          log_level = 2
+          warn_on_root = 1
+          [buildozer]
+          log_level = 2
+          warn_on_root = 1
+          SPECEOF
 
       - name: Create main.py for APK
         run: |
@@ -86,7 +104,7 @@ jobs:
           Echo - Anime & Manga Oneri Sistemi
           Kivy WebView Wrapper
           """
-          import os, sys, subprocess, time, threading
+          import os, sys, time, threading
 
           APP_DIR = os.path.dirname(os.path.abspath(__file__))
           WEB_PORT = 8765
@@ -159,12 +177,27 @@ jobs:
                   try:
                       self.root.remove_widget(self.loading)
                       self.status_dot.color = COLORS['neon']
+                      # Use pyjnius to create Android WebView
                       try:
-                          from kivy.uix.webview import WebView
-                          wv = WebView(url=f"http://127.0.0.1:{WEB_PORT}/", enable_javascript=True, enable_zoom=False)
-                          self.root.add_widget(wv)
-                      except:
-                          self.status_label.text = "WebView yukleniyor..."
+                          from jnius import autoclass
+                          WebView = autoclass('android.webkit.WebView')
+                          WebSettings = autoclass('android.webkit.WebSettings')
+                          activity = autoclass('org.kivy.android.PythonActivity').mActivity
+                          webview = WebView(activity)
+                          webview.getSettings().setJavaScriptEnabled(True)
+                          webview.getSettings().setDomStorageEnabled(True)
+                          webview.loadUrl(f"http://127.0.0.1:{WEB_PORT}/")
+                          # Add WebView to activity
+                          activity.setContentView(webview)
+                      except Exception as e:
+                          # Fallback: try kivy webview
+                          try:
+                              from kivy.uix.webview import WebView as KVWebView
+                              wv = KVWebView(url=f"http://127.0.0.1:{WEB_PORT}/", enable_javascript=True, enable_zoom=False)
+                              self.root.add_widget(wv)
+                          except:
+                              self.status_label.text = f"WebView error: {e}"
+                              self.root.add_widget(self.status_label)
                   except Exception as e:
                       self.status_label.text = str(e)
 
@@ -178,79 +211,39 @@ jobs:
               EchoApp().run()
           PYEOF
 
-      - name: Create buildozer.spec
-        run: |
-          cat > apk_project/buildozer.spec << 'SPECEOF'
-          [app]
-          title = Echo
-          package.name = echo.anime
-          package.domain = com.echo.anime
-          source.dir = .
-          source.include_exts = py,png,jpg,db,json,txt
-          version = 5.2.0
-          requirements = python3,kivy==2.3.0,android,pyjnius,urllib3
-          orientation = portrait
-          fullscreen = 0
-          android.permissions = INTERNET,ACCESS_NETWORK_STATE
-          android.api = 33
-          android.minapi = 21
-          android.archs = arm64-v8a
-          android.accept_sdk_license = True
-          presplash.filename = data/presplash.png
-          icon.filename = data/icon.png
-          log_level = 2
-          warn_on_root = 1
-          [buildozer]
-          log_level = 2
-          warn_on_root = 1
-          SPECEOF
-
-      - name: Copy project files
-        run: |
-          cp oneri.py apk_project/oneri.py
-          cp -r data apk_project/
-          cp -r output apk_project/ 2>/dev/null || true
-          ls -la apk_project/
-
       - name: Build APK
         working-directory: ./apk_project
         run: |
           export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
           export ANDROID_SDK_ROOT=$ANDROID_HOME
-          # Show buildozer version
           buildozer version
-          # Build with full log
-          yes | buildozer -v android debug 2>&1 | tail -200
-          echo "=== BUILD COMPLETE ==="
-          echo "=== All APK files in apk_project ==="
-          find apk_project -name "*.apk" -type f 2>/dev/null || echo "NO APK FOUND"
-          echo "=== Directory structure ==="
-          ls -la apk_project/bin/ 2>/dev/null || echo "No bin/"
-          ls -la apk_project/.buildozer/ 2>/dev/null || echo "No .buildozer/"
+          yes | buildozer -v android debug 2>&1 | tee /tmp/build.log
+          echo "=== BUILD EXIT CODE: $? ==="
 
-      - name: Find and copy APK
+      - name: Find APK
+        if: always()
+        run: |
+          echo "=== Searching for APK files ==="
+          find . -name "*.apk" -type f 2>/dev/null
+          echo "=== bin/ contents ==="
+          ls -la apk_project/bin/ 2>/dev/null || echo "No bin/"
+          echo "=== .buildozer dists ==="
+          find apk_project -path "*/dists/*" -name "*.apk" -type f 2>/dev/null
+          echo "=== Last 50 lines of build log ==="
+          tail -50 /tmp/build.log 2>/dev/null || echo "No build log"
+
+      - name: Copy APK to output
+        if: always()
         run: |
           mkdir -p apk_output
-          echo "=== Searching all APK files ==="
-          # Search everywhere
-          find apk_project -name "*.apk" -type f 2>/dev/null | while read f; do
-            echo "FOUND: $f"
-            cp "$f" apk_output/
-          done
-          echo "=== bin/ contents ==="
-          ls -la apk_project/bin/ 2>/dev/null || echo "No bin/ found"
-          echo "=== .buildozer structure ==="
-          ls -laR apk_project/.buildozer/android/platform/build/dists/ 2>/dev/null | head -30 || echo "No .buildozer dists"
-          echo "=== Final APK files ==="
-          ls -la apk_output/ 2>/dev/null || echo "NO APK TO UPLOAD"
+          find . -name "*.apk" -type f -exec cp {} apk_output/ \;
+          echo "=== APK output ==="
+          ls -la apk_output/ 2>/dev/null || echo "NO APK FOUND"
 
       - name: Upload APK
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: echo-apk
-          path: |
-            apk_output/*.apk
-            apk_project/bin/*.apk
-            apk_project/.buildozer/android/platform/build/dists/*/bin/*.apk
+          path: apk_output/*.apk
           retention-days: 30
