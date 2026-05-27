@@ -298,182 +298,224 @@ function rateFilm(id, stars) {{
 })();
 </script>
 <script>
-// === LAIN AUDIO SYSTEM v2 ===
+// === LAIN AUDIO SYSTEM v3 — Serial Experiments Lain theme ===
 (function() {
-  var ctx = null;
-  var masterGain = null;
-  var isPlaying = false;
-  var loopTimer = null;
-  var currentVol = parseFloat(localStorage.getItem('echo-vol') || '0.15');
-  var autoStarted = false;
+  var ctx, master, lfo, isPlaying = false, loopId = null;
+  var vol = parseFloat(localStorage.getItem('lain-vol') || '0.25');
 
-  // Lain "Wired" notası - e minor, yavaş, siberpunk havası
-  // Her notalar [freq_hz, duration_beats, type]
-  var leadMelody = [
-    [329.63, 1.5], [0, 0.5],
-    [293.66, 1.0], [0, 0.3],
-    [261.63, 1.5], [0, 0.5],
-    [293.66, 1.0], [0, 0.3],
-    [329.63, 1.0], [0, 0.3],
-    [349.23, 1.5], [0, 0.5],
-    [293.66, 1.0], [0, 0.3],
-    [261.63, 2.0], [0, 1.0],
-    [0, 1.5],
-    [392.00, 1.0], [0, 0.3],
-    [349.23, 1.0], [0, 0.3],
-    [329.63, 1.5], [0, 0.5],
-    [293.66, 1.0], [0, 0.3],
-    [261.63, 1.5], [0, 0.5],
-    [220.00, 2.0], [0, 1.5],
+  // Lain temposu: 50-65 BPM arası, yavaş, atmospheric
+  var BPM = 55;
+  var T = { whole: 60/BPM*4, half: 60/BPM*2, quarter: 60/BPM, eighth: 60/BPM/2,
+            dotted_half: 60/BPM*3, dotted_q: 60/BPM*1.5 };
+
+  // === MELODİ: Ana tema — Lain'in "Wired" temasına sadık, E minor ===
+  // Her eleman: [nota_hz, süre, oscillator_type, volume_multiplier]
+  var melody = [
+    [329.63, T.dotted_half],                    // E4
+    [0, T.half],
+    [311.13, T.quarter],                        // Eb4
+    [0, T.eighth],
+    [293.66, T.dotted_half],                    // D4
+    [0, T.half],
+    [329.63, T.quarter],                        // E4
+    [0, T.eighth],
+    [349.23, T.dotted_half],                    // F4
+    [0, T.half],
+    [392.00, T.half],                           // G4
+    [349.23, T.quarter],                        // F4
+    [329.63, T.dotted_half],                    // E4
+    [0, T.whole],
+    [261.63, T.half],                           // C4
+    [293.66, T.quarter],                        // D4
+    [329.63, T.dotted_half],                    // E4
+    [0, T.half],
+    [293.66, T.quarter],                        // D4
+    [0, T.eighth],
+    [261.63, T.dotted_half],                    // C4
+    [0, T.half],
+    [0, T.whole * 2],                           // Uzun sessizlik
   ];
 
+  // === BASS: Derin, yavaş, karanlık ===
   var bassLine = [
-    [130.81, 4.0], [0, 1.0],
-    [110.00, 4.0], [0, 1.0],
-    [130.81, 3.0], [0, 0.5],
-    [146.83, 3.0], [0, 1.5],
+    [82.41,  T.whole * 4],                      // E2
+    [0, T.whole],
+    [73.42,  T.whole * 4],                      // D2
+    [0, T.whole],
+    [82.41,  T.whole * 3],                      // E2
+    [65.41,  T.whole * 3],                      // C2
+    [0, T.whole * 2],
   ];
 
-  var tempo = 65; // BPM - yavaş, atmospheric
-  var beatDur = 60 / tempo;
+  // === PAD: Sürekli dron ===
+  var padChord = [
+    { notes: [164.81, 196.00, 246.94, 329.63], dur: T.whole * 16 },  // E minor maj7
+    { notes: [146.83, 174.61, 220.00, 293.66], dur: T.whole * 16 },  // D maj7
+  ];
 
-  function initAudio() {
-    if (ctx) return;
-    ctx = new (window.AudioContext || window.webkitAudioContext)();
-    masterGain = ctx.createGain();
-    masterGain.gain.setValueAtTime(currentVol, ctx.currentTime);
-    masterGain.connect(ctx.destination);
+  // === ARPEJ: Parmak izi gibi yankılanan notalar ===
+  var arpeggio = [
+    [659.25, T.eighth],                         // E5
+    [523.25, T.eighth],                         // C5
+    [493.88, T.eighth],                         // B4
+    [329.63, T.eighth],                         // E4
+    [261.63, T.eighth],                         // C4
+    [164.81, T.half],                           // E3
+  ];
+
+  var arpeggio2 = [
+    [587.33, T.eighth],                         // D5
+    [440.00, T.eighth],                         // A4
+    [349.23, T.eighth],                         // F4
+    [293.66, T.eighth],                         // D4
+    [220.00, T.eighth],                         // A3
+    [146.83, T.half],                           // D3
+  ];
+
+  // === DRONE: Ultra derin sese mantık ===
+  var droneNotes = [41.20, 61.74];              // E1, B0
+
+  function mkOsc(c, type, freq, start, dur, detuneVal, volMul) {
+    var o = c.createOscillator();
+    var g = c.createGain();
+    var f = c.createBiquadFilter();
+    o.type = type;
+    o.frequency.setValueAtTime(freq, start);
+    if (detuneVal) o.detune.setValueAtTime(detuneVal, start);
+    f.type = 'lowpass';
+    f.frequency.setValueAtTime(type === 'sine' ? 800 : 2500, start);
+    f.Q.setValueAtTime(3, start);
+    var v = (volMul || 0.05) * vol;
+    g.gain.setValueAtTime(0, start);
+    g.gain.linearRampToValueAtTime(v, start + Math.min(dur * 0.3, 0.5));
+    g.gain.setValueAtTime(v, start + dur * 0.7);
+    g.gain.linearRampToValueAtTime(0, start + dur);
+    o.connect(f); f.connect(g); g.connect(master);
+    o.start(start); o.stop(start + dur + 0.1);
   }
 
-  function playNote(freq, start, dur, type) {
-    if (!ctx || freq === 0) return [];
-    var osc = ctx.createOscillator();
-    var env = ctx.createGain();
-    var filter = ctx.createBiquadFilter();
-
-    osc.type = type || 'triangle';
-    osc.frequency.setValueAtTime(freq, start);
-
-    filter.type = 'lowpass';
-    filter.frequency.setValueAtTime(2000, start);
-    filter.Q.setValueAtTime(1, start);
-
-    var vol = type === 'sawtooth' ? 0.06 : 0.08;
-    env.gain.setValueAtTime(0, start);
-    env.gain.linearRampToValueAtTime(vol, start + 0.08);
-    env.gain.setValueAtTime(vol, start + dur * 0.6);
-    env.gain.linearRampToValueAtTime(0, start + dur);
-
-    osc.connect(filter);
-    filter.connect(env);
-    env.connect(masterGain);
-
-    osc.start(start);
-    osc.stop(start + dur + 0.05);
-    return [osc];
-  }
-
-  function scheduleLoop() {
+  function playLoop() {
     if (!isPlaying) return;
-    var now = ctx.currentTime + 0.1;
-    var t = now;
+    var t = ctx.currentTime + 0.15;
+    var now = t;
 
-    // Lead melody - triangle wave, melodic
-    for (var i = 0; i < leadMelody.length; i++) {
-      var n = leadMelody[i];
-      var dur = n[1] * beatDur;
-      if (n[0] > 0) playNote(n[0], t, dur * 0.85, 'triangle');
-      t += dur;
+    // MELODİ katmanı — triangle + slight detune
+    for (var i = 0; i < melody.length; i++) {
+      var n = melody[i];
+      if (n[0] > 0) mkOsc(ctx, 'triangle', n[0], now, n[1] * 0.9, Math.random()*6-3, 0.12);
+      now += n[1];
     }
 
-    // Bass line - sawtooth, deep
-    t = now;
+    // BASS katmanı — sawtooth + heavy filter
+    now = t;
     for (var j = 0; j < bassLine.length; j++) {
-      var m = bassLine[j];
-      var bd = m[1] * beatDur;
-      if (m[0] > 0) playNote(m[0], t, bd * 0.7, 'sawtooth');
-      t += bd;
+      var b = bassLine[j];
+      if (b[0] > 0) mkOsc(ctx, 'sawtooth', b[0], now, b[1] * 0.8, 0, 0.15);
+      now += b[1];
     }
 
-    // Pad - slow evolving chord
-    var padNotes = [130.81, 164.81, 196.00, 261.63];
-    var padLen = leadMelody.reduce(function(s, n) { return s + n[1]; }, 0) * beatDur;
-    for (var k = 0; k < padNotes.length; k++) {
-      playNote(padNotes[k], now, padLen * 0.9, 'sine');
+    // PAD katmanı — sine wave dron
+    var padIdx = 0;
+    var padTime = 0;
+    var totalMelody = melody.reduce(function(s,n){return s+n[1];}, 0);
+    while (padTime < totalMelody) {
+      var chord = padChord[padIdx % padChord.length];
+      for (var k = 0; k < chord.notes.length; k++) {
+        mkOsc(ctx, 'sine', chord.notes[k], t + padTime, chord.dur * 0.95, Math.random()*10-5, 0.04);
+      }
+      padTime += chord.dur;
+      padIdx++;
     }
 
-    var totalDur = padLen * 1000 + 500;
-    loopTimer = setTimeout(scheduleLoop, totalDur);
+    // ARPEJ katmanı — echo gibi, düşük ses
+    var arpLen = arpeggio.reduce(function(s,n){return s+n[1];}, 0);
+    var arpTime = 0;
+    while (arpTime < totalMelody) {
+      var arpNotes = Math.random() > 0.5 ? arpeggio : arpeggio2;
+      var at2 = t + arpTime;
+      for (var a = 0; a < arpNotes.length; a++) {
+        var an = arpNotes[a];
+        mkOsc(ctx, 'sine', an[0], at2, an[1] * 0.7, 0, 0.025);
+        at2 += an[1];
+      }
+      arpTime += arpLen + T.whole;
+    }
+
+    // DRONE katmanı
+    for (var d = 0; d < droneNotes.length; d++) {
+      mkOsc(ctx, 'sine', droneNotes[d], t, totalMelody * 4, Math.random()*8-4, 0.06);
+    }
+
+    var totalMs = totalMelody * 1000 + 1000;
+    loopId = setTimeout(playLoop, totalMs);
   }
 
-  function start() {
-    initAudio();
+  function startM() {
+    if (!ctx) {
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      master = ctx.createGain();
+      master.gain.setValueAtTime(vol, ctx.currentTime);
+      master.connect(ctx.destination);
+    }
     if (ctx.state === 'suspended') ctx.resume();
     isPlaying = true;
-    scheduleLoop();
+    playLoop();
     updateUI();
   }
 
-  function stop() {
+  function stopM() {
     isPlaying = false;
-    if (loopTimer) clearTimeout(loopTimer);
-    if (ctx) { ctx.close(); ctx = null; masterGain = null; }
+    if (loopId) clearTimeout(loopId);
+    if (ctx) { ctx.close(); ctx = null; master = null; }
     updateUI();
   }
 
   function setVol(v) {
-    currentVol = Math.max(0, Math.min(1, v));
-    localStorage.setItem('echo-vol', currentVol.toString());
-    if (masterGain && ctx) {
-      masterGain.gain.setValueAtTime(currentVol, ctx.currentTime);
-    }
+    vol = Math.max(0, Math.min(1, v));
+    localStorage.setItem('lain-vol', vol.toFixed(2));
+    if (master && ctx) master.gain.setValueAtTime(vol, ctx.currentTime);
     updateUI();
   }
 
   function updateUI() {
     var btn = document.getElementById('lain-play');
-    var volIn = document.getElementById('lain-vol');
     if (btn) {
-      btn.innerHTML = isPlaying ? '⏸' : '▶';
+      btn.textContent = isPlaying ? '⏸' : '▶';
       btn.style.borderColor = isPlaying ? '#2dd4bf' : 'var(--accent)';
       btn.style.color = isPlaying ? '#2dd4bf' : 'var(--accent)';
     }
-    if (volIn) volIn.value = currentVol;
+    var vl = document.getElementById('lain-vl');
+    if (vl) vl.value = vol;
+    var pct = document.getElementById('lain-pct');
+    if (pct) pct.textContent = Math.round(vol * 100) + '%';
   }
 
-  // UI Panel
+  // UI — minimalist, Lain temalı
   var panel = document.createElement('div');
-  panel.id = 'lain-panel';
-  panel.style.cssText = 'position:fixed;bottom:56px;left:4px;z-index:99;display:flex;align-items:center;gap:4px;opacity:0;transition:opacity 0.4s';
+  panel.style.cssText = 'position:fixed;bottom:56px;left:4px;z-index:98;display:flex;align-items:center;gap:5px;opacity:0;transition:opacity 0.5s';
   panel.innerHTML =
-    '<button id="lain-play" title="Lain Wired Müziği" style="width:26px;height:26px;border-radius:50%;background:var(--surface);border:1px solid var(--accent);color:var(--accent);font-size:0.7em;cursor:pointer;display:flex;align-items:center;justify-content:center">▶</button>' +
-    '<input id="lain-vol" type="range" min="0" max="1" step="0.01" title="Ses Seviyesi" style="width:60px;height:3px;accent-color:var(--accent);cursor:pointer">';
+    '<button id="lain-play" title="Serial Experiments Lain — Wired" style="width:28px;height:28px;border-radius:50%;background:rgba(10,10,15,0.8);border:1px solid var(--accent);color:var(--accent);font-size:0.7em;cursor:pointer;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)">▶</button>' +
+    '<div style="display:flex;flex-direction:column;gap:1px">' +
+    '<input id="lain-vl" type="range" min="0" max="1" step="0.01" title="Ses" style="width:52px;height:2px;accent-color:var(--accent);cursor:pointer">' +
+    '<span id="lain-pct" style="font-size:0.45em;color:var(--muted);text-align:center">25%</span>' +
+    '</div>';
   document.body.appendChild(panel);
 
-  setTimeout(function() { panel.style.opacity = '0.7'; }, 2000);
+  // 2sn sonra göster
+  setTimeout(function() { panel.style.opacity = '0.6'; }, 2000);
   panel.onmouseenter = function() { panel.style.opacity = '1'; };
-  panel.onmouseleave = function() { panel.style.opacity = '0.7'; };
+  panel.onmouseleave = function() { panel.style.opacity = '0.6'; };
 
-  var playBtn = document.getElementById('lain-play');
-  var volInput = document.getElementById('lain-vol');
-  volInput.value = currentVol;
+  document.getElementById('lain-play').onclick = function() { isPlaying ? stopM() : startM(); };
+  document.getElementById('lain-vl').oninput = function() { setVol(parseFloat(this.value)); };
 
-  playBtn.onclick = function() { if (isPlaying) stop(); else start(); };
-  volInput.oninput = function() { setVol(parseFloat(this.value)); };
-
-  // İlk kullanıcı etkileşiminde otomatik başlat
-  function autoStart(e) {
-    if (!autoStarted && !isPlaying) {
-      autoStarted = true;
-      start();
-    }
-    document.removeEventListener('click', autoStart);
-    document.removeEventListener('touchstart', autoStart);
-    document.removeEventListener('keydown', autoStart);
+  // İlk etkileşimde otomatik başlat
+  var started = false;
+  function autoStart() {
+    if (!started && !isPlaying) { started = true; startM(); }
+    ['click','touchstart','keydown'].forEach(function(e) { document.removeEventListener(e, autoStart); });
   }
-  document.addEventListener('click', autoStart);
-  document.addEventListener('touchstart', autoStart);
-  document.addEventListener('keydown', autoStart);
+  ['click','touchstart','keydown'].forEach(function(e) { document.addEventListener(e, autoStart); });
 })();
 </script>
 </body>
