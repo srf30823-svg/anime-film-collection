@@ -215,34 +215,42 @@ jobs:
       - name: Build APK
         working-directory: ./apk_project
         run: |
-          # Accept SDK licenses non-interactively
           export ANDROID_HOME=$HOME/.buildozer/android/platform/android-sdk
           export ANDROID_SDK_ROOT=$ANDROID_HOME
-          yes | buildozer android debug 2>&1 | tail -100
+          # Show buildozer version
+          buildozer version
+          # Build with full log
+          yes | buildozer -v android debug 2>&1 | tail -200
           echo "=== BUILD COMPLETE ==="
-          echo "=== Searching for APK ==="
-          find . -name "*.apk" -type f 2>/dev/null
-          echo "=== bin/ ==="
-          ls -la bin/ 2>/dev/null || echo "No bin/ dir"
-          echo "=== .buildozer ==="
-          find .buildozer -name "*.apk" 2>/dev/null || echo "No APK in .buildozer"
+          echo "=== All APK files in apk_project ==="
+          find apk_project -name "*.apk" -type f 2>/dev/null || echo "NO APK FOUND"
+          echo "=== Directory structure ==="
+          ls -la apk_project/bin/ 2>/dev/null || echo "No bin/"
+          ls -la apk_project/.buildozer/ 2>/dev/null || echo "No .buildozer/"
 
       - name: Find and copy APK
         run: |
           mkdir -p apk_output
-          # Find APK in all possible locations
+          echo "=== Searching all APK files ==="
+          # Search everywhere
           find apk_project -name "*.apk" -type f 2>/dev/null | while read f; do
-            echo "Found: $f"
+            echo "FOUND: $f"
             cp "$f" apk_output/
           done
-          echo "=== APK files ==="
-          ls -la apk_output/ 2>/dev/null || echo "NO APK FOUND"
-          # Also check if bin exists
-          ls -la apk_project/bin/ 2>/dev/null || echo "No bin dir"
+          echo "=== bin/ contents ==="
+          ls -la apk_project/bin/ 2>/dev/null || echo "No bin/ found"
+          echo "=== .buildozer structure ==="
+          ls -laR apk_project/.buildozer/android/platform/build/dists/ 2>/dev/null | head -30 || echo "No .buildozer dists"
+          echo "=== Final APK files ==="
+          ls -la apk_output/ 2>/dev/null || echo "NO APK TO UPLOAD"
 
       - name: Upload APK
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: echo-apk
-          path: apk_output/*.apk
+          path: |
+            apk_output/*.apk
+            apk_project/bin/*.apk
+            apk_project/.buildozer/android/platform/build/dists/*/bin/*.apk
           retention-days: 30
