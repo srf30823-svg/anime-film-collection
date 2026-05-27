@@ -1,6 +1,6 @@
-# OWL Anime & Film Öneri Sistesi
+# Echo - Anime & Film Öneri Sistemi
 
-602 anime filmi içeren, content-based filtreleme motoru ile akıllı öneri sistemi.
+4778 anime/manga/light novel içeren, content-based filtreleme motoru ile akıllı öneri sistemi.
 
 ## Kurulum
 
@@ -90,10 +90,14 @@ python3 oneri.py --web 8080
 
 | Endpoint | Açıklama | Parametreler |
 |----------|----------|-------------|
-| `GET /api/recommend` | Öneri listesi | `limit`, `genre`, `source`, `year_from`, `year_to`, `min_score` |
+| `GET /api/recommend` | Öneri listesi | `limit`, `genre`, `source`, `year_from`, `year_to`, `min_score`, `media_type` |
 | `GET /api/search` | Film ara | `q`, `limit` |
 | `GET /api/stats` | İstatistikler | - |
 | `GET /api/dump` | Tüm filmler | - |
+| `GET /api/watchlist` | Watchlist işlemleri | `action=list\|add\|remove\|watch\|unwatch\|rate`, `id`, `priority`, `note`, `rating` |
+| `GET /api/profile` | Kullanıcı profili | - |
+| `GET /api/export/csv` | CSV export | - |
+| `GET /api/export/watchlist` | Watchlist CSV | - |
 | `GET /film?id=ID` | Film detay (HTML) | `id` |
 
 ```
@@ -148,15 +152,18 @@ anime-project/
 
 ## Algoritma
 
-v4.1 öneri algoritması şu bileşenleri kullanır:
+v5.2 öneri algoritması şu bileşenleri kullanır:
 
 1. **OWL Skoru**: AniList puanı + tür bonusu + yıl/popularite farkı
 2. **Zevk Profili**: İzlenen filmlerden çıkarılan tür ağırlıkları
-3. **Recency Bonus**: 2023+ filmler için ek puan
+3. **Recency Bonus**: 2024-2025 filmler için ek puan
 4. **Popularite Dengesi**: Çok popüler/niş filmler arasında denge
-5. **Çeşitlilik Filtresi**: Her türden en fazla 3 film
+5. **Stüdyo Kalitesi**: Bilinen stüdyolara bonus puan
+6. **Çeşitlilik Filtresi**: Her türden dengeli dağılım
+7. **Media Type Desteği**: Anime, Manga, Light Novel ayrı filtreleme
 
 ## Veri Kaynakları
 
-- **AniList API**: Film bilgileri, türler, puanlar, studio bilgileri
+- **AniList API**: Film bilgileri, türler, puanlar, studio bilgileri (4778+ item)
 - **Manuel Giriş**: Klasik ve özel filmler
+- **Format Desteği**: Movie, TV, OVA, Special, Manga, Novel, Light Novel, One Shot

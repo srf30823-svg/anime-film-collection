@@ -56,7 +56,7 @@ _ECHO_HTML_TEMPLATE = """<!DOCTYPE html>
 :root{{
   --bg:#0a0a0f;--surface:#111114;--border:#1a1a1e;--border2:#222228;
   --text:#c8c8c8;--muted:#555566;
-  --accent:#6b5b95;--accent2:#4a4a6a;
+  --accent:#6b5b95;--accent2:#4a4a6a;--pink:#ec4899;--red:#ef4444;
   --glow:rgba(107,91,149,0.15);
   --radius:6px;--gap:10px;
 }}
@@ -67,10 +67,16 @@ body::before{{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background
 @keyframes fadeInUp{{from{{opacity:0;transform:translateY(12px)}}to{{opacity:1;transform:translateY(0)}}}}
 @keyframes pulseGlow{{0%,100%{{opacity:0.4}}50%{{opacity:1}}}}
 @keyframes glitch{{0%,100%{{transform:translate(0)}}20%{{transform:translate(-1px,1px)}}40%{{transform:translate(1px,-1px)}}60%{{transform:translate(-1px,-1px)}}80%{{transform:translate(1px,1px)}}}}
+.compare-wrap{{max-width:900px;margin:0 auto}}.compare-table{{width:100%;border-collapse:collapse;margin-top:10px}}
+.compare-table th,.compare-table td{{padding:8px 12px;border:1px solid var(--border);font-size:0.72em;text-align:left}}
+.compare-table th{{background:var(--surface);color:var(--muted);font-weight:400;letter-spacing:0.05em;text-transform:uppercase;font-size:0.65em}}
+.compare-table td:first-child{{color:var(--muted);width:100px;font-size:0.65em}}
+.compare-table tr:nth-child(even) td{{background:rgba(255,255,255,0.01)}}
+.compare-check{{color:var(--accent)}}.compare-cross{{color:var(--red);opacity:0.6}}
 .topbar{{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px}}
 .topbar .logo{{font-size:0.95em;font-weight:600;letter-spacing:0.2em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;opacity:0.85}}
 .topbar .logo:hover{{opacity:1;animation:glitch 0.2s}}
-.logo-symbol{{width:20px;height:20px;position:relative;display:inline-block}}
+.logo-symbol{{width:24px;height:24px;position:relative;display:inline-block}}
 .logo-symbol svg{{width:100%;height:100%}}
 .logo-dot{{width:3px;height:3px;background:var(--accent);border-radius:50%;position:absolute;top:1px;right:1px;animation:pulseGlow 3s ease-in-out infinite}}
 .topbar .badge{{background:var(--accent);color:#fff;font-size:0.5em;padding:2px 6px;border-radius:3px;font-weight:600;letter-spacing:0.1em;opacity:0.7}}
@@ -89,6 +95,12 @@ body::before{{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background
 .search-input{{flex:1;min-width:120px}}.year-input{{width:70px}}.score-input{{width:55px}}select{{min-width:90px}}
 .btn{{background:var(--surface);color:var(--text);border:1px solid var(--border);border-radius:4px;padding:6px 12px;font-size:0.75em;cursor:pointer;text-decoration:none;display:inline-block;font-weight:400;transition:all 0.15s}}
 .btn:hover{{background:var(--accent);color:#fff;border-color:var(--accent)}}.btn-sm{{padding:4px 8px;font-size:0.65em}}
+.btn-wl{{border-color:var(--accent2);color:var(--accent)}}
+.btn-wl:hover{{background:var(--accent);color:#fff}}
+.btn-watched{{border-color:rgba(34,197,94,0.3);color:#22c55e}}
+.btn-watched:hover{{background:#22c55e;color:#fff;border-color:#22c55e}}
+.btn-clear{{background:transparent;color:var(--muted);border-color:var(--border)}}
+.btn-clear:hover{{color:var(--text);border-color:var(--muted)}}
 .film-grid{{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:var(--gap)}}
 .film-card{{display:flex;gap:10px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:10px;text-decoration:none;color:inherit;transition:all 0.15s}}
 .film-card:hover{{border-color:var(--accent2);background:var(--glow)}}.film-card.watched{{opacity:0.35}}
@@ -163,12 +175,21 @@ h3{{font-size:0.72em;color:var(--muted);text-transform:uppercase;letter-spacing:
 <div class="topbar">
   <a href="/" class="logo">
     <span class="logo-symbol">
-      <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="16" cy="16" r="14" stroke="var(--accent)" stroke-width="1" opacity="0.2" stroke-dasharray="2 2"/>
-        <circle cx="16" cy="16" r="11" stroke="var(--text)" stroke-width="1.2" opacity="0.4" stroke-dasharray="3 2"/>
-        <path d="M16 16 L26 6" stroke="var(--text)" stroke-width="1.5" stroke-linecap="round" opacity="0.6"/>
-        <circle cx="16" cy="16" r="3.5" fill="var(--accent)" opacity="0.5"/>
-        <circle cx="26" cy="6" r="2" fill="var(--text)" opacity="0.7"/>
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Dis halka - kesikli -->
+        <circle cx="20" cy="20" r="17" stroke="var(--accent)" stroke-width="1" opacity="0.15" stroke-dasharray="3 3"/>
+        <!-- Orta halka -->
+        <circle cx="20" cy="20" r="13" stroke="var(--accent)" stroke-width="1.2" opacity="0.3"/>
+        <!-- Ic halka -->
+        <circle cx="20" cy="20" r="9" stroke="var(--text)" stroke-width="0.8" opacity="0.4"/>
+        <!-- Merkez nokta -->
+        <circle cx="20" cy="20" r="3" fill="var(--accent)" opacity="0.6"/>
+        <!-- Yanki cizgisi sag -->
+        <path d="M23 20 Q28 14 34 16" stroke="var(--text)" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+        <path d="M23 20 Q28 26 34 24" stroke="var(--text)" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
+        <!-- Kucuk pulse noktasi -->
+        <circle cx="34" cy="16" r="1.5" fill="var(--accent)" opacity="0.4"/>
+        <circle cx="34" cy="24" r="1.5" fill="var(--accent)" opacity="0.4"/>
       </svg>
       <span class="logo-dot"></span>
     </span>
@@ -182,6 +203,20 @@ h3{{font-size:0.72em;color:var(--muted);text-transform:uppercase;letter-spacing:
 <nav class="bottom-nav">
 {nav_html}
 </nav>
+<script>
+function toggleWatched(id, current) {{
+  var btn = document.getElementById('watched-btn');
+  btn.disabled = true; btn.textContent = '⏳...';
+  var action = current ? 'unwatch' : 'watch';
+  fetch('/api/watchlist?action=' + action + '&id=' + id)
+    .then(function(r) {{ return r.json(); }})
+    .then(function(d) {{
+      if (d.ok) {{ location.reload(); }}
+      else {{ btn.disabled = false; btn.textContent = 'Hata'; }}
+    }})
+    .catch(function() {{ btn.disabled = false; btn.textContent = 'Hata'; }});
+}}
+</script>
 </body>
 </html>"""
 BASE = os.environ.get("ANIME_BASE", os.path.dirname(os.path.abspath(__file__)))
@@ -945,10 +980,17 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
                 user_bonus = 0
 
             year = row["year"] or 2010
-            if year >= 2023:
-                recency = 0.1
-            elif year >= 2018:
-                recency = 0.05
+            # Yeni çıkanlara öncelik (2024-2025 en yüksek)
+            if year >= 2025:
+                recency = 0.25
+            elif year >= 2024:
+                recency = 0.20
+            elif year >= 2023:
+                recency = 0.15
+            elif year >= 2020:
+                recency = 0.08
+            elif year >= 2015:
+                recency = 0.03
             else:
                 recency = 0
 
@@ -962,7 +1004,19 @@ def recommend(db=None, category=None, genre=None, studio=None, source=None,
             else:
                 pop_b = 0.03
 
-            final = base + (taste_bonus + user_bonus + recency + pop_b) * 0.5
+            # Stüdyo kalitesi bonusu
+            studio_bonus = 0
+            studio = (row["studio"] or "").lower()
+            top_studios = ["studio ghibli", "kyoto animation", "ufotable", "madhouse",
+                          "bones", "wit studio", "a-1 pictures", "shaft", "trigger",
+                          "mappa", "production i.g", "cloverworks", "science saru",
+                          "white fox", "lerche", "silver link", "doga kobo"]
+            for s in top_studios:
+                if s in studio:
+                    studio_bonus = 0.1
+                    break
+
+            final = base + (taste_bonus * 1.5 + user_bonus + recency + pop_b + studio_bonus) * 0.5
             scored.append((round(min(final, 10.0), 2), row))
 
         scored.sort(key=lambda x: x[0], reverse=True)
@@ -1107,6 +1161,8 @@ def start_web_server(port=8080):
 
             if path == "/" or path == "/index":
                 self._serve_index(params)
+            elif path == "/watched":
+                self._serve_watched(params)
             elif path == "/film":
                 film_id = int(params.get("id", [0])[0])
                 self._serve_detail(film_id)
@@ -1130,6 +1186,14 @@ def start_web_server(port=8080):
                 self._api_export_csv()
             elif path == "/api/export/watchlist":
                 self._api_export_watchlist()
+            elif path == "/random":
+                self._serve_random()
+            elif path == "/daily":
+                self._serve_daily()
+            elif path == "/api/daily":
+                self._api_daily()
+            elif path == "/api/stats/extended":
+                self._api_stats_extended()
             else:
                 self.send_response(404)
                 self.end_headers()
@@ -1137,7 +1201,8 @@ def start_web_server(port=8080):
         def _serve_index(self, params):
             db = self.get_db()
             page = max(int(params.get("page", [1])[0]), 1)
-            per_page = min(int(params.get("per_page", [50])[0]), 200)
+            per_page = min(max(int(params.get("per_page", [200])[0]), 10), 500)
+            hide_watched = int(params.get("hide_watched", [1])[0])
             limit = per_page * page  # fetch enough for pagination
             genre_f = params.get("genre", [None])[0]
             source_f = params.get("source", [None])[0]
@@ -1152,15 +1217,36 @@ def start_web_server(port=8080):
                 films = search_film(db, search_q, limit)
                 scored = [(r["owl_score"], r) for r in films]
                 scored.sort(key=lambda x: x[0], reverse=True)
+                total_count = len(scored)
             else:
+                # Total count'u DB'den al (pagination için)
+                count_where = "WHERE year BETWEEN ? AND ?"
+                count_params = [yf, yt]
+                if hide_watched:
+                    count_where += " AND is_watched=0"
+                if genre_f:
+                    count_where += " AND genres LIKE ?"
+                    count_params.append(f"%{genre_f}%")
+                if source_f:
+                    count_where += " AND source=?"
+                    count_params.append(source_f)
+                if media_f:
+                    count_where += " AND media_type=?"
+                    count_params.append(media_f)
+                if ms > 0:
+                    count_where += " AND owl_score>=?"
+                    count_params.append(ms)
+                total_count = db.execute(f"SELECT COUNT(*) FROM films {count_where}", count_params).fetchone()[0]
+
+                # recommend'a yeterli limit gönder (her sayfa için per_page * 5)
                 scored = recommend(db, genre=genre_f, source=source_f, studio=studio_f,
                                    year_from=yf, year_to=yt, min_score=ms,
-                                   media_type=media_f, limit=limit)
+                                   media_type=media_f, limit=per_page * 5,
+                                   unwatched_only=bool(hide_watched))
 
             # Pagination slice
             start = (page - 1) * per_page
             end = start + per_page
-            total_count = len(scored)
             scored = scored[start:end]
             stats = get_stats(db)
             # Type dagilimi (db.close() oncesi)
@@ -1203,7 +1289,7 @@ def start_web_server(port=8080):
                     progress_html = f'<span class="progress-text">{progress}/{eps} ep</span>'
 
                 # Kisa ozet (film card icin)
-                raw_s = row["synopsis"] or ""
+                raw_s = row["synopsis_tr"] or row["synopsis"] or ""
                 import re as _re2
                 clean_s = _re2.sub(r'<[^>]+>', '', raw_s).strip()
                 synopsis_snippet = ""
@@ -1239,6 +1325,11 @@ def start_web_server(port=8080):
             ms_val = ms if ms else ""
 
             content = f"""
+            <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
+                <a href="/daily" class="btn" style="border-color:var(--accent);color:var(--accent)">🎲 Günün Önerisi</a>
+                <a href="/random" class="btn btn-sm" style="border-color:var(--border2)">🔀 Rastgele</a>
+                <a href="/random?unwatched=1" class="btn btn-sm" style="border-color:var(--border2)">🔀 Rastgele (İzlenmemiş)</a>
+            </div>
             <div class="stats-bar">
                 <span>📊 {stats["total"]} item</span>
                 <span>✅ {stats["watched"]} izlenen</span>
@@ -1257,6 +1348,16 @@ def start_web_server(port=8080):
                         <input type="number" name="year_from" placeholder="Yil baslangic" value="{yf_val}" class="year-input">
                         <input type="number" name="year_to" placeholder="Yil bitis" value="{yt_val}" class="year-input">
                         <input type="number" name="min_score" placeholder="Min OWL" value="{ms_val}" step="0.5" class="score-input">
+                        <select name="per_page">
+                            <option value="50" {"selected" if per_page==50 else ""}>50/sayfa</option>
+                            <option value="100" {"selected" if per_page==100 else ""}>100/sayfa</option>
+                            <option value="200" {"selected" if per_page==200 else ""}>200/sayfa</option>
+                            <option value="500" {"selected" if per_page==500 else ""}>500/sayfa</option>
+                        </select>
+                        <label style="font-size:0.65em;color:var(--muted);display:flex;align-items:center;gap:4px">
+                            <input type="checkbox" name="hide_watched" value="1" {"checked" if hide_watched else ""} onchange="this.form.submit()">
+                            Izlenenleri Gizle
+                        </label>
                         <button type="submit" class="btn">Filtrele</button>
                         <a href="/" class="btn btn-clear">Temizle</a>
                     </div>
@@ -1317,7 +1418,7 @@ def start_web_server(port=8080):
             cover_html = f'<img src="{cover}" class="detail-cover" onerror="this.parentElement.innerHTML=\'<div class=detail-cover-placeholder>🎬</div>\'">' if cover else '<div class="detail-cover-placeholder">🎬</div>'
             # Synopsis temizle (HTML tag'leri cikar)
             import re as _re
-            raw_synopsis = film["synopsis"] or ""
+            raw_synopsis = film["synopsis_tr"] or film["synopsis"] or ""
             clean_synopsis = _re.sub(r'<[^>]+>', '', raw_synopsis).strip()
             if not clean_synopsis:
                 clean_synopsis = "Bu eser icin henuz ozet eklenmemistir. Detaylar icin AniList veya MAL sayfasini ziyaret edebilirsiniz."
@@ -1329,12 +1430,13 @@ def start_web_server(port=8080):
             else:
                 synopsis_html = synopsis
             watched_btn = "✅ İzlendi" if film["is_watched"] else "📋 İzlendi İşaretle"
-            user_r = f"⭐ Kullanıcı: {film['user_rating']}/10" if film["user_rating"] > 0 else "Kullanıcı puani yok"
-            note = f'<div class="note">📝 {htmlmod.escape(film["user_note"])}</div>' if film["user_note"] else ""
-            duration = f"{film['duration']} dk" if film["duration"] > 0 else "?"
+            user_r = f"⭐ Kullanıcı: {film['user_rating']}/10" if (film["user_rating"] or 0) > 0 else "Kullanıcı puani yok"
+            note_html = f'<div class="note">📝 {htmlmod.escape(film["user_note"])}</div>' if film["user_note"] else ""
+            duration = f"{film['duration']} dk" if (film["duration"] or 0) > 0 else "?"
             year = film["year"] or "?"
+            is_watched_val = 1 if film["is_watched"] else 0
 
-            imdb_html = f'<span class="score-box imdb">IMDB: {film["imdb_score"]:.1f}</span>' if film["imdb_score"] > 0 else ""
+            imdb_html = f'<span class="score-box imdb">IMDB: {film["imdb_score"]:.1f}</span>' if (film["imdb_score"] or 0) > 0 else ""
             watched_btn = "✅ İzlendi" if film["is_watched"] else "📋 İzlendi İşaretle"
             wl_btn = "📋 Watchlist'ten Çıkar" if db.execute("SELECT 1 FROM watchlist WHERE film_id=?", (film_id,)).fetchone() else "➕ Watchlist'e Ekle"
             wl_action = "remove" if "Çıkar" in wl_btn else "add"
@@ -1350,15 +1452,15 @@ def start_web_server(port=8080):
                             <span>{year}</span> · <span>{htmlmod.escape(film["studio"])}</span> · <span>{film["source"]}</span> · <span>{duration}</span>
                         </div>
                         <div class="detail-scores">
-                            <span class="score-box owl">OWL: {film["owl_score"]}</span>
+                            <span class="score-box owl">Echo: {film["owl_score"]}</span>
                             <span class="score-box mal">MAL: {film["mal_score"]:.1f}</span>
                             {imdb_html}
-                            {f'<span class="score-box user">{user_r}</span>' if film["user_rating"] > 0 else ""}
+                            {f'<span class="score-box user">{user_r}</span>' if (film["user_rating"] or 0) > 0 else ""}
                         </div>
                         <div class="detail-badges">{badges}</div>
                         <div class="detail-actions">
                             <a href="/watchlist?action={wl_action}&id={film_id}" class="btn btn-sm btn-wl">{wl_btn}</a>
-                            <a href="/api/watchlist?action=add&id={film_id}" class="btn btn-sm btn-watched" onclick="markWatched({film_id})">{watched_btn}</a>
+                            <button class="btn btn-sm btn-watched" onclick="toggleWatched({film_id}, {is_watched_val})" id="watched-btn">{watched_btn}</button>
                         </div>
                     </div>
                 </div>
@@ -1366,7 +1468,7 @@ def start_web_server(port=8080):
                     <h3>Özet</h3>
                     <p>{synopsis_html}</p>
                 </div>
-                {note}
+                {note_html}
             </div>
             """
             self._send_html(film["title"], content, "detail")
@@ -1387,7 +1489,7 @@ def start_web_server(port=8080):
                     "id": r["id"], "title": r["title"], "year": r["year"],
                     "score": score, "owl_score": r["owl_score"], "studio": r["studio"],
                     "source": r["source"], "genres": json.loads(r["genres"]) if r["genres"] and r["genres"] != "[]" else [],
-                    "cover_url": r["cover_url"], "synopsis": r["synopsis"],
+                    "cover_url": r["cover_url"], "synopsis": r["synopsis_tr"] or r["synopsis"], "synopsis_tr": r.get("synopsis_tr",""),
                     "is_watched": bool(r["is_watched"]), "user_rating": r["user_rating"],
                 })
             db.close()
@@ -1467,6 +1569,42 @@ def start_web_server(port=8080):
                 db.commit()
                 db.close()
                 self._send_json({"ok": True, "message": f"Film #{film_id} cikarildi"})
+            elif action == "watch":
+                film_id = int(params.get("id", [0])[0])
+                row = db.execute("SELECT id FROM films WHERE id=?", (film_id,)).fetchone()
+                if row:
+                    now = datetime.now().isoformat()
+                    db.execute("UPDATE films SET is_watched=1, watched_at=? WHERE id=?", (now, film_id))
+                    db.execute("INSERT OR REPLACE INTO watched(title_lower,title,watched_at,rating) SELECT title_lower,title,?,0 FROM films WHERE id=?", (now, film_id))
+                    db.commit()
+                    db.close()
+                    self._send_json({"ok": True, "message": "Izlendi olarak isaretlendi"})
+                else:
+                    db.close()
+                    self._send_json({"ok": False, "error": "Film bulunamadi"})
+            elif action == "unwatch":
+                film_id = int(params.get("id", [0])[0])
+                row = db.execute("SELECT title_lower FROM films WHERE id=?", (film_id,)).fetchone()
+                if row:
+                    db.execute("UPDATE films SET is_watched=0, watched_at='', user_rating=0 WHERE id=?", (film_id,))
+                    db.execute("DELETE FROM watched WHERE title_lower=?", (row["title_lower"],))
+                    db.commit()
+                    db.close()
+                    self._send_json({"ok": True, "message": "Izlenmedi olarak isaretlendi"})
+                else:
+                    db.close()
+                    self._send_json({"ok": False, "error": "Film bulunamadi"})
+            elif action == "rate":
+                film_id = int(params.get("id", [0])[0])
+                rating = float(params.get("rating", [0])[0])
+                if 0 <= rating <= 10:
+                    db.execute("UPDATE films SET user_rating=? WHERE id=?", (rating, film_id))
+                    db.commit()
+                    db.close()
+                    self._send_json({"ok": True, "message": f"Puan guncellendi: {rating}"})
+                else:
+                    db.close()
+                    self._send_json({"ok": False, "error": "Gecersiz puan"})
             else:
                 db.close()
                 self.send_response(400)
@@ -1496,6 +1634,98 @@ def start_web_server(port=8080):
             self.end_headers()
             with open(path, "rb") as f:
                 self.wfile.write(f.read())
+
+        def _serve_random(self):
+            """Rastgele film sayfası."""
+            import random as _rnd
+            db = self.get_db()
+            # Filtre parametreleri
+            media_f = urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).get("media_type", [None])[0]
+            unwatched = int(urllib.parse.parse_qs(urllib.parse.urlparse(self.path).query).get("unwatched", ["0"])[0])
+            where = "WHERE 1=1"
+            params_list = []
+            if media_f:
+                where += " AND media_type=?"
+                params_list.append(media_f)
+            if unwatched:
+                where += " AND (is_watched=0 OR is_watched IS NULL)"
+            rows = db.execute(f"SELECT id FROM films {where}", params_list).fetchall()
+            if not rows:
+                db.close()
+                self._send_html("Sonuç Yok", '<div style="padding:40px;color:var(--muted);text-align:center">Kriterlere uygun film bulunamadı. <a href="/" class="back-link">← Geri</a></div>', "default")
+                return
+            chosen = _rnd.choice(rows)
+            db.close()
+            self.send_response(302)
+            self.send_header("Location", f"/film?id={chosen['id']}")
+            self.end_headers()
+
+        def _serve_daily(self):
+            """Günün önerisi sayfası (tarihe göre deterministic)."""
+            import hashlib as _hl
+            today = datetime.now().strftime("%Y-%m-%d")
+            db = self.get_db()
+            rows = db.execute("SELECT id, title FROM films WHERE (is_watched=0 OR is_watched IS NULL) ORDER BY owl_score DESC").fetchall()
+            if not rows:
+                db.close()
+                self._send_html("Günün Önerisi", '<div style="padding:40px;color:var(--muted);text-align:center">Tüm filmler izlendi! 🎉 <a href="/" class="back-link">← Geri</a></div>', "default")
+                return
+            # Tarihe göre sabit film seç
+            h = int(_hl.md5(today.encode()).hexdigest(), 16)
+            idx = h % len(rows)
+            film_id = rows[idx]["id"]
+            db.close()
+            self.send_response(302)
+            self.send_header("Location", f"/film?id={film_id}")
+            self.end_headers()
+
+        def _api_daily(self):
+            """JSON: Günün önerisi."""
+            import hashlib as _hl
+            today = datetime.now().strftime("%Y-%m-%d")
+            db = self.get_db()
+            rows = db.execute("SELECT * FROM films WHERE (is_watched=0 OR is_watched IS NULL) ORDER BY owl_score DESC").fetchall()
+            if not rows:
+                db.close()
+                self._send_json({"error": "Tüm filmler izlendi"})
+                return
+            h = int(_hl.md5(today.encode()).hexdigest(), 16)
+            idx = h % len(rows)
+            film = dict(rows[idx])
+            film["genres"] = json.loads(film["genres"]) if film["genres"] and film["genres"] != "[]" else []
+            film["synopsis"] = film.get("synopsis_tr") or film.get("synopsis", "")
+            film["daily_date"] = today
+            db.close()
+            self._send_json(film)
+
+        def _api_stats_extended(self):
+            """JSON: Detaylı istatistikler."""
+            db = self.get_db()
+            stats = {}
+            # Genel sayılar
+            stats["total"] = db.execute("SELECT COUNT(*) FROM films").fetchone()[0]
+            stats["watched"] = db.execute("SELECT COUNT(*) FROM films WHERE is_watched=1").fetchone()[0]
+            stats["unwatched"] = stats["total"] - stats["watched"]
+            stats["watchlist"] = db.execute("SELECT COUNT(*) FROM watchlist").fetchone()[0]
+            # Media type dağılımı
+            media_dist = db.execute("SELECT media_type, COUNT(*) FROM films GROUP BY media_type ORDER BY COUNT(*) DESC").fetchall()
+            stats["media_types"] = {r[0] or "bilinmiyor": r[1] for r in media_dist}
+            # Source dağılımı
+            src_dist = db.execute("SELECT source, COUNT(*) FROM films WHERE source != '' GROUP BY source ORDER BY COUNT(*) DESC LIMIT 15").fetchall()
+            stats["sources"] = {r[0]: r[1] for r in src_dist}
+            # Yıl dağılımı (son 20 yıl)
+            year_dist = db.execute("SELECT year, COUNT(*) FROM films WHERE year > 2000 GROUP BY year ORDER BY year").fetchall()
+            stats["years"] = {str(r[0]): r[1] for r in year_dist}
+            # En iyi 10 film (OWL score)
+            top = db.execute("SELECT title, year, owl_score FROM films ORDER BY owl_score DESC LIMIT 10").fetchall()
+            stats["top_rated"] = [{"title": r[0], "year": r[1], "score": r[2]} for r in top]
+            # En çok izlenen türler
+            stats["genre_ranking"] = get_stats(db)["genre_ranking"][:15]
+            # Kullanıcı puanı ortalaması
+            avg_user = db.execute("SELECT AVG(user_rating) FROM films WHERE user_rating > 0").fetchone()[0]
+            stats["avg_user_rating"] = round(avg_user, 2) if avg_user else 0
+            db.close()
+            self._send_json(stats)
 
         # === YENI SAYFA: WATCHLIST ===
         def _serve_watchlist(self, params):
@@ -1558,6 +1788,63 @@ def start_web_server(port=8080):
             <div class="wl-grid">{watchlist_html}</div>
             """
             self._send_html("Watchlist", content, "watchlist")
+
+        # === YENI SAYFA: IZLENENLER ===
+        def _serve_watched(self, params):
+            db = self.get_db()
+            page = max(int(params.get("page", [1])[0]), 1)
+            per_page = min(max(int(params.get("per_page", [200])[0]), 10), 500)
+
+            # Sadece izlenenler
+            rows = db.execute(
+                "SELECT * FROM films WHERE is_watched=1 ORDER BY watched_at DESC, owl_score DESC"
+            ).fetchall()
+
+            total_count = len(rows)
+            start = (page - 1) * per_page
+            end = start + per_page
+            rows = rows[start:end]
+
+            watched_html = ""
+            for i, row in enumerate(rows, start + 1):
+                genres = json.loads(row["genres"]) if row["genres"] and row["genres"] != "[]" else []
+                badges = "".join(f'<span class="badge">{g}</span>' for g in genres[:4])
+                cover = row["cover_url"] or ""
+                cover_html = f'<img src="{cover}" class="cover" loading="lazy" onerror="this.style.display=\'none\'">' if cover else '<div class="cover placeholder">🎬</div>'
+                user_r = f' <span style="color:var(--accent)">⭐ {row["user_rating"]}</span>' if row["user_rating"] > 0 else ""
+                watched_at = row["watched_at"] or ""
+                mt = row["media_type"] or "anime"
+                mt_icons = {"anime":"🎬","manga":"📖","light_novel":"📚"}
+                mt_icon = mt_icons.get(mt, "🎬")
+
+                watched_html += f"""
+                <a href="/film?id={row['id']}" class="film-card">
+                    {cover_html}
+                    <div class="film-info">
+                        <div class="film-title">#{i} {htmlmod.escape(row["title"])}</div>
+                        <div class="film-meta">{row["year"]} · {htmlmod.escape(row["studio"])} · {mt_icon} {mt.upper()}{user_r}</div>
+                        <div class="film-score">{row["owl_score"]}</div>
+                        <div class="film-badges">{badges}</div>
+                        <span style="font-size:0.5em;color:var(--muted)">{watched_at[:10]}</span>
+                    </div>
+                </a>"""
+
+            if not watched_html:
+                watched_html = '<div class="empty-state">Henüz izlenen eser yok. Filmlerin üzerindeki "İzledim" butonuna tıklayarak ekleyebilirsin.</div>'
+
+            # Sayfalama
+            _pagination = self._pagination_html(page, per_page, total_count, params)
+            sq = htmlmod.escape(params.get("q", [""])[0] or "")
+
+            content = f"""
+            <div class="stats-bar">
+                <span>✅ {total_count} izlenen eser</span>
+                <span>Sayfa {page}/{(total_count + per_page - 1) // per_page if total_count > 0 else 1}</span>
+            </div>
+            <div class="film-grid">{watched_html}</div>
+            {_pagination}
+            """
+            self._send_html("İzlenenler", content, "watched")
 
         # === YENI SAYFA: PROFIL ===
         def _serve_profile(self):
@@ -1643,7 +1930,7 @@ def start_web_server(port=8080):
         # === YENI SAYFA: KARSILASTIRMA ===
         def _send_html(self, title, content, page="index"):
             nav_html = ""
-            for p, icon, label in [("index","🏠","Ana Sayfa"),("watchlist","📋","Watchlist"),("profile","👤","Profil")]:
+            for p, icon, label in [("index","🏠","Ana Sayfa"),("random","🔀","Rastgele"),("watched","✅","İzlenenler"),("watchlist","📋","Watchlist"),("profile","👤","Profil")]:
                 cls = " active" if page == p else ""
                 nav_html += f'<a href="/{p}" class="bn-item{cls}"><span class="bn-icon">{icon}</span><span>{label}</span></a>'
             page_title = htmlmod.escape(title)
