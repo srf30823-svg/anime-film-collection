@@ -216,6 +216,30 @@ function toggleWatched(id, current) {{
     }})
     .catch(function() {{ btn.disabled = false; btn.textContent = 'Hata'; }});
 }}
+function rateFilm(id, stars) {{
+  var btn = event.target;
+  btn.style.transform = 'scale(1.3)';
+  setTimeout(function() {{ btn.style.transform = 'scale(1)'; }}, 200);
+  fetch('/api/watchlist?action=rate&id=' + id + '&rating=' + (stars * 2))
+    .then(function(r) {{ return r.json(); }})
+    .then(function(d) {{
+      if (d.ok) {{
+        // Yıldızları güncelle
+        var allStars = document.querySelectorAll('.star-btn');
+        allStars.forEach(function(s) {{
+          var val = parseInt(s.dataset.val);
+          if (val <= stars) {{
+            s.style.color = '#2dd4bf'; s.style.filter = 'grayscale(0)'; s.style.opacity = '1';
+          }} else {{
+            s.style.color = '#555566'; s.style.filter = 'grayscale(1)'; s.style.opacity = '0.7';
+          }}
+        }});
+        var disp = document.getElementById('rate-display');
+        if (disp) disp.textContent = ' ' + (stars * 2) + '/10 ✓';
+      }}
+    }})
+    .catch(function() {{}});
+}}
 </script>
 <script>
 // === ECHO UX ENHANCEMENTS ===
@@ -274,135 +298,182 @@ function toggleWatched(id, current) {{
 })();
 </script>
 <script>
-// === LAIN 8-BIT AUDIO SYSTEM ===
+// === LAIN AUDIO SYSTEM v2 ===
 (function() {
-  // Kullanıcı etkileşimi ile başlat (browser policy)
-  var audioCtx = null;
+  var ctx = null;
+  var masterGain = null;
   var isPlaying = false;
-  var currentTimeout = null;
+  var loopTimer = null;
+  var currentVol = parseFloat(localStorage.getItem('echo-vol') || '0.15');
+  var autoStarted = false;
 
-  // Lain teması müziği - düşük tempolu, minimalist, 8-bit
-  var melody = [
-    // Nota, süre(s), frekans(Hz) - Lain "Wired" temasına benzer minimalist
-    [0, 0.5],      // rest
-    [523.25, 0.8], // C5
-    [0, 0.2],      // rest
-    [587.33, 0.6], // D5
-    [659.25, 0.8], // E5
-    [0, 0.4],      // rest
-    [587.33, 0.6], // D5
-    [523.25, 1.0], // C5
-    [0, 0.6],      // rest
-    [392.00, 0.8], // G4
-    [0, 0.2],      // rest
-    [440.00, 0.6], // A4
-    [523.25, 0.8], // C5
-    [0, 0.4],      // rest
-    [440.00, 0.6], // A4
-    [392.00, 1.0], // G4
-    [0, 0.8],      // rest
-    [329.63, 0.8], // E4
-    [0, 0.2],      // rest
-    [349.23, 0.6], // F4
-    [440.00, 0.8], // A4
-    [523.25, 0.6], // C5
-    [0, 0.4],      // rest
-    [440.00, 0.8], // A4
-    [349.23, 0.6], // F4
-    [329.63, 1.2], // E4
-    [0, 1.0],      // rest - uzun bekleme
+  // Lain "Wired" notası - e minor, yavaş, siberpunk havası
+  // Her notalar [freq_hz, duration_beats, type]
+  var leadMelody = [
+    [329.63, 1.5], [0, 0.5],
+    [293.66, 1.0], [0, 0.3],
+    [261.63, 1.5], [0, 0.5],
+    [293.66, 1.0], [0, 0.3],
+    [329.63, 1.0], [0, 0.3],
+    [349.23, 1.5], [0, 0.5],
+    [293.66, 1.0], [0, 0.3],
+    [261.63, 2.0], [0, 1.0],
+    [0, 1.5],
+    [392.00, 1.0], [0, 0.3],
+    [349.23, 1.0], [0, 0.3],
+    [329.63, 1.5], [0, 0.5],
+    [293.66, 1.0], [0, 0.3],
+    [261.63, 1.5], [0, 0.5],
+    [220.00, 2.0], [0, 1.5],
   ];
 
-  function createOscillator(ctx, freq, startTime, duration) {
+  var bassLine = [
+    [130.81, 4.0], [0, 1.0],
+    [110.00, 4.0], [0, 1.0],
+    [130.81, 3.0], [0, 0.5],
+    [146.83, 3.0], [0, 1.5],
+  ];
+
+  var tempo = 65; // BPM - yavaş, atmospheric
+  var beatDur = 60 / tempo;
+
+  function initAudio() {
+    if (ctx) return;
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+    masterGain = ctx.createGain();
+    masterGain.gain.setValueAtTime(currentVol, ctx.currentTime);
+    masterGain.connect(ctx.destination);
+  }
+
+  function playNote(freq, start, dur, type) {
+    if (!ctx || freq === 0) return [];
     var osc = ctx.createOscillator();
-    var gain = ctx.createGain();
+    var env = ctx.createGain();
+    var filter = ctx.createBiquadFilter();
 
-    // 8-bit için square wave
-    osc.type = 'square';
-    osc.frequency.setValueAtTime(freq, startTime);
+    osc.type = type || 'triangle';
+    osc.frequency.setValueAtTime(freq, start);
 
-    // Volume envelope - 8-bit tarzı keskin
-    var vol = 0.08; // düşük ses
-    gain.gain.setValueAtTime(0, startTime);
-    gain.gain.linearRampToValueAtTime(vol, startTime + 0.02);
-    gain.gain.setValueAtTime(vol, startTime + duration * 0.7);
-    gain.gain.linearRampToValueAtTime(0, startTime + duration);
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(2000, start);
+    filter.Q.setValueAtTime(1, start);
 
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    return osc;
+    var vol = type === 'sawtooth' ? 0.06 : 0.08;
+    env.gain.setValueAtTime(0, start);
+    env.gain.linearRampToValueAtTime(vol, start + 0.08);
+    env.gain.setValueAtTime(vol, start + dur * 0.6);
+    env.gain.linearRampToValueAtTime(0, start + dur);
+
+    osc.connect(filter);
+    filter.connect(env);
+    env.connect(masterGain);
+
+    osc.start(start);
+    osc.stop(start + dur + 0.05);
+    return [osc];
   }
 
-  function playMelody() {
-    if (!audioCtx) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    }
-    var now = audioCtx.currentTime;
-    var time = now;
+  function scheduleLoop() {
+    if (!isPlaying) return;
+    var now = ctx.currentTime + 0.1;
+    var t = now;
 
-    for (var i = 0; i < melody.length; i++) {
-      var note = melody[i];
-      var freq = note[0];
-      var dur = note[1];
-      if (freq > 0) {
-        var osc = createOscillator(audioCtx, freq, time, dur * 0.8);
-        osc.start(time);
-        osc.stop(time + dur * 0.8);
-      }
-      time += dur;
+    // Lead melody - triangle wave, melodic
+    for (var i = 0; i < leadMelody.length; i++) {
+      var n = leadMelody[i];
+      var dur = n[1] * beatDur;
+      if (n[0] > 0) playNote(n[0], t, dur * 0.85, 'triangle');
+      t += dur;
     }
 
-    // Döngü için tekrar et
-    var totalLen = (time - now) * 1000;
-    currentTimeout = setTimeout(function() {
-      if (isPlaying) playMelody();
-    }, totalLen);
+    // Bass line - sawtooth, deep
+    t = now;
+    for (var j = 0; j < bassLine.length; j++) {
+      var m = bassLine[j];
+      var bd = m[1] * beatDur;
+      if (m[0] > 0) playNote(m[0], t, bd * 0.7, 'sawtooth');
+      t += bd;
+    }
+
+    // Pad - slow evolving chord
+    var padNotes = [130.81, 164.81, 196.00, 261.63];
+    var padLen = leadMelody.reduce(function(s, n) { return s + n[1]; }, 0) * beatDur;
+    for (var k = 0; k < padNotes.length; k++) {
+      playNote(padNotes[k], now, padLen * 0.9, 'sine');
+    }
+
+    var totalDur = padLen * 1000 + 500;
+    loopTimer = setTimeout(scheduleLoop, totalDur);
   }
 
-  // UI - sol alt köşede gizli kontrol
-  var musicBtn = document.createElement('button');
-  musicBtn.id = 'lain-music-btn';
-  musicBtn.innerHTML = '♪';
-  musicBtn.title = 'Lain Wired Müziği';
-  musicBtn.style.cssText = 'position:fixed;bottom:64px;left:8px;width:28px;height:28px;border-radius:50%;background:var(--surface);border:1px solid var(--accent);color:var(--accent);font-size:0.9em;cursor:pointer;z-index:99;opacity:0;display:flex;align-items:center;justify-content:center;transition:opacity 0.3s';
-  document.body.appendChild(musicBtn);
+  function start() {
+    initAudio();
+    if (ctx.state === 'suspended') ctx.resume();
+    isPlaying = true;
+    scheduleLoop();
+    updateUI();
+  }
 
-  // 3 saniye sonra göster
-  setTimeout(function() {
-    musicBtn.style.opacity = '0.5';
-  }, 3000);
+  function stop() {
+    isPlaying = false;
+    if (loopTimer) clearTimeout(loopTimer);
+    if (ctx) { ctx.close(); ctx = null; masterGain = null; }
+    updateUI();
+  }
 
-  musicBtn.onmouseenter = function() { musicBtn.style.opacity = '1'; };
-  musicBtn.onmouseleave = function() { if (!isPlaying) musicBtn.style.opacity = '0.5'; };
-
-  musicBtn.onclick = function() {
-    if (isPlaying) {
-      isPlaying = false;
-      if (currentTimeout) clearTimeout(currentTimeout);
-      musicBtn.innerHTML = '♪';
-      musicBtn.style.borderColor = 'var(--accent)';
-      musicBtn.style.color = 'var(--accent)';
-      if (audioCtx) audioCtx.close();
-      audioCtx = null;
-    } else {
-      isPlaying = true;
-      playMelody();
-      musicBtn.innerHTML = '♫';
-      musicBtn.style.borderColor = '#2dd4bf';
-      musicBtn.style.color = '#2dd4bf';
-      musicBtn.style.opacity = '1';
+  function setVol(v) {
+    currentVol = Math.max(0, Math.min(1, v));
+    localStorage.setItem('echo-vol', currentVol.toString());
+    if (masterGain && ctx) {
+      masterGain.gain.setValueAtTime(currentVol, ctx.currentTime);
     }
-  };
+    updateUI();
+  }
 
-  // Mouse hareketi ile de tetiklenebilir (Lain temasına uygun)
-  var lastMove = 0;
-  document.addEventListener('mousemove', function() {
-    var now = Date.now();
-    if (now - lastMove > 30000) { // 30sn hareketsizlik sonrası
-      lastMove = now;
-      // Otomatik çalma - kullanıcı açmadıysa
+  function updateUI() {
+    var btn = document.getElementById('lain-play');
+    var volIn = document.getElementById('lain-vol');
+    if (btn) {
+      btn.innerHTML = isPlaying ? '⏸' : '▶';
+      btn.style.borderColor = isPlaying ? '#2dd4bf' : 'var(--accent)';
+      btn.style.color = isPlaying ? '#2dd4bf' : 'var(--accent)';
     }
-  });
+    if (volIn) volIn.value = currentVol;
+  }
+
+  // UI Panel
+  var panel = document.createElement('div');
+  panel.id = 'lain-panel';
+  panel.style.cssText = 'position:fixed;bottom:56px;left:4px;z-index:99;display:flex;align-items:center;gap:4px;opacity:0;transition:opacity 0.4s';
+  panel.innerHTML =
+    '<button id="lain-play" title="Lain Wired Müziği" style="width:26px;height:26px;border-radius:50%;background:var(--surface);border:1px solid var(--accent);color:var(--accent);font-size:0.7em;cursor:pointer;display:flex;align-items:center;justify-content:center">▶</button>' +
+    '<input id="lain-vol" type="range" min="0" max="1" step="0.01" title="Ses Seviyesi" style="width:60px;height:3px;accent-color:var(--accent);cursor:pointer">';
+  document.body.appendChild(panel);
+
+  setTimeout(function() { panel.style.opacity = '0.7'; }, 2000);
+  panel.onmouseenter = function() { panel.style.opacity = '1'; };
+  panel.onmouseleave = function() { panel.style.opacity = '0.7'; };
+
+  var playBtn = document.getElementById('lain-play');
+  var volInput = document.getElementById('lain-vol');
+  volInput.value = currentVol;
+
+  playBtn.onclick = function() { if (isPlaying) stop(); else start(); };
+  volInput.oninput = function() { setVol(parseFloat(this.value)); };
+
+  // İlk kullanıcı etkileşiminde otomatik başlat
+  function autoStart(e) {
+    if (!autoStarted && !isPlaying) {
+      autoStarted = true;
+      start();
+    }
+    document.removeEventListener('click', autoStart);
+    document.removeEventListener('touchstart', autoStart);
+    document.removeEventListener('keydown', autoStart);
+  }
+  document.addEventListener('click', autoStart);
+  document.addEventListener('touchstart', autoStart);
+  document.addEventListener('keydown', autoStart);
 })();
 </script>
 </body>
@@ -1650,6 +1721,18 @@ def start_web_server(port=8080):
                             <a href="/watchlist?action={wl_action}&id={film_id}" class="btn btn-sm btn-wl">{wl_btn}</a>
                             <button class="btn btn-sm btn-watched" onclick="toggleWatched({film_id}, {is_watched_val})" id="watched-btn">{watched_btn}</button>
                         </div>
+                        <!-- Yıldız Puanlama -->
+                        <div class="star-rating" style="margin-top:12px">
+                            <div style="font-size:0.6em;color:var(--muted);margin-bottom:4px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase">Puanla</div>
+                            <div class="stars" style="display:flex;gap:3px">
+                                <button class="star-btn" data-val="1" onclick="rateFilm({film_id},1)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
+                                <button class="star-btn" data-val="2" onclick="rateFilm({film_id},2)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
+                                <button class="star-btn" data-val="3" onclick="rateFilm({film_id},3)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
+                                <button class="star-btn" data-val="4" onclick="rateFilm({film_id},4)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
+                                <button class="star-btn" data-val="5" onclick="rateFilm({film_id},5)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
+                                <span id="rate-display" style="font-size:0.65em;color:var(--muted);margin-left:6px;align-self:center"> {film["user_rating"]}/10 </span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="detail-synopsis">
@@ -2122,7 +2205,7 @@ def start_web_server(port=8080):
                 cls = " active" if page == p else ""
                 nav_html += f'<a href="/{p}" class="bn-item{cls}"><span class="bn-icon">{icon}</span><span>{label}</span></a>'
             page_title = htmlmod.escape(title)
-            full = _ECHO_HTML_TEMPLATE.format(page_title=page_title, content=content, nav_html=nav_html)
+            full = _ECHO_HTML_TEMPLATE.replace('{page_title}', page_title).replace('{content}', content).replace('{nav_html}', nav_html)
             self.send_response(200)
             self.send_header("Content-Type","text/html; charset=utf-8")
             self.end_headers()
