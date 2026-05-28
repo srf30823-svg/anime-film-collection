@@ -1663,23 +1663,280 @@ def start_web_server(port=8080):
             self.end_headers()
 
         def _serve_daily(self):
-            """Günün önerisi sayfası (tarihe göre deterministic)."""
+            """Günün önerisi — Lain temalı sinematik sayfa."""
             import hashlib as _hl
-            today = datetime.now().strftime("%Y-%m-%d")
-            db = self.get_db()
-            rows = db.execute("SELECT id, title FROM films WHERE (is_watched=0 OR is_watched IS NULL) ORDER BY owl_score DESC").fetchall()
+            today    = datetime.now().strftime("%Y-%m-%d")
+            today_tr = datetime.now().strftime("%d.%m.%Y")
+            db       = self.get_db()
+
+            # İzlenmemişlerden tarihe göre deterministic seç
+            rows = db.execute(
+                "SELECT * FROM films WHERE (is_watched=0 OR is_watched IS NULL) "
+                "ORDER BY owl_score DESC"
+            ).fetchall()
             if not rows:
                 db.close()
-                self._send_html("Günün Önerisi", '<div style="padding:40px;color:var(--muted);text-align:center">Tüm filmler izlendi! 🎉 <a href="/" class="back-link">← Geri</a></div>', "default")
+                self._send_html("Günün Önerisi",
+                    '<div class="empty-state">Tüm eserler izlendi! 🎉<br>'
+                    '<a href="/" class="back-link">← Ana Sayfa</a></div>', "daily")
                 return
-            # Tarihe göre sabit film seç
-            h = int(_hl.md5(today.encode()).hexdigest(), 16)
-            idx = h % len(rows)
-            film_id = rows[idx]["id"]
+
+            h   = int(_hl.md5(today.encode()).hexdigest(), 16)
+            film = dict(rows[h % len(rows)])
             db.close()
-            self.send_response(302)
-            self.send_header("Location", f"/film?id={film_id}")
-            self.end_headers()
+
+            genres   = json.loads(film["genres"]) if film.get("genres") and film["genres"] != "[]" else []
+            cover    = film.get("cover_url") or ""
+            raw_syn  = film.get("synopsis_tr") or film.get("synopsis") or ""
+            synopsis = re.sub(r'<[^>]+>', '', raw_syn).strip()
+            if not synopsis:
+                synopsis = "Bu eser için henüz özet eklenmemiştir."
+            synopsis = htmlmod.escape(synopsis[:500]) + ("..." if len(synopsis) > 500 else "")
+            owl      = film.get("owl_score", 0)
+            mal      = film.get("mal_score", 0) or 0
+            imdb     = film.get("imdb_score", 0) or 0
+            year     = film.get("year", "?")
+            studio   = htmlmod.escape(film.get("studio", "?"))
+            title    = htmlmod.escape(film.get("title", "?"))
+            film_id  = film["id"]
+
+            genre_tags = "".join(
+                f'<span class="badge" style="font-size:0.62em">{g}</span>'
+                for g in genres[:5]
+            )
+
+            # Kapak: var mı?
+            if cover:
+                hero_bg    = f'style="background-image:url(\'{cover}\')"'
+                poster_html = f'<img src="{cover}" class="dp-poster" onerror="this.style.display=\'none\'">'
+            else:
+                hero_bg    = ''
+                poster_html = '<div class="dp-poster-ph">🎬</div>'
+
+            # Puan yıldızları
+            star_filled = int(round(owl / 2)) if owl else 0
+            stars = "★" * star_filled + "☆" * (5 - star_filled)
+
+            lain_quotes = [
+                '"No matter where you go, everyone is connected." — Lain',
+                '"The border between the real world and the Wired is becoming thin." — Lain',
+                '"Present day, present time." — Lain',
+                '"God is here now. Right here, watching you." — Wired',
+                '"If you are not remembered, you never existed." — Lain',
+            ]
+            quote = lain_quotes[h % len(lain_quotes)]
+
+            content = f"""
+<style>
+/* === DAILY PAGE STYLES === */
+@keyframes scanIn{{
+  0%{{clip-path:inset(0 0 100% 0);opacity:0}}
+  60%{{clip-path:inset(0 0 0% 0);opacity:1}}
+  100%{{clip-path:inset(0 0 0% 0);opacity:1}}
+}}
+@keyframes glitchTitle{{
+  0%,90%,100%{{transform:translate(0);filter:none}}
+  92%{{transform:translate(-3px,1px);filter:hue-rotate(90deg)}}
+  94%{{transform:translate(3px,-1px);filter:hue-rotate(-90deg)}}
+  96%{{transform:translate(-2px,2px);filter:brightness(1.4)}}
+  98%{{transform:translate(2px,-2px);filter:none}}
+}}
+@keyframes flicker{{
+  0%,19%,21%,23%,25%,54%,56%,100%{{opacity:1}}
+  20%,22%,24%,55%{{opacity:0.85}}
+}}
+@keyframes posterIn{{
+  from{{opacity:0;transform:translateY(20px) scale(0.97)}}
+  to{{opacity:1;transform:translateY(0) scale(1)}}
+}}
+@keyframes fadeUp{{
+  from{{opacity:0;transform:translateY(16px)}}
+  to{{opacity:1;transform:translateY(0)}}
+}}
+@keyframes scanlines{{
+  0%{{background-position:0 0}}
+  100%{{background-position:0 4px}}
+}}
+.dp-hero{{
+  position:relative;overflow:hidden;border-radius:8px;
+  margin-bottom:16px;min-height:220px;
+  display:flex;align-items:flex-end;
+  background:#0a0a0f;
+}}
+.dp-hero-bg{{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center top;
+  filter:blur(28px) brightness(0.25) saturate(0.6);
+  transform:scale(1.08);
+  transition:filter 1s;
+}}
+.dp-hero-bg::after{{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    0deg,rgba(0,0,0,0.18) 0px,rgba(0,0,0,0.18) 1px,
+    transparent 1px,transparent 3px
+  );
+  animation:scanlines 0.08s linear infinite;
+  pointer-events:none;
+}}
+.dp-hero-overlay{{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    rgba(10,10,15,0.2) 0%,
+    rgba(10,10,15,0.0) 40%,
+    rgba(10,10,15,0.85) 100%
+  );
+}}
+.dp-hero-content{{
+  position:relative;z-index:2;padding:16px;width:100%;
+  display:flex;gap:16px;align-items:flex-end;
+}}
+.dp-poster{{
+  width:110px;height:155px;object-fit:cover;
+  border-radius:6px;flex-shrink:0;
+  border:1px solid rgba(107,91,149,0.4);
+  box-shadow:0 4px 24px rgba(0,0,0,0.7),0 0 0 1px rgba(107,91,149,0.15);
+  animation:posterIn 0.7s 0.2s both;
+}}
+.dp-poster-ph{{
+  width:110px;height:155px;border-radius:6px;flex-shrink:0;
+  background:var(--surface);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;font-size:2em;
+}}
+.dp-hero-info{{flex:1;min-width:0;}}
+.dp-label{{
+  font-size:0.52em;letter-spacing:0.25em;color:var(--accent);
+  text-transform:uppercase;margin-bottom:6px;
+  animation:fadeUp 0.5s both;
+  opacity:0.85;font-weight:400;
+}}
+.dp-title{{
+  font-size:1.1em;font-weight:600;color:#fff;
+  margin-bottom:4px;line-height:1.3;
+  animation:glitchTitle 8s ease-in-out infinite,fadeUp 0.6s 0.1s both;
+  word-break:break-word;
+}}
+.dp-meta{{
+  font-size:0.62em;color:rgba(200,200,200,0.6);
+  margin-bottom:6px;letter-spacing:0.04em;
+  animation:fadeUp 0.6s 0.2s both;
+}}
+.dp-stars{{
+  font-size:0.85em;color:var(--accent);letter-spacing:2px;
+  animation:fadeUp 0.6s 0.25s both;
+  margin-bottom:6px;
+}}
+.dp-date{{
+  display:inline-block;
+  font-size:0.48em;letter-spacing:0.15em;
+  color:var(--muted);border:1px solid var(--border);
+  padding:2px 8px;border-radius:3px;
+  animation:fadeUp 0.5s 0.3s both;
+}}
+.dp-body{{animation:scanIn 0.6s 0.4s both;}}
+.dp-scores{{
+  display:flex;gap:6px;flex-wrap:wrap;
+  margin-bottom:12px;
+}}
+.dp-score{{
+  padding:4px 10px;border-radius:4px;font-size:0.68em;
+  font-weight:600;letter-spacing:0.04em;
+}}
+.dp-score.owl{{background:var(--accent);color:#fff;opacity:0.9}}
+.dp-score.mal{{background:transparent;color:var(--muted);border:1px solid var(--border)}}
+.dp-score.imdb{{background:rgba(234,179,8,0.12);color:#eab308;border:1px solid rgba(234,179,8,0.2)}}
+.dp-synopsis{{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:6px;padding:14px;margin-bottom:12px;
+  font-size:0.78em;line-height:1.75;color:var(--muted);
+  font-weight:300;
+}}
+.dp-actions{{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}}
+.dp-quote{{
+  border-left:2px solid var(--accent);padding:8px 12px;
+  color:var(--muted);font-size:0.68em;font-style:italic;
+  background:rgba(107,91,149,0.05);border-radius:0 4px 4px 0;
+  animation:flicker 6s ease-in-out infinite;
+  letter-spacing:0.03em;line-height:1.6;
+}}
+.dp-nav{{
+  display:flex;gap:8px;margin-bottom:14px;align-items:center;
+}}
+</style>
+
+<div class="dp-nav">
+  <a href="/" class="back-link" style="margin-bottom:0">← Geri</a>
+  <span style="font-size:0.6em;color:var(--muted);margin-left:auto">Her gün yeni bir öneri</span>
+</div>
+
+<!-- HERO BÖLÜMÜ -->
+<div class="dp-hero">
+  <div class="dp-hero-bg" {hero_bg}></div>
+  <div class="dp-hero-overlay"></div>
+  <div class="dp-hero-content">
+    {poster_html}
+    <div class="dp-hero-info">
+      <div class="dp-label">— Günün Önerisi —</div>
+      <div class="dp-title">{title}</div>
+      <div class="dp-meta">{year} · {studio} · {film.get("source","?")} · {film.get("format","?")}</div>
+      <div class="dp-stars" title="OWL {owl}/10">{stars}</div>
+      <div>{genre_tags}</div>
+      <div class="dp-date" style="margin-top:8px">📅 {today_tr}</div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAY BÖLÜMÜ -->
+<div class="dp-body">
+  <div class="dp-scores">
+    <span class="dp-score owl">🦉 Echo&nbsp;{owl}</span>
+    {f'<span class="dp-score mal">MAL&nbsp;{mal:.1f}</span>' if mal > 0 else ''}
+    {f'<span class="dp-score imdb">⭐ IMDB&nbsp;{imdb:.1f}</span>' if imdb > 0 else ''}
+  </div>
+
+  <div class="dp-synopsis">{synopsis}</div>
+
+  <div class="dp-actions">
+    <a href="/film?id={film_id}" class="btn" style="border-color:var(--accent);color:var(--accent)">
+      📄 Detay Sayfası
+    </a>
+    <a href="/watchlist?action=add&id={film_id}" class="btn btn-wl">
+      ➕ Watchlist'e Ekle
+    </a>
+    <button class="btn btn-watched" onclick="toggleWatched({film_id},0)" id="watched-btn">
+      📋 İzlendi İşaretle
+    </button>
+    <a href="/random" class="btn btn-clear">
+      🔀 Başka Öneri
+    </a>
+  </div>
+
+  <div class="dp-quote">{quote}</div>
+</div>
+
+<script>
+/* Sayfa girişinde poster lazy-glow efekti */
+(function(){{
+  var bg = document.querySelector('.dp-hero-bg');
+  if (bg) setTimeout(function(){{
+    bg.style.filter = 'blur(22px) brightness(0.32) saturate(0.7)';
+  }}, 600);
+
+  /* İzlendi toggle — ana sayfadaki ile aynı API */
+  window.toggleWatched = function(id, current){{
+    var btn = document.getElementById('watched-btn');
+    var newVal = current ? 0 : 1;
+    fetch('/watched?id=' + id + '&watched=' + newVal)
+      .then(function(){{
+        btn.textContent = newVal ? '✅ İzlendi' : '📋 İzlendi İşaretle';
+        btn.className   = newVal ? 'btn btn-sm btn-watched' : 'btn btn-sm btn-watched';
+      }});
+  }};
+}})();
+</script>
+"""
+            self._send_html(f"Günün Önerisi — {title}", content, "daily")
 
         def _api_daily(self):
             """JSON: Günün önerisi."""
