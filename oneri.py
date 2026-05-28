@@ -76,9 +76,9 @@ body::before{{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background
 .topbar{{position:sticky;top:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:10px 16px;display:flex;align-items:center;gap:10px}}
 .topbar .logo{{font-size:0.95em;font-weight:600;letter-spacing:0.2em;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:8px;opacity:0.85}}
 .topbar .logo:hover{{opacity:1;animation:glitch 0.2s}}
-.logo-symbol{{width:24px;height:24px;position:relative;display:inline-block}}
-.logo-symbol svg{{width:100%;height:100%}}
-.logo-dot{{width:3px;height:3px;background:var(--accent);border-radius:50%;position:absolute;top:1px;right:1px;animation:pulseGlow 3s ease-in-out infinite}}
+.logo-symbol{{width:30px;height:30px;position:relative;display:inline-block;flex-shrink:0}}
+.logo-symbol svg{{width:100%;height:100%;overflow:visible}}
+.logo-dot{{width:4px;height:4px;background:#2dd4bf;border-radius:50%;position:absolute;top:0;right:0;animation:pulseGlow 2.5s ease-in-out infinite;box-shadow:0 0 4px #2dd4bf}}
 .topbar .badge{{background:var(--accent);color:#fff;font-size:0.5em;padding:2px 6px;border-radius:3px;font-weight:600;letter-spacing:0.1em;opacity:0.7}}
 .bottom-nav{{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(10,10,15,0.92);backdrop-filter:blur(10px);border-top:1px solid var(--border);display:flex;justify-content:space-around;padding:6px 0;padding-bottom:max(6px,env(safe-area-inset-bottom))}}
 .bn-item{{display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:var(--muted);font-size:0.55em;padding:4px 10px;border-radius:4px;transition:all 0.15s;letter-spacing:0.05em}}
@@ -176,20 +176,22 @@ h3{{font-size:0.72em;color:var(--muted);text-transform:uppercase;letter-spacing:
   <a href="/" class="logo">
     <span class="logo-symbol">
       <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Dis halka - kesikli -->
-        <circle cx="20" cy="20" r="17" stroke="var(--accent)" stroke-width="1" opacity="0.15" stroke-dasharray="3 3"/>
-        <!-- Orta halka -->
-        <circle cx="20" cy="20" r="13" stroke="var(--accent)" stroke-width="1.2" opacity="0.3"/>
-        <!-- Ic halka -->
-        <circle cx="20" cy="20" r="9" stroke="var(--text)" stroke-width="0.8" opacity="0.4"/>
-        <!-- Merkez nokta -->
-        <circle cx="20" cy="20" r="3" fill="var(--accent)" opacity="0.6"/>
-        <!-- Yanki cizgisi sag -->
-        <path d="M23 20 Q28 14 34 16" stroke="var(--text)" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
-        <path d="M23 20 Q28 26 34 24" stroke="var(--text)" stroke-width="1" opacity="0.3" stroke-linecap="round"/>
-        <!-- Kucuk pulse noktasi -->
-        <circle cx="34" cy="16" r="1.5" fill="var(--accent)" opacity="0.4"/>
-        <circle cx="34" cy="24" r="1.5" fill="var(--accent)" opacity="0.4"/>
+        <!-- Dıs kesikli halka — sinyal yayılımı -->
+        <circle cx="20" cy="20" r="18" stroke="var(--accent)" stroke-width="0.7" stroke-dasharray="2.5 4" opacity="0.25"/>
+        <!-- Göz dıs hattı — Lain ikonografisi -->
+        <path d="M3 20 Q11.5 7 20 7 Q28.5 7 37 20 Q28.5 33 20 33 Q11.5 33 3 20Z"
+              stroke="var(--accent)" stroke-width="1.2" fill="none" opacity="0.55"/>
+        <!-- İris -->
+        <circle cx="20" cy="20" r="7.5" stroke="var(--text)" stroke-width="0.7" fill="none" opacity="0.3"/>
+        <!-- Tarama çizgileri (CRT efekti) -->
+        <line x1="3" y1="20" x2="37" y2="20" stroke="var(--accent)" stroke-width="0.4" opacity="0.18"/>
+        <!-- Pupil dolgu -->
+        <circle cx="20" cy="20" r="4" fill="var(--accent)" opacity="0.75"/>
+        <!-- Merkez parıltı -->
+        <circle cx="22.5" cy="17.5" r="1.1" fill="#fff" opacity="0.45"/>
+        <!-- Sinyal noktaları -->
+        <circle cx="3.5" cy="20" r="1.3" fill="var(--accent)" opacity="0.5"/>
+        <circle cx="36.5" cy="20" r="1.3" fill="var(--accent)" opacity="0.5"/>
       </svg>
       <span class="logo-dot"></span>
     </span>
@@ -203,7 +205,6 @@ h3{{font-size:0.72em;color:var(--muted);text-transform:uppercase;letter-spacing:
 <nav class="bottom-nav">
 {nav_html}
 </nav>
-<script src="/static.js"></script>
 <script src="/static.js"></script>
 </body>
 </html>"""
@@ -1268,8 +1269,8 @@ def start_web_server(port=8080):
 
                 # Progress bar (manga/LN icin)
                 progress_html = ""
-                total_items = row["total_items"] or 0 or 0
-                progress = row["progress"] or 0 or 0
+                total_items = row["total_items"] or 0
+                progress = row["progress"] or 0
                 if total_items > 0 and mt != "anime":
                     pct = min(int(progress / total_items * 100), 100)
                     item_label = "ch" if mt == "manga" else "vol"
@@ -1280,8 +1281,7 @@ def start_web_server(port=8080):
 
                 # Kisa ozet (film card icin)
                 raw_s = row["synopsis_tr"] or row["synopsis"] or ""
-                import re as _re2
-                clean_s = _re2.sub(r'<[^>]+>', '', raw_s).strip()
+                clean_s = re.sub(r'<[^>]+>', '', raw_s).strip()
                 synopsis_snippet = ""
                 if clean_s:
                     syn_html = htmlmod.escape(clean_s[:120])
@@ -1305,7 +1305,7 @@ def start_web_server(port=8080):
             # Type toggle butonlari
             type_btns = ""
             for mt_val, mt_icon, mt_name in [(None,"🌐","Tümü"),("anime","🎬","Anime"),("manga","📖","Manga"),("light_novel","📚","LN")]:
-                active = " style=\"background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff\"" if mt_val == media_f else ""
+                active = " style=\"background:linear-gradient(135deg,var(--accent),var(--pink));color:#fff;border-color:transparent\"" if mt_val == media_f else ""
                 href = f"/?media_type={mt_val}" if mt_val else "/"
                 type_btns += f'<a href="{href}" class="btn btn-sm"{active}>{mt_icon} {mt_name}</a>'
 
