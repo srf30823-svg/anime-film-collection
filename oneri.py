@@ -1185,6 +1185,8 @@ def start_web_server(port=8080):
                 self._api_daily()
             elif path == "/api/stats/extended":
                 self._api_stats_extended()
+            elif path == "/rate":
+                self._api_rate(params)
             else:
                 self.send_response(404)
                 self.end_headers()
@@ -1200,7 +1202,8 @@ def start_web_server(port=8080):
             studio_f = params.get("studio", [None])[0]
             yf = int(params.get("year_from", [0])[0])
             yt = int(params.get("year_to", [2030])[0])
-            ms = float(params.get("min_score", [0])[0])
+            ms  = float(params.get("min_score", [0])[0])
+            mxs = float(params.get("max_score", [10])[0])
             search_q = params.get("q", [None])[0]
             media_f = params.get("media_type", [None])[0]
 
@@ -1227,11 +1230,14 @@ def start_web_server(port=8080):
                 if ms > 0:
                     count_where += " AND owl_score>=?"
                     count_params.append(ms)
+                if mxs < 10:
+                    count_where += " AND owl_score<=?"
+                    count_params.append(mxs)
                 total_count = db.execute(f"SELECT COUNT(*) FROM films {count_where}", count_params).fetchone()[0]
 
                 # recommend'a yeterli limit gönder (her sayfa için per_page * 5)
                 scored = recommend(db, genre=genre_f, source=source_f, studio=studio_f,
-                                   year_from=yf, year_to=yt, min_score=ms,
+                                   year_from=yf, year_to=yt, min_score=ms, max_score=mxs,
                                    media_type=media_f, limit=per_page * 5,
                                    unwatched_only=bool(hide_watched))
 
@@ -1312,7 +1318,8 @@ def start_web_server(port=8080):
             sq = htmlmod.escape(search_q or "")
             yf_val = yf if yf else ""
             yt_val = yt if yt != 2030 else ""
-            ms_val = ms if ms else ""
+            ms_val  = ms  if ms  else ""
+            mxs_val = mxs if mxs < 10 else ""
 
             content = f"""
             <div style="display:flex;gap:6px;margin-bottom:8px;flex-wrap:wrap">
@@ -1337,7 +1344,8 @@ def start_web_server(port=8080):
                         <select name="source"><option value="">Tum Kaynaklar</option>{source_opts}</select>
                         <input type="number" name="year_from" placeholder="Yil baslangic" value="{yf_val}" class="year-input">
                         <input type="number" name="year_to" placeholder="Yil bitis" value="{yt_val}" class="year-input">
-                        <input type="number" name="min_score" placeholder="Min OWL" value="{ms_val}" step="0.5" class="score-input">
+                        <input type="number" name="min_score" placeholder="Min ECHO" value="{ms_val}" step="0.5" class="score-input" min="0" max="10">
+                        <input type="number" name="max_score" placeholder="Max ECHO" value="{mxs_val}" step="0.5" class="score-input" min="0" max="10">
                         <select name="per_page">
                             <option value="50" {"selected" if per_page==50 else ""}>50/sayfa</option>
                             <option value="100" {"selected" if per_page==100 else ""}>100/sayfa</option>
@@ -1367,7 +1375,7 @@ def start_web_server(port=8080):
             # Build base URL params
             import urllib.parse as _up
             base_params = {}
-            for k in ("genre", "source", "studio", "year_from", "year_to", "min_score", "media_type", "q", "per_page"):
+            for k in ("genre", "source", "studio", "year_from", "year_to", "min_score", "max_score", "media_type", "q", "per_page"):
                 v = params.get(k, [None])[0]
                 if v and v not in ("0", "2030", ""):
                     base_params[k] = v
@@ -1452,18 +1460,44 @@ def start_web_server(port=8080):
                             <a href="/watchlist?action={wl_action}&id={film_id}" class="btn btn-sm btn-wl">{wl_btn}</a>
                             <button class="btn btn-sm btn-watched" onclick="toggleWatched({film_id}, {is_watched_val})" id="watched-btn">{watched_btn}</button>
                         </div>
-                        <!-- Yıldız Puanlama -->
-                        <div class="star-rating" style="margin-top:12px">
-                            <div style="font-size:0.6em;color:var(--muted);margin-bottom:4px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase">Puanla</div>
-                            <div class="stars" style="display:flex;gap:3px">
-                                <button class="star-btn" data-val="1" onclick="rateFilm({film_id},1)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
-                                <button class="star-btn" data-val="2" onclick="rateFilm({film_id},2)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
-                                <button class="star-btn" data-val="3" onclick="rateFilm({film_id},3)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
-                                <button class="star-btn" data-val="4" onclick="rateFilm({film_id},4)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
-                                <button class="star-btn" data-val="5" onclick="rateFilm({film_id},5)" style="background:none;border:none;font-size:1.1em;cursor:pointer;color:#555566;padding:0 2px;filter:grayscale(1);opacity:0.7">★</button>
-                                <span id="rate-display" style="font-size:0.65em;color:var(--muted);margin-left:6px;align-self:center"> {film["user_rating"]}/10 </span>
+                        <!-- Puanlama: 10 üzerinden seçimli -->
+                        <div style="margin-top:12px">
+                            <div style="font-size:0.6em;color:var(--muted);margin-bottom:6px;font-weight:400;letter-spacing:0.06em;text-transform:uppercase">Puanla (10 üzerinden)</div>
+                            <div style="display:flex;flex-wrap:wrap;gap:4px" id="rate-btns">
+                                {" ".join(f'<button onclick="rateFilm({film_id},{i})" id="rb-{i}" style="width:28px;height:28px;border-radius:4px;border:1px solid var(--border);background:{"var(--accent)" if int(film["user_rating"] or 0)==i else "var(--surface)"};color:{"#fff" if int(film["user_rating"] or 0)==i else "var(--muted)"};font-size:0.7em;cursor:pointer;font-weight:600;transition:all 0.15s">{i}</button>' for i in range(1,11))}
+                            </div>
+                            <div id="rate-display" style="font-size:0.62em;color:var(--muted);margin-top:5px">
+                                {f"Mevcut puan: <b style='color:var(--accent)'>{int(film['user_rating'])}/10</b>" if (film["user_rating"] or 0) > 0 else "Henüz puanlanmadı"}
                             </div>
                         </div>
+                        <script>
+                        function rateFilm(id, val) {{
+                            fetch('/rate?id=' + id + '&rating=' + val)
+                              .then(function(r) {{ return r.json(); }})
+                              .then(function(d) {{
+                                if (d.ok) {{
+                                    for (var i=1;i<=10;i++) {{
+                                        var b = document.getElementById('rb-' + i);
+                                        if (!b) continue;
+                                        b.style.background = (i===val) ? 'var(--accent)' : 'var(--surface)';
+                                        b.style.color      = (i===val) ? '#fff' : 'var(--muted)';
+                                        b.style.borderColor= (i===val) ? 'var(--accent)' : 'var(--border)';
+                                    }}
+                                    var rd = document.getElementById('rate-display');
+                                    if (rd) rd.innerHTML = "Puan kaydedildi: <b style='color:var(--accent)'>" + val + "/10</b>";
+                                }}
+                              }});
+                        }}
+                        function toggleWatched(id, current) {{
+                            var btn = document.getElementById('watched-btn');
+                            var newVal = current ? 0 : 1;
+                            fetch('/watched?id=' + id + '&watched=' + newVal)
+                              .then(function() {{
+                                btn.textContent = newVal ? '✅ İzlendi' : '📋 İzlendi İşaretle';
+                                btn.style.color = newVal ? '#22c55e' : '';
+                              }});
+                        }}
+                        </script>
                     </div>
                 </div>
                 <div class="detail-synopsis">
@@ -1957,6 +1991,26 @@ def start_web_server(port=8080):
             db.close()
             self._send_json(film)
 
+        def _api_rate(self, params):
+            """JSON: Film puanla (GET /rate?id=X&rating=Y)."""
+            try:
+                film_id = int(params.get("id", [0])[0])
+                rating  = float(params.get("rating", [0])[0])
+                rating  = max(0.0, min(10.0, rating))
+            except (ValueError, IndexError):
+                self._send_json({"ok": False, "error": "invalid params"})
+                return
+            db = self.get_db()
+            row = db.execute("SELECT id FROM films WHERE id=?", (film_id,)).fetchone()
+            if not row:
+                db.close()
+                self._send_json({"ok": False, "error": "not found"})
+                return
+            db.execute("UPDATE films SET user_rating=? WHERE id=?", (rating, film_id))
+            db.commit()
+            db.close()
+            self._send_json({"ok": True, "id": film_id, "rating": rating})
+
         def _api_stats_extended(self):
             """JSON: Detaylı istatistikler."""
             db = self.get_db()
@@ -2194,7 +2248,7 @@ def start_web_server(port=8080):
                     js = f.read()
                 self.send_response(200)
                 self.send_header("Content-Type", "application/javascript; charset=utf-8")
-                self.send_header("Cache-Control", "public, max-age=3600")
+                self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
                 self.end_headers()
                 self.wfile.write(js.encode())
             except Exception as e:
